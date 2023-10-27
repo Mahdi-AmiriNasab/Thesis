@@ -55,22 +55,22 @@ clt.clt_res_soc_av = sortrows(clt.clt_res_soc_av, 1, 'descend');
 
 s_column = 1;
 c_column = 1;
-clt.noise_soc = zeros (2, cell_cnt);            % to store noise vs soc
-clt.cluster_numbers = zeros (2, cell_cnt);      % to store cluster vs average soc
+clt.clt_noise_soc = zeros (2, cell_cnt);        % to store noise vs soc
+clt.clt_soc = zeros (2, cell_cnt);      % to store cluster vs average soc
 for n = 1:cell_cnt
 
     if clt.clt_res_cell(n , 1) ~= 0         % noise detected
         if (clt.clt_res_cell(n, 2) == 0)
-            clt.noise_soc(1, s_column) = clt.clt_res_cell(n, 1);
-            clt.noise_soc(2, s_column) = socs(1, clt.clt_res_cell(n, 1));
+            clt.clt_noise_soc(1, s_column) = n;%clt.clt_res_cell(n, 1);
+            clt.clt_noise_soc(2, s_column) = socs(1, clt.clt_res_cell(n, 1));
             s_column = s_column + 1;
         else    %cluster detected
-            clt.cluster_numbers(1, c_column) = n;
+            clt.clt_soc(1, c_column) = n;
             % find the corresponding soc of the index (n)
-            found_index = find(cluster.clt_res_soc_av(:, 2) == n);
+            found_index = find(clt.clt_res_soc_av(:, 2) == n);
             % check if the found_index is not empty
             if ~isempty(found_index)
-                clt.cluster_numbers(2, c_column) = clt.clt_res_soc_av(found_index(1, 1) ,1);
+                clt.clt_soc(2, c_column) = clt.clt_res_soc_av(found_index(1, 1) ,1);
             end
             c_column = c_column + 1;
         end
@@ -78,26 +78,45 @@ for n = 1:cell_cnt
     end
 end
 
-if all(clt.noise_soc(2, :) == 0)
+if all(clt.clt_noise_soc(2, :) == 0)
     clt.noise_max = [0 ;0];
     clt.noise_min = [0 ;0];
 else
-    % maximum niose
-    non_zero_indices = clt.noise_soc(2, :) ~= 0;
-    clt.noise_min(2, 1) = min(clt.noise_soc(2, non_zero_indices));
-    tmp = find(socs == clt.noise_min(2, 1));
-    clt.noise_min(1, 1) = tmp(1, 1);
-    
     % minimum niose
-    clt.noise_max(2, 1) = max(clt.noise_soc(2, :));
-    tmp = find(socs == clt.noise_max(2, 1));
-    clt.noise_max(1, 1) = tmp(1, 1);
+    non_zero_indices = clt.clt_noise_soc(2, :) ~= 0;
+    clt.noise_min = min(clt.clt_noise_soc(2, non_zero_indices));
+    tmp = find(clt.clt_noise_soc(1, :) == clt.noise_min(2, 1));
+    % clt.noise_min(1, 1) = tmp(1, 1);
+    
+    % maximum niose
+    clt.noise_max = max(clt.clt_noise_soc);
+    % tmp = find(clt.clt_noise_soc(1, :) == clt.noise_max(2, 1));
+    % clt.noise_max(1, 1) = tmp(1, 1);
 
 end
 
+vis = [];
+
+for i = 1:size(clt.clt_res_cell ,1)
+    nonZeroIndices = find(clt.clt_res_cell(i,:));
+    vis = [vis; repmat(i, length(nonZeroIndices), 1)];
+end
 
 %% vizualization
-clustering_v= dbscan_res_clm + 2;  % Adjust cluster indices for visualization
+clustering_v= vis + 2;  % Adjust cluster indices for visualization
+
+num_clusters = length(unique(clustering_v));  % Get the number of unique elements in clustering_v
+my_colormap = hsv(num_clusters);  % Generate a colormap with num_clusters colors
+unique_clusters = unique(clustering_v);
+color_map = containers.Map('KeyType', 'double', 'ValueType', 'any');
+for i = 1:num_clusters
+    color_map(unique_clusters(i)) = my_colormap(i, :);
+end
+color_v = zeros(length(clustering_v), 3);  % Initialize color_v
+for i = 1:length(clustering_v)
+    color_v(i, :) = color_map(clustering_v(i));
+end
+
 scatter(1:length(socs'), socs', 100, clustering_v', 'filled');
 yline(clt.average, '-', 'clt.average');
 colorbar;

@@ -20,7 +20,7 @@ else
 end
 
 % if there is any cluster
-if all(cluster.cluster_soc(1, :) == 0) 
+if all(cluster.clt_soc(1, :) == 0) 
     cluster_status = e_cluster_stat.cluster_not_found;
 else
     cluster_status = e_cluster_stat.cluster_found;
@@ -46,7 +46,7 @@ else
     value_lower = cluster.clt_res_soc_av(r ,1);  
 end
 % watch for the maximum boundaries
-if r + 1 <= cell_count
+if r + 1 <= cluster.clt_max_count
     value_upper = cluster.clt_res_soc_av(r + 1,1);
 else
     value_upper = cluster.clt_res_soc_av(r ,1);
@@ -77,7 +77,7 @@ else
     value_lower = cluster.clt_res_soc_av(r ,1);  
 end
 % watch for the maximum boundaries
-if r + 1 <= cell_count
+if r + 1 <= cluster.clt_max_count
     value_upper = cluster.clt_res_soc_av(r + 1,1);
 else
     value_upper = cluster.clt_res_soc_av(r ,1);
@@ -95,15 +95,15 @@ else
     closest_cluster_n = cluster.clt_res_soc_av(r + 1, :);
 end
 
-target_cluster_soc = [0 0]; % stores the cluster and target soc to reach
+target_clt_soc = [0 0]; % stores the cluster and target soc to reach
 target_transfer_soc = 0;    % stores the soc to transfer
 
 % decide the target cluster soc
 if neighbor_distance_x < neighbor_distance_n
-    target_cluster_soc =  closest_cluster_x;
+    target_clt_soc =  closest_cluster_x;
     target_transfer_soc = neighbor_distance_x;
 else
-    target_cluster_soc =  closest_cluster_n;
+    target_clt_soc =  closest_cluster_n;
     target_transfer_soc = neighbor_distance_n;
 end
 %clear temporary variables used
@@ -155,7 +155,7 @@ else
     value_lower = cluster.clt_res_soc_av(r ,1);  
 end
 % watch for the maximum boundaries
-if r + 1 <= cell_count
+if r + 1 <= cluster.clt_max_count
     value_upper = cluster.clt_res_soc_av(r + 1,1);
 else
     value_upper = cluster.clt_res_soc_av(r ,1);
@@ -165,17 +165,19 @@ end
 diff_lower = abs(value - value_lower);
 diff_upper = abs(value - value_upper);
 
-% store closest values and its index
-neighbor_distance_x = min(diff_lower, diff_upper);
-
 % watch boundaries
 if r - 1 > 0
+    % store closest values and its index
+    neighbor_distance_x = min(diff_lower, diff_upper);
+    
     if neighbor_distance_x == diff_lower
         closest_cluster_x = cluster.clt_res_soc_av(r - 1, :);
     else
         closest_cluster_x = cluster.clt_res_soc_av(r + 1, :);
     end
 else
+    % store closest values and its index
+    neighbor_distance_x = diff_upper;
     closest_cluster_x = cluster.clt_res_soc_av(r + 1, :);
 end
 % calculation for noise_min
@@ -191,7 +193,7 @@ else
     value_lower = cluster.clt_res_soc_av(r ,1);  
 end
 % watch for the maximum boundaries
-if r + 1 <= cell_count
+if r + 1 <= cluster.clt_max_count
     value_upper = cluster.clt_res_soc_av(r + 1,1);
 else
     value_upper = cluster.clt_res_soc_av(r ,1);
@@ -201,26 +203,29 @@ end
 diff_lower = abs(value - value_lower);
 diff_upper = abs(value - value_upper);
 
-% store closest values and its index
-neighbor_distance_n = min(diff_lower, diff_upper);
-if r + 1 <= cell_count
+if r + 1 <= cluster.clt_max_count
+    % store closest values and its index
+    neighbor_distance_n = min(diff_lower, diff_upper);
+
     if neighbor_distance_n == diff_lower
         closest_cluster_n = cluster.clt_res_soc_av(r - 1, :);
     else
         closest_cluster_n = cluster.clt_res_soc_av(r + 1, :);
     end
 else
+    % store closest values and its index
+    neighbor_distance_n = diff_lower;
     closest_cluster_n = cluster.clt_res_soc_av(r - 1, :);
 end
-target_cluster_soc = [0 0]; % stores the cluster and target soc to reach
+target_clt_soc = [0 0]; % stores the cluster and target soc to reach
 target_transfer_soc = 0;    % stores the soc to transfer
 
 % decide the target cluster soc
 if neighbor_distance_x < neighbor_distance_n
-    target_cluster_soc =  closest_cluster_x;
+    target_clt_soc =  closest_cluster_x;
     target_transfer_soc = neighbor_distance_x;
 else
-    target_cluster_soc =  closest_cluster_n;
+    target_clt_soc =  closest_cluster_n;
     target_transfer_soc = neighbor_distance_n;
 end
 %clear temporary variables used
@@ -229,13 +234,19 @@ clear r V value_upper value_lower diff_lower diff_upper
 %% transfer charges
 
 soc_new = soc;
-noise_max_new = cluster.noise_max;
-noise_min_new = cluster.noise_min;
+noise_max_cell_soc_new = [0; 0];
+noise_max_cell_soc_new(1, 1) = cluster.clt_res_cell(cluster.noise_max(1, 1), 1);
+noise_max_cell_soc_new(2, 1) = cluster.noise_max(2, 1);
 
-noise_max_new(2, 1) = noise_max_new(2, 1) - target_transfer_soc;
-noise_min_new(2, 1) = noise_min_new(2, 1) + target_transfer_soc;
-soc_new(1, noise_min_new(1, 1)) = noise_min_new(2, 1);
-soc_new(1, noise_max_new(1, 1)) = noise_max_new(2, 1);
+noise_min_cell_soc_new = [0; 0];
+noise_min_cell_soc_new(1, 1) = cluster.clt_res_cell(cluster.noise_min(1, 1), 1);
+noise_min_cell_soc_new(2, 1) = cluster.noise_min(2, 1);
+
+
+noise_max_cell_soc_new(2, 1) = noise_max_cell_soc_new(2, 1) - target_transfer_soc;
+noise_min_cell_soc_new(2, 1) = noise_min_cell_soc_new(2, 1) + target_transfer_soc;
+soc_new(1, noise_min_cell_soc_new(1, 1)) = noise_min_cell_soc_new(2, 1);
+soc_new(1, noise_max_cell_soc_new(1, 1)) = noise_max_cell_soc_new(2, 1);
 
 figure;
 mp  = 2;
