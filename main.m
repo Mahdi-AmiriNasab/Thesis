@@ -7,36 +7,22 @@ cell_count = 9;
 %soc = fix(rand (1, cell_count) * 100);
 soc = [69    31    95     3    43    38    76    79    18];
 %soc = [69    31    95     20    43    38    76    79    18];
-mp  = 2;
+mp = 2;
 ep = 10;
+
 [cluster] = pso_DBSCAN(soc, mp, ep);
 itteration = 0;
 soc_transfered = 0;
 
 while cluster.clt_max_count > 1
-
-    %% finding the noise neighbors
-    % calculation for noise_max
     
-    % sorting cluster.clt_res_soc_av 
-    V = cluster.clt_res_soc_av;
-    V(V(:,2)==0,2) = Inf;
-    cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
-    cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
-    
-    [soc_transfered, soc] = balance_soc(cluster, soc);
-
-	% clear noise_max_cell_soc_new noise_min_cell_soc_new soc_new
-	% clear closest_cluster_n closest_cluster_x diff_lower diff_upper
-	% clear neighbor_distance_n neighbor_distance_x r target_clt_soc
-	% clear V target_transfer_soc value value_lower value_lower
-
+  %% vizualization
     figure;
-    %% vizualization
+
     vis = [];
     
-    for i = 1:size(clt.clt_res_cell ,1)
-        nonZeroIndices = find(clt.clt_res_cell(i,:));
+    for i = 1:size(cluster.clt_res_cell ,1)
+        nonZeroIndices = find(cluster.clt_res_cell(i,:));
         vis = [vis; repmat(i, length(nonZeroIndices), 1)];
     end
     
@@ -54,20 +40,30 @@ while cluster.clt_max_count > 1
         color_v(i, :) = color_map(clustering_v(i));
     end
     
-    scatter(1:length(socs'), socs', 100, clustering_v', 'filled');
-    yline(clt.average, '-', 'clt.average');
+    scatter(1:length(soc'), soc', 100, clustering_v', 'filled');
+    yline(cluster.average, '-', 'cluster.average');
     
-    xlim([1 cell_cnt]); ylim([0 100]);
-    mp  = 2;
-    ep = 10;
-    [cluster] = pso_DBSCAN(soc, mp, ep);
-    
+    xlim([1 cell_count]); ylim([0 100]);
+  
     itteration = itteration + 1;
     
     if itteration > 20
         error("maximum itteration reached")
     end
 
+    %% finding the noise neighbors
+    % calculation for noise_max
+    
+    % sorting cluster.clt_res_soc_av 
+    V = cluster.clt_res_soc_av;
+    V(V(:,2)==0,2) = Inf;
+    cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
+    cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
+    
+    [soc_transfered, soc] = balance_soc(cluster, soc, mp, ep);
+
+
+  
 end
 
 
