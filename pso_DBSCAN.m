@@ -51,7 +51,7 @@ end
 % sorting
 clt.clt_res_soc_av = sortrows(clt.clt_res_soc_av, 1, 'descend');
 
-%% finding noise
+%% finding noises
 
 s_column = 1;
 c_column = 1;
@@ -78,10 +78,98 @@ for n = 1:cell_cnt
     end
 end
 
+clt.noise_max = [0; 0];
+clt.noise_min = [0; 0];
+clt.single_noise = [0; 0];
+
+% if no single noise found
 if all(clt.clt_noise_soc(2, :) == 0)
-    clt.noise_max = [0 ;0];
-    clt.noise_min = [0 ;0];
+	clt.noise_status = e_noise_stat.noise_not_found;
+    % minimum cluster as noise
+    non_zero_indices = clt.clt_res_soc_av(:, 1) ~= 0;
+    clt.noise_min(2, 1) = min(clt.clt_res_soc_av(non_zero_indices, 1));
+    tmp = find(clt.clt_res_soc_av(:, 1) == clt.noise_min(2, 1));
+    clt.noise_min(1, 1) = clt.clt_res_soc_av(tmp(1, 1), 2);
+
+    % maximum cluster as noise
+    non_zero_indices = clt.clt_res_soc_av(:, 1) ~= 0;
+    clt.noise_max(2, 1) = max(clt.clt_res_soc_av(non_zero_indices, 1));
+    tmp = find(clt.clt_res_soc_av(:, 1) == clt.noise_max(2, 1));
+    clt.noise_max(1, 1) = clt.clt_res_soc_av(tmp(1, 1), 2);
+
+% if just one noise found
+elseif nnz(clt.clt_noise_soc(2, :)) == 1
+
+	clt.noise_status = e_noise_stat.noise_single_found;
+
+	single_noise = clt.clt_noise_soc(:, 1);
+	search_indices = 1 : cell_cnt;
+	if single_noise(2, 1) > clt.average
+
+		% maximum single noise
+		clt.noise_max = single_noise;
+
+		% minimum cluster as noise
+		non_zero_indices = clt.clt_res_soc_av(:, 1) ~= 0;
+		clt.noise_min(2, 1) = min(clt.clt_res_soc_av(non_zero_indices, 1));
+		tmp = find(clt.clt_res_soc_av(:, 1) == clt.noise_min(2, 1));
+		clt.noise_min(1, 1) = clt.clt_res_soc_av(tmp(1, 1), 2);
+		
+	else
+
+		% maximum cluster as noise
+		non_zero_indices = clt.clt_res_soc_av(:, 1) ~= 0;
+		clt.noise_max(2, 1) = max(clt.clt_res_soc_av(non_zero_indices, 1));
+		tmp = find(clt.clt_res_soc_av(:, 1) == clt.noise_max(2, 1));
+		clt.noise_max(1, 1) = clt.clt_res_soc_av(tmp(1, 1), 2);
+
+		% minimum single noise
+		clt.noise_min = single_noise;
+		
+	end
+
+		% single_noise = clt.clt_noise_soc;
+	% search_indices = 1 : cell_cnt;
+	% search_indices(1, single_noise(1, 1)) = 0; % clear the noise indice to exit search scope
+	% search_indices = find(search_indices > 0);
+    
+    % % indices sorting basis just to perform the operation
+    % V = clt.clt_res_soc_av;
+    % V(V(:,2)==0,2) = Inf;
+    % clt.clt_res_soc_av = sortrows(V, 2,'ascend');
+    % clt.clt_res_soc_av(clt.clt_res_soc_av(:,2)==Inf,2) = 0;
+    
+    % % if any greater noise cluster NOT found 
+    % if max(clt.clt_res_soc_av(search_indices', 1)) < single_noise(2 ,1)
+		
+    %     % maximum single noise
+    %     clt.noise_max = single_noise(:, 1);
+
+    %     % minimum cluster as noise
+    %     non_zero_indices = clt.clt_res_soc_av(:, 1) ~= 0;
+    %     clt.noise_min(2, 1) = min(clt.clt_res_soc_av(non_zero_indices, 1));
+    %     tmp = find(clt.clt_res_soc_av(:, 1) == clt.noise_min(2, 1));
+    %     clt.noise_min(1, 1) = clt.clt_res_soc_av(tmp(1, 1), 2);
+    % else
+    %     % maximum cluster as noise
+    %     a = max(clt.clt_res_soc_av(search_indices', :))';
+    %     clt.noise_max(1, 1) = a(2, 1);
+    %     clt.noise_max(2, 1) = a(1, 1);
+        
+    %     % minimum single noise
+    %     clt.noise_min = single_noise(:, 1);
+    % end
+
+    % clear V a non_zero_indices;
+
+    % % revese sorting after the operation
+    % clt.clt_res_soc_av = sortrows(clt.clt_res_soc_av, 1, 'descend');
+
+% if several noises available
 else
+
+	clt.noise_status = e_noise_stat.noise_found;
+
     % minimum niose
     non_zero_indices = clt.clt_noise_soc(2, :) ~= 0;
     clt.noise_min(2, 1) = min(clt.clt_noise_soc(2, non_zero_indices));
