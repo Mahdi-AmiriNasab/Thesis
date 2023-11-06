@@ -65,13 +65,13 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 	while soc_mismatch
 
 		% clustering
-		[cluster] = pso_DBSCAN(soc_out, mp, ep);
+		[clt] = pso_DBSCAN(soc_out, mp, ep);
 
         % sorting clt.clt_res_soc_av 
-	    V = cluster.clt_res_soc_av;
+	    V = clt.clt_res_soc_av;
 	    V(V(:,2)==0,2) = Inf;
-	    cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
-	    cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
+	    clt.clt_res_soc_av = sortrows(V, 2,'ascend');
+	    clt.clt_res_soc_av(clt.clt_res_soc_av(:,2)==Inf,2) = 0;
         clear V
 
 		% soc sweep
@@ -132,16 +132,16 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 		soc_new = soc_out;
 
 		% calculate amount of increment and decreament after each sweep
-		inc = step_source;
+		inc = abs(sweep_source - step_source);
 		soc_new(1 ,source_cells) = soc_new(1 ,source_cells) - inc;
 		
-		dec = step_destination;
+		dec = abs(sweep_destination - destination_clt(2, 1));
 		soc_new(1 ,destination_cells) = soc_new(1 ,destination_cells) + dec;	
 
 		soc_out = soc_new;
 
         % increament/decreament soc calculation (both are equal)
-		soc_transfered = soc_transfered + inc * source_clt_cnt;
+		soc_transfered = inc * source_clt_cnt;
 
         clear dec inc
 

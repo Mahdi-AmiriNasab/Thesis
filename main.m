@@ -5,7 +5,7 @@ clear;
 close all
 cell_count = 9;
 %soc = fix(rand (1, cell_count) * 100);
-soc = [69    31    95     3    43    38    76    79    18];
+soc = [10    12    15     35    38    32    90    88    96];
 %soc = [69    31    95     20    43    38    76    79    18];
 mp = 2;
 ep = 10;
@@ -61,6 +61,7 @@ while cluster.clt_max_count > 1
     cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
     
     [soc_transfered, soc] = balance_soc(cluster, soc, mp, ep);
+    [cluster] = pso_DBSCAN(soc, mp, ep);
 
 
   
