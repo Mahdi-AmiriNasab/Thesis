@@ -65,15 +65,15 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 
 	while soc_mismatch
 
-		% clustering
-		[cluster] = pso_DBSCAN(soc_out, mp, ep);
+		% % clustering
+		% [cluster] = pso_DBSCAN(soc_out, mp, ep);
 
-        % sorting clt.clt_res_soc_av 
-	    V = cluster.clt_res_soc_av;
-	    V(V(:,2)==0,2) = Inf;
-	    cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
-	    cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
-        clear V
+        % % sorting clt.clt_res_soc_av 
+	    % V = cluster.clt_res_soc_av;
+	    % V(V(:,2)==0,2) = Inf;
+	    % cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
+	    % cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
+        % clear V
 
 		% soc sweep
 		sweep_source = sweep_source - step_source;
@@ -149,6 +149,11 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
             error("soc transfer mismatch");
         else
             soc_transfered =  soc_transfered_s;
+        end
+
+        if sweep_destination > 100 || sweep_destination < 0 ...
+            || sweep_source > 100 || sweep_source < 0
+           error("soc sweep limit exceed");
         end
 
         clear dec inc

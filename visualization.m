@@ -4,7 +4,6 @@ cell_count = length(soc);
 
 
 %% vizualization
-    figure;
 
     vis = [];
     

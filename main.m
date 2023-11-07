@@ -4,20 +4,34 @@
 clear;
 close all
 cell_count = 9;
-soc = fix(rand (1, cell_count) * 100);
-%soc = [10    10    60     40    40    40    90    88    96];
-%soc = [69    31    95     20    43    38    76    79    18];
+%soc = fix(rand (1, cell_count) * 100);
+soc = [69    23    25    24    66    67    55    55    67];
+
+soc_init = soc;
+
+
 mp = 2;
-ep = 10;
+ep = 1;
 
 % clustering
 [cluster] = pso_DBSCAN(soc, mp, ep);
 
+%figure;
+tile_counter = 0;
+fg_row = 2; fg_column = 3;
+tiledlayout(fg_row ,fg_column);  % Create a 2x1 grid layout
+
+
 % plot the clustering result
+nexttile;
 visualization(soc, cluster);
+tile_counter = tile_counter + 1;
+
 
 itteration = 0;
 soc_transfered = 0;
+
+
 
 while cluster.clt_max_count > 1
 
@@ -30,7 +44,14 @@ while cluster.clt_max_count > 1
     [cluster] = pso_DBSCAN(soc, mp, ep);
     
     % plot the balancing result
+    if(tile_counter >= fg_row * fg_column)
+        figure;
+        tiledlayout(fg_row ,fg_column);  % Create a 2x1 grid layout
+        tile_counter = 0;
+    end
+    nexttile;
     visualization(soc, cluster);
+    tile_counter = tile_counter + 1;
     
     % count each balancing itteration
     itteration = itteration + 1;
@@ -46,6 +67,8 @@ while cluster.clt_max_count > 1
     cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
 
 end
+
+soc_inconsistency = max(soc) - min(soc);
 
 
 
