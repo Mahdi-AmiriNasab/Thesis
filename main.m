@@ -4,67 +4,47 @@
 clear;
 close all
 cell_count = 9;
-%soc = fix(rand (1, cell_count) * 100);
-soc = [10    12    15     35    38    32    90    88    96];
+soc = fix(rand (1, cell_count) * 100);
+%soc = [10    10    60     40    40    40    90    88    96];
 %soc = [69    31    95     20    43    38    76    79    18];
 mp = 2;
 ep = 10;
 
+% clustering
 [cluster] = pso_DBSCAN(soc, mp, ep);
+
+% plot the clustering result
+visualization(soc, cluster);
+
 itteration = 0;
 soc_transfered = 0;
 
 while cluster.clt_max_count > 1
-    
-  %% vizualization
-    figure;
 
-    vis = [];
+    %% clustering and balancing
     
-    for i = 1:size(cluster.clt_res_cell ,1)
-        nonZeroIndices = find(cluster.clt_res_cell(i,:));
-        vis = [vis; repmat(i, length(nonZeroIndices), 1)];
-    end
+    % balancing
+    [soc_transfered, soc] = balance_soc(cluster, soc, mp, ep);
     
-    clustering_v= vis + 2;  % Adjust cluster indices for visualization
+    % clustering
+    [cluster] = pso_DBSCAN(soc, mp, ep);
     
-    num_clusters = length(unique(clustering_v));  % Get the number of unique elements in clustering_v
-    my_colormap = hsv(num_clusters);  % Generate a colormap with num_clusters colors
-    unique_clusters = unique(clustering_v);
-    color_map = containers.Map('KeyType', 'double', 'ValueType', 'any');
-    for i = 1:num_clusters
-        color_map(unique_clusters(i)) = my_colormap(i, :);
-    end
-    color_v = zeros(length(clustering_v), 3);  % Initialize color_v
-    for i = 1:length(clustering_v)
-        color_v(i, :) = color_map(clustering_v(i));
-    end
+    % plot the balancing result
+    visualization(soc, cluster);
     
-    scatter(1:length(soc'), soc', 100, clustering_v', 'filled');
-    yline(cluster.average, '-', 'cluster.average');
-    
-    xlim([1 cell_count]); ylim([0 100]);
-  
+    % count each balancing itteration
     itteration = itteration + 1;
     
     if itteration > 20
         error("maximum itteration reached")
     end
 
-    %% finding the noise neighbors
-    % calculation for noise_max
-    
     % sorting cluster.clt_res_soc_av 
     V = cluster.clt_res_soc_av;
     V(V(:,2)==0,2) = Inf;
     cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
     cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
-    
-    [soc_transfered, soc] = balance_soc(cluster, soc, mp, ep);
-    [cluster] = pso_DBSCAN(soc, mp, ep);
 
-
-  
 end
 
 

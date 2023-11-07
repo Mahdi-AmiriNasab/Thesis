@@ -2,6 +2,7 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 
 	%% init
 	soc_out = soc_in;
+    soc_transfered_s = 0; soc_transfered_d = 0;
 	soc_transfered = 0;
 	cell_count = length(soc_in);
 
@@ -84,7 +85,7 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 		if source_neighbor_lower_cell - 1 > 0
 
 			% subtract noise value and lower neighbor value
-			value_lower_diff_s = abs(soc_in(1, source_neighbor_lower_cell) - sweep_source); 
+			value_lower_diff_s = abs(soc_out(1, source_neighbor_lower_cell) - sweep_source); 
 			% if the differential is within the valid range
 			if value_lower_diff_s < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
@@ -95,7 +96,7 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 		if source_neighbor_upper_cell + 1 <= cell_count
 
 			% subtract noise value and lower neighbor value
-			value_higher_diff_s = abs(soc_in(1, source_neighbor_upper_cell) - sweep_source); 
+			value_higher_diff_s = abs(soc_out(1, source_neighbor_upper_cell) - sweep_source); 
 			% if the differential is within the valid range
 			if value_higher_diff_s < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
@@ -109,7 +110,7 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 		if destination_neighbor_lower_cell - 1 > 0
 
 			% subtract noise value and lower neighbor value
-			value_lower_diff_d = abs(soc_in(1, destination_neighbor_lower_cell) - sweep_destination); 
+			value_lower_diff_d = abs(soc_out(1, destination_neighbor_lower_cell) - sweep_destination); 
 			% if the differential is within the valid range
 			if value_lower_diff_d < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
@@ -120,7 +121,7 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 		if destination_neighbor_upper_cell + 1 <= cell_count
 
 			% subtract noise value and lower neighbor value
-			value_higher_diff_d = abs(soc_in(1, destination_neighbor_upper_cell) - sweep_destination); 
+			value_higher_diff_d = abs(soc_out(1, destination_neighbor_upper_cell) - sweep_destination); 
 			% if the differential is within the valid range
 			if value_higher_diff_d < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
@@ -141,7 +142,14 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 		soc_out = soc_new;
 
         % increament/decreament soc calculation (both are equal)
-		soc_transfered = soc_transfered + inc * source_clt_cnt;
+		soc_transfered_s = soc_transfered_s + inc * source_clt_cnt;
+        soc_transfered_d = soc_transfered_d + dec * destination_clt_cnt;
+
+        if(soc_transfered_s ~= soc_transfered_d)
+            error("soc transfer mismatch");
+        else
+            soc_transfered =  soc_transfered_s;
+        end
 
         clear dec inc
 
