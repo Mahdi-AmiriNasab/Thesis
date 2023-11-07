@@ -1,10 +1,17 @@
-function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
+function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep)
 
 	%% init
 	soc_out = soc_in;
     soc_transfered_s = 0; soc_transfered_d = 0;
 	soc_transfered = 0;
 	cell_count = length(soc_in);
+
+	% validity of source/destination cluster neighbors (valid by default)
+	snlc_validity = 1;
+	snuc_validity = 1;
+
+	dnlc_validity = 1;
+	dnuc_validity = 1;
 
 	% conditional flag
 	soc_mismatch = 1;
@@ -14,25 +21,117 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 
 	% assaign weight to each noise cluster by each cell in it
 	% number of elements in noise clusters
-	source_clt_cnt = nnz(clt.clt_res_cell(clt.noise_max(1, 1), :));
-	destination_clt_cnt = nnz(clt.clt_res_cell(clt.noise_min(1, 1), :));
+	source_clt_cnt = nnz(cluster.clt_res_cell(cluster.noise_max(1, 1), :));
+	destination_clt_cnt = nnz(cluster.clt_res_cell(cluster.noise_min(1, 1), :));
 
-	% define source and destination clusters
-	source_clt = clt.noise_max;
-	destination_clt = clt.noise_min;
+	%% define source and destination clusters
+	source_clt = cluster.noise_max;
+	destination_clt = cluster.noise_min;
 
     % find neighbor cells of each source and destination cell
 	% source cluster neighbors
-	source_cells = clt.clt_res_cell(source_clt(1, 1), 1:source_clt_cnt);
-    source_neighbor_lower_cell = min(source_cells) - 1;
-    source_neighbor_upper_cell = max(source_cells) + 1;
+	source_cells = cluster.clt_res_cell(source_clt(1, 1), 1:source_clt_cnt);
+
+	source_neighbor_lower_cell = min(source_cells) - 1;
+	
+	% the source cell must have a lower value neighbor
+	% check the validity of lower cell
+	if source_neighbor_lower_cell  > 0
+		if soc_out(1, source_neighbor_lower_cell) < source_clt(2 ,1)
+			snlc_validity = 1;
+		else
+			snlc_validity = 0;
+        end
+	else
+		snlc_validity = 0;
+	end
+
+	source_neighbor_upper_cell = max(source_cells) + 1;
+
+	% check the validity of upper cell
+	if source_neighbor_upper_cell <= cell_count
+		if soc_out(1, source_neighbor_upper_cell) < source_clt(2 ,1)
+			snuc_validity = 1;
+		else
+			snuc_validity = 0;
+        end
+	else
+		snuc_validity = 0;
+	end
+
+	% check if any valid neighbor found
+	if snlc_validity || snuc_validity
+		% we are good
+	else
+		% select a source cluster with valid neighbors
+
+		% sorting
+		soc_sorted_clusters = sortrows(cluster.clt_res_soc_av, 1, 'descend');
+		% pick the maximum soc cluster regarding noise 
+		[source_clt(2, 1), source_clt(1, 1)] = max(soc_sorted_clusters([1:cluster.clt_number_max]', 1));
+
+		% number of elements in the clusters
+		source_clt_cnt = nnz(cluster.clt_res_cell(source_clt(1, 1), :));
+
+		% source cluster neighbors
+		source_cells = cluster.clt_res_cell(source_clt(1, 1), 1:source_clt_cnt);
+		source_neighbor_lower_cell = min(source_cells) - 1;
+		source_neighbor_upper_cell = max(source_cells) + 1;
+
+    end
+
 	% destination cluster neighbors
-	destination_cells = clt.clt_res_cell(destination_clt(1, 1), 1:destination_clt_cnt);
-    destination_neighbor_lower_cell = min(destination_cells) - 1;
-    destination_neighbor_upper_cell = max(destination_cells) + 1;
+	destination_cells = cluster.clt_res_cell(destination_clt(1, 1), 1:destination_clt_cnt);
 
+	destination_neighbor_lower_cell = min(destination_cells) - 1;
 
-	% calculate soc step to balance
+	% the destination cell must have a lower value neighbor
+	% check the validity of lower cell
+	if destination_neighbor_lower_cell  > 0
+		if soc_out(1, destination_neighbor_lower_cell) > destination_clt(2 ,1)
+			dnlc_validity = 1;
+		else
+			dnlc_validity = 0;
+        end
+	else
+		dnlc_validity = 0;
+	end
+	
+	destination_neighbor_upper_cell = max(destination_cells) + 1;
+
+	% check the validity of upper cell
+	if destination_neighbor_upper_cell <= cell_count
+		if soc_out(1, destination_neighbor_upper_cell) > destination_clt(2 ,1)
+			dnuc_validity = 1;
+		else
+			dnuc_validity = 0;
+		end
+	else
+		dnuc_validity = 0;
+	end
+
+	% check if any valid neighbor found
+	if dnlc_validity || dnuc_validity
+		% we are good
+	else
+		% select a destination cluster with valid neighbors
+
+		% sorting
+		soc_sorted_clusters = sortrows(cluster.clt_res_soc_av, 1, 'descend');
+		% pick the maximum soc cluster regarding noise 
+		[destination_clt(2, 1), destination_clt(1, 1)] = min(soc_sorted_clusters([1:cluster.clt_max_count]', 1));
+
+		% number of elements in the clusters
+		destination_clt_cnt = nnz(cluster.clt_res_cell(destination_clt(1, 1), :));
+
+		% destination cluster neighbors
+		destination_cells = cluster.clt_res_cell(destination_clt(1, 1), 1:destination_clt_cnt);
+		destination_neighbor_lower_cell = min(destination_cells) - 1;
+		destination_neighbor_upper_cell = max(destination_cells) + 1;
+		
+	end
+
+	%% calculate soc step to balance
 	% assign step = 1 to lower cluster member count
 	if destination_clt_cnt < source_clt_cnt
 
@@ -68,7 +167,7 @@ function [soc_transfered, soc_out] = balance_soc(clt, soc_in, mp, ep)
 		% % clustering
 		% [cluster] = pso_DBSCAN(soc_out, mp, ep);
 
-        % % sorting clt.clt_res_soc_av 
+        % % sorting cluster.clt_res_soc_av 
 	    % V = cluster.clt_res_soc_av;
 	    % V(V(:,2)==0,2) = Inf;
 	    % cluster.clt_res_soc_av = sortrows(V, 2,'ascend');

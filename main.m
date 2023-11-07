@@ -5,7 +5,8 @@ clear;
 close all
 cell_count = 9;
 %soc = fix(rand (1, cell_count) * 100);
-soc = [69    23    25    24    66    67    55    55    67];
+%soc = [69    23    25    24    66    67    55    55    67];
+soc = [2    3    50    1    4    6    49    4    5];
 
 soc_init = soc;
 
