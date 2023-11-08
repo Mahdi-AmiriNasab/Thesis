@@ -1,4 +1,4 @@
-function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep)
+function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep, blc_range)
 
 	%% init
 	soc_out = soc_in;
@@ -17,7 +17,7 @@ function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep)
 	soc_mismatch = 1;
 
 	% valid balance range soc
-	blc_range = 2;
+	%blc_range = 2;
 
 	% assaign weight to each noise cluster by each cell in it
 	% number of elements in noise clusters
@@ -66,9 +66,9 @@ function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep)
 		% select a source cluster with valid neighbors
 
 		% sorting
-		soc_sorted_clusters = sortrows(cluster.clt_res_soc_av, 1, 'descend');
-		% pick the maximum soc cluster regarding noise 
-		[source_clt(2, 1), source_clt(1, 1)] = max(soc_sorted_clusters([1:cluster.clt_number_max]', 1));
+		soc_sorted_clusters = sortrows(cluster.clt_res_soc_av(1:cluster.clt_max_count,:), 2, 'ascend');
+	    % pick the maximum soc cluster regarding noise 
+		[source_clt(2, 1), source_clt(1, 1)] = max(soc_sorted_clusters([1:cluster.clt_max_count]', 1));
 
 		% number of elements in the clusters
 		source_clt_cnt = nnz(cluster.clt_res_cell(source_clt(1, 1), :));
@@ -117,8 +117,8 @@ function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep)
 		% select a destination cluster with valid neighbors
 
 		% sorting
-		soc_sorted_clusters = sortrows(cluster.clt_res_soc_av, 1, 'descend');
-		% pick the maximum soc cluster regarding noise 
+		soc_sorted_clusters = sortrows(cluster.clt_res_soc_av(1:cluster.clt_max_count,:), 2, 'ascend');
+		% pick the minimum soc cluster regarding noise 
 		[destination_clt(2, 1), destination_clt(1, 1)] = min(soc_sorted_clusters([1:cluster.clt_max_count]', 1));
 
 		% number of elements in the clusters
@@ -135,13 +135,13 @@ function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep)
 	% assign step = 1 to lower cluster member count
 	if destination_clt_cnt < source_clt_cnt
 
-		step_source = 1 / source_clt_cnt * destination_clt_cnt; 
-		step_destination = 1;
+		step_source = (blc_range/2) / source_clt_cnt * destination_clt_cnt; 
+		step_destination = (blc_range/2);
 
 	else
 
-		step_source = 1;
-		step_destination = 1 / destination_clt_cnt * source_clt_cnt;
+		step_source = (blc_range/2);
+		step_destination = (blc_range/2) / destination_clt_cnt * source_clt_cnt;
 
 	end
 
@@ -243,7 +243,10 @@ function [soc_transfered, soc_out] = balance_soc(cluster, soc_in, mp, ep)
         % increament/decreament soc calculation (both are equal)
 		soc_transfered_s = soc_transfered_s + inc * source_clt_cnt;
         soc_transfered_d = soc_transfered_d + dec * destination_clt_cnt;
-
+        % round to avoid unwanted mismatch
+        soc_transfered_s = round(soc_transfered_s, 2);
+        soc_transfered_d = round(soc_transfered_d, 2);
+        
         if(soc_transfered_s ~= soc_transfered_d)
             error("soc transfer mismatch");
         else

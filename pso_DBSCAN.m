@@ -51,6 +51,8 @@ end
 % sorting
 cluster.clt_res_soc_av = sortrows(cluster.clt_res_soc_av, 1, 'descend');
 
+cluster.clt_max_count = max(cluster.clt_res_soc_av(:, 2));
+
 %% finding noises
 
 s_column = 1;
@@ -83,16 +85,16 @@ cluster.noise_min = [0; 0];
 cluster.single_noise = [0; 0];
 
 % if no single noise found
-if all(cluster.clt_noise_soc(2, :) == 0)
+if all(cluster.clt_noise_soc == 0)
 	cluster.noise_status = e_noise_stat.noise_not_found;
     % minimum cluster as noise
-    non_zero_indices = cluster.clt_res_soc_av(:, 1) ~= 0;
+    non_zero_indices = cluster.clt_res_soc_av(:, 2) ~= 0;
     cluster.noise_min(2, 1) = min(cluster.clt_res_soc_av(non_zero_indices, 1));
     tmp = find(cluster.clt_res_soc_av(:, 1) == cluster.noise_min(2, 1));
     cluster.noise_min(1, 1) = cluster.clt_res_soc_av(tmp(1, 1), 2);
 
     % maximum cluster as noise
-    non_zero_indices = cluster.clt_res_soc_av(:, 1) ~= 0;
+    non_zero_indices = cluster.clt_res_soc_av(:, 2) ~= 0;
     cluster.noise_max(2, 1) = max(cluster.clt_res_soc_av(non_zero_indices, 1));
     tmp = find(cluster.clt_res_soc_av(:, 1) == cluster.noise_max(2, 1));
     cluster.noise_max(1, 1) = cluster.clt_res_soc_av(tmp(1, 1), 2);
@@ -110,7 +112,7 @@ elseif nnz(cluster.clt_noise_soc(2, :)) == 1
 		cluster.noise_max = single_noise;
 
 		% minimum cluster as noise
-		non_zero_indices = cluster.clt_res_soc_av(:, 1) ~= 0;
+		non_zero_indices = cluster.clt_res_soc_av(:, 2) ~= 0;
 		cluster.noise_min(2, 1) = min(cluster.clt_res_soc_av(non_zero_indices, 1));
 		tmp = find(cluster.clt_res_soc_av(:, 1) == cluster.noise_min(2, 1));
 		cluster.noise_min(1, 1) = cluster.clt_res_soc_av(tmp(1, 1), 2);
@@ -118,7 +120,7 @@ elseif nnz(cluster.clt_noise_soc(2, :)) == 1
 	else
 
 		% maximum cluster as noise
-		non_zero_indices = cluster.clt_res_soc_av(:, 1) ~= 0;
+		non_zero_indices = cluster.clt_res_soc_av(:, 2) ~= 0;
 		cluster.noise_max(2, 1) = max(cluster.clt_res_soc_av(non_zero_indices, 1));
 		tmp = find(cluster.clt_res_soc_av(:, 1) == cluster.noise_max(2, 1));
 		cluster.noise_max(1, 1) = cluster.clt_res_soc_av(tmp(1, 1), 2);
@@ -134,7 +136,7 @@ else
 	cluster.noise_status = e_noise_stat.noise_found;
 
     % minimum niose
-    non_zero_indices = cluster.clt_noise_soc(2, :) ~= 0;
+    non_zero_indices = cluster.clt_noise_soc(1, :) ~= 0;
     cluster.noise_min(2, 1) = min(cluster.clt_noise_soc(2, non_zero_indices));
     tmp = find(cluster.clt_noise_soc(2, :) == cluster.noise_min(2, 1));
     cluster.noise_min = cluster.clt_noise_soc(:, tmp(1, 1));
@@ -146,6 +148,5 @@ else
 
 end
 
-cluster.clt_max_count = max(cluster.clt_res_soc_av(:, 2));
 
 end

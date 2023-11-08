@@ -1,13 +1,11 @@
 
 %% start clustering
 
-clear;
+clear all;
 close all
 cell_count = 9;
-%soc = fix(rand (1, cell_count) * 100);
-%soc = [69    23    25    24    66    67    55    55    67];
-soc = [2    3    50    1    4    6    49    4    5];
-
+soc = fix(rand (1, cell_count) * 100);
+%soc = [58    15    19    40    74    82    78    31    53];
 soc_init = soc;
 
 
@@ -31,6 +29,7 @@ tile_counter = tile_counter + 1;
 
 itteration = 0;
 soc_transfered = 0;
+soc_transfered_total = 0;
 
 
 
@@ -39,7 +38,7 @@ while cluster.clt_max_count > 1
     %% clustering and balancing
     
     % balancing
-    [soc_transfered, soc] = balance_soc(cluster, soc, mp, ep);
+    [soc_transfered, soc] = balance_soc(cluster, soc, mp, ep, 1);
     
     % clustering
     [cluster] = pso_DBSCAN(soc, mp, ep);
@@ -66,8 +65,9 @@ while cluster.clt_max_count > 1
     V(V(:,2)==0,2) = Inf;
     cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
     cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
-
+soc_transfered_total = soc_transfered_total + soc_transfered;
 end
+clear soc_transfered V fg_column fg_row tile_counter
 
 soc_inconsistency = max(soc) - min(soc);
 
