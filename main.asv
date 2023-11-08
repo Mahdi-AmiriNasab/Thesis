@@ -38,7 +38,7 @@ while cluster.clt_max_count > 1
     %% clustering and balancing
     
     % balancing
-    [soc_transfered, soc] = balance_soc(cluster, soc, mp, ep, 1);
+    [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, 1, 2200, 2000);
     
     % clustering
     [cluster] = pso_DBSCAN(soc, mp, ep);
@@ -65,7 +65,8 @@ while cluster.clt_max_count > 1
     V(V(:,2)==0,2) = Inf;
     cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
     cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
-soc_transfered_total = soc_transfered_total + soc_transfered;
+    soc_transfered_total = soc_transfered_total + soc_transfered;
+    t
 end
 clear soc_transfered V fg_column fg_row tile_counter
 

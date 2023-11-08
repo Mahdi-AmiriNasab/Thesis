@@ -1,4 +1,4 @@
-function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, ep, blc_range, capacity, blc_current)
+function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, ep, blc_range, capacity, bl)
 
 	%% init
 	soc_out = soc_in;
@@ -252,8 +252,6 @@ function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, 
         else
             soc_transfered =  soc_transfered_s;
         end
-
-        blc_time = (soc_transfered/100 * capacity) / blc_current;
 
         if sweep_destination > 100 || sweep_destination < 0 ...
             || sweep_source > 100 || sweep_source < 0
