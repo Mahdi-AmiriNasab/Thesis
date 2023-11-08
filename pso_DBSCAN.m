@@ -132,19 +132,32 @@ elseif nnz(cluster.clt_noise_soc(2, :)) == 1
 
 % if several noises available
 else
-
-	cluster.noise_status = e_noise_stat.noise_found;
-
-    % minimum niose
-    non_zero_indices = cluster.clt_noise_soc(1, :) ~= 0;
-    cluster.noise_min(2, 1) = min(cluster.clt_noise_soc(2, non_zero_indices));
-    tmp = find(cluster.clt_noise_soc(2, :) == cluster.noise_min(2, 1));
-    cluster.noise_min = cluster.clt_noise_soc(:, tmp(1, 1));
     
+	cluster.noise_status = e_noise_stat.noise_found;
+    % indice to clear the noise cluster
+    indice_to_clear = 0;
+
+    clt_noise_soc_cpy = cluster.clt_noise_soc;
+    
+    % minimum niose
+    non_zero_indices =  clt_noise_soc_cpy(1, :) ~= 0;
+    [cluster.noise_min(2, 1), indice_to_clear] = min( clt_noise_soc_cpy(2, non_zero_indices));
+    %tmp = find( clt_noise_soc_cpy(2, non_zero_indices) == cluster.noise_min(2, 1));
+    cluster.noise_min =  clt_noise_soc_cpy(:, indice_to_clear);
+    
+
+    % clear the picked noise as minimum to avoid repeated selection
+    clt_noise_soc_cpy(1, indice_to_clear) = -1;
+    clt_noise_soc_cpy(2, indice_to_clear) = -1;
+    
+
     % maximum niose
-    cluster.noise_max(2, 1) = max(cluster.clt_noise_soc(2, :));
-    tmp = find(cluster.clt_noise_soc(2, :) == cluster.noise_max(2, 1));
-    cluster.noise_max = cluster.clt_noise_soc(:, tmp(1, 1));
+    [cluster.noise_max(2, 1), indice_to_clear] = max( clt_noise_soc_cpy(2, non_zero_indices));
+    %tmp = find( clt_noise_soc_cpy(2, non_zero_indices) == cluster.noise_max(2, 1));
+    cluster.noise_max =  clt_noise_soc_cpy(:, indice_to_clear);
+   
+
+    clear tmp clt_noise_soc_cpy non_zero_indices
 
 end
 
