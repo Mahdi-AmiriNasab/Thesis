@@ -1,0 +1,16 @@
+[peaks, peak_locs] = findpeaks(cell_values);
+
+% Initialize valleys as empty array
+valleys = [];
+
+% Calculate valleys
+for i = 1:length(peak_locs)-1
+    [valley, valley_loc] = min(cell_values(peak_locs(i):peak_locs(i+1)));
+    valleys = [valleys; valley];
+end
+
+disp('Peaks: ')
+disp(peaks)
+
+disp('Valleys: ')
+disp(valleys)
