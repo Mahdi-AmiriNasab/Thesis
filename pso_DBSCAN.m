@@ -2,6 +2,7 @@
 function [cluster] = pso_DBSCAN(socs, minPts, eps)
 %% initialization
 cell_cnt = length(socs);
+cluster.cell_cnt = length(socs);
 %socs = fix(rand (1, cell_cnt) * 100);
 % eps = 10;
 % minPts = 3;

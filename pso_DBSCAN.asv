@@ -2,6 +2,7 @@
 function [cluster] = pso_DBSCAN(socs, minPts, eps)
 %% initialization
 cell_cnt = length(socs);
+cell_cnt = length(socs);
 %socs = fix(rand (1, cell_cnt) * 100);
 % eps = 10;
 % minPts = 3;
@@ -144,18 +145,18 @@ else
     [cluster.noise_min(2, 1), indice_to_clear] = min( clt_noise_soc_cpy(2, non_zero_indices));
     %tmp = find( clt_noise_soc_cpy(2, non_zero_indices) == cluster.noise_min(2, 1));
     cluster.noise_min =  clt_noise_soc_cpy(:, indice_to_clear);
-    non_zero_indices(1, indice_to_clear) = 0;
+    
 
     % clear the picked noise as minimum to avoid repeated selection
-    clt_noise_soc_cpy(1, indice_to_clear) = 0;
-    clt_noise_soc_cpy(2, indice_to_clear) = 0;
+    clt_noise_soc_cpy(1, indice_to_clear) = -1;
+    clt_noise_soc_cpy(2, indice_to_clear) = -1;
     
 
     % maximum niose
     [cluster.noise_max(2, 1), indice_to_clear] = max( clt_noise_soc_cpy(2, non_zero_indices));
     %tmp = find( clt_noise_soc_cpy(2, non_zero_indices) == cluster.noise_max(2, 1));
     cluster.noise_max =  clt_noise_soc_cpy(:, indice_to_clear);
-    non_zero_indices(1, indice_to_clear) = 0;
+   
 
     clear tmp clt_noise_soc_cpy non_zero_indices
 

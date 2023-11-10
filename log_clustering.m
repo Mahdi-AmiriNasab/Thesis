@@ -1,8 +1,8 @@
-function [lg_time, lg_inconsistency, lg_soc_transfer] = log_clustering(soc_in, mp, ep_arr)
+function [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
 
 lg_time = zeros(length(ep_arr), 1);
 lg_inconsistency = zeros(length(ep_arr), 1);
-lg_soc_transfer = zeros(length(ep_arr), 1);
+lg_eq_overlap = zeros(length(ep_arr), 1);
 
 for ep = ep_arr 
 
@@ -50,13 +50,22 @@ for ep = ep_arr
     
     lg_time(ep_i) = blc_time_total;
     lg_inconsistency(ep_i) = max(soc) - min(soc);
-    lg_soc_transfer(ep_i) = soc_transfered_total;
+    
+    % summing equalization overlap value of each cell after balancing 
+    for n = 1:cluster.cell_cnt
+        OE = calculate_overlap(soc_profile(:, n)');
+        lg_eq_overlap(ep_i) = lg_eq_overlap(ep_i) + OE;
+    end
+    
 
 end
 
 close all 
 
 figure;
+tiledlayout(3 ,1);  % Create a 2x1 grid layout
+
+nexttile;
 plot(ep_arr', lg_inconsistency);
 title('inconsistency')
 xlabel('eps')
@@ -64,17 +73,16 @@ ylabel('% SOC')
 
 
 
-figure;
 
+nexttile;
 plot(ep_arr', lg_time);
 title('equalization time')
 xlabel('eps')
 ylabel('time(h)')
 
-
-figure;
-plot(ep_arr', lg_soc_transfer);
-title('SOC transfer')
+nexttile;
+plot(ep_arr', lg_eq_overlap);
+title('equalization overlap')
 xlabel('eps')
 ylabel('% SOC')
 
