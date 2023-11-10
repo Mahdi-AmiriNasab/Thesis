@@ -1,19 +1,19 @@
 
-function global_best = pso()
+function global_best = pso(soc_in, mp)
 
 %% problem definition
-costfunction = @(x) Sphere(x);  % cost function 
+costfunction = @(ep) balance_costF(soc_in, mp, ep);  % cost function 
 
-nvar = 2;                       % number of unknown (decision) variables
+nvar = 1;                       % number of unknown (decision) variables
 
 varsize = [1 nvar];             % matrix size of decision variables
-varmin = 0;                   % lower bound of dicision of variables
+varmin = 0.1;                   % lower bound of dicision of variables
 varmax = 20;                    % upper bound of dicision of variables
 
 %% parameters of PSO
-maxit   = 100;        % maximum itteration 
+maxit   = 10;        % maximum itteration 
 
-npop    = 50;       % population size
+npop    = 30;       % population size
 w       = 1;        % inertia coefficient
 wdamp   = 0.99;     % inertia damping ratio coefficient
 c1      = 2;             % personal acceleration coefficient 
