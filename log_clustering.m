@@ -39,7 +39,9 @@ for ep = ep_arr
         blc_time_total = blc_time_total + blc_time;
     
         if itteration > 20
-            error("maximum itteration reached")
+            % error("maximum itteration reached");
+            disp("maximum itteration reached");
+            break;
         end
     
     end

@@ -32,7 +32,7 @@ itteration = 0;
 soc_transfered_total = 0;
 blc_time_total = 0;
 
-ep_domain = 1:0.1:15;
+ep_domain = 0.1:0.1:100;
 
 
 
