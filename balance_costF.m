@@ -1,4 +1,4 @@
-function lg_inconsistency = balance_costF(soc_in, mp, ep)
+function cost = balance_costF(soc_in, mp, ep)
 
 %[lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
 
@@ -6,6 +6,10 @@ lg_time = 0;
 lg_inconsistency = 0;
 lg_eq_overlap = 0;
 
+w_time = 0;           % weight for time
+w_inconsistency = 0;  % weight for inconsitency
+w_eq_overlap = 1;     % weight for overlap equalization
+    
 
 soc = soc_in;
 itteration = 0;
@@ -57,5 +61,8 @@ for n = 1:cluster.cell_cnt
     OE = calculate_overlap(soc_profile(:, n)');
     lg_eq_overlap = lg_eq_overlap + OE;
 end
+
+% combined cost
+cost = w_time * lg_time + w_inconsistency * lg_inconsistency + w_eq_overlap * lg_eq_overlap;
 
 end

@@ -5,7 +5,7 @@ clear
 close all
 cell_count = 9;
 soc = fix(rand (1, cell_count) * 100);
-soc = [35    70    69    95     1    80    82    24    80];
+soc = [89    87    84    42    98    21    72    91    27];
 soc_init = soc;
 
 
@@ -36,7 +36,7 @@ ep_domain = 0.1:0.1:20;
 
 
 
-[lg_time, lg_inconsistency, lg_soc_transfer] = log_clustering(soc, mp, ep_domain);
+[lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc, mp, ep_domain);
 global_best = pso(soc, 2);
 
 % while cluster.clt_max_count > 1

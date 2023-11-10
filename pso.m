@@ -13,7 +13,7 @@ varmax = 20;                    % upper bound of dicision of variables
 %% parameters of PSO
 maxit   = 10;        % maximum itteration 
 
-npop    = 30;       % population size
+npop    = 20;       % population size
 w       = 1;        % inertia coefficient
 wdamp   = 0.99;     % inertia damping ratio coefficient
 c1      = 2;             % personal acceleration coefficient 
