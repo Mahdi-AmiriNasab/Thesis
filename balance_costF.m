@@ -51,7 +51,7 @@ while cluster.clt_max_count > 1
 
     if itteration > 20
         % error("maximum itteration reached");
-        disp("maximum itteration reached");
+        % disp("maximum itteration reached");
         break;
     end
 
