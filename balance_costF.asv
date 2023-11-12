@@ -1,4 +1,4 @@
-function cost = balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap)
+function cost = balance_costF(soc_in, mp, ep)
 
 %[lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
 
@@ -7,14 +7,14 @@ lg_inconsistency = 0;
 lg_eq_overlap = 0;
 
 % maximum possible values
-max_lg_time = 2;
-max_lg_inconsistency = 100;
+max_lg_time = 100;
+max_lg_inconsistency = 2;
 max_lg_eq_overlap = 300;
 
 
-% w_time = 0.8;           % weight for time
-% w_inconsistency = 0.2;  % weight for inconsitency
-% w_eq_overlap = 0;     % weight for overlap equalization
+w_time = 0;           % weight for time
+w_inconsistency = 0;  % weight for inconsitency
+w_eq_overlap = ;     % weight for overlap equalization
     
 
 soc = soc_in;

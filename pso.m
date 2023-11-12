@@ -1,8 +1,8 @@
 
-function global_best = pso(soc_in, mp)
+function global_best = pso(soc_in, mp, w_time, w_inconsistency, w_eq_overlap)
 
 %% problem definition
-costfunction = @(ep) balance_costF(soc_in, mp, ep);  % cost function 
+costfunction = @(ep) balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap);  % cost function 
 
 nvar = 1;                       % number of unknown (decision) variables
 
@@ -11,9 +11,9 @@ varmin = 0.1;                   % lower bound of dicision of variables
 varmax = 20;                    % upper bound of dicision of variables
 
 %% parameters of PSO
-maxit   = 10;        % maximum itteration 
+maxit   = 15;        % maximum itteration 
 
-npop    = 20;       % population size
+npop    = 3;       % population size
 w       = 1;        % inertia coefficient
 wdamp   = 0.99;     % inertia damping ratio coefficient
 c1      = 2;             % personal acceleration coefficient 
