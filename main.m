@@ -4,7 +4,7 @@
 clear 
 close all
 cell_count = 9;
-soc = fix(rand (1, cell_count) * 100);
+% soc = fix(rand (1, cell_count) * 100);
 soc = [7    88    10    95    52    50    48    42    76];
 soc_init = soc;
 
