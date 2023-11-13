@@ -1,10 +1,19 @@
-function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, ep, blc_range, capacity, blc_current)
+function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc_in, mp, ep, blc_range, capacity, blc_current)
 
 	%% init
 	soc_out = soc_in;
     soc_transfered_s = 0; soc_transfered_d = 0;
 	soc_transfered = 0;
 	cell_count = length(soc_in);
+
+	% equalization steps storage
+	eq_step.source_queue_cells = [0, 0];		% [start_cell, stop_cell]
+
+	eq_step.destination_queue_cells = [0, 0];	% [start_cell, stop_cell]       
+
+	eq_step.source_target_soc_av = 0;    		% [src cluster average soc]  
+
+	eq_step.destination_target_soc_av = 0; 		% [des cluster average soc]
 
 	% validity of source/destination cluster neighbors (valid by default)
 	snlc_validity = 1;
@@ -131,6 +140,10 @@ function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, 
 		
 	end
 
+	% store source and destination clusters
+	eq_step.source_queue_cells = [source_neighbor_lower_cell + 1, source_neighbor_upper_cell - 1];
+	eq_step.destination_queue_cells = [destination_neighbor_lower_cell + 1, destination_neighbor_upper_cell - 1];
+	 
 	%% calculate soc step to balance
 	% assign step = 1 to lower cluster member count
 	if destination_clt_cnt < source_clt_cnt
@@ -188,6 +201,7 @@ function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, 
 			% if the differential is within the valid range
 			if value_lower_diff_s < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
+				eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
 			end
 				
 		end
@@ -199,6 +213,7 @@ function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, 
 			% if the differential is within the valid range
 			if value_higher_diff_s < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
+				eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
 			end
 		end
 
@@ -213,6 +228,7 @@ function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, 
 			% if the differential is within the valid range
 			if value_lower_diff_d < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
+				eq_step.destination_target_soc_av = sweep_destination;	% store the target soc of neighbors
 			end
 				
 		end
@@ -224,6 +240,7 @@ function [soc_transfered, soc_out, blc_time] = balance_soc(cluster, soc_in, mp, 
 			% if the differential is within the valid range
 			if value_higher_diff_d < blc_range 
 				soc_mismatch = 0; % the neighbors are balanced
+				eq_step.destination_target_soc_av = sweep_destination; % store the target soc of neighbors	
 			end
 		end
 

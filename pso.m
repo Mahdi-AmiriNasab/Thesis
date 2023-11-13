@@ -1,5 +1,5 @@
 
-function global_best = pso(soc_in, mp, w_time, w_inconsistency, w_eq_overlap)
+function [global_best, eq_step] = pso(soc_in, mp, w_time, w_inconsistency, w_eq_overlap)
 
 %% problem definition
 costfunction = @(ep) balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap);  % cost function 
@@ -11,9 +11,9 @@ varmin = 0.1;                   % lower bound of dicision of variables
 varmax = 20;                    % upper bound of dicision of variables
 
 %% parameters of PSO
-maxit   = 15;        % maximum itteration 
+maxit   = 20;        % maximum itteration 
 
-npop    = 3;       % population size
+npop    = 10;       % population size
 w       = 1;        % inertia coefficient
 wdamp   = 0.99;     % inertia damping ratio coefficient
 c1      = 2;             % personal acceleration coefficient 
@@ -45,7 +45,7 @@ for i=1:npop
     particle(i).velocity = zeros(varsize);
 
     % evaluation 
-    particle(i).cost = costfunction(particle(i).position);
+    [particle(i).cost, eq_step] = costfunction(particle(i).position);
 
     %update the personal best
     particle(i).best.position = particle(i).position;
@@ -78,7 +78,7 @@ for it=1:maxit
         
 
         % evaluation
-        particle(i).cost = costfunction(particle(i).position);
+        [particle(i).cost, eq_step] = costfunction(particle(i).position);
 
         % update personal best
         if(particle(i).cost < particle(i).best.cost)

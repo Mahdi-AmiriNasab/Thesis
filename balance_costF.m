@@ -1,6 +1,25 @@
-function cost = balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap)
+function [cost, eq_step] = balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap)
 
-%[lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
+% equalization steps storage
+eq_step.source_queue_cells = [];            % [start_cell, stop_cell]       step 1
+                                            %           .                   step 2
+                                            %           .                   step 3
+                                            %           .                   step n
+
+eq_step.destination_queue_cells = [];       % [start_cell, stop_cell]       step 1
+                                            %           .                   step 2
+                                            %           .                   step 3
+                                            %           .                   step n
+
+eq_step.source_target_soc_av = [];          % [src cluster average soc]     step 1
+                                            %           .                   step 2
+                                            %           .                   step 3
+                                            %           .                   step n     
+
+eq_step.destination_target_soc_av = [];     % [des cluster average soc]     step 1
+                                            %           .                   step 2
+                                            %           .                   step 3
+                                            %           .                   step n     
 
 lg_time = 0;
 lg_inconsistency = 0;
@@ -31,7 +50,7 @@ while cluster.clt_max_count > 1
 
 
     % balancing
-    [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, 1, 2200, 2000);
+    [soc_transfered, soc, blc_time, eq_step(itteration + 1)] = balance_soc(cluster, soc, mp, ep, 1, 2200, 2000);
 
     % store charge profile
     soc_profile(itteration + 2, :) = soc;

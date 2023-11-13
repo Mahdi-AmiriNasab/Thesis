@@ -37,7 +37,7 @@ ep_domain = 0.1:0.1:20;
 
 
 [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc, mp, ep_domain);
-global_best = pso(soc, 2, 0.7, 0.3, 0);
+[global_best, eq_step] = pso(soc, 2, 0.5, 0.5, 0);
 
 % while cluster.clt_max_count > 1
 % 

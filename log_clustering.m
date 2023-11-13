@@ -41,7 +41,7 @@ for ep = ep_arr
     
         if itteration > 20
             % error("maximum itteration reached");
-            disp("maximum itteration reached");
+            % disp("maximum itteration reached");
             break;
         end
     
