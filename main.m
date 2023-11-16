@@ -39,6 +39,20 @@ ep_domain = 0.1:0.1:20;
 [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc, mp, ep_domain);
 [global_best, eq_step] = pso(soc, 2, 0.5, 0.5, 0);
 
+src_q_cls = zeros(50, 2);
+dst_q_cls = zeros(50, 2);
+src_trg_soc_av = zeros(50, 1);
+dst_trg_soc_av = zeros(50, 1);
+
+%% preparing output steps
+for n = 1:length(eq_step)
+    src_q_cls(n, :) = eq_step(n).source_queue_cells;
+    dst_q_cls(n, :) = eq_step(n).destination_queue_cells;
+    src_trg_soc_av(n, 1) = eq_step(n).source_target_soc_av;
+    dst_trg_soc_av(n, 1) = eq_step(n).destination_target_soc_av;
+
+end
+
 % while cluster.clt_max_count > 1
 % 
 %     %% clustering and balancing
