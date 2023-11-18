@@ -15,6 +15,9 @@ ep = 1;
 
 % clustering
 [cluster] = pso_DBSCAN(soc, mp, ep);
+figure;
+visualization(soc, cluster);
+
 
 % %figure;
 % tile_counter = 0;
@@ -37,7 +40,7 @@ ep_domain = 0.1:0.1:20;
 
 
 [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc, mp, ep_domain);
-[global_best, eq_step] = pso(soc, 2, 0.5, 0.5, 0);
+[global_best, eq_step, stio] = pso(soc, 2, 0.8, 0.2, 0);
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);
@@ -52,6 +55,14 @@ for n = 1:length(eq_step)
     dst_trg_soc_av(n, 1) = eq_step(n).destination_target_soc_av;
 
 end
+
+% clustering
+[cluster] = pso_DBSCAN(stio.soc, mp, global_best.position);
+
+figure;
+visualization(stio.soc, cluster);
+
+
 
 % while cluster.clt_max_count > 1
 % 

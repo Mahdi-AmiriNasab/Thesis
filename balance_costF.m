@@ -1,4 +1,4 @@
-function [cost, eq_step] = balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap)
+function [cost, eq_step, soc, time, inconsistency, eq_overlap] = balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap)
 
 % equalization steps storage
 eq_step.source_queue_cells = [];            % [start_cell, stop_cell]       step 1
@@ -26,7 +26,7 @@ lg_inconsistency = 0;
 lg_eq_overlap = 0;
 
 % maximum possible values
-max_lg_time = 2;
+max_lg_time = 1.5;
 max_lg_inconsistency = 100;
 max_lg_eq_overlap = 300;
 
@@ -87,6 +87,10 @@ for n = 1:cluster.cell_cnt
     lg_eq_overlap = lg_eq_overlap + OE;
 end
 
+% results
+time = lg_time;
+inconsistency = lg_inconsistency;
+eq_overlap = lg_eq_overlap;
 
 % normalize each component
 lg_time = lg_time / max_lg_time;
