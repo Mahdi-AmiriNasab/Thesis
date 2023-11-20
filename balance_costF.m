@@ -24,6 +24,7 @@ eq_step.destination_target_soc_av = [];     % [des cluster average soc]     step
 lg_time = 0;
 lg_inconsistency = 0;
 lg_eq_overlap = 0;
+persistent max_t_res; % assume eps = 0.1        
 
 % maximum possible values
 max_lg_time = 1.5;
@@ -93,7 +94,14 @@ inconsistency = lg_inconsistency;
 eq_overlap = lg_eq_overlap;
 
 % normalize each component
-lg_time = lg_time / max_lg_time;
+
+% calculating maximum time just once
+if isempty(max_t_res)
+    ep = 0.1;
+    [max_t_res, ~, ~] = log_clustering(soc_in, mp, ep);
+end
+
+lg_time = lg_time / max_t_res;
 lg_inconsistency = lg_inconsistency / max_lg_inconsistency;
 lg_eq_overlap = lg_eq_overlap / max_lg_eq_overlap;
 
