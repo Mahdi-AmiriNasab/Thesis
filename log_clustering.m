@@ -63,7 +63,6 @@ for ep = ep_arr
 
 end
 
-close all 
 
 figure;
 tiledlayout(3 ,1);  % Create a 2x1 grid layout
