@@ -1,16 +1,25 @@
 
 function [cluster] = pso_DBSCAN(socs, minPts, eps)
+
+
 %% initialization
 cell_cnt = length(socs);
+
+cluster = struct('cell_cnt', 0, 'average', 0, 'dbscan_res', zeros(1, 9) ...
+, 'clt_res_cell', zeros(cell_cnt, cell_cnt), 'clt_res_soc',  zeros(cell_cnt, cell_cnt) ...
+, 'clt_res_soc_av', zeros(cell_cnt, 2), 'clt_max_count', 0, 'clt_noise_soc', zeros(2, cell_cnt) ...
+, 'clt_soc', zeros(2, cell_cnt), 'noise_max', zeros(2, 1), 'noise_min', zeros(2, 1), 'single_noise', zeros(2, 1) ...
+, 'noise_status', e_noise_stat.noise_found);
+
 cluster.cell_cnt = length(socs);
 %socs = fix(rand (1, cell_cnt) * 100);
 % eps = 10;
 % minPts = 3;
 %% clustering
-cluster.average = fix(mean(socs));
+cluster.average = double(fix(mean(socs)));
 error = [(1:cell_cnt); socs - repmat(cluster.average, 1, cell_cnt)];
 
-dbscan_res_clm = dbscan(error(2, :)', eps, minPts);
+dbscan_res_clm = db(error(2, :)', eps, minPts);
 %data_cluster = [error(2, :); dbscan_res_clm'];
 
 % finding adjacent clusters

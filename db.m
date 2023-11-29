@@ -1,4 +1,4 @@
-function [IDX]=DBSCAN(X,epsilon,MinPts)
+function [IDX]=db(X,epsilon,MinPts)
 
     C=0;
     n=size(X,1);
