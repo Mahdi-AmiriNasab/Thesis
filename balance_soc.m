@@ -1,6 +1,7 @@
 function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc_in, mp, ep, blc_range, capacity, blc_current)
 
 	%% init
+    blc_time = 0;
 	soc_out = soc_in;
     soc_transfered_s = 0; soc_transfered_d = 0;
 	soc_transfered = 0;
@@ -260,9 +261,18 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
         % increament/decreament soc calculation (both are equal)
 		soc_transfered_s = soc_transfered_s + inc * source_clt_cnt;
         soc_transfered_d = soc_transfered_d + dec * destination_clt_cnt;
-        % round to avoid unwanted mismatch
-        soc_transfered_s = round(soc_transfered_s, 2);
-        soc_transfered_d = round(soc_transfered_d, 2);
+		% round to avoid unwanted mismatch
+		
+		%#codegen
+		if coder.target('MATLAB')
+			% This code will only be executed in the MATLAB environment
+			soc_transfered_s = round(soc_transfered_s, 2);
+			soc_transfered_d = round(soc_transfered_d, 2);
+		else
+			soc_transfered_s = round(soc_transfered_s * 100) / 100;
+			soc_transfered_d = round(soc_transfered_d * 100) / 100;
+		end
+
         
         if(soc_transfered_s ~= soc_transfered_d)
             error("soc transfer mismatch");

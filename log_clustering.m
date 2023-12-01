@@ -1,8 +1,16 @@
 function [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
 
+coder.extrinsic('plot', 'nexttile', 'tiledlayout');
+
+cell_count = length(soc_in);
+
+soc_profile = zeros(1, cell_count);
+coder.varsize('soc_profile', [inf, cell_count], [1, 0]); % Variable rows, fixed 9 columns, 0 and 1 shows which one dimension is variable
+
 lg_time = zeros(length(ep_arr), 1);
 lg_inconsistency = zeros(length(ep_arr), 1);
 lg_eq_overlap = zeros(length(ep_arr), 1);
+coder.varsize('soc_profile', [inf, 9], [1, 0]); % Variable rows, fixed 9 columns, 0 and 1 shows which one dimension is variable
 
 for ep = ep_arr 
 

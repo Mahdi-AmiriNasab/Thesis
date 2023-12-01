@@ -1,5 +1,20 @@
 function [cost, eq_step, soc, time, inconsistency, eq_overlap] = balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap)
 
+	cell_count = length(soc_in);
+    
+    eq_step = struct('source_queue_cells', zeros(0,2),...
+                     'destination_queue_cells', zeros(0,2),...
+                     'source_target_soc_av', zeros(0,1),...
+                     'destination_target_soc_av', zeros(0,1));
+    coder.varsize('eq_step.source_queue_cells', [inf, 2], [1, 0]);
+    coder.varsize('eq_step.destination_queue_cells', [inf, 2], [1, 0]);
+    coder.varsize('eq_step.source_target_soc_av', [inf, 1], [1, 0]);
+    coder.varsize('eq_step.destination_target_soc_av', [inf, 1], [1, 0]);
+    
+    soc_profile = zeros(1, cell_count);
+    coder.varsize('soc_profile', [inf, cell_count], [1, 0]); % Variable rows, fixed 9 columns, 0 and 1 shows which one dimension is variable
+
+
 % equalization steps storage
 eq_step.source_queue_cells = [];            % [start_cell, stop_cell]       step 1
                                             %           .                   step 2
@@ -20,6 +35,7 @@ eq_step.destination_target_soc_av = [];     % [des cluster average soc]     step
                                             %           .                   step 2
                                             %           .                   step 3
                                             %           .                   step n     
+                                            
 
 lg_time = 0;
 lg_inconsistency = 0;

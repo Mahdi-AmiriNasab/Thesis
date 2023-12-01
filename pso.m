@@ -22,15 +22,18 @@ c2      = 2;             % social acceleration coefficient
 %% initialization
 
 % the particel template
-empty_particle.position = [];
-empty_particle.cost = [];
-empty_particle.best.position = [];
-empty_particle.best.cost = [];
+
+empty_particle = struct('position', zeros(varsize), ...
+                        'cost', zeros(varsize),'velocity', zeros(varsize), ...
+                        'best', struct('position', zeros(varsize), 'cost', zeros(varsize)));
+                        
+global_best = struct('position', zeros(varsize), 'cost', zeros(varsize));
 
 % create population array
 particle = repmat(empty_particle, npop, 1);
 
 % global best
+
 
 global_best.cost = inf;
 % start with the +infinity value to move toward least values...
@@ -95,9 +98,12 @@ for it=1:maxit
     end
     % store the best cost value
     best_costs(it) = global_best.cost;
-    % display the iteration information
-    disp(['iteration ' num2str(it) ': best cost = ' num2str(best_costs(it))]);
-    % scatter3(global_best.position(1, 1), global_best.position(1, 2), global_best.position(1, 3));
+    
+    if coder.target('MATLAB')
+        % display the iteration information
+        disp(['iteration ' num2str(it) ': best cost = ' num2str(best_costs(it))]);
+        % scatter3(global_best.position(1, 1), global_best.position(1, 2), global_best.position(1, 3));
+    end
     w = w * wdamp;
 
 end
