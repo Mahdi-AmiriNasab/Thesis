@@ -1,6 +1,6 @@
 function [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
 
-coder.extrinsic('plot', 'nexttile', 'tiledlayout');
+coder.extrinsic('plot', 'nexttile', 'tiledlayout', 'clear');
 
 cell_count = length(soc_in);
 
