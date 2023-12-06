@@ -1,16 +1,16 @@
 function [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
 
-coder.extrinsic('plot', 'nexttile', 'tiledlayout', 'clear');
+coder.extrinsic('plot', 'nexttile', 'tiledlayout');
 
 cell_count = length(soc_in);
 
 soc_profile = zeros(1, cell_count);
 coder.varsize('soc_profile', [inf, cell_count], [1, 0]); % Variable rows, fixed 9 columns, 0 and 1 shows which one dimension is variable
+soc_profile = NaN(100, cell_count);
 
 lg_time = zeros(length(ep_arr), 1);
 lg_inconsistency = zeros(length(ep_arr), 1);
 lg_eq_overlap = zeros(length(ep_arr), 1);
-coder.varsize('soc_profile', [inf, 9], [1, 0]); % Variable rows, fixed 9 columns, 0 and 1 shows which one dimension is variable
 
 for ep = ep_arr 
 
@@ -55,8 +55,12 @@ for ep = ep_arr
     
     end
     
-    clear soc_transfered V  blc_time
+    if coder.target('MATLAB')
+        clear soc_transfered V  blc_time
+    end
     
+    soc_profile(any(isnan(soc_profile), 2), :) = [];  % Remove any row with NaN
+  
     ep_i = find(ep_arr == ep);
     
     lg_time(ep_i) = blc_time_total;

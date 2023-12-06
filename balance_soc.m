@@ -286,9 +286,10 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
             || sweep_source > 100 || sweep_source < 0
            error("soc sweep limit exceed");
         end
-
-        clear dec inc
-
+        
+        if coder.target('MATLAB')
+            clear dec inc
+        end
 	end
 
 end

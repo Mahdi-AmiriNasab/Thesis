@@ -1,8 +1,8 @@
 /*
  * File: main.h
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 /*************************************************************************/
@@ -44,8 +44,6 @@ extern "C" {
 
 /* Function Declarations */
 extern int main(int argc, char **argv);
-
-extern void main_pso(void);
 
 #ifdef __cplusplus
 }

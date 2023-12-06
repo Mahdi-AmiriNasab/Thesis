@@ -1,5 +1,5 @@
-<deployment-project plugin="plugin.coder" plugin-version="R2023a">
-  <configuration build-checksum="1852633550" file="D:\Thesis\pso.prj" location="D:\Thesis" name="pso" target="target.unifiedcoder" target-name="MATLAB Coder">
+<deployment-project plugin="plugin.coder" plugin-version="R2021a">
+  <configuration build-checksum="4187475049" file="E:\Thesis\pso.prj" location="E:\Thesis" name="pso" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
       <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
@@ -11,6 +11,7 @@
       <var.SimdQueryHardwareVendor>Generic</var.SimdQueryHardwareVendor>
       <var.SimdQueryHardwareType>MATLAB Host Computer</var.SimdQueryHardwareType>
       <param.InstructionSetExtensionsAvailableInUI>true</param.InstructionSetExtensionsAvailableInUI>
+      <param.InstructionSetExtensions>None</param.InstructionSetExtensions>
       <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
       <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
       <param.IntegrityChecks>true</param.IntegrityChecks>
@@ -18,13 +19,10 @@
       <param.EnableAutoParallelization>false</param.EnableAutoParallelization>
       <param.NumberOfCpuThreads>0</param.NumberOfCpuThreads>
       <param.OptimizeReductions>false</param.OptimizeReductions>
-      <param.SIMDAcceleration>option.SIMDAcceleration.Portable</param.SIMDAcceleration>
       <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
-      <param.EnableDynamicMemoryAllocation>true</param.EnableDynamicMemoryAllocation>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
-      <param.DynamicMemoryAllocationForFixedSizeArrays>false</param.DynamicMemoryAllocationForFixedSizeArrays>
       <param.DynamicMemoryAllocationInterface>option.DynamicMemoryAllocationInterface.AUTO</param.DynamicMemoryAllocationInterface>
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
@@ -34,7 +32,6 @@
       <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
       <param.GenerateComments>true</param.GenerateComments>
       <param.MATLABSourceComments>false</param.MATLABSourceComments>
-      <param.MATLABSourceCommentLineNumbers>true</param.MATLABSourceCommentLineNumbers>
       <param.CodeFormattingTool>option.CodeFormattingTool.Auto</param.CodeFormattingTool>
       <param.ReservedNameArray />
       <param.CppStyleConst>true</param.CppStyleConst>
@@ -43,13 +40,12 @@
       <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
       <param.HighlightImplicitExpansionIssues>true</param.HighlightImplicitExpansionIssues>
-      <param.HighlightLoopControlIssues>true</param.HighlightLoopControlIssues>
       <param.LaunchReport>false</param.LaunchReport>
       <param.ReportInfoVarName />
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.VerificationMode>option.VerificationMode.None</param.VerificationMode>
-      <param.VerificationStatus>option.VerificationStatus.FailedTest</param.VerificationStatus>
+      <param.VerificationStatus>option.VerificationStatus.Passed</param.VerificationStatus>
       <param.EnableMexProfiling>false</param.EnableMexProfiling>
       <var.BuiltWithMexProfiling>false</var.BuiltWithMexProfiling>
       <param.CustomSourceCode />
@@ -76,7 +72,6 @@
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
-      <param.DefaultVariableInitialization>option.DefaultVariableInitialization.None</param.DefaultVariableInitialization>
       <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
       <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
       <param.EnableAutoParallelizationReporting>true</param.EnableAutoParallelizationReporting>
@@ -98,6 +93,7 @@
         <var.SimdQueryHardwareVendor />
         <var.SimdQueryHardwareType />
         <param.InstructionSetExtensionsAvailableInUI />
+        <param.InstructionSetExtensions />
         <param.ResponsivenessChecks />
         <param.ExtrinsicCalls />
         <param.IntegrityChecks />
@@ -105,13 +101,10 @@
         <param.EnableAutoParallelization />
         <param.NumberOfCpuThreads />
         <param.OptimizeReductions />
-        <param.SIMDAcceleration />
         <param.GlobalDataSyncMethod />
         <param.EnableVariableSizing />
-        <param.EnableDynamicMemoryAllocation />
         <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
-        <param.DynamicMemoryAllocationForFixedSizeArrays />
         <param.DynamicMemoryAllocationInterface />
         <param.RowMajor />
         <param.HighlightPotentialRowMajorIssues />
@@ -121,7 +114,6 @@
         <param.FilePartitionMethod />
         <param.GenerateComments />
         <param.MATLABSourceComments />
-        <param.MATLABSourceCommentLineNumbers />
         <param.CodeFormattingTool />
         <param.ReservedNameArray />
         <param.CppStyleConst />
@@ -130,7 +122,6 @@
         <param.ReportPotentialDifferences />
         <param.GenerateReport />
         <param.HighlightImplicitExpansionIssues />
-        <param.HighlightLoopControlIssues />
         <param.LaunchReport />
         <param.ReportInfoVarName />
         <param.DefaultTestFile />
@@ -162,7 +153,6 @@
         <param.MemcpyThreshold />
         <param.EnableOpenMP />
         <param.InitFltsAndDblsToZero />
-        <param.DefaultVariableInitialization />
         <param.ConstantInputs />
         <param.EnableCRICodeCoverage />
         <param.EnableAutoParallelizationReporting />
@@ -193,10 +183,8 @@
       <param.NumberOfCpuThreads>0</param.NumberOfCpuThreads>
       <param.OptimizeReductions>false</param.OptimizeReductions>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
-      <param.EnableDynamicMemoryAllocation>true</param.EnableDynamicMemoryAllocation>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
       <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
-      <param.DynamicMemoryAllocationForFixedSizeArrays>false</param.DynamicMemoryAllocationForFixedSizeArrays>
       <param.DynamicMemoryAllocationInterface>option.DynamicMemoryAllocationInterface.AUTO</param.DynamicMemoryAllocationInterface>
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
@@ -209,9 +197,7 @@
       <param.GenerateComments>true</param.GenerateComments>
       <param.CommentStyle>option.CommentStyle.Auto</param.CommentStyle>
       <param.MATLABSourceComments>true</param.MATLABSourceComments>
-      <param.MATLABSourceCommentLineNumbers>false</param.MATLABSourceCommentLineNumbers>
       <param.MATLABFcnDesc>true</param.MATLABFcnDesc>
-      <param.ReqsInCode>false</param.ReqsInCode>
       <param.ConvertIfToSwitch>false</param.ConvertIfToSwitch>
       <param.PreserveExternInFcnDecls>true</param.PreserveExternInFcnDecls>
       <param.EnableSignedLeftShifts>true</param.EnableSignedLeftShifts>
@@ -259,18 +245,14 @@
       <param.GenerateCodeReplacementReport>false</param.GenerateCodeReplacementReport>
       <param.HighlightPotentialDataTypeIssues>false</param.HighlightPotentialDataTypeIssues>
       <param.HighlightImplicitExpansionIssues>true</param.HighlightImplicitExpansionIssues>
-      <param.HighlightLoopControlIssues>true</param.HighlightLoopControlIssues>
       <param.LaunchReport>false</param.LaunchReport>
       <param.ReportInfoVarName />
-      <param.SILPILDebugging>false</param.SILPILDebugging>
+      <param.SILDebugging>false</param.SILDebugging>
       <param.SILPILCheckConstantInputs>true</param.SILPILCheckConstantInputs>
       <param.SILPILSyncGlobalData>true</param.SILPILSyncGlobalData>
       <param.CodeExecutionProfiling>false</param.CodeExecutionProfiling>
       <param.CodeProfilingInstrumentation>false</param.CodeProfilingInstrumentation>
-      <param.CodeProfilingSaveOptions>option.CodeProfilingSaveOptions.AllData</param.CodeProfilingSaveOptions>
       <param.CodeStackProfiling>false</param.CodeStackProfiling>
-      <param.CodeCoverage>false</param.CodeCoverage>
-      <param.EnableInstrumentCode>false</param.EnableInstrumentCode>
       <param.DefaultTestFile />
       <param.MergeInstrumentationResults>false</param.MergeInstrumentationResults>
       <param.RanPilSilVerification>false</param.RanPilSilVerification>
@@ -292,7 +274,6 @@
       <param.BuildConfiguration>Debug</param.BuildConfiguration>
       <param.CustomToolchainOptions />
       <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
-      <var.ToolchainSupportsBuildConfigurations>true</var.ToolchainSupportsBuildConfigurations>
       <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware/&gt;&lt;/ctdata&gt;</param.target.Data>
       <param.target.ActiveType>option.target.TargetType.MatlabHost</param.target.ActiveType>
       <param.target.ActiveTarget />
@@ -366,17 +347,14 @@
       <param.MemcpyThreshold>64</param.MemcpyThreshold>
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
-      <param.DefaultVariableInitialization>option.DefaultVariableInitialization.None</param.DefaultVariableInitialization>
       <param.GenerateNonFiniteFilesIfUsed>true</param.GenerateNonFiniteFilesIfUsed>
       <param.PassStructByReference>true</param.PassStructByReference>
-      <param.UseBuiltinFFTWLibrary>false</param.UseBuiltinFFTWLibrary>
+      <param.CustomLAPACKCallback />
       <param.CustomFFTCallback />
       <param.CustomBLASCallback />
-      <param.CustomLAPACKCallback />
       <param.EnableAutoParallelizationReporting>true</param.EnableAutoParallelizationReporting>
       <param.CacheDynamicArrayDataPointer>true</param.CacheDynamicArrayDataPointer>
       <param.GenerateDefaultInSwitch>false</param.GenerateDefaultInSwitch>
-      <param.JustifyMISRAViolations>false</param.JustifyMISRAViolations>
       <param.EnableTraceability>true</param.EnableTraceability>
       <param.SILPILVerbosity>option.SILPILVerbosity.off</param.SILPILVerbosity>
       <param.UseECoderFeatures>true</param.UseECoderFeatures>
@@ -409,10 +387,8 @@
         <param.NumberOfCpuThreads />
         <param.OptimizeReductions />
         <param.EnableVariableSizing />
-        <param.EnableDynamicMemoryAllocation />
         <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
-        <param.DynamicMemoryAllocationForFixedSizeArrays />
         <param.DynamicMemoryAllocationInterface />
         <param.RowMajor />
         <param.HighlightPotentialRowMajorIssues />
@@ -425,7 +401,6 @@
         <param.GenerateComments />
         <param.CommentStyle />
         <param.MATLABFcnDesc />
-        <param.ReqsInCode />
         <param.ConvertIfToSwitch />
         <param.PreserveExternInFcnDecls />
         <param.EnableSignedLeftShifts />
@@ -472,18 +447,14 @@
         <param.GenerateCodeReplacementReport />
         <param.HighlightPotentialDataTypeIssues />
         <param.HighlightImplicitExpansionIssues />
-        <param.HighlightLoopControlIssues />
         <param.LaunchReport />
         <param.ReportInfoVarName />
-        <param.SILPILDebugging />
+        <param.SILDebugging />
         <param.SILPILCheckConstantInputs />
         <param.SILPILSyncGlobalData />
         <param.CodeExecutionProfiling />
         <param.CodeProfilingInstrumentation />
-        <param.CodeProfilingSaveOptions />
         <param.CodeStackProfiling />
-        <param.CodeCoverage />
-        <param.EnableInstrumentCode />
         <param.DefaultTestFile />
         <param.MergeInstrumentationResults />
         <param.RanPilSilVerification />
@@ -503,7 +474,6 @@
         <param.SameHardware />
         <param.CustomToolchainOptions />
         <var.ToolchainSettingsVisible />
-        <var.ToolchainSupportsBuildConfigurations />
         <param.target.ActiveType />
         <param.target.ActiveTarget />
         <param.HardwareVendor.Production />
@@ -561,17 +531,14 @@
         <param.MemcpyThreshold />
         <param.EnableOpenMP />
         <param.InitFltsAndDblsToZero />
-        <param.DefaultVariableInitialization />
         <param.GenerateNonFiniteFilesIfUsed />
         <param.PassStructByReference />
-        <param.UseBuiltinFFTWLibrary />
+        <param.CustomLAPACKCallback />
         <param.CustomFFTCallback />
         <param.CustomBLASCallback />
-        <param.CustomLAPACKCallback />
         <param.EnableAutoParallelizationReporting />
         <param.CacheDynamicArrayDataPointer />
         <param.GenerateDefaultInSwitch />
-        <param.JustifyMISRAViolations />
         <param.EnableTraceability />
         <param.SILPILVerbosity />
         <param.UseECoderFeatures />
@@ -589,7 +556,7 @@
       </unset>
     </profile>
     <param.objective>option.objective.c</param.objective>
-    <param.WorkflowStep>workflowSummary</param.WorkflowStep>
+    <param.WorkflowStep>generateCode</param.WorkflowStep>
     <param.TestSnippets>
       <item>[global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.8, 0);</item>
       <item>pso_DBSCAN(soc_init, 2, 0.2)</item>
@@ -599,8 +566,8 @@
     <param.outputfile>${PROJECT_ROOT}\codegen\lib\pso\pso.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
-    <param.HasGpuCoder>true</param.HasGpuCoder>
-    <var.HasNeuralNetworkToolbox>true</var.HasNeuralNetworkToolbox>
+    <param.HasGpuCoder>false</param.HasGpuCoder>
+    <var.HasNeuralNetworkToolbox>false</var.HasNeuralNetworkToolbox>
     <param.mex.mainhtml />
     <param.grt.mainhtml />
     <param.CallGeneratedCodeFromTest>true</param.CallGeneratedCodeFromTest>
@@ -621,13 +588,13 @@
     <param.hdlParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\pso</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>1852633550</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>4187475049</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\pso</var.cfi.lastOutputRoot>
-    <var.cfi.preBuildChecksum>127772086</var.cfi.preBuildChecksum>
+    <var.cfi.preBuildChecksum>1806382794</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>[global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.8, 0);</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;D:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;D:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;D:\Thesis\db.m&lt;/file&gt;&lt;file&gt;D:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;2529366480&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;D:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;D:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;D:\Thesis\db.m&lt;/file&gt;&lt;file&gt;D:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;E:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;E:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;E:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;E:\Thesis\db.m&lt;/file&gt;&lt;file&gt;E:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;295689937&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;E:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;E:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;E:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;E:\Thesis\db.m&lt;/file&gt;&lt;file&gt;E:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -652,9 +619,9 @@
     <param.CppGenerateEnumClass>true</param.CppGenerateEnumClass>
     <param.gpu.Enabled>false</param.gpu.Enabled>
     <param.gpu.SelectCudaDevice>-1</param.gpu.SelectCudaDevice>
-    <param.gpu.ComputeCapability>3.5</param.gpu.ComputeCapability>
+    <param.gpu.ComputeCapability />
     <param.gpu.CustomComputeCapability />
-    <param.gpu.MallocMode>discrete</param.gpu.MallocMode>
+    <param.gpu.MallocMode />
     <param.gpu.MallocThreshold>200</param.gpu.MallocThreshold>
     <param.gpu.StackLimitPerThread>1024</param.gpu.StackLimitPerThread>
     <param.gpu.MaximumBlocksPerKernel>0</param.gpu.MaximumBlocksPerKernel>
@@ -662,12 +629,12 @@
     <param.gpu.SafeBuild>false</param.gpu.SafeBuild>
     <param.gpu.KernelNamePrefix />
     <param.gpu.CompilerFlags />
-    <param.gpu.EnableCUBLAS>true</param.gpu.EnableCUBLAS>
-    <param.gpu.EnableCUSOLVER>true</param.gpu.EnableCUSOLVER>
-    <param.gpu.EnableCUFFT>true</param.gpu.EnableCUFFT>
+    <param.gpu.EnableCUBLAS>false</param.gpu.EnableCUBLAS>
+    <param.gpu.EnableCUSOLVER>false</param.gpu.EnableCUSOLVER>
+    <param.gpu.EnableCUFFT>false</param.gpu.EnableCUFFT>
     <param.gpu.EnableMemoryManager>false</param.gpu.EnableMemoryManager>
     <param.gpu.BlockAlignment>256</param.gpu.BlockAlignment>
-    <param.gpu.FreeMode>Never</param.gpu.FreeMode>
+    <param.gpu.FreeMode />
     <param.gpu.MinPoolSize>8</param.gpu.MinPoolSize>
     <param.gpu.MaxPoolSize>2048</param.gpu.MaxPoolSize>
     <var.checkIssuesGpu>false</var.checkIssuesGpu>
@@ -677,8 +644,8 @@
     <param.deeplearning.DeepLearningCustomCallback />
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
     <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
+    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
@@ -691,8 +658,6 @@
     <param.arm-compute.CalibrationResultFile />
     <param.cmsis-nn.DataType>option.arm-compute.datatype.int8</param.cmsis-nn.DataType>
     <param.cmsis-nn.CalibrationResultFile />
-    <param.none.LearnablesCompression>option.none.LearnablesCompression.None</param.none.LearnablesCompression>
-    <var.ToolchainCanRunBuildArtifact>true</var.ToolchainCanRunBuildArtifact>
     <param.TargetLang>option.TargetLang.C</param.TargetLang>
     <param.EnableAutoExtrinsicCalls>true</param.EnableAutoExtrinsicCalls>
     <param.EnableImplicitExpansion>true</param.EnableImplicitExpansion>
@@ -819,8 +784,6 @@
       <param.deeplearning.DeepLearningCustomCallback />
       <param.deeplearning.TargetLib />
       <var.cfiTargetLibSuppression />
-      <var.hasMatlabDeepLearningSupportPackage />
-      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
@@ -833,8 +796,6 @@
       <param.arm-compute.CalibrationResultFile />
       <param.cmsis-nn.DataType />
       <param.cmsis-nn.CalibrationResultFile />
-      <param.none.LearnablesCompression />
-      <var.ToolchainCanRunBuildArtifact />
       <param.TargetLang />
       <param.EnableAutoExtrinsicCalls />
       <param.EnableImplicitExpansion />
@@ -918,18 +879,16 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}\codegen\lib\pso" name="pso.lib" optional="false">D:\Thesis\codegen\lib\pso\pso.lib</file>
+      <file location="${PROJECT_ROOT}\codegen\lib\pso" name="pso.lib" optional="false">E:\Thesis\codegen\lib\pso\pso.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2023a</root>
+      <root>C:\Program Files\Matlab\R2022a</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />
-        <toolbox name="gpucoder" />
         <toolbox name="fixedpoint" />
         <toolbox name="matlabhdlcoder" />
-        <toolbox name="neuralnetwork" />
       </toolboxes>
       <toolbox>
         <matlabcoder>
@@ -942,11 +901,6 @@
         </embeddedcoder>
       </toolbox>
       <toolbox>
-        <gpucoder>
-          <enabled>true</enabled>
-        </gpucoder>
-      </toolbox>
-      <toolbox>
         <fixedpoint>
           <enabled>true</enabled>
         </fixedpoint>
@@ -955,11 +909,6 @@
         <matlabhdlcoder>
           <enabled>true</enabled>
         </matlabhdlcoder>
-      </toolbox>
-      <toolbox>
-        <neuralnetwork>
-          <enabled>true</enabled>
-        </neuralnetwork>
       </toolbox>
     </matlab>
     <platform>

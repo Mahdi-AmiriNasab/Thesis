@@ -1,0 +1,32 @@
+/*
+ * File: pso_rtwutil.h
+ *
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ */
+
+#ifndef PSO_RTWUTIL_H
+#define PSO_RTWUTIL_H
+
+/* Include Files */
+#include "rtwtypes.h"
+#include <stddef.h>
+#include <stdlib.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+/* Function Declarations */
+extern double rt_roundd_snf(double u);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif
+/*
+ * File trailer for pso_rtwutil.h
+ *
+ * [EOF]
+ */

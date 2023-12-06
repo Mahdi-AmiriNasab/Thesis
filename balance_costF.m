@@ -6,32 +6,40 @@ function [cost, eq_step, soc, time, inconsistency, eq_overlap] = balance_costF(s
                      'destination_queue_cells', zeros(0,2),...
                      'source_target_soc_av', zeros(0,1),...
                      'destination_target_soc_av', zeros(0,1));
+    max_itteration = 100; % or whatever the maximum value of itteration is
+
+    % Initialize eq_step as an empty structure array with max_itteration elements
+    eq_step = repmat(struct('source_queue_cells', zeros(0,2),...
+                       'destination_queue_cells', zeros(0,2),...
+                       'source_target_soc_av', zeros(0,1),...
+                       'destination_target_soc_av', zeros(0,1)), 1, max_itteration);
+
     coder.varsize('eq_step.source_queue_cells', [inf, 2], [1, 0]);
     coder.varsize('eq_step.destination_queue_cells', [inf, 2], [1, 0]);
     coder.varsize('eq_step.source_target_soc_av', [inf, 1], [1, 0]);
     coder.varsize('eq_step.destination_target_soc_av', [inf, 1], [1, 0]);
     
-    soc_profile = zeros(1, cell_count);
+    
     coder.varsize('soc_profile', [inf, cell_count], [1, 0]); % Variable rows, fixed 9 columns, 0 and 1 shows which one dimension is variable
-
+    soc_profile = NaN(100, cell_count);
 
 % equalization steps storage
-eq_step.source_queue_cells = [];            % [start_cell, stop_cell]       step 1
+%eq_step.source_queue_cells = [];            % [start_cell, stop_cell]       step 1
                                             %           .                   step 2
                                             %           .                   step 3
                                             %           .                   step n
 
-eq_step.destination_queue_cells = [];       % [start_cell, stop_cell]       step 1
+%eq_step.destination_queue_cells = [];       % [start_cell, stop_cell]       step 1
                                             %           .                   step 2
                                             %           .                   step 3
                                             %           .                   step n
 
-eq_step.source_target_soc_av = [];          % [src cluster average soc]     step 1
+%eq_step.source_target_soc_av = [];          % [src cluster average soc]     step 1
                                             %           .                   step 2
                                             %           .                   step 3
                                             %           .                   step n     
 
-eq_step.destination_target_soc_av = [];     % [des cluster average soc]     step 1
+%eq_step.destination_target_soc_av = [];     % [des cluster average soc]     step 1
                                             %           .                   step 2
                                             %           .                   step 3
                                             %           .                   step n     
@@ -92,8 +100,11 @@ while cluster.clt_max_count > 1
     end
 
 end
+if coder.target('MATLAB')   
+    clear soc_transfered V  blc_time
+end
 
-clear soc_transfered V  blc_time
+soc_profile(any(isnan(soc_profile), 2), :) = [];  % Remove any row with NaN
 
 lg_time = blc_time_total;
 lg_inconsistency = max(soc) - min(soc);

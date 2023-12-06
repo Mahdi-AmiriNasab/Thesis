@@ -166,9 +166,9 @@ else
     %tmp = find( clt_noise_soc_cpy(2, non_zero_indices) == cluster.noise_max(2, 1));
     cluster.noise_max =  clt_noise_soc_cpy(:, indice_to_clear);
    
-
-    clear tmp clt_noise_soc_cpy non_zero_indices
-
+    if coder.target('MATLAB')
+        clear tmp clt_noise_soc_cpy non_zero_indices
+    end
 end
 
 

@@ -2,7 +2,7 @@
 ## Makefile generated for component 'pso'. 
 ## 
 ## Makefile     : pso_rtw.mk
-## Generated on : Fri Dec 01 15:17:56 2023
+## Generated on : Wed Dec 06 16:49:26 2023
 ## Final product: ./pso.lib
 ## Product type : static-library
 ## 
@@ -19,10 +19,10 @@
 
 PRODUCT_NAME              = pso
 MAKEFILE                  = pso_rtw.mk
-MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2023a
-MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2023a/bin
+MATLAB_ROOT               = C:/PROGRA~1/Matlab/R2022a
+MATLAB_BIN                = C:/PROGRA~1/Matlab/R2022a/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = D:/Thesis
+START_DIR                 = E:/Thesis
 TGT_FCN_LIB               = ISO_C
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
@@ -38,7 +38,7 @@ MODELLIB                  = pso.lib
 
 # Toolchain Name:          Texas Instruments Code Composer Studio (C2000)
 # Supported Version(s):    
-# ToolchainInfo Version:   2023a
+# ToolchainInfo Version:   2022a
 # Specification Revision:  1.0
 # 
 #-------------------------------------------
@@ -55,7 +55,7 @@ MODELLIB                  = pso.lib
 #-----------
 
 TARGET_SCRIPTINGTOOLS_INSTALLDIR = $(CCSSCRIPTINGDIR)
-TI_C2000_SHARED_DIR              = $(MATLAB_ROOT)/toolbox/c2b/tic2000_shared
+TI_C2000_SHARED_DIR              = $(TARGET_PKG_INSTALLDIR)/../../../shared/supportpackages/tic2000
 TI_TOOLS                         = $(CCSINSTALLDIR)/bin
 TI_INCLUDE                       = $(CCSINSTALLDIR)/include
 TI_LIB                           = $(CCSINSTALLDIR)/lib
@@ -218,7 +218,7 @@ DEFINES = $(DEFINES_CUSTOM) $(DEFINES_STANDARD)
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/codegen/lib/pso/pso_data.c $(START_DIR)/codegen/lib/pso/rt_nonfinite.c $(START_DIR)/codegen/lib/pso/rtGetNaN.c $(START_DIR)/codegen/lib/pso/rtGetInf.c $(START_DIR)/codegen/lib/pso/pso_initialize.c $(START_DIR)/codegen/lib/pso/pso_terminate.c $(START_DIR)/codegen/lib/pso/pso.c $(START_DIR)/codegen/lib/pso/rand.c $(START_DIR)/codegen/lib/pso/pso_DBSCAN.c $(START_DIR)/codegen/lib/pso/pdist2.c $(START_DIR)/codegen/lib/pso/find.c $(START_DIR)/codegen/lib/pso/db.c $(START_DIR)/codegen/lib/pso/minOrMax.c $(START_DIR)/codegen/lib/pso/all.c $(START_DIR)/codegen/lib/pso/log_clustering.c $(START_DIR)/codegen/lib/pso/eml_rand_mt19937ar_stateful.c $(START_DIR)/codegen/lib/pso/balance_costF.c $(START_DIR)/codegen/lib/pso/sortrows.c $(START_DIR)/codegen/lib/pso/pso_emxutil.c $(START_DIR)/codegen/lib/pso/sortrowsLE.c
+SRCS = $(START_DIR)/codegen/lib/pso/pso_data.c $(START_DIR)/codegen/lib/pso/rt_nonfinite.c $(START_DIR)/codegen/lib/pso/rtGetNaN.c $(START_DIR)/codegen/lib/pso/rtGetInf.c $(START_DIR)/codegen/lib/pso/pso_initialize.c $(START_DIR)/codegen/lib/pso/pso_terminate.c $(START_DIR)/codegen/lib/pso/pso.c $(START_DIR)/codegen/lib/pso/rand.c $(START_DIR)/codegen/lib/pso/pso_DBSCAN.c $(START_DIR)/codegen/lib/pso/pdist2.c $(START_DIR)/codegen/lib/pso/find.c $(START_DIR)/codegen/lib/pso/db.c $(START_DIR)/codegen/lib/pso/sortrowsLE.c $(START_DIR)/codegen/lib/pso/minOrMax.c $(START_DIR)/codegen/lib/pso/all.c $(START_DIR)/codegen/lib/pso/any.c $(START_DIR)/codegen/lib/pso/calculate_overlap.c $(START_DIR)/codegen/lib/pso/isLocalExtrema.c $(START_DIR)/codegen/lib/pso/diff.c $(START_DIR)/codegen/lib/pso/log_clustering.c $(START_DIR)/codegen/lib/pso/eml_rand_mt19937ar_stateful.c $(START_DIR)/codegen/lib/pso/balance_costF.c $(START_DIR)/codegen/lib/pso/sortrows.c $(START_DIR)/codegen/lib/pso/nullAssignment.c $(START_DIR)/codegen/lib/pso/sort.c $(START_DIR)/codegen/lib/pso/sortIdx.c $(START_DIR)/codegen/lib/pso/balance_soc.c $(START_DIR)/codegen/lib/pso/pso_emxutil.c $(START_DIR)/codegen/lib/pso/pso_rtwutil.c
 
 ALL_SRCS = $(SRCS)
 
@@ -226,7 +226,7 @@ ALL_SRCS = $(SRCS)
 ## OBJECTS
 ###########################################################################
 
-OBJS = pso_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj pso_initialize.obj pso_terminate.obj pso.obj rand.obj pso_DBSCAN.obj pdist2.obj find.obj db.obj minOrMax.obj all.obj log_clustering.obj eml_rand_mt19937ar_stateful.obj balance_costF.obj sortrows.obj pso_emxutil.obj sortrowsLE.obj
+OBJS = pso_data.obj rt_nonfinite.obj rtGetNaN.obj rtGetInf.obj pso_initialize.obj pso_terminate.obj pso.obj rand.obj pso_DBSCAN.obj pdist2.obj find.obj db.obj sortrowsLE.obj minOrMax.obj all.obj any.obj calculate_overlap.obj isLocalExtrema.obj diff.obj log_clustering.obj eml_rand_mt19937ar_stateful.obj balance_costF.obj sortrows.obj nullAssignment.obj sort.obj sortIdx.obj balance_soc.obj pso_emxutil.obj pso_rtwutil.obj
 
 ALL_OBJS = $(OBJS)
 
@@ -278,6 +278,7 @@ CPPFLAGS += $(CPPFLAGS_BASIC)
 #-------------------------------------------
 all :
 ifeq ($(DEPRULES),1)
+ifneq ("$$(wildcard *.dep)","")
 #--------------------------
 # Dependency file updates
 #--------------------------
@@ -287,6 +288,7 @@ $(PRODUCT_DEP): $(PRODUCT)
 	@echo "### Updating dependency files ..."
 	PowerShell -ExecutionPolicy Bypass -command "& '$(DEPFILE_UPDATE)'"
 	@echo "### Done Updating dependency files ..."
+endif
 endif
 
 ifeq ($(PRODUCT_TYPE),"executable")
@@ -491,11 +493,31 @@ db.obj : $(START_DIR)/codegen/lib/pso/db.c
 	$(CC) $(CFLAGS) --output_file="$@" "$<"
 
 
+sortrowsLE.obj : $(START_DIR)/codegen/lib/pso/sortrowsLE.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
 minOrMax.obj : $(START_DIR)/codegen/lib/pso/minOrMax.c
 	$(CC) $(CFLAGS) --output_file="$@" "$<"
 
 
 all.obj : $(START_DIR)/codegen/lib/pso/all.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
+any.obj : $(START_DIR)/codegen/lib/pso/any.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
+calculate_overlap.obj : $(START_DIR)/codegen/lib/pso/calculate_overlap.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
+isLocalExtrema.obj : $(START_DIR)/codegen/lib/pso/isLocalExtrema.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
+diff.obj : $(START_DIR)/codegen/lib/pso/diff.c
 	$(CC) $(CFLAGS) --output_file="$@" "$<"
 
 
@@ -515,11 +537,27 @@ sortrows.obj : $(START_DIR)/codegen/lib/pso/sortrows.c
 	$(CC) $(CFLAGS) --output_file="$@" "$<"
 
 
+nullAssignment.obj : $(START_DIR)/codegen/lib/pso/nullAssignment.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
+sort.obj : $(START_DIR)/codegen/lib/pso/sort.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
+sortIdx.obj : $(START_DIR)/codegen/lib/pso/sortIdx.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
+balance_soc.obj : $(START_DIR)/codegen/lib/pso/balance_soc.c
+	$(CC) $(CFLAGS) --output_file="$@" "$<"
+
+
 pso_emxutil.obj : $(START_DIR)/codegen/lib/pso/pso_emxutil.c
 	$(CC) $(CFLAGS) --output_file="$@" "$<"
 
 
-sortrowsLE.obj : $(START_DIR)/codegen/lib/pso/sortrowsLE.c
+pso_rtwutil.obj : $(START_DIR)/codegen/lib/pso/pso_rtwutil.c
 	$(CC) $(CFLAGS) --output_file="$@" "$<"
 
 
@@ -566,7 +604,7 @@ info :
 
 
 clean : 
-	$(ECHO) "### Deleting all derived files ..."
+	$(ECHO) "### Deleting all derived files..."
 	$(RM) $(subst /,\,$(PRODUCT))
 	$(RM) $(subst /,\,$(ALL_OBJS))
 	$(RM) *Object

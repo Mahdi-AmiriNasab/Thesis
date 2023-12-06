@@ -1,8 +1,8 @@
 /*
  * File: _coder_pso_mex.c
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 /* Include Files */
@@ -36,7 +36,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
   emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL, "windows-1252", true);
+                           NULL, (const char_T *)"windows-1252", true);
   return emlrtRootTLSGlobal;
 }
 
@@ -55,10 +55,8 @@ void unsafe_pso_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
-  const mxArray *b_prhs[5];
   const mxArray *outputs[3];
-  int32_T i;
-  int32_T i1;
+  int32_T b_nlhs;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
   if (nrhs != 5) {
@@ -70,17 +68,14 @@ void unsafe_pso_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
                         "pso");
   }
   /* Call the function. */
-  for (i = 0; i < 5; i++) {
-    b_prhs[i] = prhs[i];
-  }
-  pso_api(b_prhs, nlhs, outputs);
+  pso_api(prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
   if (nlhs < 1) {
-    i1 = 1;
+    b_nlhs = 1;
   } else {
-    i1 = nlhs;
+    b_nlhs = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
+  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
 }
 
 /*

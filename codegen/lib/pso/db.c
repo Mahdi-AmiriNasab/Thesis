@@ -1,8 +1,8 @@
 /*
  * File: db.c
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 /* Include Files */
@@ -38,51 +38,52 @@ void ExpandCluster(const d_captured_var *D, const captured_var *epsilon,
   int i1;
   unsigned int k;
   Neighbors_data = Neighbors->data;
-  /* IDX(i)=C; */
+  /* 'db:24' IDX(i)=C; */
   IDX->contents[(int)i - 1] = C;
-  /* k = 1; */
+  /* 'db:25' k = 1; */
   k = 1U;
-  /* while true */
+  /* 'db:26' while true */
   double j_tmp;
   do {
-    /* j = Neighbors(k); */
+    /* 'db:27' j = Neighbors(k); */
     j_tmp = Neighbors_data[(int)k - 1];
-    /* if ~visited(j) */
+    /* 'db:28' if ~visited(j) */
     if (!visited->contents[(int)j_tmp - 1]) {
       int Neighbors2_size[2];
+      int b_Neighbors;
       boolean_T b_D[9];
-      /* visited(j)=true; */
+      /* 'db:29' visited(j)=true; */
       visited->contents[(int)j_tmp - 1] = true;
-      /* Neighbors2=RegionQuery(j); */
-      /* Neighbors=find(D(i,:)<=epsilon); */
+      /* 'db:30' Neighbors2=RegionQuery(j); */
+      /* 'db:46' Neighbors=find(D(i,:)<=epsilon); */
+      b_Neighbors = (int)Neighbors_data[(int)k - 1];
       for (b_i = 0; b_i < 9; b_i++) {
         b_D[b_i] =
-            (D->contents[((int)j_tmp + 9 * b_i) - 1] <= epsilon->contents);
+            (D->contents[(b_Neighbors + 9 * b_i) - 1] <= epsilon->contents);
       }
       eml_find(b_D, Neighbors2_data, Neighbors2_size);
-      /* if numel(Neighbors2)>=MinPts */
+      /* 'db:31' if numel(Neighbors2)>=MinPts */
       if (Neighbors2_size[1] >= MinPts->contents) {
-        int loop_ub;
-        /* Neighbors=[Neighbors Neighbors2]; */
+        /* 'db:32' Neighbors=[Neighbors Neighbors2]; */
         b_i = Neighbors->size[1];
-        loop_ub = Neighbors2_size[1];
+        b_Neighbors = Neighbors2_size[1];
         i1 = Neighbors->size[0] * Neighbors->size[1];
         Neighbors->size[1] += Neighbors2_size[1];
         emxEnsureCapacity_real_T(Neighbors, i1);
         Neighbors_data = Neighbors->data;
-        for (i1 = 0; i1 < loop_ub; i1++) {
+        for (i1 = 0; i1 < b_Neighbors; i1++) {
           Neighbors_data[b_i + i1] = Neighbors2_data[i1];
         }
       }
     }
-    /* if IDX(j)==0 */
+    /* 'db:35' if IDX(j)==0 */
     if (IDX->contents[(int)j_tmp - 1] == 0.0) {
-      /* IDX(j)=C; */
+      /* 'db:36' IDX(j)=C; */
       IDX->contents[(int)j_tmp - 1] = C;
     }
-    /* k = k + 1; */
+    /* 'db:38' k = k + 1; */
     k++;
-    /* if k > numel(Neighbors) */
+    /* 'db:39' if k > numel(Neighbors) */
   } while (!(k > (unsigned int)Neighbors->size[1]));
 }
 

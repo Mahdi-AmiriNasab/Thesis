@@ -6,7 +6,10 @@
 	],
 	"settings": {
 		"files.associations": {
-			"pso_dbscan.h": "c"
+			"pso_dbscan.h": "c",
+			"main.h": "c",
+			"rtwtypes.h": "c",
+			"tmwtypes.h": "c"
 		}
 	}
 }

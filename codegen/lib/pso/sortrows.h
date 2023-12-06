@@ -1,8 +1,8 @@
 /*
  * File: sortrows.h
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 #ifndef SORTROWS_H
@@ -19,6 +19,8 @@ extern "C" {
 
 /* Function Declarations */
 void b_sortrows(double y_data[], const int y_size[2]);
+
+void c_sortrows(double y[18]);
 
 void sortrows(double y[18]);
 

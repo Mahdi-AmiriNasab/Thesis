@@ -1,8 +1,8 @@
 /*
  * File: find.c
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 /* Include Files */
@@ -13,21 +13,22 @@
 /*
  * Arguments    : const boolean_T x[9]
  *                int i_data[]
- * Return Type  : int
+ *                int *i_size
+ * Return Type  : void
  */
-int b_eml_find(const boolean_T x[9], int i_data[])
+void b_eml_find(const boolean_T x[9], int i_data[], int *i_size)
 {
-  int i_size;
+  int idx;
   int ii;
   boolean_T exitg1;
-  i_size = 0;
+  idx = 0;
   ii = 0;
   exitg1 = false;
   while ((!exitg1) && (ii < 9)) {
     if (x[ii]) {
-      i_size++;
-      i_data[i_size - 1] = ii + 1;
-      if (i_size >= 9) {
+      idx++;
+      i_data[idx - 1] = ii + 1;
+      if (idx >= 9) {
         exitg1 = true;
       } else {
         ii++;
@@ -36,10 +37,56 @@ int b_eml_find(const boolean_T x[9], int i_data[])
       ii++;
     }
   }
-  if (i_size < 1) {
-    i_size = 0;
+  if (idx < 1) {
+    *i_size = 0;
+  } else {
+    *i_size = idx;
   }
-  return i_size;
+}
+
+/*
+ * Arguments    : const boolean_T x_data[]
+ *                const int x_size[2]
+ *                int i_data[]
+ *                int i_size[2]
+ * Return Type  : void
+ */
+void c_eml_find(const boolean_T x_data[], const int x_size[2], int i_data[],
+                int i_size[2])
+{
+  int idx;
+  int ii;
+  int nx;
+  boolean_T exitg1;
+  nx = x_size[1];
+  idx = 0;
+  i_size[0] = 1;
+  i_size[1] = x_size[1];
+  ii = 0;
+  exitg1 = false;
+  while ((!exitg1) && (ii <= nx - 1)) {
+    if (x_data[ii]) {
+      idx++;
+      i_data[idx - 1] = ii + 1;
+      if (idx >= nx) {
+        exitg1 = true;
+      } else {
+        ii++;
+      }
+    } else {
+      ii++;
+    }
+  }
+  if (x_size[1] == 1) {
+    if (idx == 0) {
+      i_size[0] = 1;
+      i_size[1] = 0;
+    }
+  } else if (idx < 1) {
+    i_size[1] = 0;
+  } else {
+    i_size[1] = idx;
+  }
 }
 
 /*

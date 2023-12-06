@@ -1,8 +1,8 @@
 /*
  * File: _coder_pso_api.h
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 #ifndef _CODER_PSO_API_H
@@ -76,8 +76,8 @@ extern "C" {
 
 /* Function Declarations */
 void pso(real_T soc_in[9], real_T mp, real_T w_time, real_T w_inconsistency,
-         real_T w_eq_overlap, struct0_T *global_best, struct1_T *eq_step,
-         struct2_T *stio);
+         real_T w_eq_overlap, struct0_T *global_best, struct1_T eq_step_data[],
+         int32_T eq_step_size[2], struct2_T *stio);
 
 void pso_api(const mxArray *const prhs[5], int32_T nlhs,
              const mxArray *plhs[3]);

@@ -1,8 +1,8 @@
 /*
  * File: sortrows.c
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 /* Include Files */
@@ -36,7 +36,7 @@ void b_sortrows(double y_data[], const int y_size[2])
   n = y_size[0] + 1;
   i2 = y_size[0];
   if (i2 - 1 >= 0) {
-    memset(&idx_data[0], 0, (unsigned int)i2 * sizeof(int));
+    memset(&idx_data[0], 0, i2 * sizeof(int));
   }
   i = y_size[0] - 1;
   for (k = 1; k <= i; k += 2) {
@@ -72,15 +72,15 @@ void b_sortrows(double y_data[], const int y_size[2])
       k = 0;
       kEnd = qEnd - j;
       while (k + 1 <= kEnd) {
-        int v1_tmp_tmp_tmp;
-        int v2_tmp_tmp_tmp;
-        v1_tmp_tmp_tmp = idx_data[p - 1];
-        v1 = y_data[(v1_tmp_tmp_tmp + y_size[0]) - 1];
-        v2_tmp_tmp_tmp = idx_data[q - 1];
-        v2 = y_data[(v2_tmp_tmp_tmp + y_size[0]) - 1];
+        int v1_tmp_tmp;
+        int v2_tmp_tmp;
+        v1_tmp_tmp = idx_data[p - 1];
+        v1 = y_data[(v1_tmp_tmp + y_size[0]) - 1];
+        v2_tmp_tmp = idx_data[q - 1];
+        v2 = y_data[(v2_tmp_tmp + y_size[0]) - 1];
         if ((v1 == v2) || (rtIsNaN(v1) && rtIsNaN(v2)) || (v1 <= v2) ||
             rtIsNaN(v2)) {
-          iwork_data[k] = v1_tmp_tmp_tmp;
+          iwork_data[k] = v1_tmp_tmp;
           p++;
           if (p == pEnd) {
             while (q < qEnd) {
@@ -90,7 +90,7 @@ void b_sortrows(double y_data[], const int y_size[2])
             }
           }
         } else {
-          iwork_data[k] = v2_tmp_tmp_tmp;
+          iwork_data[k] = v2_tmp_tmp;
           q++;
           if (q == qEnd) {
             while (p < pEnd) {
@@ -123,7 +123,7 @@ void b_sortrows(double y_data[], const int y_size[2])
  * Arguments    : double y[18]
  * Return Type  : void
  */
-void sortrows(double y[18])
+void c_sortrows(double y[18])
 {
   double ycol[9];
   int idx[9];
@@ -133,28 +133,28 @@ void sortrows(double y[18])
   int k;
   int pEnd;
   int qEnd;
-  if (sortrowsLE(y, 1, 2)) {
+  if (sortrowsLE(y, 2, 1, 2)) {
     idx[0] = 1;
     idx[1] = 2;
   } else {
     idx[0] = 2;
     idx[1] = 1;
   }
-  if (sortrowsLE(y, 3, 4)) {
+  if (sortrowsLE(y, 2, 3, 4)) {
     idx[2] = 3;
     idx[3] = 4;
   } else {
     idx[2] = 4;
     idx[3] = 3;
   }
-  if (sortrowsLE(y, 5, 6)) {
+  if (sortrowsLE(y, 2, 5, 6)) {
     idx[4] = 5;
     idx[5] = 6;
   } else {
     idx[4] = 6;
     idx[5] = 5;
   }
-  if (sortrowsLE(y, 7, 8)) {
+  if (sortrowsLE(y, 2, 7, 8)) {
     idx[6] = 7;
     idx[7] = 8;
   } else {
@@ -182,10 +182,10 @@ void sortrows(double y[18])
       while (k + 1 <= kEnd) {
         int b_i;
         int i1;
-        b_i = idx[p - 1];
-        i1 = idx[q - 1];
-        if (sortrowsLE(y, b_i, i1)) {
-          iwork[k] = b_i;
+        b_i = idx[q - 1];
+        i1 = idx[p - 1];
+        if (sortrowsLE(y, 2, i1, b_i)) {
+          iwork[k] = i1;
           p++;
           if (p == pEnd) {
             while (q < qEnd) {
@@ -195,7 +195,110 @@ void sortrows(double y[18])
             }
           }
         } else {
+          iwork[k] = b_i;
+          q++;
+          if (q == qEnd) {
+            while (p < pEnd) {
+              k++;
+              iwork[k] = idx[p - 1];
+              p++;
+            }
+          }
+        }
+        k++;
+      }
+      for (k = 0; k < kEnd; k++) {
+        idx[(j + k) - 1] = iwork[k];
+      }
+      j = qEnd;
+    }
+    i = i2;
+  }
+  for (j = 0; j < 2; j++) {
+    for (i = 0; i < 9; i++) {
+      ycol[i] = y[(idx[i] + 9 * j) - 1];
+    }
+    memcpy(&y[j * 9], &ycol[0], 9U * sizeof(double));
+  }
+}
+
+/*
+ * Arguments    : double y[18]
+ * Return Type  : void
+ */
+void sortrows(double y[18])
+{
+  double ycol[9];
+  int idx[9];
+  int iwork[9];
+  int i;
+  int j;
+  int k;
+  int pEnd;
+  int qEnd;
+  if (sortrowsLE(y, -1, 1, 2)) {
+    idx[0] = 1;
+    idx[1] = 2;
+  } else {
+    idx[0] = 2;
+    idx[1] = 1;
+  }
+  if (sortrowsLE(y, -1, 3, 4)) {
+    idx[2] = 3;
+    idx[3] = 4;
+  } else {
+    idx[2] = 4;
+    idx[3] = 3;
+  }
+  if (sortrowsLE(y, -1, 5, 6)) {
+    idx[4] = 5;
+    idx[5] = 6;
+  } else {
+    idx[4] = 6;
+    idx[5] = 5;
+  }
+  if (sortrowsLE(y, -1, 7, 8)) {
+    idx[6] = 7;
+    idx[7] = 8;
+  } else {
+    idx[6] = 8;
+    idx[7] = 7;
+  }
+  idx[8] = 9;
+  i = 2;
+  while (i < 9) {
+    int i2;
+    i2 = i << 1;
+    j = 1;
+    for (pEnd = i + 1; pEnd < 10; pEnd = qEnd + i) {
+      int kEnd;
+      int p;
+      int q;
+      p = j;
+      q = pEnd;
+      qEnd = j + i2;
+      if (qEnd > 10) {
+        qEnd = 10;
+      }
+      k = 0;
+      kEnd = qEnd - j;
+      while (k + 1 <= kEnd) {
+        int b_i;
+        int i1;
+        b_i = idx[q - 1];
+        i1 = idx[p - 1];
+        if (sortrowsLE(y, -1, i1, b_i)) {
           iwork[k] = i1;
+          p++;
+          if (p == pEnd) {
+            while (q < qEnd) {
+              k++;
+              iwork[k] = idx[q - 1];
+              q++;
+            }
+          }
+        } else {
+          iwork[k] = b_i;
           q++;
           if (q == qEnd) {
             while (p < pEnd) {

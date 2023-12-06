@@ -1,8 +1,8 @@
 /*
  * File: log_clustering.h
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 #ifndef LOG_CLUSTERING_H
@@ -18,8 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double log_clustering(const double soc_in[9], double mp,
-                      double *lg_inconsistency, double *lg_eq_overlap);
+void log_clustering(const double soc_in[9], double mp, double *lg_time,
+                    double *lg_inconsistency, double *lg_eq_overlap);
 
 #ifdef __cplusplus
 }

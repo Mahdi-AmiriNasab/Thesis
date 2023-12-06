@@ -1,8 +1,8 @@
 /*
  * File: sortrowsLE.c
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 /* Include Files */
@@ -13,22 +13,32 @@
 /* Function Definitions */
 /*
  * Arguments    : const double v[18]
+ *                int col
  *                int irow1
  *                int irow2
  * Return Type  : boolean_T
  */
-boolean_T sortrowsLE(const double v[18], int irow1, int irow2)
+boolean_T sortrowsLE(const double v[18], int col, int irow1, int irow2)
 {
-  double d;
-  double d1;
+  int abscolk;
   boolean_T p;
   p = true;
-  d = v[irow1 - 1];
-  d1 = v[irow2 - 1];
-  if (!(d == d1)) {
-    boolean_T b;
-    b = rtIsNaN(d);
-    if (((!b) || (!rtIsNaN(d1))) && (!(d >= d1)) && (!b)) {
+  if (col < 0) {
+    abscolk = 0;
+  } else {
+    abscolk = col - 1;
+  }
+  if ((!(v[(irow1 + 9 * abscolk) - 1] == v[(irow2 + 9 * abscolk) - 1])) &&
+      ((!rtIsNaN(v[(irow1 + 9 * abscolk) - 1])) ||
+       (!rtIsNaN(v[(irow2 + 9 * abscolk) - 1])))) {
+    if (col < 0) {
+      if ((!(v[(irow1 + 9 * abscolk) - 1] >= v[(irow2 + 9 * abscolk) - 1])) &&
+          (!rtIsNaN(v[(irow1 + 9 * abscolk) - 1]))) {
+        p = false;
+      }
+    } else if ((!(v[(irow1 + 9 * abscolk) - 1] <=
+                  v[(irow2 + 9 * abscolk) - 1])) &&
+               (!rtIsNaN(v[(irow2 + 9 * abscolk) - 1]))) {
       p = false;
     }
   }

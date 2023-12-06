@@ -1,8 +1,8 @@
 /*
  * File: pso_DBSCAN.h
  *
- * MATLAB Coder version            : 5.6
- * C/C++ source code generated on  : 01-Dec-2023 15:17:17
+ * MATLAB Coder version            : 5.4
+ * C/C++ source code generated on  : 06-Dec-2023 18:10:23
  */
 
 #ifndef PSO_DBSCAN_H
@@ -19,23 +19,26 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double
-b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
-             double cluster_dbscan_res[9], double cluster_clt_res_cell[81],
-             double cluster_clt_res_soc[81], double cluster_clt_res_soc_av[18],
-             double *cluster_clt_max_count, double cluster_clt_noise_soc[18],
-             double cluster_clt_soc[18], double cluster_noise_max[2],
-             double cluster_noise_min[2], double cluster_single_noise[2],
-             e_noise_stat *cluster_noise_status);
+void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
+                  double *cluster_average, double cluster_dbscan_res[9],
+                  double cluster_clt_res_cell[81],
+                  double cluster_clt_res_soc[81],
+                  double cluster_clt_res_soc_av[18],
+                  double *cluster_clt_max_count,
+                  double cluster_clt_noise_soc[18], double cluster_clt_soc[18],
+                  double cluster_noise_max[2], double cluster_noise_min[2],
+                  double cluster_single_noise[2],
+                  e_noise_stat *cluster_noise_status);
 
-double
-pso_DBSCAN(const double socs[9], double minPts, double eps,
-           double *cluster_average, double cluster_dbscan_res[9],
-           double cluster_clt_res_cell[81], double cluster_clt_res_soc[81],
-           double cluster_clt_res_soc_av[18], double *cluster_clt_max_count,
-           double cluster_clt_noise_soc[18], double cluster_clt_soc[18],
-           double cluster_noise_max[2], double cluster_noise_min[2],
-           double cluster_single_noise[2], e_noise_stat *cluster_noise_status);
+void pso_DBSCAN(const double socs[9], double minPts, double eps,
+                double *cluster_cell_cnt, double *cluster_average,
+                double cluster_dbscan_res[9], double cluster_clt_res_cell[81],
+                double cluster_clt_res_soc[81],
+                double cluster_clt_res_soc_av[18],
+                double *cluster_clt_max_count, double cluster_clt_noise_soc[18],
+                double cluster_clt_soc[18], double cluster_noise_max[2],
+                double cluster_noise_min[2], double cluster_single_noise[2],
+                e_noise_stat *cluster_noise_status);
 
 #ifdef __cplusplus
 }
