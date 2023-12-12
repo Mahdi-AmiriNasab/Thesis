@@ -119,6 +119,9 @@ PAGE 0:    /* Program Memory */
    FLASHD      : origin = 0x320000, length = 0x008000     /* on-chip FLASH */
    FLASHC      : origin = 0x328000, length = 0x008000     /* on-chip FLASH */
    FLASHA      : origin = 0x338000, length = 0x007F80     /* on-chip FLASH */
+
+   FLASHB      : origin = 0x330000, length = 0x008000
+
    CSM_RSVD    : origin = 0x33FF80, length = 0x000076     /* Part of FLASHA.  Program with all 0x0000 when CSM is in use. */
    BEGIN       : origin = 0x33FFF6, length = 0x000002     /* Part of FLASHA.  Used for "boot to Flash" bootloader mode. */
    CSM_PWL     : origin = 0x33FFF8, length = 0x000008     /* Part of FLASHA.  CSM password locations in FLASHA */
@@ -139,13 +142,12 @@ PAGE 1 :   /* Data Memory */
    BOOT_RSVD   : origin = 0x000000, length = 0x000050     /* Part of M0, BOOT rom will use this for stack */
    RAMM0       : origin = 0x000050, length = 0x0003B0     /* on-chip RAM block M0 */
    RAMM1       : origin = 0x000400, length = 0x000400     /* on-chip RAM block M1 */
-   RAML4T       : origin = 0x00C000, length = 0x004000     /* on-chip RAM block L1 */
-  // RAML4       : origin = 0x00C000, length = 0x001000     /* on-chip RAM block L1 */
-//   RAML5       : origin = 0x00D000, length = 0x001000     /* on-chip RAM block L1 */
-  // RAML6       : origin = 0x00E000, length = 0x001000     /* on-chip RAM block L1 */
-  // RAML7       : origin = 0x00F000, length = 0x001000     /* on-chip RAM block L1 */
+   RAML4       : origin = 0x00C000, length = 0x001000     /* on-chip RAM block L1 */
+   RAML5       : origin = 0x00D000, length = 0x001000     /* on-chip RAM block L1 */
+   RAML6       : origin = 0x00E000, length = 0x001000     /* on-chip RAM block L1 */
+   RAML7       : origin = 0x00F000, length = 0x001000     /* on-chip RAM block L1 */
    ZONE7B      : origin = 0x20FC00, length = 0x000400     /* XINTF zone 7 - data space */
-   FLASHB      : origin = 0x330000, length = 0x008000     /* on-chip FLASH */
+
 }
 
 /* Allocate sections to memory blocks.
@@ -157,26 +159,15 @@ PAGE 1 :   /* Data Memory */
  
 SECTIONS
 {
-
-   Flash28_API:
-   {
-        -lFlash28335_API_V210.lib(.econst)
-        -lFlash28335_API_V210.lib(.text)
-   }                   LOAD = FLASHA,
-                       RUN = RAML0,
-                       LOAD_START(_Flash28_API_LoadStart),
-                       LOAD_END(_Flash28_API_LoadEnd),
-                       RUN_START(_Flash28_API_RunStart),
-                       PAGE = 0
-
+ 
    /* Allocate program areas: */
    .cinit              : > FLASHA      PAGE = 0
    .pinit              : > FLASHA,     PAGE = 0
-   .text               : > FLASHA      PAGE = 0
+   .text               : >> FLASHA|FLASHB|FLASHC      PAGE = 0
    codestart           : > BEGIN       PAGE = 0
 #ifdef __TI_COMPILER_VERSION__
     #if __TI_COMPILER_VERSION__ >= 15009000
-        .TI.ramfunc : {} LOAD = FLASHA,
+        .TI.ramfunc : {} LOAD = FLASHD,
                          RUN = RAML0,
                          LOAD_START(_RamfuncsLoadStart),
                          LOAD_END(_RamfuncsLoadEnd),
@@ -184,7 +175,7 @@ SECTIONS
                          LOAD_SIZE(_RamfuncsLoadSize),
                          PAGE = 0
     #else
-        ramfuncs       : LOAD = FLASHA,
+        ramfuncs       : LOAD = FLASHD, 
                          RUN = RAML0, 
                          LOAD_START(_RamfuncsLoadStart),
                          LOAD_END(_RamfuncsLoadEnd),
@@ -199,7 +190,7 @@ SECTIONS
    
    /* Allocate uninitalized data sections: */
    .stack              : > RAMM1       PAGE = 1
-   .ebss               : >> RAML4T      PAGE = 1
+   .ebss               : >> RAML4 |RAML5      PAGE = 1
    .esysmem            : > RAMM1       PAGE = 1
 
    /* Initalized sections go in Flash */
@@ -208,7 +199,7 @@ SECTIONS
    .switch             : > FLASHA      PAGE = 0      
 
    /* Allocate IQ math areas: */
-   IQmath              : > FLASHA      PAGE = 0                  /* Math Code */
+   IQmath              : > FLASHC      PAGE = 0                  /* Math Code */
    IQmathTables     : > IQTABLES,  PAGE = 0, TYPE = NOLOAD 
    
    /* Uncomment the section below if calling the IQNexp() or IQexp()
@@ -230,10 +221,10 @@ SECTIONS
    FPUmathTables    : > FPUTABLES, PAGE = 0, TYPE = NOLOAD 
          
    /* Allocate DMA-accessible RAM sections: */
-   DMARAML4         : > RAML4T,     PAGE = 1
-   DMARAML5         : > RAML4T,     PAGE = 1
-   DMARAML6         : > RAML4T,     PAGE = 1
-   DMARAML7         : > RAML4T,     PAGE = 1
+   DMARAML4         : > RAML4,     PAGE = 1
+   DMARAML5         : > RAML5,     PAGE = 1
+   DMARAML6         : > RAML6,     PAGE = 1
+   DMARAML7         : > RAML7,     PAGE = 1
    
    /* Allocate 0x400 of XINTF Zone 7 to storing data */
    ZONE7DATA        : > ZONE7B,    PAGE = 1

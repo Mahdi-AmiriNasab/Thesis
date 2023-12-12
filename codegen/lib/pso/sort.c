@@ -2,7 +2,7 @@
  * File: sort.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -22,8 +22,9 @@
  */
 void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
 {
-  double xwork_data[100];
-  int iwork_data[100];
+  static double xwork_data[100];
+  static double x4[4];
+  static int iwork_data[100];
   int ib;
   int k;
   signed char perm[4];
@@ -33,7 +34,6 @@ void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
     memset(&idx_data[0], 0, ib * sizeof(int));
   }
   if (*x_size != 0) {
-    double x4[4];
     int i2;
     int i3;
     int i4;

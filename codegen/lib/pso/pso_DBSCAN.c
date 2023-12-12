@@ -2,7 +2,7 @@
  * File: pso_DBSCAN.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -55,17 +55,17 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
                   double cluster_single_noise[2],
                   e_noise_stat *cluster_noise_status)
 {
-  b_captured_var IDX;
+  static b_captured_var IDX;
+  static d_captured_var D;
+  static double clt_noise_soc_cpy[18];
+  static double Neighbors_data[9];
+  static int tmp_data[9];
   c_captured_var visited;
   captured_var MinPts;
   captured_var epsilon;
-  d_captured_var D;
   emxArray_real_T *r;
-  double clt_noise_soc_cpy[18];
-  double Neighbors_data[9];
   double C;
   double *r1;
-  int tmp_data[9];
   int Neighbors_size[2];
   int b_i;
   int i;
@@ -605,14 +605,14 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
                 double cluster_noise_min[2], double cluster_single_noise[2],
                 e_noise_stat *cluster_noise_status)
 {
+  static d_captured_var D;
+  static double clt_noise_soc_cpy[18];
+  static double Neighbors_data[9];
   b_captured_var IDX;
   c_captured_var visited;
   captured_var MinPts;
   captured_var epsilon;
-  d_captured_var D;
   emxArray_real_T *r;
-  double clt_noise_soc_cpy[18];
-  double Neighbors_data[9];
   double C;
   double *r1;
   int tmp_data[9];

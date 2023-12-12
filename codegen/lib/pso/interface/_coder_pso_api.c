@@ -2,7 +2,7 @@
  * File: _coder_pso_api.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -10,13 +10,13 @@
 #include "_coder_pso_mex.h"
 
 /* Type Definitions */
-#ifndef typedef_emxArray_struct1_T_1x100
-#define typedef_emxArray_struct1_T_1x100
+#ifndef typedef_emxArray_struct1_T_1x50
+#define typedef_emxArray_struct1_T_1x50
 typedef struct {
-  struct1_T data[100];
+  struct1_T data[50];
   int32_T size[2];
-} emxArray_struct1_T_1x100;
-#endif /* typedef_emxArray_struct1_T_1x100 */
+} emxArray_struct1_T_1x50;
+#endif /* typedef_emxArray_struct1_T_1x50 */
 
 /* Variable Definitions */
 emlrtCTX emlrtRootTLSGlobal = NULL;
@@ -95,7 +95,7 @@ static const mxArray *b_emlrt_marshallOut(const struct1_T u_data[])
   int32_T i;
   y = NULL;
   iv[0] = 1;
-  iv[1] = 100;
+  iv[1] = 50;
   emlrtAssign(&y,
               emlrtCreateStructArray(2, &iv[0], 4, (const char_T **)&sv[0]));
   emlrtCreateField(y, (const char_T *)"source_queue_cells");
@@ -103,7 +103,7 @@ static const mxArray *b_emlrt_marshallOut(const struct1_T u_data[])
   emlrtCreateField(y, (const char_T *)"source_target_soc_av");
   emlrtCreateField(y, (const char_T *)"destination_target_soc_av");
   i = 0;
-  for (b_j1 = 0; b_j1 < 100; b_j1++) {
+  for (b_j1 = 0; b_j1 < 50; b_j1++) {
     emlrtSetFieldR2017b(
         y, i, (const char_T *)"source_queue_cells",
         c_emlrt_marshallOut(u_data[b_j1].source_queue_cells.data,
@@ -354,12 +354,12 @@ static real_T f_emlrt_marshallIn(const emlrtStack *sp, const mxArray *src,
  */
 void pso_api(const mxArray *const prhs[5], int32_T nlhs, const mxArray *plhs[3])
 {
+  static emxArray_struct1_T_1x50 eq_step;
   emlrtStack st = {
       NULL, /* site */
       NULL, /* tls */
       NULL  /* prev */
   };
-  emxArray_struct1_T_1x100 eq_step;
   struct0_T global_best;
   struct2_T stio;
   real_T(*soc_in)[9];

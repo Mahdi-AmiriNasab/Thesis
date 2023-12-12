@@ -9,7 +9,12 @@
 			"pso_dbscan.h": "c",
 			"main.h": "c",
 			"rtwtypes.h": "c",
-			"tmwtypes.h": "c"
+			"tmwtypes.h": "c",
+			"matrix.h": "c",
+			"pso_terminate.h": "c",
+			"pso.h": "c",
+			"stddef.h": "c",
+			"pso_internal_types.h": "c"
 		}
 	}
 }

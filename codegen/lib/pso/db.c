@@ -2,7 +2,7 @@
  * File: db.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -32,8 +32,8 @@ void ExpandCluster(const d_captured_var *D, const captured_var *epsilon,
                    const captured_var *MinPts, double i,
                    emxArray_real_T *Neighbors, double C)
 {
+  static int Neighbors2_data[9];
   double *Neighbors_data;
-  int Neighbors2_data[9];
   int b_i;
   int i1;
   unsigned int k;

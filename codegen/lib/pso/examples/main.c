@@ -38,6 +38,14 @@
 #include "pso_types.h"
 #include "rt_nonfinite.h"
 
+#ifndef typedef_emxArray_struct1_T_1x100
+#define typedef_emxArray_struct1_T_1x100
+typedef struct {
+  struct1_T data[100];
+  int size[2];
+} emxArray_struct1_T_1x100;
+#endif /* typedef_emxArray_struct1_T_1x100 */
+
 /* Function Declarations */
 static void argInit_1x9_real_T(double result[9]);
 

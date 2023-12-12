@@ -2,7 +2,7 @@
  * File: isLocalExtrema.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -37,23 +37,27 @@ static void getAllLocalMax(const double A_data[], int A_size,
                            boolean_T inflectionPts_data[],
                            int *inflectionPts_size)
 {
+  static double b_data[99];
+  static double b_y_data[99];
+  static double d_tmp_data[99];
+  static double s_data[99];
+  static signed char b_tmp_data[99];
+  static signed char b_x_data[99];
+  static signed char c_tmp_data[99];
+  static boolean_T b_uniquePts_data[100];
+  static boolean_T nanMask_data[100];
+  static boolean_T tmp_data[100];
+  static boolean_T uniquePts_data[100];
+  static boolean_T idx_data[99];
+  static boolean_T x_data[99];
   emxArray_int8_T *b_y;
-  double b_data[99];
-  double d_tmp_data[99];
-  double s_data[99];
   double tmp;
   int i;
   int k;
   int low_ip1;
   int nz;
   int s_size;
-  signed char b_tmp_data[99];
-  signed char c_tmp_data[99];
   signed char *y_data;
-  boolean_T b_uniquePts_data[100];
-  boolean_T nanMask_data[100];
-  boolean_T uniquePts_data[100];
-  boolean_T idx_data[99];
   boolean_T exitg1;
   boolean_T y;
   diff(A_data, A_size, s_data, &s_size);
@@ -111,7 +115,6 @@ static void getAllLocalMax(const double A_data[], int A_size,
   }
   if (!y) {
     int low_i;
-    boolean_T x_data[99];
     if (s_size - 1 >= 0) {
       memcpy(&b_data[0], &s_data[0], s_size * sizeof(double));
     }
@@ -130,10 +133,8 @@ static void getAllLocalMax(const double A_data[], int A_size,
       }
     }
     if (nz > 1) {
-      double b_y_data[99];
       int b_trueCount;
       int trueCount;
-      signed char b_x_data[99];
       emxInit_int8_T(&b_y);
       y_data = b_y->data;
       if (s_size < 1) {
@@ -297,7 +298,6 @@ static void getAllLocalMax(const double A_data[], int A_size,
     }
   }
   if (y) {
-    boolean_T tmp_data[100];
     low_ip1 = A_size - 2;
     nz = A_size - 1;
     for (i = 0; i <= low_ip1; i++) {
@@ -344,10 +344,22 @@ void doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
                       boolean_T maxVals_data[], int *maxVals_size,
                       double P_data[], int *P_size)
 {
-  double idxTemp_data[100];
-  double c_tmp_data[99];
-  int d_tmp_data[101];
-  int iidx_data[100];
+  static double leftRange_data[101];
+  static double idxTemp_data[100];
+  static double c_tmp_data[99];
+  static int d_tmp_data[101];
+  static int e_tmp_data[101];
+  static int iidx_data[100];
+  static signed char ranges_data[202];
+  static signed char rightRange_data[102];
+  static signed char b_tmp_data[100];
+  static signed char extremaList_data[100];
+  static boolean_T flatRegion_data[101];
+  static boolean_T x_data[101];
+  static boolean_T inflectionPts_data[100];
+  static boolean_T isLocMax_data[100];
+  static boolean_T tmp_data[100];
+  static boolean_T locUniLeadMax_data[99];
   int b_i;
   int i;
   int i1;
@@ -355,10 +367,6 @@ void doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
   int nz;
   int right;
   int trueCount;
-  signed char b_tmp_data[100];
-  signed char extremaList_data[100];
-  boolean_T inflectionPts_data[100];
-  boolean_T isLocMax_data[100];
   *P_size = A_size;
   if (A_size - 1 >= 0) {
     memset(&P_data[0], 0, A_size * sizeof(double));
@@ -370,7 +378,6 @@ void doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
     }
   } else {
     double ctr;
-    boolean_T tmp_data[100];
     boolean_T colRngTF;
     boolean_T exitg4;
     for (i = 0; i < A_size; i++) {
@@ -530,11 +537,7 @@ void doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
     }
     i = (nz >= 1);
     for (k = 0; k < i; k++) {
-      double leftRange_data[101];
       int loop_ub;
-      signed char rightRange_data[102];
-      boolean_T flatRegion_data[101];
-      boolean_T locUniLeadMax_data[99];
       memcpy(&idxTemp_data[0], &A_data[0], A_size * sizeof(double));
       diff(idxTemp_data, A_size, c_tmp_data, &nz);
       for (i1 = 0; i1 < nz; i1++) {
@@ -586,7 +589,6 @@ void doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
         }
       }
       if (colRngTF) {
-        boolean_T x_data[101];
         for (i1 = 0; i1 < trueCount; i1++) {
           x_data[i1] = (maxVals_data[(int)leftRange_data[i1] - 1] &&
                         flatRegion_data[i1]);
@@ -603,8 +605,6 @@ void doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
           }
         }
         if (colRngTF) {
-          int e_tmp_data[101];
-          signed char ranges_data[202];
           nz = right;
           trueCount = 0;
           for (b_i = 0; b_i <= right; b_i++) {

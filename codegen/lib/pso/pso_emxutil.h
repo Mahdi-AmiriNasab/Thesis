@@ -2,7 +2,7 @@
  * File: pso_emxutil.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 #ifndef PSO_EMXUTIL_H
@@ -19,17 +19,17 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel);
+void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel);
 
-extern void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel);
+void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel);
 
-extern void emxFree_int8_T(emxArray_int8_T **pEmxArray);
+void emxFree_int8_T(emxArray_int8_T **pEmxArray);
 
-extern void emxFree_real_T(emxArray_real_T **pEmxArray);
+void emxFree_real_T(emxArray_real_T **pEmxArray);
 
-extern void emxInit_int8_T(emxArray_int8_T **pEmxArray);
+void emxInit_int8_T(emxArray_int8_T **pEmxArray);
 
-extern void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
+void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 
 #ifdef __cplusplus
 }

@@ -1,7 +1,7 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2021a">
-  <configuration build-checksum="4187475049" file="E:\Thesis\pso.prj" location="E:\Thesis" name="pso" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="418695253" file="E:\Thesis\pso.prj" location="E:\Thesis" name="pso" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
-      <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
+      <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
@@ -77,7 +77,7 @@
       <param.EnableAutoParallelizationReporting>true</param.EnableAutoParallelizationReporting>
       <param.CacheDynamicArrayDataPointer>true</param.CacheDynamicArrayDataPointer>
       <param.EnableJIT>false</param.EnableJIT>
-      <param.EnableJITSilentBailOut>false</param.EnableJITSilentBailOut>
+      <param.EnableJITSilentBailOut />
       <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
       <param.EnableGitSupport>false</param.EnableGitSupport>
       <param.EnableAutoCommit>true</param.EnableAutoCommit>
@@ -184,13 +184,13 @@
       <param.OptimizeReductions>false</param.OptimizeReductions>
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
-      <param.DynamicMemoryAllocationThreshold>65536</param.DynamicMemoryAllocationThreshold>
+      <param.DynamicMemoryAllocationThreshold>20000</param.DynamicMemoryAllocationThreshold>
       <param.DynamicMemoryAllocationInterface>option.DynamicMemoryAllocationInterface.AUTO</param.DynamicMemoryAllocationInterface>
       <param.RowMajor>option.RowMajor.ColumnMajor</param.RowMajor>
       <param.HighlightPotentialRowMajorIssues>true</param.HighlightPotentialRowMajorIssues>
       <param.PreserveArrayDimensions>false</param.PreserveArrayDimensions>
       <param.EliminateSingleDimensions>false</param.EliminateSingleDimensions>
-      <param.StackUsageMax>200000</param.StackUsageMax>
+      <param.StackUsageMax>500</param.StackUsageMax>
       <param.MultiInstanceCode>false</param.MultiInstanceCode>
       <param.PreserveUnusedStructFields>false</param.PreserveUnusedStructFields>
       <param.FilePartitionMethod>option.FilePartitionMethod.MapMFileToCFile</param.FilePartitionMethod>
@@ -199,7 +199,7 @@
       <param.MATLABSourceComments>true</param.MATLABSourceComments>
       <param.MATLABFcnDesc>true</param.MATLABFcnDesc>
       <param.ConvertIfToSwitch>false</param.ConvertIfToSwitch>
-      <param.PreserveExternInFcnDecls>true</param.PreserveExternInFcnDecls>
+      <param.PreserveExternInFcnDecls>false</param.PreserveExternInFcnDecls>
       <param.EnableSignedLeftShifts>true</param.EnableSignedLeftShifts>
       <param.EnableSignedRightShifts>true</param.EnableSignedRightShifts>
       <param.ParenthesesLevel>option.ParenthesesLevel.Nominal</param.ParenthesesLevel>
@@ -241,8 +241,8 @@
       <param.Verbosity>option.Verbosity.Info</param.Verbosity>
       <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
-      <param.GenerateCodeMetricsReport>false</param.GenerateCodeMetricsReport>
-      <param.GenerateCodeReplacementReport>false</param.GenerateCodeReplacementReport>
+      <param.GenerateCodeMetricsReport>true</param.GenerateCodeMetricsReport>
+      <param.GenerateCodeReplacementReport>true</param.GenerateCodeReplacementReport>
       <param.HighlightPotentialDataTypeIssues>false</param.HighlightPotentialDataTypeIssues>
       <param.HighlightImplicitExpansionIssues>true</param.HighlightImplicitExpansionIssues>
       <param.LaunchReport>false</param.LaunchReport>
@@ -388,13 +388,11 @@
         <param.OptimizeReductions />
         <param.EnableVariableSizing />
         <param.DynamicMemoryAllocation />
-        <param.DynamicMemoryAllocationThreshold />
         <param.DynamicMemoryAllocationInterface />
         <param.RowMajor />
         <param.HighlightPotentialRowMajorIssues />
         <param.PreserveArrayDimensions />
         <param.EliminateSingleDimensions />
-        <param.StackUsageMax />
         <param.MultiInstanceCode />
         <param.PreserveUnusedStructFields />
         <param.FilePartitionMethod />
@@ -402,7 +400,6 @@
         <param.CommentStyle />
         <param.MATLABFcnDesc />
         <param.ConvertIfToSwitch />
-        <param.PreserveExternInFcnDecls />
         <param.EnableSignedLeftShifts />
         <param.EnableSignedRightShifts />
         <param.ParenthesesLevel />
@@ -443,8 +440,6 @@
         <param.Verbosity />
         <param.ReportPotentialDifferences />
         <param.GenerateReport />
-        <param.GenerateCodeMetricsReport />
-        <param.GenerateCodeReplacementReport />
         <param.HighlightPotentialDataTypeIssues />
         <param.HighlightImplicitExpansionIssues />
         <param.LaunchReport />
@@ -588,12 +583,12 @@
     <param.hdlParamStorage />
     <var.gc.lastOutputRoot>codegen\lib\pso</var.gc.lastOutputRoot>
     <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>4187475049</var.gc.preBuildChecksum>
+    <var.gc.preBuildChecksum>418695253</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\pso</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>1806382794</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>[global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.8, 0);</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;E:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;E:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;E:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;E:\Thesis\db.m&lt;/file&gt;&lt;file&gt;E:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;295689937&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;E:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;E:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;E:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;E:\Thesis\db.m&lt;/file&gt;&lt;file&gt;E:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;4188010466&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
     <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;E:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;E:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;E:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;E:\Thesis\db.m&lt;/file&gt;&lt;file&gt;E:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>

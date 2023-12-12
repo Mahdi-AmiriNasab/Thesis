@@ -2,7 +2,7 @@
  * File: calculate_overlap.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -27,12 +27,23 @@
 double calculate_overlap(const double cell_values_data[],
                          const int cell_values_size[2])
 {
-  double A_data[100];
-  double local_depths_data[100];
+  static double A_data[100];
+  static double local_depths_data[100];
+  static int peak_indices_data[100];
+  static int valley_indices_data[100];
+  static signed char b_tmp_data[100];
+  static signed char c_tmp_data[100];
+  static signed char d_tmp_data[100];
+  static signed char e_tmp_data[100];
+  static signed char f_tmp_data[100];
+  static signed char g_tmp_data[100];
+  static signed char h_tmp_data[100];
+  static signed char i_tmp_data[100];
+  static boolean_T isnanA_data[100];
+  static boolean_T outputs_f1_data[100];
+  static boolean_T tmp_data[100];
   double b_y;
   double x;
-  int peak_indices_data[100];
-  int valley_indices_data[100];
   int tf_size[2];
   int valley_indices_size[2];
   int A_size;
@@ -44,17 +55,6 @@ double calculate_overlap(const double cell_values_data[],
   int partialTrueCount;
   int peak_indices_size_idx_1;
   int trueCount;
-  signed char b_tmp_data[100];
-  signed char c_tmp_data[100];
-  signed char d_tmp_data[100];
-  signed char e_tmp_data[100];
-  signed char f_tmp_data[100];
-  signed char g_tmp_data[100];
-  signed char h_tmp_data[100];
-  signed char i_tmp_data[100];
-  boolean_T isnanA_data[100];
-  boolean_T outputs_f1_data[100];
-  boolean_T tmp_data[100];
   boolean_T y;
   /* 'calculate_overlap:4' is_peak = islocalmax(cell_values); */
   /* 'calculate_overlap:5' is_valley = islocalmin(cell_values); */

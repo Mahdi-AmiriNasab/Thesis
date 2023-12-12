@@ -2,7 +2,7 @@
  * File: balance_soc.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -49,13 +49,13 @@ void balance_soc(const double cluster_clt_res_cell[81],
                  double *eq_step_source_target_soc_av,
                  double *c_eq_step_destination_target_so)
 {
+  static double soc_sorted_clusters_data[18];
+  static double cluster_clt_res_cell_data[9];
+  static double destination_cells_data[9];
+  static double source_cells_data[9];
+  static double tmp_data[9];
   emxArray_real_T *varargin_1;
   emxArray_real_T *y;
-  double soc_sorted_clusters_data[18];
-  double cluster_clt_res_cell_data[9];
-  double destination_cells_data[9];
-  double source_cells_data[9];
-  double tmp_data[9];
   double destination_clt_idx_1;
   double destination_neighbor_lower_cell;
   double destination_neighbor_upper_cell;

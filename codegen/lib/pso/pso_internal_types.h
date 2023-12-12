@@ -2,7 +2,7 @@
  * File: pso_internal_types.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 #ifndef PSO_INTERNAL_TYPES_H
@@ -54,14 +54,6 @@ typedef struct {
   double contents[81];
 } d_captured_var;
 #endif /* typedef_d_captured_var */
-
-#ifndef typedef_emxArray_struct1_T_1x100
-#define typedef_emxArray_struct1_T_1x100
-typedef struct {
-  struct1_T data[100];
-  int size[2];
-} emxArray_struct1_T_1x100;
-#endif /* typedef_emxArray_struct1_T_1x100 */
 
 #endif
 /*

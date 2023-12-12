@@ -2,7 +2,7 @@
  * File: log_clustering.c
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 /* Include Files */
@@ -37,27 +37,33 @@
 void log_clustering(const double soc_in[9], double mp, double *lg_time,
                     double *lg_inconsistency, double *lg_eq_overlap)
 {
+  static double soc_profile_data[900];
+  static double b_soc_profile_data[100];
+  static double cluster_clt_res_cell[81];
+  static double expl_temp[81];
+  static double V[18];
+  static double b_expl_temp[18];
+  static double soc_sorted_clusters_data[18];
+  static double cluster_clt_res_cell_data[9];
+  static double destination_cells_data[9];
+  static double e_tmp_data[9];
+  static double soc[9];
+  static double source_cells_data[9];
+  static double c_expl_temp[2];
+  static double destination_clt[2];
+  static double source_clt[2];
+  static int b_soc_profile_size[2];
+  static int soc_profile_size[2];
+  static signed char c_tmp_data[9];
+  static signed char d_tmp_data[9];
+  static boolean_T tmp_data[900];
+  static boolean_T b_tmp_data[100];
   emxArray_real_T *soc_sorted_clusters;
-  double soc_profile_data[900];
-  double cluster_clt_res_cell[81];
-  double expl_temp[81];
-  double V[18];
-  double b_expl_temp[18];
-  double soc_sorted_clusters_data[18];
-  double destination_cells_data[9];
-  double e_tmp_data[9];
-  double soc[9];
-  double source_cells_data[9];
-  double c_expl_temp[2];
-  double destination_clt[2];
-  double source_clt[2];
   double step_destination;
   double step_source;
   double sweep_source;
   double *b_soc_sorted_clusters_data;
-  int b_soc_profile_size[2];
   int cluster_clt_res_cell_size[2];
-  int soc_profile_size[2];
   int soc_sorted_clusters_size[2];
   int i;
   int itteration;
@@ -65,10 +71,6 @@ void log_clustering(const double soc_in[9], double mp, double *lg_time,
   int loop_ub_tmp_tmp;
   int snlc_validity;
   int snuc_validity;
-  signed char c_tmp_data[9];
-  signed char d_tmp_data[9];
-  boolean_T tmp_data[900];
-  boolean_T b_tmp_data[100];
   boolean_T exitg1;
   e_noise_stat d_expl_temp;
   /* 'log_clustering:3' coder.extrinsic('plot', 'nexttile', 'tiledlayout'); */
@@ -111,7 +113,6 @@ void log_clustering(const double soc_in[9], double mp, double *lg_time,
   emxInit_real_T(&soc_sorted_clusters, 1);
   exitg1 = false;
   while ((!exitg1) && (sweep_source > 1.0)) {
-    double cluster_clt_res_cell_data[9];
     double blc_time;
     double destination_neighbor_lower_cell;
     double destination_neighbor_upper_cell;
@@ -761,7 +762,6 @@ void log_clustering(const double soc_in[9], double mp, double *lg_time,
   b_soc_profile_size[0] = 1;
   b_soc_profile_size[1] = loop_ub;
   for (snuc_validity = 0; snuc_validity < 9; snuc_validity++) {
-    double b_soc_profile_data[100];
     /* 'log_clustering:71' OE = calculate_overlap(soc_profile(:, n)'); */
     for (i = 0; i < loop_ub; i++) {
       b_soc_profile_data[i] =

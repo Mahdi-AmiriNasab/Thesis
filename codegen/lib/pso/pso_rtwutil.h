@@ -2,7 +2,7 @@
  * File: pso_rtwutil.h
  *
  * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * C/C++ source code generated on  : 11-Dec-2023 16:05:35
  */
 
 #ifndef PSO_RTWUTIL_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-extern double rt_roundd_snf(double u);
+double rt_roundd_snf(double u);
 
 #ifdef __cplusplus
 }
