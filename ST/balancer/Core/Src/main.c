@@ -42,12 +42,22 @@ typedef struct {
 } emxArray_struct1_T_1x100;
 #endif /* typedef_emxArray_struct1_T_1x100 */
 
-float vol1, vol2;
+float vol1 = 0.7, vol2 = 0.7;
 
 double w_time = 0.5;
 double w_inc = 0.5;
 double soc_init[9] = {7, 88, 10, 95, 52, 50, 48, 42, 76};
 double soc[9];
+
+GPIO_PinState dcdc_rst1 = 0, dcdc_rst2 = 0;
+GPIO_PinState main_relay = 0;
+
+enum DCDCState 
+{
+	DCDC_Off,
+	DCDC_P2B,
+	DCDC_B2P
+}e_DCDC_status;
 
 
 
@@ -139,12 +149,35 @@ int main(void)
   
 	while(1)
 	{
-        memcpy(soc, soc_init, sizeof(soc));
-        HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
-		pso(soc, 2, w_time, w_inc, 0, &global_best, eq_step.data, eq_step.size, &stio);
-        HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
-		HAL_Delay(500);
+        // memcpy(soc, soc_init, sizeof(soc));
+        // HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+		// pso(soc, 2, w_time, w_inc, 0, &global_best, eq_step.data, eq_step.size, &stio);
+        // HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+		// HAL_Delay(500);
+		if(e_DCDC_status == DCDC_Off)
+		{
+			dcdc_rst2 = 1;
+			dcdc_rst1 = 1;
+		}
+		else if (e_DCDC_status == DCDC_B2P)
+		{
+			dcdc_rst2 = 0;
+			dcdc_rst1 = 1;
+		}
+		else if(e_DCDC_status == DCDC_P2B)
+		{
+			dcdc_rst2 = 1;
+			dcdc_rst1 = 0;
+		}
+	
 
+		HAL_GPIO_WritePin(DCDC_RST1_GPIO_Port, DCDC_RST1_Pin, dcdc_rst1);
+		HAL_GPIO_WritePin(LD4_GPIO_Port, LD4_Pin, !dcdc_rst1);
+		HAL_GPIO_WritePin(DCDC_RST2_GPIO_Port, DCDC_RST2_Pin, dcdc_rst2);
+		HAL_GPIO_WritePin(LD5_GPIO_Port, LD5_Pin, !dcdc_rst2);
+		HAL_GPIO_WritePin(RelayMain_GPIO_Port, RelayMain_Pin, main_relay);
+	
+		
         Set_DAC_Voltage(vol1, DAC_CHANNEL_1);
         Set_DAC_Voltage(vol2, DAC_CHANNEL_2);
 		
@@ -311,6 +344,12 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_WritePin(OTG_FS_PowerSwitchOn_GPIO_Port, OTG_FS_PowerSwitchOn_Pin, GPIO_PIN_SET);
 
   /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(GPIOA, DCDC_RST1_Pin|DCDC_RST2_Pin, GPIO_PIN_SET);
+
+  /*Configure GPIO pin Output Level */
+  HAL_GPIO_WritePin(RelayMain_GPIO_Port, RelayMain_Pin, GPIO_PIN_RESET);
+
+  /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOD, LD4_Pin|LD3_Pin|LD5_Pin|LD6_Pin
                           |Audio_RST_Pin, GPIO_PIN_RESET);
 
@@ -321,12 +360,12 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(CS_I2C_SPI_GPIO_Port, &GPIO_InitStruct);
 
-  /*Configure GPIO pin : OTG_FS_PowerSwitchOn_Pin */
-  GPIO_InitStruct.Pin = OTG_FS_PowerSwitchOn_Pin;
+  /*Configure GPIO pins : OTG_FS_PowerSwitchOn_Pin RelayMain_Pin */
+  GPIO_InitStruct.Pin = OTG_FS_PowerSwitchOn_Pin|RelayMain_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
-  HAL_GPIO_Init(OTG_FS_PowerSwitchOn_GPIO_Port, &GPIO_InitStruct);
+  HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
   /*Configure GPIO pin : PDM_OUT_Pin */
   GPIO_InitStruct.Pin = PDM_OUT_Pin;
@@ -341,6 +380,13 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Mode = GPIO_MODE_EVT_RISING;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   HAL_GPIO_Init(B1_GPIO_Port, &GPIO_InitStruct);
+
+  /*Configure GPIO pins : DCDC_RST1_Pin DCDC_RST2_Pin */
+  GPIO_InitStruct.Pin = DCDC_RST1_Pin|DCDC_RST2_Pin;
+  GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+  GPIO_InitStruct.Pull = GPIO_NOPULL;
+  GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+  HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pin : BOOT1_Pin */
   GPIO_InitStruct.Pin = BOOT1_Pin;

@@ -73,6 +73,12 @@ void Error_Handler(void);
 #define PDM_OUT_GPIO_Port GPIOC
 #define B1_Pin GPIO_PIN_0
 #define B1_GPIO_Port GPIOA
+#define DCDC_RST1_Pin GPIO_PIN_6
+#define DCDC_RST1_GPIO_Port GPIOA
+#define DCDC_RST2_Pin GPIO_PIN_7
+#define DCDC_RST2_GPIO_Port GPIOA
+#define RelayMain_Pin GPIO_PIN_4
+#define RelayMain_GPIO_Port GPIOC
 #define BOOT1_Pin GPIO_PIN_2
 #define BOOT1_GPIO_Port GPIOB
 #define CLK_IN_Pin GPIO_PIN_10
