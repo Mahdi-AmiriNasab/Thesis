@@ -1,0 +1,69 @@
+
+**** 01/08/24 21:14:29 ********* PSpice 9.2 (Mar 2000) ******** ID# 1 ********
+
+ ** Profile: "SCHEMATIC1-switch_sim"  [ D:\Thesis\pspice\test-SCHEMATIC1-switch_sim.sim ] 
+
+
+ ****     CIRCUIT DESCRIPTION
+
+
+******************************************************************************
+
+
+
+
+** Creating circuit file "test-SCHEMATIC1-switch_sim.sim.cir" 
+** WARNING: THIS AUTOMATICALLY GENERATED FILE MAY BE OVERWRITTEN BY SUBSEQUENT SIMULATIONS
+
+*Libraries: 
+* Local Libraries :
+* From [PSPICE NETLIST] section of C:\Program Files\Orcad\PSpice\PSpice.ini file:
+.lib "nom.lib" 
+
+*Analysis directives: 
+.TRAN  0 1 0 1e-3 
+.PROBE V(*) I(*) W(*) D(*) NOISE(*) 
+.INC ".\test-SCHEMATIC1.net" 
+
+
+
+**** INCLUDING test-SCHEMATIC1.net ****
+* source TEST
+V_V1         N00577 0 DC 10 AC 0 0
+
+**** RESUMING test-SCHEMATIC1-switch_sim.sim.cir ****
+.END
+
+**** 01/08/24 21:14:29 ********* PSpice 9.2 (Mar 2000) ******** ID# 1 ********
+
+ ** Profile: "SCHEMATIC1-switch_sim"  [ D:\Thesis\pspice\test-SCHEMATIC1-switch_sim.sim ] 
+
+
+ ****     INITIAL TRANSIENT SOLUTION       TEMPERATURE =   27.000 DEG C
+
+
+******************************************************************************
+
+
+
+ NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE     NODE   VOLTAGE
+
+
+(N00577)   10.0000 
+
+
+
+
+    VOLTAGE SOURCE CURRENTS
+    NAME         CURRENT
+
+    V_V1         0.000E+00
+
+    TOTAL POWER DISSIPATION   0.00E+00  WATTS
+
+
+
+          JOB CONCLUDED
+
+          TOTAL JOB TIME             .05
+

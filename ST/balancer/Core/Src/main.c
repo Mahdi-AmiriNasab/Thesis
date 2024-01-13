@@ -42,7 +42,9 @@ typedef struct {
 } emxArray_struct1_T_1x100;
 #endif /* typedef_emxArray_struct1_T_1x100 */
 
-float vol1 = 0.7, vol2 = 0.7;
+float vol = 0.7, cur = 0.7;
+uint8_t current_percent = 20;
+float vout = 2.0;
 
 double w_time = 0.5;
 double w_inc = 0.5;
@@ -154,6 +156,9 @@ int main(void)
 		// pso(soc, 2, w_time, w_inc, 0, &global_best, eq_step.data, eq_step.size, &stio);
         // HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
 		// HAL_Delay(500);
+        if(main_relay == GPIO_PIN_RESET)
+            e_DCDC_status = DCDC_Off;
+        
 		if(e_DCDC_status == DCDC_Off)
 		{
 			dcdc_rst2 = 1;
@@ -176,10 +181,24 @@ int main(void)
 		HAL_GPIO_WritePin(DCDC_RST2_GPIO_Port, DCDC_RST2_Pin, dcdc_rst2);
 		HAL_GPIO_WritePin(LD5_GPIO_Port, LD5_Pin, !dcdc_rst2);
 		HAL_GPIO_WritePin(RelayMain_GPIO_Port, RelayMain_Pin, main_relay);
-	
-		
-        Set_DAC_Voltage(vol1, DAC_CHANNEL_1);
-        Set_DAC_Voltage(vol2, DAC_CHANNEL_2);
+
+        if(current_percent > 100)
+            current_percent = 100;	
+		cur = current_percent * 0.012;
+
+        if(vout > 37)
+            vout = 37;
+        if(vout < 0)
+            vout = 0;
+        vol = 0.94 - vout * 0.0256;
+
+        if(vol > 1)
+            vol = 1;
+        if(vol < 0)
+            vol = 0;
+        
+        Set_DAC_Voltage(vol, DAC_CHANNEL_1);
+        Set_DAC_Voltage(cur, DAC_CHANNEL_2);
 		
 
 	}
