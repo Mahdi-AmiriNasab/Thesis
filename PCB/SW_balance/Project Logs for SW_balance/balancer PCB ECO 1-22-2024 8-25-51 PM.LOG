@@ -1,0 +1,17 @@
+Change Component Footprint: Designator=INPUT Old Footprint=2828372 New Footprint=terminal block - 2828372
+Change Component Footprint: Designator=OUTPUT Old Footprint=2828372 New Footprint=terminal block - 2828372
+Added Component: Designator=J1(terminal block - 2828372)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = ""; Value = "http://www.chila.ir"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ASSEMBLY"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DESC"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "DIST#"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MANF"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "MANF_P#"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PARAM"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PARAM2"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PRICE"; Value = ""; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "VALUE"; Value = "CONN_TB8"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=J1-1
+Added Pin To Net: NetName=12V_IN Pin=J1-2
+Added Member To Class: ClassName=U_power Member=Component J1 CONN_TB8
