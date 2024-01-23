@@ -1,0 +1,14 @@
+Removed Pin From Net: NetName=NetDCDC_CTRL_3 Pin=SB3-1
+Removed Pin From Net: NetName=GND Pin=SB3-2
+Removed Member From Class: ClassName=U_DCDC Member=SB3
+Added Component: Designator=R20(RESC0603)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "0"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=GND Pin=R20-1
+Added Pin To Net: NetName=NetDCDC_CTRL_3 Pin=R20-2
+Added Member To Class: ClassName=U_DCDC Member=Component R20 0

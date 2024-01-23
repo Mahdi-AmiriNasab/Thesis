@@ -1,0 +1,41 @@
+Removed Pin From Net: NetName=trig_neg_2 Pin=P1-34
+Removed Pin From Net: NetName=PE2 Pin=U5-1
+Removed Pin From Net: NetName=PE3 Pin=U5-2
+Removed Pin From Net: NetName=PE4 Pin=U5-3
+Removed Pin From Net: NetName=PE5 Pin=U5-4
+Removed Pin From Net: NetName=PE6 Pin=U5-5
+Removed Pin From Net: NetName=PC13 Pin=U5-7
+Removed Pin From Net: NetName=PC14 Pin=U5-8
+Removed Pin From Net: NetName=PC15 Pin=U5-9
+Removed Pin From Net: NetName=PC0 Pin=U5-15
+Removed Pin From Net: NetName=PC1 Pin=U5-16
+Removed Pin From Net: NetName=PC2 Pin=U5-17
+Removed Pin From Net: NetName=PC3 Pin=U5-18
+Removed Pin From Net: NetName=PA0 Pin=U5-23
+Removed Pin From Net: NetName=PC5 Pin=U5-34
+Removed Pin From Net: NetName=PB1 Pin=U5-36
+Removed Pin From Net: NetName=PB2 Pin=U5-37
+Removed Pin From Net: NetName=PD11 Pin=U5-58
+Removed Pin From Net: NetName=PC8 Pin=U5-65
+Removed Pin From Net: NetName=PC9 Pin=U5-66
+Removed Pin From Net: NetName=PA8 Pin=U5-67
+Removed Pin From Net: NetName=PA9 Pin=U5-68
+Removed Pin From Net: NetName=PA10 Pin=U5-69
+Removed Pin From Net: NetName=PC10 Pin=U5-78
+Removed Pin From Net: NetName=PC11 Pin=U5-79
+Removed Pin From Net: NetName=PC12 Pin=U5-80
+Removed Pin From Net: NetName=PB4 Pin=U5-90
+Removed Pin From Net: NetName=PB5 Pin=U5-91
+Removed Pin From Net: NetName=PB6 Pin=U5-92
+Removed Pin From Net: NetName=PB7 Pin=U5-93
+Removed Pin From Net: NetName=PB8 Pin=U5-95
+Removed Pin From Net: NetName=PB9 Pin=U5-96
+Removed Pin From Net: NetName=PE0 Pin=U5-97
+Removed Pin From Net: NetName=PE1 Pin=U5-98
+Removed Member From Class: ClassName=G_pos_o[1..9] Member=G_pos_oN_8
+Removed Member From Class: ClassName=G_pos_o[1..9] Member=G_pos_oN_9
+Added Pin To Net: NetName=PB10 Pin=P1-34
+Added Net: Name=PB10
+Added Member To Class: ClassName=river_high_side_i Member=Component Q5O (Q5) NPN transistor
+Added Member To Class: ClassName=river_high_side_i Member=Component R4O (R4) 10
+Added Member To Class: ClassName=river_high_side_i Member=Component R5O (R5) 10K
