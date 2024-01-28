@@ -1,0 +1,10 @@
+Removed Pin From Net: NetName=5V Pin=P2-4
+Removed Pin From Net: NetName=PA2 Pin=P2-9
+Removed Pin From Net: NetName=PA2 Pin=P2-10
+Removed Pin From Net: NetName=PA2 Pin=USART-1
+Added Pin To Net: NetName=NetUSART_1 Pin=USART-1
+Added Net: Name=NetUSART_1
+Added Pin To Net: NetName=PC14 Pin=P2-9
+Added Net: Name=PC14
+Added Pin To Net: NetName=PC15 Pin=P2-10
+Added Net: Name=PC15

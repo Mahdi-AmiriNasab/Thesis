@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=trig_pos_3 Pin=P1-31
+Removed Pin From Net: NetName=trig_neg_5 Pin=P1-37
+Removed Pin From Net: NetName=trig_pos_3 Pin=U5-44
+Removed Pin From Net: NetName=trig_neg_5 Pin=U5-52
+Added Pin To Net: NetName=trig_neg_5 Pin=P1-31
+Added Pin To Net: NetName=trig_pos_3 Pin=P1-37
+Added Pin To Net: NetName=trig_neg_5 Pin=U5-44
+Added Pin To Net: NetName=trig_pos_3 Pin=U5-52

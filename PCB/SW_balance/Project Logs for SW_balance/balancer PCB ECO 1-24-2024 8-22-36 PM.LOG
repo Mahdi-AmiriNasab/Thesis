@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=DCDC_RST1 Pin=P1-18
+Removed Pin From Net: NetName=trig_neg_10 Pin=P1-42
+Removed Pin From Net: NetName=DCDC_RST1 Pin=U5-31
+Removed Pin From Net: NetName=trig_neg_10 Pin=U5-57
+Added Pin To Net: NetName=trig_neg_10 Pin=P1-18
+Added Pin To Net: NetName=DCDC_RST1 Pin=P1-42
+Added Pin To Net: NetName=trig_neg_10 Pin=U5-31
+Added Pin To Net: NetName=DCDC_RST1 Pin=U5-57

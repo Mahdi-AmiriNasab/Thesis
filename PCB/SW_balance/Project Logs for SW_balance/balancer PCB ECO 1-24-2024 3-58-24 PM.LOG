@@ -1,0 +1,17 @@
+Removed Pin From Net: NetName=LED8 Pin=P2-27
+Removed Pin From Net: NetName=LED6 Pin=P2-29
+Removed Pin From Net: NetName=LED7 Pin=P2-30
+Removed Pin From Net: NetName=LED5 Pin=P2-32
+Removed Pin From Net: NetName=PD3 Pin=U5-84
+Removed Pin From Net: NetName=LED5 Pin=U5-85
+Removed Pin From Net: NetName=LED6 Pin=U5-86
+Removed Pin From Net: NetName=LED7 Pin=U5-87
+Removed Pin From Net: NetName=LED8 Pin=U5-88
+Added Pin To Net: NetName=LED5 Pin=P2-27
+Added Pin To Net: NetName=LED7 Pin=P2-29
+Added Pin To Net: NetName=LED6 Pin=P2-30
+Added Pin To Net: NetName=LED8 Pin=P2-32
+Change Net Name : Old Net Name=LED5 New Net Name=PD7
+Change Net Name : Old Net Name=LED6 New Net Name=PD6
+Change Net Name : Old Net Name=LED7 New Net Name=PD5
+Change Net Name : Old Net Name=LED8 New Net Name=PD4

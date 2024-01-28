@@ -1,0 +1,2 @@
+Change Room Name: Old Name=river_high_side_i New Name=driver_high_side_neg7
+Change Room Scope: Old Scope=InComponentClass('river_high_side_i') New Scope=InComponentClass('driver_high_side_neg7')

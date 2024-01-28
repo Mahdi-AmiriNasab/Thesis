@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=GND Pin=12IN-1
+Removed Pin From Net: NetName=12V Pin=R7-2
+Added Pin To Net: NetName=12V Pin=AXBATT-1
+Added Pin To Net: NetName=12V Pin=U6A-1
+Added Pin To Net: NetName=12V Pin=U6A-2

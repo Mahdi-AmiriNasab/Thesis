@@ -1,0 +1,198 @@
+Protel Design System Design Rule Check
+PCB File : D:\Thesis\PCB\SW_balance\balancer.PcbDoc
+Date     : 1/28/2024
+Time     : 10:17:38 AM
+
+Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Short-Circuit Constraint (Allowed=No) (All),(All)
+Rule Violations :0
+
+Processing Rule : Un-Routed Net Constraint ( (All) )
+Rule Violations :0
+
+Processing Rule : Modified Polygon (Allow modified: No), (Allow shelved: No)
+Rule Violations :0
+
+Processing Rule : Width Constraint (Min=0.254mm) (Max=2mm) (Preferred=0.3mm) (All)
+Rule Violations :0
+
+Processing Rule : Power Plane Connect Rule(Relief Connect )(Expansion=0.508mm) (Conductor Width=0.5mm) (Air Gap=0.5mm) (Entries=4) (All)
+Rule Violations :0
+
+Processing Rule : Hole Size Constraint (Min=0.5mm) (Max=1.1mm) (All)
+Rule Violations :0
+
+Processing Rule : Hole To Hole Clearance (Gap=0.254mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Minimum Solder Mask Sliver (Gap=0.001mm) (Disabled)(All),(All)
+Rule Violations :0
+
+Processing Rule : Silk To Solder Mask (Clearance=0mm) (IsPad),(All)
+Rule Violations :0
+
+Processing Rule : Silk to Silk (Clearance=0.2mm) (All),(All)
+Rule Violations :0
+
+Processing Rule : Net Antennae (Tolerance=0mm) (All)
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_P4 (Bounding Region = (44.896mm, 87.555mm, 72.504mm, 96.266mm) (InComponentClass('bidirectional_switch_neg_P4'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_P3 (Bounding Region = (44.762mm, 105.418mm, 72.37mm, 114.13mm) (InComponentClass('bidirectional_switch_neg_P3'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_P6 (Bounding Region = (45.27mm, 60.968mm, 72.878mm, 69.68mm) (InComponentClass('bidirectional_switch_neg_P6'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_P5 (Bounding Region = (45.27mm, 69.985mm, 72.878mm, 78.697mm) (InComponentClass('bidirectional_switch_neg_P5'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_P2 (Bounding Region = (44.642mm, 122.944mm, 72.25mm, 131.656mm) (InComponentClass('bidirectional_switch_neg_P2'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_N2 (Bounding Region = (45.56mm, 15.196mm, 73.142mm, 23.954mm) (InComponentClass('bidirectional_switch_neg_N2'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_N1 (Bounding Region = (45.138mm, 42.455mm, 72.72mm, 51.213mm) (InComponentClass('bidirectional_switch_neg_N1'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_P1 (Bounding Region = (44.635mm, 140.343mm, 72.243mm, 149.055mm) (InComponentClass('bidirectional_switch_neg_P1'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_neg_N3 (Bounding Region = (45.659mm, 6.133mm, 73.241mm, 14.891mm) (InComponentClass('bidirectional_switch_neg_N3'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_pos13 (Bounding Region = (35.814mm, 98.66mm, 48.133mm, 104.454mm) (InComponentClass('driver_high_side_pos13'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_pos14 (Bounding Region = (35.814mm, 81.074mm, 48.133mm, 86.868mm) (InComponentClass('driver_high_side_pos14'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_pos12 (Bounding Region = (35.814mm, 116.126mm, 48.133mm, 121.92mm) (InComponentClass('driver_high_side_pos12'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_pos10 (Bounding Region = (35.814mm, 151.432mm, 48.133mm, 157.226mm) (InComponentClass('driver_high_side_pos10'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_pos11 (Bounding Region = (35.814mm, 133.652mm, 48.133mm, 139.446mm) (InComponentClass('driver_high_side_pos11'))
+Rule Violations :0
+
+Processing Rule : Room current_sensor_ax (Bounding Region = (120.669mm, 144.722mm, 126.957mm, 155.011mm) (InComponentClass('current_sensor_ax'))
+Rule Violations :0
+
+Processing Rule : Room driver_low_side_DCDC_o (Bounding Region = (156.309mm, 102.471mm, 170.679mm, 107.079mm) (InComponentClass('driver_low_side_DCDC_o'))
+Rule Violations :0
+
+Processing Rule : Room U_DCDC (Bounding Region = (79.336mm, 158.334mm, 130.931mm, 169.269mm) (InComponentClass('U_DCDC'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_pos15 (Bounding Region = (35.814mm, 54.089mm, 48.133mm, 59.883mm) (InComponentClass('driver_high_side_pos15'))
+Rule Violations :0
+
+Processing Rule : Room driver_low_side_pos7 (Bounding Region = (38.703mm, 26.007mm, 55.829mm, 35.332mm) (InComponentClass('driver_low_side_pos7'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_pos9 (Bounding Region = (35.598mm, 159.893mm, 47.917mm, 165.687mm) (InComponentClass('driver_high_side_pos9'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_neg2 (Bounding Region = (35.814mm, 142.415mm, 48.133mm, 148.209mm) (InComponentClass('driver_high_side_neg2'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_neg3 (Bounding Region = (35.814mm, 125.034mm, 48.133mm, 130.828mm) (InComponentClass('driver_high_side_neg3'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_i (Bounding Region = (93.58mm, 102.41mm, 102.648mm, 106.886mm) (InComponentClass('driver_high_side_i'))
+Rule Violations :0
+
+Processing Rule : Room driver_low_side_pos6 (Bounding Region = (38.703mm, 35.506mm, 55.829mm, 44.831mm) (InComponentClass('driver_low_side_pos6'))
+Rule Violations :0
+
+Processing Rule : Room driver_low_side_neg2 (Bounding Region = (38.703mm, 44.704mm, 53.073mm, 49.312mm) (InComponentClass('driver_low_side_neg2'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_neg7 (Bounding Region = (35.814mm, 63.067mm, 48.133mm, 68.86mm) (InComponentClass('driver_high_side_neg7'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_o (Bounding Region = (96.939mm, 132.89mm, 109.258mm, 138.684mm) (InComponentClass('driver_high_side_o'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_neg6 (Bounding Region = (35.814mm, 72.311mm, 48.133mm, 78.105mm) (InComponentClass('driver_high_side_neg6'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_neg4 (Bounding Region = (35.814mm, 107.429mm, 48.133mm, 113.223mm) (InComponentClass('driver_high_side_neg4'))
+Rule Violations :0
+
+Processing Rule : Room driver_high_side_neg5 (Bounding Region = (35.814mm, 89.837mm, 48.133mm, 95.631mm) (InComponentClass('driver_high_side_neg5'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_P15 (Bounding Region = (44.902mm, 96.401mm, 72.51mm, 105.113mm) (InComponentClass('bidirectional_switch_pos_P15'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_P14 (Bounding Region = (44.642mm, 114.181mm, 72.25mm, 122.893mm) (InComponentClass('bidirectional_switch_pos_P14'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_P16 (Bounding Region = (45.016mm, 78.875mm, 72.624mm, 87.587mm) (InComponentClass('bidirectional_switch_pos_P16'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_AXBATT_i (Bounding Region = (97.786mm, 100.483mm, 125.394mm, 109.195mm) (InComponentClass('bidirectional_switch_pos_AXBATT_i'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_P17 (Bounding Region = (45.278mm, 51.951mm, 72.886mm, 60.663mm) (InComponentClass('bidirectional_switch_pos_P17'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_P13 (Bounding Region = (44.642mm, 131.572mm, 72.25mm, 140.283mm) (InComponentClass('bidirectional_switch_pos_P13'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_DCDC_i (Bounding Region = (97.715mm, 121.057mm, 125.323mm, 129.769mm) (InComponentClass('bidirectional_switch_pos_DCDC_i'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_AXBATT_o (Bounding Region = (97.786mm, 109.627mm, 125.394mm, 118.339mm) (InComponentClass('bidirectional_switch_pos_AXBATT_o'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_DCDC_o (Bounding Region = (97.786mm, 130.337mm, 125.394mm, 139.048mm) (InComponentClass('bidirectional_switch_pos_DCDC_o'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_P12 (Bounding Region = (44.635mm, 149.233mm, 72.243mm, 157.945mm) (InComponentClass('bidirectional_switch_pos_P12'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_P11 (Bounding Region = (44.635mm, 158.123mm, 72.243mm, 166.835mm) (InComponentClass('bidirectional_switch_pos_P11'))
+Rule Violations :0
+
+Processing Rule : Room driver_low_side_neg3 (Bounding Region = (38.703mm, 17.11mm, 55.829mm, 26.435mm) (InComponentClass('driver_low_side_neg3'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_N5 (Bounding Region = (45.405mm, 24.179mm, 72.987mm, 32.937mm) (InComponentClass('bidirectional_switch_pos_N5'))
+Rule Violations :0
+
+Processing Rule : Room driver_low_side_pack2ax (Bounding Region = (156.309mm, 111.046mm, 170.679mm, 115.654mm) (InComponentClass('driver_low_side_pack2ax'))
+Rule Violations :0
+
+Processing Rule : Room driver_low_side_neg4 (Bounding Region = (38.703mm, 7.912mm, 55.829mm, 17.237mm) (InComponentClass('driver_low_side_neg4'))
+Rule Violations :0
+
+Processing Rule : Room bidirectional_switch_pos_N4 (Bounding Region = (45.349mm, 33.357mm, 72.931mm, 42.115mm) (InComponentClass('bidirectional_switch_pos_N4'))
+Rule Violations :0
+
+Processing Rule : Room U_communication (Bounding Region = (251.968mm, 40.767mm, 285.369mm, 49.53mm) (Disabled)(InComponentClass('U_communication'))
+Rule Violations :0
+
+Processing Rule : Room main2020 (Bounding Region = (268.53mm, 55.976mm, 339.65mm, 86.71mm) (Disabled)(InComponentClass('main2020'))
+Rule Violations :0
+
+Processing Rule : Room current_sensor_pack (Bounding Region = (83.228mm, 146.487mm, 89.516mm, 156.776mm) (InComponentClass('current_sensor_pack'))
+Rule Violations :0
+
+Processing Rule : Room U_power (Bounding Region = (283.845mm, 188.341mm, 362.458mm, 209.423mm) (Disabled)(InComponentClass('U_power'))
+Rule Violations :0
+
+Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
+Rule Violations :0
+
+
+Violations Detected : 0
+Waived Violations : 0
+Time Elapsed        : 00:00:01

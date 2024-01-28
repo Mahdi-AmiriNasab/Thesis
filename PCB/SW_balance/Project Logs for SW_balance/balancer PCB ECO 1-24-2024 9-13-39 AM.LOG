@@ -1,0 +1,71 @@
+Change Component Designator: OldDesignator=Q5A NewDesignator=Q5B
+Change Component Designator: OldDesignator=Q5B NewDesignator=Q5C
+Change Component Designator: OldDesignator=Q5C NewDesignator=Q5D
+Change Component Designator: OldDesignator=Q5D NewDesignator=Q5E
+Change Component Designator: OldDesignator=Q5E NewDesignator=Q5F
+Change Component Designator: OldDesignator=Q5F NewDesignator=Q5H
+Change Component Designator: OldDesignator=Q5H NewDesignator=Q5I
+Change Component Designator: OldDesignator=Q5I NewDesignator=Q5J
+Change Component Designator: OldDesignator=Q5J NewDesignator=Q5K
+Change Component Designator: OldDesignator=Q5K NewDesignator=Q5L
+Change Component Designator: OldDesignator=Q5L NewDesignator=Q5M
+Change Component Designator: OldDesignator=Q5M NewDesignator=Q5N
+Change Component Designator: OldDesignator=Q5N NewDesignator=Q5A
+Change Component Designator: OldDesignator=R4A NewDesignator=R4B
+Change Component Designator: OldDesignator=R4B NewDesignator=R4C
+Change Component Designator: OldDesignator=R4C NewDesignator=R4D
+Change Component Designator: OldDesignator=R4D NewDesignator=R4E
+Change Component Designator: OldDesignator=R4E NewDesignator=R4F
+Change Component Designator: OldDesignator=R4F NewDesignator=R4H
+Change Component Designator: OldDesignator=R4H NewDesignator=R4I
+Change Component Designator: OldDesignator=R4I NewDesignator=R4J
+Change Component Designator: OldDesignator=R4J NewDesignator=R4K
+Change Component Designator: OldDesignator=R4K NewDesignator=R4L
+Change Component Designator: OldDesignator=R4L NewDesignator=R4M
+Change Component Designator: OldDesignator=R4M NewDesignator=R4N
+Change Component Designator: OldDesignator=R4N NewDesignator=R4A
+Change Component Designator: OldDesignator=R5A NewDesignator=R5B
+Change Component Designator: OldDesignator=R5B NewDesignator=R5C
+Change Component Designator: OldDesignator=R5C NewDesignator=R5D
+Change Component Designator: OldDesignator=R5D NewDesignator=R5E
+Change Component Designator: OldDesignator=R5E NewDesignator=R5F
+Change Component Designator: OldDesignator=R5F NewDesignator=R5H
+Change Component Designator: OldDesignator=R5H NewDesignator=R5I
+Change Component Designator: OldDesignator=R5I NewDesignator=R5J
+Change Component Designator: OldDesignator=R5J NewDesignator=R5K
+Change Component Designator: OldDesignator=R5K NewDesignator=R5L
+Change Component Designator: OldDesignator=R5L NewDesignator=R5M
+Change Component Designator: OldDesignator=R5M NewDesignator=R5N
+Change Component Designator: OldDesignator=R5N NewDesignator=R5A
+Change Net Name : Old Net Name=NetQ5A_1 New Net Name=NetQ5B_1
+Change Net Name : Old Net Name=NetQ5A_3 New Net Name=NetQ5B_3
+Change Net Name : Old Net Name=NetQ5B_1 New Net Name=NetQ5C_1
+Change Net Name : Old Net Name=NetQ5B_3 New Net Name=NetQ5C_3
+Change Net Name : Old Net Name=NetQ5C_1 New Net Name=NetQ5D_1
+Change Net Name : Old Net Name=NetQ5C_3 New Net Name=NetQ5D_3
+Change Net Name : Old Net Name=NetQ5D_1 New Net Name=NetQ5E_1
+Change Net Name : Old Net Name=NetQ5D_3 New Net Name=NetQ5E_3
+Change Net Name : Old Net Name=NetQ5E_1 New Net Name=NetQ5F_1
+Change Net Name : Old Net Name=NetQ5E_3 New Net Name=NetQ5F_3
+Change Net Name : Old Net Name=NetQ5F_1 New Net Name=NetQ5H_1
+Change Net Name : Old Net Name=NetQ5F_3 New Net Name=NetQ5H_3
+Change Net Name : Old Net Name=NetQ5H_1 New Net Name=NetQ5I_1
+Change Net Name : Old Net Name=NetQ5H_3 New Net Name=NetQ5I_3
+Change Net Name : Old Net Name=NetQ5I_1 New Net Name=NetQ5J_1
+Change Net Name : Old Net Name=NetQ5I_3 New Net Name=NetQ5J_3
+Change Net Name : Old Net Name=NetQ5J_1 New Net Name=NetQ5K_1
+Change Net Name : Old Net Name=NetQ5J_3 New Net Name=NetQ5K_3
+Change Net Name : Old Net Name=NetQ5K_1 New Net Name=NetQ5L_1
+Change Net Name : Old Net Name=NetQ5K_3 New Net Name=NetQ5L_3
+Change Net Name : Old Net Name=NetQ5L_1 New Net Name=NetQ5M_1
+Change Net Name : Old Net Name=NetQ5L_3 New Net Name=NetQ5M_3
+Change Net Name : Old Net Name=NetQ5M_1 New Net Name=NetQ5N_1
+Change Net Name : Old Net Name=NetQ5M_3 New Net Name=NetQ5N_3
+Change Net Name : Old Net Name=NetQ5N_1 New Net Name=NetQ5A_1
+Change Net Name : Old Net Name=NetQ5N_3 New Net Name=NetQ5A_3
+Change Class Name : Old Net Name=driver_high_side_neg1 New Net Name=driver_high_side_pos15
+Change Class Name : Old Net Name=driver_high_side_pos8 New Net Name=driver_high_side_neg7
+Change Class Name : Old Net Name=river_high_side_i New Net Name=driver_high_side_i
+Change Room Scope: Old Scope=InComponentClass('river_high_side_i') New Scope=InComponentClass('driver_high_side_i')
+Added Room: Name=driver_high_side_neg7
+Added Room: Name=driver_high_side_pos15

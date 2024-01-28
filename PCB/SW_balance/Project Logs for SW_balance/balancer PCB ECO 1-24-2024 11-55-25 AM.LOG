@@ -1,0 +1,59 @@
+Removed Member From Class: ClassName=driver_high_side_pos11 Member=Q5A
+Removed Member From Class: ClassName=driver_high_side_pos12 Member=Q5A
+Removed Member From Class: ClassName=driver_high_side_pos14 Member=Q5A
+Removed Member From Class: ClassName=driver_high_side_neg2 Member=Q5D
+Removed Member From Class: ClassName=driver_high_side_neg3 Member=Q5D
+Removed Member From Class: ClassName=driver_high_side_neg4 Member=Q5E
+Removed Member From Class: ClassName=driver_high_side_neg5 Member=Q5F
+Removed Member From Class: ClassName=driver_high_side_neg6 Member=Q5I
+Removed Member From Class: ClassName=driver_high_side_neg7 Member=Q5I
+Removed Member From Class: ClassName=driver_high_side_pos14 Member=R4A
+Removed Member From Class: ClassName=driver_high_side_neg2 Member=R4F
+Removed Member From Class: ClassName=driver_high_side_neg3 Member=R4F
+Removed Member From Class: ClassName=driver_high_side_neg4 Member=R4F
+Removed Member From Class: ClassName=driver_high_side_neg5 Member=R4F
+Removed Member From Class: ClassName=driver_high_side_neg6 Member=R4J
+Removed Member From Class: ClassName=driver_high_side_neg7 Member=R4J
+Removed Member From Class: ClassName=driver_high_side_pos11 Member=R4M
+Removed Member From Class: ClassName=driver_high_side_pos12 Member=R4M
+Removed Member From Class: ClassName=driver_high_side_pos14 Member=R5A
+Removed Member From Class: ClassName=driver_high_side_neg2 Member=R5C
+Removed Member From Class: ClassName=driver_high_side_neg3 Member=R5I
+Removed Member From Class: ClassName=driver_high_side_neg4 Member=R5I
+Removed Member From Class: ClassName=driver_high_side_neg5 Member=R5I
+Removed Member From Class: ClassName=driver_high_side_neg6 Member=R5I
+Removed Member From Class: ClassName=driver_high_side_neg7 Member=R5I
+Removed Member From Class: ClassName=driver_high_side_pos11 Member=R5M
+Removed Member From Class: ClassName=driver_high_side_pos12 Member=R5M
+Change Class Name : Old Net Name=driver_high_side_pos9 New Net Name=driver_high_side_pos10
+Change Class Name : Old Net Name=driver_high_side_pos13 New Net Name=driver_high_side_pos15
+Added Class: Name=driver_high_side_pos9
+Added Class: Name=driver_high_side_pos13
+Added Member To Class: ClassName=main2020 Member=Component D3 FastDiode
+Added Member To Class: ClassName=driver_high_side_neg2 Member=Component Q5B (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_neg3 Member=Component Q5C (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_neg4 Member=Component Q5D (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_neg5 Member=Component Q5E (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_neg6 Member=Component Q5F (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_neg7 Member=Component Q5H (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_pos11 Member=Component Q5K (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_pos12 Member=Component Q5L (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_pos14 Member=Component Q5N (Q5) NPN transistor
+Added Member To Class: ClassName=driver_high_side_neg2 Member=Component R4B (R4) 10
+Added Member To Class: ClassName=driver_high_side_neg3 Member=Component R4C (R4) 10
+Added Member To Class: ClassName=driver_high_side_neg4 Member=Component R4D (R4) 10
+Added Member To Class: ClassName=driver_high_side_neg5 Member=Component R4E (R4) 10
+Added Member To Class: ClassName=driver_high_side_neg6 Member=Component R4F (R4) 10
+Added Member To Class: ClassName=driver_high_side_neg7 Member=Component R4H (R4) 10
+Added Member To Class: ClassName=driver_high_side_pos11 Member=Component R4K (R4) 10
+Added Member To Class: ClassName=driver_high_side_pos12 Member=Component R4L (R4) 10
+Added Member To Class: ClassName=driver_high_side_pos14 Member=Component R4N (R4) 10
+Added Member To Class: ClassName=driver_high_side_neg2 Member=Component R5B (R5) 10K
+Added Member To Class: ClassName=driver_high_side_neg3 Member=Component R5C (R5) 10K
+Added Member To Class: ClassName=driver_high_side_neg4 Member=Component R5D (R5) 10K
+Added Member To Class: ClassName=driver_high_side_neg5 Member=Component R5E (R5) 10K
+Added Member To Class: ClassName=driver_high_side_neg6 Member=Component R5F (R5) 10K
+Added Member To Class: ClassName=driver_high_side_neg7 Member=Component R5H (R5) 10K
+Added Member To Class: ClassName=driver_high_side_pos11 Member=Component R5K (R5) 10K
+Added Member To Class: ClassName=driver_high_side_pos12 Member=Component R5L (R5) 10K
+Added Member To Class: ClassName=driver_high_side_pos14 Member=Component R5N (R5) 10K
