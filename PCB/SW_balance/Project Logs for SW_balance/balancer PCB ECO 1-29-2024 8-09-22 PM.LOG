@@ -1,0 +1,49 @@
+Removed Pin From Net: NetName=NetD1H_1 Pin=D1J_1-1
+Removed Pin From Net: NetName=NetD1I_2 Pin=D1J_1-2
+Removed Pin From Net: NetName=NetD1H_1 Pin=R6J_1-1
+Removed Pin From Net: NetName=NetD1I_2 Pin=R6J_1-2
+Added Component: Designator=M1(MOUNTING)
+Add component. Clean all parameters for all variants
+Added Component: Designator=M2(MOUNTING)
+Add component. Clean all parameters for all variants
+Added Component: Designator=M3(MOUNTING)
+Add component. Clean all parameters for all variants
+Added Component: Designator=M4(MOUNTING)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetM1_1 Pin=M1-1
+Added Pin To Net: NetName=NetM1_1 Pin=M1-2
+Added Pin To Net: NetName=NetM1_1 Pin=M1-3
+Added Pin To Net: NetName=NetM1_1 Pin=M1-4
+Added Pin To Net: NetName=NetM1_1 Pin=M1-5
+Added Pin To Net: NetName=NetM1_1 Pin=M1-6
+Added Pin To Net: NetName=NetM1_1 Pin=M1-7
+Added Net: Name=NetM1_1
+Added Pin To Net: NetName=NetM2_1 Pin=M2-1
+Added Pin To Net: NetName=NetM2_1 Pin=M2-2
+Added Pin To Net: NetName=NetM2_1 Pin=M2-3
+Added Pin To Net: NetName=NetM2_1 Pin=M2-4
+Added Pin To Net: NetName=NetM2_1 Pin=M2-5
+Added Pin To Net: NetName=NetM2_1 Pin=M2-6
+Added Pin To Net: NetName=NetM2_1 Pin=M2-7
+Added Net: Name=NetM2_1
+Added Pin To Net: NetName=NetM3_1 Pin=M3-1
+Added Pin To Net: NetName=NetM3_1 Pin=M3-2
+Added Pin To Net: NetName=NetM3_1 Pin=M3-3
+Added Pin To Net: NetName=NetM3_1 Pin=M3-4
+Added Pin To Net: NetName=NetM3_1 Pin=M3-5
+Added Pin To Net: NetName=NetM3_1 Pin=M3-6
+Added Pin To Net: NetName=NetM3_1 Pin=M3-7
+Added Net: Name=NetM3_1
+Added Pin To Net: NetName=NetM4_1 Pin=M4-1
+Added Pin To Net: NetName=NetM4_1 Pin=M4-2
+Added Pin To Net: NetName=NetM4_1 Pin=M4-3
+Added Pin To Net: NetName=NetM4_1 Pin=M4-4
+Added Pin To Net: NetName=NetM4_1 Pin=M4-5
+Added Pin To Net: NetName=NetM4_1 Pin=M4-6
+Added Pin To Net: NetName=NetM4_1 Pin=M4-7
+Added Net: Name=NetM4_1
+Added Member To Class: ClassName=main2020 Member=Component M1 M
+Added Member To Class: ClassName=main2020 Member=Component M2 M
+Added Member To Class: ClassName=main2020 Member=Component M3 M
+Added Member To Class: ClassName=main2020 Member=Component M4 M
+Added Room: Name=U_MCU

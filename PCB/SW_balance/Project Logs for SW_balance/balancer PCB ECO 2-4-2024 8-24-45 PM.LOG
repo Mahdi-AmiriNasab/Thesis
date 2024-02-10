@@ -1,0 +1,15 @@
+Removed Pin From Net: NetName=12V Pin=AXBATT-1
+Removed Pin From Net: NetName=NetD3_2 Pin=C1-1
+Removed Pin From Net: NetName=NetD3_2 Pin=D3-2
+Removed Pin From Net: NetName=NetD3_2 Pin=F3-1
+Removed Pin From Net: NetName=12V Pin=F3-2
+Removed Pin From Net: NetName=NetD3_2 Pin=U6A-1
+Removed Pin From Net: NetName=NetD3_2 Pin=U6A-2
+Added Pin To Net: NetName=NetD3_2 Pin=AXBATT-1
+Added Pin To Net: NetName=12V Pin=C1-1
+Added Pin To Net: NetName=12V Pin=D3-2
+Added Pin To Net: NetName=12V Pin=F3-1
+Added Pin To Net: NetName=NetD3_2 Pin=F3-2
+Added Pin To Net: NetName=12V Pin=U6A-1
+Added Pin To Net: NetName=12V Pin=U6A-2
+Change Net Name : Old Net Name=NetD3_2 New Net Name=12V_UP

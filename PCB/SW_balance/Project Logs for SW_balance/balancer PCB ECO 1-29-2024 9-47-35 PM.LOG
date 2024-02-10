@@ -1,0 +1,18 @@
+Removed Pin From Net: NetName=12V Pin=D3-2
+Removed Pin From Net: NetName=12V Pin=U6A-1
+Removed Pin From Net: NetName=12V Pin=U6A-2
+Added Component: Designator=F3(RES1206)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "0"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=12V Pin=F3-2
+Added Pin To Net: NetName=NetD3_2 Pin=D3-2
+Added Pin To Net: NetName=NetD3_2 Pin=F3-1
+Added Pin To Net: NetName=NetD3_2 Pin=U6A-1
+Added Pin To Net: NetName=NetD3_2 Pin=U6A-2
+Added Net: Name=NetD3_2
+Added Member To Class: ClassName=main2020 Member=Component F3 0
