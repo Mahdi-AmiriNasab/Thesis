@@ -1,0 +1,106 @@
+Added Component: Designator=BATT(terminal block - battery - 2828372 -)
+Add component. Clean all parameters for all variants
+Added Component: Designator=R10(RESC0603)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Added Component: Designator=U5(QFP50P1600X1600X160-100N)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "Distrib"; Value = "ST"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "ECCN_US/EU"; Value = "3A991A2/NEC"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manuf_1"; Value = "STM"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Manuf_Part_1"; Value = "STM32F407VGT6"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Provided"; Value = "ST"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Ref St"; Value = "9175122"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=M1_1 Pin=BATT-1
+Added Pin To Net: NetName=M1_2 Pin=BATT-2
+Added Pin To Net: NetName=M1_3 Pin=BATT-3
+Added Pin To Net: NetName=M1_4 Pin=BATT-4
+Added Pin To Net: NetName=M1_5 Pin=BATT-5
+Added Pin To Net: NetName=M1_6 Pin=BATT-6
+Added Pin To Net: NetName=M1_7 Pin=BATT-7
+Added Pin To Net: NetName=M1_8 Pin=BATT-8
+Added Pin To Net: NetName=M1_9 Pin=BATT-9
+Added Pin To Net: NetName=M1_10 Pin=BATT-10
+Added Pin To Net: NetName=DCDC_RST1 Pin=DCDC_CTRL-3
+Added Pin To Net: NetName=GND Pin=R10-1
+Added Pin To Net: NetName=PB2 Pin=R10-2
+Added Pin To Net: NetName=3V3 Pin=U5-6
+Added Pin To Net: NetName=GND Pin=U5-10
+Added Pin To Net: NetName=3V3 Pin=U5-11
+Added Pin To Net: NetName=PH0-OSC_IN Pin=U5-12
+Added Pin To Net: NetName=PH1-OSC_OUT Pin=U5-13
+Added Pin To Net: NetName=NRST Pin=U5-14
+Added Pin To Net: NetName=GND Pin=U5-19
+Added Pin To Net: NetName=NetC12_1 Pin=U5-20
+Added Pin To Net: NetName=NetC14_1 Pin=U5-21
+Added Pin To Net: NetName=CurrentSensor_AX Pin=U5-23
+Added Pin To Net: NetName=USART_TX Pin=U5-24
+Added Pin To Net: NetName=USART_RX Pin=U5-25
+Added Pin To Net: NetName=GND Pin=U5-26
+Added Pin To Net: NetName=3V3 Pin=U5-27
+Added Pin To Net: NetName=DAC_Voltage Pin=U5-28
+Added Pin To Net: NetName=DAC_Current Pin=U5-29
+Added Pin To Net: NetName=trig_pos_8 Pin=U5-30
+Added Pin To Net: NetName=trig_neg_9 Pin=U5-31
+Added Pin To Net: NetName=CurrentSensor_pack Pin=U5-34
+Added Pin To Net: NetName=PB2 Pin=U5-36
+Added Pin To Net: NetName=trig_pos_9 Pin=U5-37
+Added Pin To Net: NetName=trig_neg_8 Pin=U5-38
+Added Pin To Net: NetName=trig_pos_7 Pin=U5-39
+Added Pin To Net: NetName=trig_neg_7 Pin=U5-40
+Added Pin To Net: NetName=trig_neg_6 Pin=U5-41
+Added Pin To Net: NetName=trig_pos_6 Pin=U5-42
+Added Pin To Net: NetName=trig_neg_5 Pin=U5-43
+Added Pin To Net: NetName=trig_pos_5 Pin=U5-44
+Added Pin To Net: NetName=trig_neg_4 Pin=U5-45
+Added Pin To Net: NetName=trig_pos_4 Pin=U5-46
+Added Pin To Net: NetName=trig_neg_3 Pin=U5-47
+Added Pin To Net: NetName=NetC22_1 Pin=U5-48
+Added Pin To Net: NetName=GND Pin=U5-49
+Added Pin To Net: NetName=3V3 Pin=U5-50
+Added Pin To Net: NetName=trig_pos_3 Pin=U5-51
+Added Pin To Net: NetName=trig_neg_2 Pin=U5-52
+Added Pin To Net: NetName=trig_pos_2 Pin=U5-53
+Added Pin To Net: NetName=trig_pos_1 Pin=U5-54
+Added Pin To Net: NetName=trig_neg_10 Pin=U5-55
+Added Pin To Net: NetName=DCDC_RST1 Pin=U5-57
+Added Pin To Net: NetName=LED1 Pin=U5-59
+Added Pin To Net: NetName=LED2 Pin=U5-60
+Added Pin To Net: NetName=LED3 Pin=U5-61
+Added Pin To Net: NetName=LED4 Pin=U5-62
+Added Pin To Net: NetName=en_ax2pack Pin=U5-63
+Added Pin To Net: NetName=en_pack2ax Pin=U5-64
+Added Pin To Net: NetName=SWDIO Pin=U5-72
+Added Pin To Net: NetName=NetC21_1 Pin=U5-73
+Added Pin To Net: NetName=GND Pin=U5-74
+Added Pin To Net: NetName=3V3 Pin=U5-75
+Added Pin To Net: NetName=SWCLK Pin=U5-76
+Added Pin To Net: NetName=CAN_RX Pin=U5-81
+Added Pin To Net: NetName=CAN_TX Pin=U5-82
+Added Pin To Net: NetName=CAN_STB Pin=U5-83
+Added Pin To Net: NetName=BOOT0 Pin=U5-94
+Added Pin To Net: NetName=NetR11_2 Pin=U5-99
+Added Pin To Net: NetName=3V3 Pin=U5-100
+Added Member To Class: ClassName=main2020 Member=Component BATT LI-ION BATTRY
+Added Member To Class: ClassName=U_MCU Member=Component R10 10K
+Added Member To Class: ClassName=U_MCU Member=Component U5 STM32F407VGT6
+Added Room: Name=bidirectional_switch_neg_P1
+Added Room: Name=bidirectional_switch_neg_P2
+Added Room: Name=bidirectional_switch_neg_P3
+Added Room: Name=bidirectional_switch_neg_P4
+Added Room: Name=bidirectional_switch_neg_P5
+Added Room: Name=bidirectional_switch_neg_P6
+Added Room: Name=bidirectional_switch_pos_P12
+Added Room: Name=bidirectional_switch_pos_P13
+Added Room: Name=bidirectional_switch_pos_P14
+Added Room: Name=bidirectional_switch_pos_P15
+Added Room: Name=bidirectional_switch_pos_P16
+Added Room: Name=bidirectional_switch_pos_P17
+Added Room: Name=main2020
+Added Room: Name=U_communication
+Added Room: Name=U_MCU

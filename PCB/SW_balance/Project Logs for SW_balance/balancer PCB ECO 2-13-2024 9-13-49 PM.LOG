@@ -1,0 +1,37 @@
+Removed Pin From Net: NetName=NetQ1_2 Pin=Q1-2
+Removed Pin From Net: NetName=GND Pin=Q1-3
+Removed Pin From Net: NetName=NetQ1_4 Pin=Q2-2
+Removed Pin From Net: NetName=GND Pin=Q2-3
+Removed Pin From Net: NetName=NetQ1_4 Pin=R2F-1
+Removed Pin From Net: NetName=NetQ1_2 Pin=R2G-1
+Change Component Comment : Designator=Q1 Old Comment=Dual nmos New Comment=DMT6012LSS
+Change Component Comment : Designator=Q2 Old Comment=Dual nmos New Comment=DMT6012LSS
+Added Component: Designator=Q8(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q9(LM358)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetD5_1 Pin=Q1-2
+Added Pin To Net: NetName=NetD5_1 Pin=Q1-3
+Added Pin To Net: NetName=NetD5_1 Pin=Q2-2
+Added Pin To Net: NetName=NetD5_1 Pin=Q2-3
+Added Pin To Net: NetName=GND Pin=Q8-1
+Added Pin To Net: NetName=GND Pin=Q8-2
+Added Pin To Net: NetName=GND Pin=Q8-3
+Added Pin To Net: NetName=NetQ1_4 Pin=Q8-4
+Added Pin To Net: NetName=M2_neg Pin=Q8-5
+Added Pin To Net: NetName=M2_neg Pin=Q8-6
+Added Pin To Net: NetName=M2_neg Pin=Q8-7
+Added Pin To Net: NetName=M2_neg Pin=Q8-8
+Added Pin To Net: NetName=GND Pin=Q9-1
+Added Pin To Net: NetName=GND Pin=Q9-2
+Added Pin To Net: NetName=GND Pin=Q9-3
+Added Pin To Net: NetName=NetQ1_2 Pin=Q9-4
+Added Pin To Net: NetName=NetAXBATT_1 Pin=Q9-5
+Added Pin To Net: NetName=NetAXBATT_1 Pin=Q9-6
+Added Pin To Net: NetName=NetAXBATT_1 Pin=Q9-7
+Added Pin To Net: NetName=NetAXBATT_1 Pin=Q9-8
+Added Pin To Net: NetName=NetQ1_2 Pin=R2F-1
+Added Pin To Net: NetName=NetQ1_4 Pin=R2G-1
+Change Net Name : Old Net Name=NetQ1_2 New Net Name=NetQ2_4
+Added Member To Class: ClassName=main2020 Member=Component Q8 DMT6012LSS
+Added Member To Class: ClassName=main2020 Member=Component Q9 DMT6012LSS

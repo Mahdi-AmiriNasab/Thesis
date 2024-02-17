@@ -1,0 +1,8 @@
+Removed Pin From Net: NetName=PH1-OSC_OUT Pin=Y1-1
+Removed Pin From Net: NetName=PH0-OSC_IN Pin=Y1-2
+Change Component Footprint: Designator=Y1 Old Footprint=XTAL New Footprint=ABM3B-8.000MHZ-B2
+Change Component Comment : Designator=Y1 Old Comment=XTAL New Comment=Crystal
+Added Pin To Net: NetName=PH0-OSC_IN Pin=Y1-1
+Added Pin To Net: NetName=GND Pin=Y1-2
+Added Pin To Net: NetName=PH1-OSC_OUT Pin=Y1-3
+Added Pin To Net: NetName=GND Pin=Y1-4

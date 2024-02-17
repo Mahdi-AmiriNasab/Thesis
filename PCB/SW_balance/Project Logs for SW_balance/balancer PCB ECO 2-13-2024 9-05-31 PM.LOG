@@ -1,0 +1,160 @@
+Removed Pin From Net: NetName=NetD2A_1 Pin=U7A-1
+Removed Pin From Net: NetName=NetD2A_2 Pin=U7A-2
+Removed Pin From Net: NetName=NetD2A_1 Pin=U7A-3
+Removed Pin From Net: NetName=NetD2A_2 Pin=U7A-4
+Removed Pin From Net: NetName=M2_neg Pin=U7A-5
+Removed Pin From Net: NetName=M2_neg Pin=U7A-6
+Removed Pin From Net: NetName=M1_8 Pin=U7A-7
+Removed Pin From Net: NetName=M1_8 Pin=U7A-8
+Removed Pin From Net: NetName=NetD2B_1 Pin=U7B-1
+Removed Pin From Net: NetName=NetD2B_2 Pin=U7B-2
+Removed Pin From Net: NetName=NetD2B_1 Pin=U7B-3
+Removed Pin From Net: NetName=NetD2B_2 Pin=U7B-4
+Removed Pin From Net: NetName=M2_neg Pin=U7B-5
+Removed Pin From Net: NetName=M2_neg Pin=U7B-6
+Removed Pin From Net: NetName=M1_9 Pin=U7B-7
+Removed Pin From Net: NetName=M1_9 Pin=U7B-8
+Removed Pin From Net: NetName=NetD2C_1 Pin=U7C-1
+Removed Pin From Net: NetName=NetD2C_2 Pin=U7C-2
+Removed Pin From Net: NetName=NetD2C_1 Pin=U7C-3
+Removed Pin From Net: NetName=NetD2C_2 Pin=U7C-4
+Removed Pin From Net: NetName=M2_neg Pin=U7C-5
+Removed Pin From Net: NetName=M2_neg Pin=U7C-6
+Removed Pin From Net: NetName=M1_10 Pin=U7C-7
+Removed Pin From Net: NetName=M1_10 Pin=U7C-8
+Removed Pin From Net: NetName=NetD2D_1 Pin=U7D-1
+Removed Pin From Net: NetName=NetD2D_2 Pin=U7D-2
+Removed Pin From Net: NetName=NetD2D_1 Pin=U7D-3
+Removed Pin From Net: NetName=NetD2D_2 Pin=U7D-4
+Removed Pin From Net: NetName=M2_pos Pin=U7D-5
+Removed Pin From Net: NetName=M2_pos Pin=U7D-6
+Removed Pin From Net: NetName=M1_8 Pin=U7D-7
+Removed Pin From Net: NetName=M1_8 Pin=U7D-8
+Removed Pin From Net: NetName=NetD2E_1 Pin=U7E-1
+Removed Pin From Net: NetName=NetD2E_2 Pin=U7E-2
+Removed Pin From Net: NetName=NetD2E_1 Pin=U7E-3
+Removed Pin From Net: NetName=NetD2E_2 Pin=U7E-4
+Removed Pin From Net: NetName=M2_pos Pin=U7E-5
+Removed Pin From Net: NetName=M2_pos Pin=U7E-6
+Removed Pin From Net: NetName=M1_9 Pin=U7E-7
+Removed Pin From Net: NetName=M1_9 Pin=U7E-8
+Removed Member From Class: ClassName=bidirectional_switch_neg_N1 Member=U7A
+Removed Member From Class: ClassName=bidirectional_switch_neg_N2 Member=U7B
+Removed Member From Class: ClassName=bidirectional_switch_neg_N3 Member=U7C
+Removed Member From Class: ClassName=bidirectional_switch_pos_N4 Member=U7D
+Removed Member From Class: ClassName=bidirectional_switch_pos_N5 Member=U7E
+Added Component: Designator=Q6A(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q6B(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q6C(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q6D(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q6E(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q7A(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q7B(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q7C(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q7D(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q7E(LM358)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetD2A_1 Pin=Q6A-1
+Added Pin To Net: NetName=NetD2A_1 Pin=Q6A-2
+Added Pin To Net: NetName=NetD2A_1 Pin=Q6A-3
+Added Pin To Net: NetName=NetD2A_2 Pin=Q6A-4
+Added Pin To Net: NetName=M1_8 Pin=Q6A-5
+Added Pin To Net: NetName=M1_8 Pin=Q6A-6
+Added Pin To Net: NetName=M1_8 Pin=Q6A-7
+Added Pin To Net: NetName=M1_8 Pin=Q6A-8
+Added Pin To Net: NetName=NetD2B_1 Pin=Q6B-1
+Added Pin To Net: NetName=NetD2B_1 Pin=Q6B-2
+Added Pin To Net: NetName=NetD2B_1 Pin=Q6B-3
+Added Pin To Net: NetName=NetD2B_2 Pin=Q6B-4
+Added Pin To Net: NetName=M1_9 Pin=Q6B-5
+Added Pin To Net: NetName=M1_9 Pin=Q6B-6
+Added Pin To Net: NetName=M1_9 Pin=Q6B-7
+Added Pin To Net: NetName=M1_9 Pin=Q6B-8
+Added Pin To Net: NetName=NetD2C_1 Pin=Q6C-1
+Added Pin To Net: NetName=NetD2C_1 Pin=Q6C-2
+Added Pin To Net: NetName=NetD2C_1 Pin=Q6C-3
+Added Pin To Net: NetName=NetD2C_2 Pin=Q6C-4
+Added Pin To Net: NetName=M1_10 Pin=Q6C-5
+Added Pin To Net: NetName=M1_10 Pin=Q6C-6
+Added Pin To Net: NetName=M1_10 Pin=Q6C-7
+Added Pin To Net: NetName=M1_10 Pin=Q6C-8
+Added Pin To Net: NetName=NetD2D_1 Pin=Q6D-1
+Added Pin To Net: NetName=NetD2D_1 Pin=Q6D-2
+Added Pin To Net: NetName=NetD2D_1 Pin=Q6D-3
+Added Pin To Net: NetName=NetD2D_2 Pin=Q6D-4
+Added Pin To Net: NetName=M1_8 Pin=Q6D-5
+Added Pin To Net: NetName=M1_8 Pin=Q6D-6
+Added Pin To Net: NetName=M1_8 Pin=Q6D-7
+Added Pin To Net: NetName=M1_8 Pin=Q6D-8
+Added Pin To Net: NetName=NetD2E_1 Pin=Q6E-1
+Added Pin To Net: NetName=NetD2E_1 Pin=Q6E-2
+Added Pin To Net: NetName=NetD2E_1 Pin=Q6E-3
+Added Pin To Net: NetName=NetD2E_2 Pin=Q6E-4
+Added Pin To Net: NetName=M1_9 Pin=Q6E-5
+Added Pin To Net: NetName=M1_9 Pin=Q6E-6
+Added Pin To Net: NetName=M1_9 Pin=Q6E-7
+Added Pin To Net: NetName=M1_9 Pin=Q6E-8
+Added Pin To Net: NetName=NetD2A_1 Pin=Q7A-1
+Added Pin To Net: NetName=NetD2A_1 Pin=Q7A-2
+Added Pin To Net: NetName=NetD2A_1 Pin=Q7A-3
+Added Pin To Net: NetName=NetD2A_2 Pin=Q7A-4
+Added Pin To Net: NetName=M2_neg Pin=Q7A-5
+Added Pin To Net: NetName=M2_neg Pin=Q7A-6
+Added Pin To Net: NetName=M2_neg Pin=Q7A-7
+Added Pin To Net: NetName=M2_neg Pin=Q7A-8
+Added Pin To Net: NetName=NetD2B_1 Pin=Q7B-1
+Added Pin To Net: NetName=NetD2B_1 Pin=Q7B-2
+Added Pin To Net: NetName=NetD2B_1 Pin=Q7B-3
+Added Pin To Net: NetName=NetD2B_2 Pin=Q7B-4
+Added Pin To Net: NetName=M2_neg Pin=Q7B-5
+Added Pin To Net: NetName=M2_neg Pin=Q7B-6
+Added Pin To Net: NetName=M2_neg Pin=Q7B-7
+Added Pin To Net: NetName=M2_neg Pin=Q7B-8
+Added Pin To Net: NetName=NetD2C_1 Pin=Q7C-1
+Added Pin To Net: NetName=NetD2C_1 Pin=Q7C-2
+Added Pin To Net: NetName=NetD2C_1 Pin=Q7C-3
+Added Pin To Net: NetName=NetD2C_2 Pin=Q7C-4
+Added Pin To Net: NetName=M2_neg Pin=Q7C-5
+Added Pin To Net: NetName=M2_neg Pin=Q7C-6
+Added Pin To Net: NetName=M2_neg Pin=Q7C-7
+Added Pin To Net: NetName=M2_neg Pin=Q7C-8
+Added Pin To Net: NetName=NetD2D_1 Pin=Q7D-1
+Added Pin To Net: NetName=NetD2D_1 Pin=Q7D-2
+Added Pin To Net: NetName=NetD2D_1 Pin=Q7D-3
+Added Pin To Net: NetName=NetD2D_2 Pin=Q7D-4
+Added Pin To Net: NetName=M2_pos Pin=Q7D-5
+Added Pin To Net: NetName=M2_pos Pin=Q7D-6
+Added Pin To Net: NetName=M2_pos Pin=Q7D-7
+Added Pin To Net: NetName=M2_pos Pin=Q7D-8
+Added Pin To Net: NetName=NetD2E_1 Pin=Q7E-1
+Added Pin To Net: NetName=NetD2E_1 Pin=Q7E-2
+Added Pin To Net: NetName=NetD2E_1 Pin=Q7E-3
+Added Pin To Net: NetName=NetD2E_2 Pin=Q7E-4
+Added Pin To Net: NetName=M2_pos Pin=Q7E-5
+Added Pin To Net: NetName=M2_pos Pin=Q7E-6
+Added Pin To Net: NetName=M2_pos Pin=Q7E-7
+Added Pin To Net: NetName=M2_pos Pin=Q7E-8
+Added Member To Class: ClassName=bidirectional_switch_neg_N1 Member=Component Q6A (Q6) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_neg_N2 Member=Component Q6B (Q6) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_neg_N3 Member=Component Q6C (Q6) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_pos_N4 Member=Component Q6D (Q6) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_pos_N5 Member=Component Q6E (Q6) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_neg_N1 Member=Component Q7A (Q7) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_neg_N2 Member=Component Q7B (Q7) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_neg_N3 Member=Component Q7C (Q7) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_pos_N4 Member=Component Q7D (Q7) DMT6012LSS
+Added Member To Class: ClassName=bidirectional_switch_pos_N5 Member=Component Q7E (Q7) DMT6012LSS
+Added Room: Name=main2020
+Added Room: Name=U_communication
+Added Room: Name=U_DCDC
+Added Room: Name=U_MCU
+Added Room: Name=U_power

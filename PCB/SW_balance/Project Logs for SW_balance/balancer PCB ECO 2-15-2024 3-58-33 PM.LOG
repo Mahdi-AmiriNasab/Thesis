@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=DCDC_RST1 Pin=U5-57
+Added Pin To Net: NetName=DCDC_RST1 Pin=U5-1
+Added Room: Name=main2020
+Added Room: Name=U_communication
+Added Room: Name=U_DCDC
+Added Room: Name=U_MCU
+Added Room: Name=U_power

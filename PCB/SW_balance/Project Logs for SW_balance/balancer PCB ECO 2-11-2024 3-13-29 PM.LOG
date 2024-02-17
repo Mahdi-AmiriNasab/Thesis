@@ -1,0 +1,49 @@
+Removed Pin From Net: NetName=NetQ8_1 Pin=Q8-1
+Removed Pin From Net: NetName=NetAXBATT_2 Pin=Q8-2
+Removed Pin From Net: NetName=NetD5_1 Pin=Q8-3
+Removed Pin From Net: NetName=NetQ9_1 Pin=Q9-1
+Removed Pin From Net: NetName=M2_neg Pin=Q9-2
+Removed Pin From Net: NetName=NetD5_1 Pin=Q9-3
+Removed Pin From Net: NetName=NetQ8_1 Pin=Q10-1
+Removed Pin From Net: NetName=M2_neg Pin=Q10-2
+Removed Pin From Net: NetName=GND Pin=Q10-3
+Removed Pin From Net: NetName=NetQ9_1 Pin=Q11-1
+Removed Pin From Net: NetName=NetAXBATT_2 Pin=Q11-2
+Removed Pin From Net: NetName=GND Pin=Q11-3
+Removed Pin From Net: NetName=NetQ9_1 Pin=R2F-1
+Removed Pin From Net: NetName=NetQ8_1 Pin=R2G-1
+Removed Member From Class: ClassName=main2020 Member=Q8
+Removed Member From Class: ClassName=main2020 Member=Q9
+Removed Member From Class: ClassName=main2020 Member=Q10
+Removed Member From Class: ClassName=main2020 Member=Q11
+Added Component: Designator=Q1(LM358)
+Add component. Clean all parameters for all variants
+Added Component: Designator=Q2(LM358)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=NetD5_1 Pin=Q1-1
+Added Pin To Net: NetName=NetQ9_1 Pin=Q1-2
+Added Pin To Net: NetName=GND Pin=Q1-3
+Added Pin To Net: NetName=NetQ8_1 Pin=Q1-4
+Added Pin To Net: NetName=NetAXBATT_2 Pin=Q1-5
+Added Pin To Net: NetName=NetAXBATT_2 Pin=Q1-6
+Added Pin To Net: NetName=NetAXBATT_2 Pin=Q1-7
+Added Pin To Net: NetName=NetAXBATT_2 Pin=Q1-8
+Added Pin To Net: NetName=NetD5_1 Pin=Q2-1
+Added Pin To Net: NetName=NetQ8_1 Pin=Q2-2
+Added Pin To Net: NetName=GND Pin=Q2-3
+Added Pin To Net: NetName=NetQ9_1 Pin=Q2-4
+Added Pin To Net: NetName=M2_neg Pin=Q2-5
+Added Pin To Net: NetName=M2_neg Pin=Q2-6
+Added Pin To Net: NetName=M2_neg Pin=Q2-7
+Added Pin To Net: NetName=M2_neg Pin=Q2-8
+Added Pin To Net: NetName=NetQ8_1 Pin=R2F-1
+Added Pin To Net: NetName=NetQ9_1 Pin=R2G-1
+Change Net Name : Old Net Name=NetQ8_1 New Net Name=NetQ1_4
+Change Net Name : Old Net Name=NetQ9_1 New Net Name=NetQ1_2
+Added Member To Class: ClassName=U_MCU Member=Component C10 20pF
+Added Member To Class: ClassName=U_MCU Member=Component C11 20pF
+Added Member To Class: ClassName=U_MCU Member=Component C16 100nF
+Added Member To Class: ClassName=U_MCU Member=Component LED1 Red
+Added Member To Class: ClassName=main2020 Member=Component Q1 Dual nmos
+Added Member To Class: ClassName=main2020 Member=Component Q2 Dual nmos
+Added Member To Class: ClassName=U_MCU Member=Component RST Reset
