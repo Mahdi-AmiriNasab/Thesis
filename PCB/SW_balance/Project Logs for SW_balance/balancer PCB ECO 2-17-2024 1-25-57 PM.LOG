@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=trig_pos_4 Pin=U5-46
+Removed Pin From Net: NetName=en_ax2pack Pin=U5-63
+Added Pin To Net: NetName=trig_neg_6 Pin=U5-45
+Added Pin To Net: NetName=trig_neg_7 Pin=U5-46
+Added Pin To Net: NetName=en_ax2pack Pin=U5-47
