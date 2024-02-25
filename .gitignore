@@ -1,3 +1,5 @@
 /.metadata/
 /ST/balancer/MDK-ARM/balancer
 /PCB/SW_balance/History/
+/slprj/
+*.slxc

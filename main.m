@@ -4,6 +4,7 @@
 clear 
 close all
 cell_count = 9;
+cell_cap_Ah = 2.2;
 
 soc = [70    88    10    95    52    50    48    42    76];
 %soc = fix(rand (1, cell_count) * 100);
@@ -22,7 +23,7 @@ ep_domain = 0.1:0.1:20;
 
 
 [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc, mp, ep_domain);
-[global_best, eq_step, stio] = pso(soc, 2, 1, 0, 0);
+[global_best, eq_step, stio] = pso(soc, 2, 0.4, 0.6, 0);
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);
