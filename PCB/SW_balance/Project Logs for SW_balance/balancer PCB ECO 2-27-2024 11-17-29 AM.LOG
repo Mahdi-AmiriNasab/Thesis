@@ -1,0 +1,104 @@
+Removed Pin From Net: NetName=CurrentSensor_pack Pin=U5-34
+Removed Pin From Net: NetName=CurrentSensor_AX Pin=U6A-7
+Removed Pin From Net: NetName=CurrentSensor_pack Pin=U6B-7
+Added Component: Designator=C28C(CAPC0603)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "C0805"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "100nF"; VariantName = "[No Variations]"
+Added Component: Designator=D6A(FastDiode)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "DatasheetDocument"; Value = "16-Apr-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Dec-2003"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "PCB Footprint replaced."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDocument"; Value = "16-Apr-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "3.5X2.8X1.9"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=D6B(FastDiode)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "DatasheetDocument"; Value = "16-Apr-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Dec-2003"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "PCB Footprint replaced."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDocument"; Value = "16-Apr-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "3.5X2.8X1.9"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=D6C(FastDiode)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "DatasheetDocument"; Value = "16-Apr-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Dec-2003"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "PCB Footprint replaced."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageDocument"; Value = "16-Apr-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "3.5X2.8X1.9"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Added Component: Designator=R7A(RESC0603)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Added Component: Designator=R7B(RESC0603)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Added Component: Designator=R7C(RESC0603)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "10K"; VariantName = "[No Variations]"
+Added Component: Designator=U6C(ACS712)
+Add component. Clean all parameters for all variants
+Added Pin To Net: NetName=GND Pin=C28C-1
+Added Pin To Net: NetName=CurrentSensor_AX Pin=D6A-1
+Added Pin To Net: NetName=3V3 Pin=D6A-2
+Added Pin To Net: NetName=3V3 Pin=D6B-2
+Added Pin To Net: NetName=CurrentSensor_pack Pin=D6C-1
+Added Pin To Net: NetName=3V3 Pin=D6C-2
+Added Pin To Net: NetName=CurrentSensor_AX Pin=R7A-2
+Added Pin To Net: NetName=CurrentSensor_pack Pin=R7C-2
+Added Pin To Net: NetName=CurrentSensor_pack Pin=U5-24
+Added Pin To Net: NetName=M1_1 Pin=U6C-1
+Added Pin To Net: NetName=M1_1 Pin=U6C-2
+Added Pin To Net: NetName=M1_10 Pin=U6C-3
+Added Pin To Net: NetName=M1_10 Pin=U6C-4
+Added Pin To Net: NetName=GND Pin=U6C-5
+Added Pin To Net: NetName=5V Pin=U6C-8
+Added Pin To Net: NetName=CurrentSensor_cells Pin=D6B-1
+Added Pin To Net: NetName=CurrentSensor_cells Pin=R7B-2
+Added Pin To Net: NetName=CurrentSensor_cells Pin=U5-34
+Added Net: Name=CurrentSensor_cells
+Added Pin To Net: NetName=NetC28C_2 Pin=C28C-2
+Added Pin To Net: NetName=NetC28C_2 Pin=U6C-6
+Added Net: Name=NetC28C_2
+Added Pin To Net: NetName=NetR7A_1 Pin=R7A-1
+Added Pin To Net: NetName=NetR7A_1 Pin=U6A-7
+Added Net: Name=NetR7A_1
+Added Pin To Net: NetName=NetR7B_1 Pin=R7B-1
+Added Pin To Net: NetName=NetR7B_1 Pin=U6B-7
+Added Net: Name=NetR7B_1
+Added Pin To Net: NetName=NetR7C_1 Pin=R7C-1
+Added Pin To Net: NetName=NetR7C_1 Pin=U6C-7
+Added Net: Name=NetR7C_1
+Added Member To Class: ClassName=current_sensor_pack Member=Component C28C (C28) 100nF
+Added Member To Class: ClassName=current_sensor_ax Member=Component D6A (D6) FastDiode
+Added Member To Class: ClassName=current_sensor_cells Member=Component D6B (D6) FastDiode
+Added Member To Class: ClassName=current_sensor_pack Member=Component D6C (D6) FastDiode
+Added Member To Class: ClassName=current_sensor_ax Member=Component R7A (R7) 10K
+Added Member To Class: ClassName=current_sensor_cells Member=Component R7B (R7) 10K
+Added Member To Class: ClassName=current_sensor_pack Member=Component R7C (R7) 10K
+Added Member To Class: ClassName=current_sensor_pack Member=Component U6C (U6) ACS712
+Added Room: Name=current_sensor_cells

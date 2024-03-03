@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=M1_1 Pin=U4K-1
+Removed Pin From Net: NetName=M1_10 Pin=U6C-3
+Removed Pin From Net: NetName=M1_10 Pin=U6C-4
+Change Net Name : Old Net Name=M1_1 New Net Name=M1_1_cs
+Added Pin To Net: NetName=M1_1 Pin=U4K-1
+Added Pin To Net: NetName=M1_1 Pin=U6C-3
+Added Pin To Net: NetName=M1_1 Pin=U6C-4
+Added Net: Name=M1_1
+Added Member To Class: ClassName=M1_[1..10] Member=Element[1]: M1_

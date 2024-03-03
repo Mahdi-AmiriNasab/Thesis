@@ -1,0 +1,18 @@
+Removed Pin From Net: NetName=M1_1 Pin=U4K-1
+Removed Member From Class: ClassName=M1_[1..10] Member=M1_1_cs
+Added Component: Designator=F4(RES1206)
+Add component. Clean all parameters for all variants
+Add component (AddParameter): Name = "LatestRevisionDate"; Value = "17-Jul-2002"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "LatestRevisionNote"; Value = "Re-released for DXP Platform."; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "PackageReference"; Value = "AXIAL-0.5"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Published"; Value = "8-Jun-2000"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Publisher"; Value = "Altium Limited"; VariantName = "[No Variations]"
+Add component (AddParameter): Name = "Value"; Value = "0"; VariantName = "[No Variations]"
+Added Pin To Net: NetName=M1_1 Pin=F4-1
+Added Pin To Net: NetName=M1_1_cs Pin=U4K-1
+Change Net Name : Old Net Name=M1_1 New Net Name=M1_1_cs
+Change Net Name : Old Net Name=M1_1_cs New Net Name=M1_1
+Added Pin To Net: NetName=NetF4_2 Pin=F4-2
+Added Net: Name=NetF4_2
+Added Member To Class: ClassName=main2020 Member=Component F4 0
+Added Member To Class: ClassName=M1_[1..10] Member=Element[1]: M1_

@@ -27,7 +27,7 @@ extern "C" {
 #endif
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f4xx_hal.h"
+#include "stm32h7xx_hal.h"
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -57,70 +57,64 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define CS_I2C_SPI_Pin GPIO_PIN_3
-#define CS_I2C_SPI_GPIO_Port GPIOE
-#define PC14_OSC32_IN_Pin GPIO_PIN_14
-#define PC14_OSC32_IN_GPIO_Port GPIOC
-#define PC15_OSC32_OUT_Pin GPIO_PIN_15
-#define PC15_OSC32_OUT_GPIO_Port GPIOC
-#define PH0_OSC_IN_Pin GPIO_PIN_0
-#define PH0_OSC_IN_GPIO_Port GPIOH
-#define PH1_OSC_OUT_Pin GPIO_PIN_1
-#define PH1_OSC_OUT_GPIO_Port GPIOH
-#define OTG_FS_PowerSwitchOn_Pin GPIO_PIN_0
-#define OTG_FS_PowerSwitchOn_GPIO_Port GPIOC
-#define PDM_OUT_Pin GPIO_PIN_3
-#define PDM_OUT_GPIO_Port GPIOC
-#define B1_Pin GPIO_PIN_0
-#define B1_GPIO_Port GPIOA
-#define DCDC_RST1_Pin GPIO_PIN_6
-#define DCDC_RST1_GPIO_Port GPIOA
-#define DCDC_RST2_Pin GPIO_PIN_7
-#define DCDC_RST2_GPIO_Port GPIOA
-#define RelayMain_Pin GPIO_PIN_4
-#define RelayMain_GPIO_Port GPIOC
-#define BOOT1_Pin GPIO_PIN_2
-#define BOOT1_GPIO_Port GPIOB
-#define CLK_IN_Pin GPIO_PIN_10
-#define CLK_IN_GPIO_Port GPIOB
-#define LD4_Pin GPIO_PIN_12
-#define LD4_GPIO_Port GPIOD
-#define LD3_Pin GPIO_PIN_13
-#define LD3_GPIO_Port GPIOD
-#define LD5_Pin GPIO_PIN_14
-#define LD5_GPIO_Port GPIOD
-#define LD6_Pin GPIO_PIN_15
-#define LD6_GPIO_Port GPIOD
-#define I2S3_MCK_Pin GPIO_PIN_7
-#define I2S3_MCK_GPIO_Port GPIOC
-#define VBUS_FS_Pin GPIO_PIN_9
-#define VBUS_FS_GPIO_Port GPIOA
-#define OTG_FS_ID_Pin GPIO_PIN_10
-#define OTG_FS_ID_GPIO_Port GPIOA
-#define OTG_FS_DM_Pin GPIO_PIN_11
-#define OTG_FS_DM_GPIO_Port GPIOA
-#define OTG_FS_DP_Pin GPIO_PIN_12
-#define OTG_FS_DP_GPIO_Port GPIOA
-#define SWDIO_Pin GPIO_PIN_13
-#define SWDIO_GPIO_Port GPIOA
-#define SWCLK_Pin GPIO_PIN_14
-#define SWCLK_GPIO_Port GPIOA
-#define I2S3_SCK_Pin GPIO_PIN_10
-#define I2S3_SCK_GPIO_Port GPIOC
-#define I2S3_SD_Pin GPIO_PIN_12
-#define I2S3_SD_GPIO_Port GPIOC
-#define Audio_RST_Pin GPIO_PIN_4
-#define Audio_RST_GPIO_Port GPIOD
-#define OTG_FS_OverCurrent_Pin GPIO_PIN_5
-#define OTG_FS_OverCurrent_GPIO_Port GPIOD
-#define SWO_Pin GPIO_PIN_3
-#define SWO_GPIO_Port GPIOB
-#define Audio_SCL_Pin GPIO_PIN_6
-#define Audio_SCL_GPIO_Port GPIOB
-#define Audio_SDA_Pin GPIO_PIN_9
-#define Audio_SDA_GPIO_Port GPIOB
-#define MEMS_INT2_Pin GPIO_PIN_1
-#define MEMS_INT2_GPIO_Port GPIOE
+#define DCDC_RST_Pin GPIO_PIN_2
+#define DCDC_RST_GPIO_Port GPIOE
+#define DAC_Voltage_Pin GPIO_PIN_4
+#define DAC_Voltage_GPIO_Port GPIOA
+#define DAC_Current_Pin GPIO_PIN_5
+#define DAC_Current_GPIO_Port GPIOA
+#define CurrentSensor_pack_Pin GPIO_PIN_0
+#define CurrentSensor_pack_GPIO_Port GPIOB
+#define en_pack2ax_Pin GPIO_PIN_1
+#define en_pack2ax_GPIO_Port GPIOB
+#define trig_neg_8_Pin GPIO_PIN_2
+#define trig_neg_8_GPIO_Port GPIOB
+#define trig_neg_9_Pin GPIO_PIN_7
+#define trig_neg_9_GPIO_Port GPIOE
+#define trig_neg_10_Pin GPIO_PIN_8
+#define trig_neg_10_GPIO_Port GPIOE
+#define trig_pos_8_Pin GPIO_PIN_9
+#define trig_pos_8_GPIO_Port GPIOE
+#define trig_pos_9_Pin GPIO_PIN_10
+#define trig_pos_9_GPIO_Port GPIOE
+#define trig_neg_2_Pin GPIO_PIN_11
+#define trig_neg_2_GPIO_Port GPIOE
+#define trig_neg_3_Pin GPIO_PIN_12
+#define trig_neg_3_GPIO_Port GPIOE
+#define trig_neg_4_Pin GPIO_PIN_13
+#define trig_neg_4_GPIO_Port GPIOE
+#define trig_neg_5_Pin GPIO_PIN_14
+#define trig_neg_5_GPIO_Port GPIOE
+#define trig_neg_6_Pin GPIO_PIN_15
+#define trig_neg_6_GPIO_Port GPIOE
+#define trig_neg_7_Pin GPIO_PIN_10
+#define trig_neg_7_GPIO_Port GPIOB
+#define en_ax2pack_Pin GPIO_PIN_11
+#define en_ax2pack_GPIO_Port GPIOB
+#define trig_pos_1_Pin GPIO_PIN_14
+#define trig_pos_1_GPIO_Port GPIOB
+#define trig_pos_2_Pin GPIO_PIN_15
+#define trig_pos_2_GPIO_Port GPIOB
+#define trig_pos_3_Pin GPIO_PIN_8
+#define trig_pos_3_GPIO_Port GPIOD
+#define trig_pos_4_Pin GPIO_PIN_9
+#define trig_pos_4_GPIO_Port GPIOD
+#define trig_pos_5_Pin GPIO_PIN_10
+#define trig_pos_5_GPIO_Port GPIOD
+#define trig_pos_7_Pin GPIO_PIN_11
+#define trig_pos_7_GPIO_Port GPIOD
+#define trig_pos_6_Pin GPIO_PIN_12
+#define trig_pos_6_GPIO_Port GPIOD
+#define CAN_STB_Pin GPIO_PIN_2
+#define CAN_STB_GPIO_Port GPIOD
+#define LED1_Pin GPIO_PIN_3
+#define LED1_GPIO_Port GPIOD
+#define LED2_Pin GPIO_PIN_4
+#define LED2_GPIO_Port GPIOD
+#define LED3_Pin GPIO_PIN_5
+#define LED3_GPIO_Port GPIOD
+#define LED4_Pin GPIO_PIN_6
+#define LED4_GPIO_Port GPIOD
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */
