@@ -1,5 +1,7 @@
 /.metadata/
 /ST/balancer/MDK-ARM/balancer
 /PCB/SW_balance/History/
-/slprj/
-*.slxc
+PCB/SW_balance/__Previews/
+*.htm
+PCB/SW_balance/Project Logs for SW_balance/
+
