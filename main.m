@@ -4,9 +4,10 @@
 clear 
 close all
 cell_count = 9;
+cell_cap_Ah = 2.2;
 
-soc = [70    88    10    95    52    50    48    42    76];
-%soc = fix(rand (1, cell_count) * 100);
+%soc = [70    88    10    95    52    50    48    42    76];
+soc = fix(rand (1, cell_count) * 100);
 soc_init = soc;
 
 
