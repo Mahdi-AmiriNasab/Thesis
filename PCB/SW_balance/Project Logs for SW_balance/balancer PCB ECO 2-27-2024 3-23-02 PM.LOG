@@ -1,0 +1,9 @@
+Removed Pin From Net: NetName=M1_1 Pin=BATT-1
+Removed Pin From Net: NetName=M1_10 Pin=U6C-3
+Removed Pin From Net: NetName=M1_10 Pin=U6C-4
+Added Pin To Net: NetName=M1_1_cs Pin=BATT-1
+Added Pin To Net: NetName=M1_1_cs Pin=U6C-3
+Added Pin To Net: NetName=M1_1_cs Pin=U6C-4
+Added Net: Name=M1_1_cs
+Added Member To Class: ClassName=current_sensor_pack Member=Component U6C (U6) ACS712
+Added Member To Class: ClassName=M1_[1..10] Member=Element[1]: M1_

@@ -1,0 +1,5 @@
+Removed Pin From Net: NetName=NetAXBATT_1 Pin=AXBATT-1
+Removed Pin From Net: NetName=12V_UP Pin=AXBATT-2
+Added Pin To Net: NetName=12V_UP Pin=AXBATT-1
+Added Pin To Net: NetName=NetAXBATT_1 Pin=AXBATT-2
+Change Net Name : Old Net Name=NetAXBATT_1 New Net Name=NetAXBATT_2

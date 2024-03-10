@@ -1,0 +1,3 @@
+Removed Member From Class: ClassName=M1_[1..10] Member=M1_1_cs
+Added Member To Class: ClassName=current_sensor_pack Member=Component U6C (U6) ACS712
+Added Member To Class: ClassName=M1_[1..10] Member=Element[1]: M1_
