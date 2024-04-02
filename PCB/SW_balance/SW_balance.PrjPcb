@@ -55,6 +55,23 @@ GenerateClassCluster=0
 DocumentUniqueId=OEIQDLAB
 
 [Document2]
+DocumentPath=driver_isolated_opto.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=BAHBOHQY
+
+[Document3]
 DocumentPath=power.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -71,7 +88,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=GMXKFDQX
 
-[Document3]
+[Document4]
 DocumentPath=DCDC.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -88,7 +105,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=ISDVNOPM
 
-[Document4]
+[Document5]
 DocumentPath=communication.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -105,7 +122,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=HYHJNCDG
 
-[Document5]
+[Document6]
 DocumentPath=MCU.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -122,7 +139,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=NLVPSYXD
 
-[Document6]
+[Document7]
 DocumentPath=current_sensor.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -139,7 +156,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=CGVGMKWS
 
-[Document7]
+[Document8]
 DocumentPath=driver_high_side.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -156,7 +173,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YSKCIXYF
 
-[Document8]
+[Document9]
 DocumentPath=driver_low_side.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -171,9 +188,9 @@ ClassGenCCAutoRoomEnabled=1
 ClassGenNCAutoScope=None
 DItemRevisionGUID=
 GenerateClassCluster=0
-DocumentUniqueId=NUUWMQBR
+DocumentUniqueId=KHLDVOEW
 
-[Document9]
+[Document10]
 DocumentPath=bidirectional_switch.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -190,7 +207,24 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QZQADDJQ
 
-[Document10]
+[Document11]
+DocumentPath=driver_isolated_trans.SchDoc
+AnnotationEnabled=1
+AnnotateStartValue=1
+AnnotationIndexControlEnabled=0
+AnnotateSuffix=
+AnnotateScope=All
+AnnotateOrder=-1
+DoLibraryUpdate=1
+DoDatabaseUpdate=1
+ClassGenCCAutoEnabled=1
+ClassGenCCAutoRoomEnabled=1
+ClassGenNCAutoScope=None
+DItemRevisionGUID=
+GenerateClassCluster=0
+DocumentUniqueId=NUUWMQBR
+
+[Document12]
 DocumentPath=main2020.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -207,7 +241,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YISKSMKV
 
-[Document11]
+[Document13]
 DocumentPath=bidirectional_switch_N.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -224,7 +258,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VBCKGVOA
 
-[Document12]
+[Document14]
 DocumentPath=..\eLIB.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -241,7 +275,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FYXPGJBR
 
-[Document13]
+[Document15]
 DocumentPath=balancer.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -258,7 +292,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=UEBMBYHJ
 
-[Document14]
+[Document16]
 DocumentPath=SW_balance.IntLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -275,7 +309,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document15]
+[Document17]
 DocumentPath=SW_balance.Annotation
 AnnotationEnabled=1
 AnnotateStartValue=1
