@@ -61,7 +61,7 @@ AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
 AnnotateSuffix=
 AnnotateScope=All
-AnnotateOrder=-1
+AnnotateOrder=14
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 ClassGenCCAutoEnabled=1
@@ -157,40 +157,6 @@ GenerateClassCluster=0
 DocumentUniqueId=CGVGMKWS
 
 [Document8]
-DocumentPath=driver_high_side.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=4
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=YSKCIXYF
-
-[Document9]
-DocumentPath=driver_low_side.SchDoc
-AnnotationEnabled=1
-AnnotateStartValue=1
-AnnotationIndexControlEnabled=0
-AnnotateSuffix=
-AnnotateScope=All
-AnnotateOrder=3
-DoLibraryUpdate=1
-DoDatabaseUpdate=1
-ClassGenCCAutoEnabled=1
-ClassGenCCAutoRoomEnabled=1
-ClassGenNCAutoScope=None
-DItemRevisionGUID=
-GenerateClassCluster=0
-DocumentUniqueId=KHLDVOEW
-
-[Document10]
 DocumentPath=bidirectional_switch.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -207,14 +173,14 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=QZQADDJQ
 
-[Document11]
+[Document9]
 DocumentPath=driver_isolated_trans.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
 AnnotationIndexControlEnabled=0
 AnnotateSuffix=
 AnnotateScope=All
-AnnotateOrder=-1
+AnnotateOrder=15
 DoLibraryUpdate=1
 DoDatabaseUpdate=1
 ClassGenCCAutoEnabled=1
@@ -224,7 +190,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=NUUWMQBR
 
-[Document12]
+[Document10]
 DocumentPath=main2020.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -241,7 +207,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=YISKSMKV
 
-[Document13]
+[Document11]
 DocumentPath=bidirectional_switch_N.SchDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -258,7 +224,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=VBCKGVOA
 
-[Document14]
+[Document12]
 DocumentPath=..\eLIB.PcbLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -275,7 +241,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=FYXPGJBR
 
-[Document15]
+[Document13]
 DocumentPath=balancer.PcbDoc
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -292,7 +258,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=UEBMBYHJ
 
-[Document16]
+[Document14]
 DocumentPath=SW_balance.IntLib
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -309,7 +275,7 @@ DItemRevisionGUID=
 GenerateClassCluster=0
 DocumentUniqueId=
 
-[Document17]
+[Document15]
 DocumentPath=SW_balance.Annotation
 AnnotationEnabled=1
 AnnotateStartValue=1
@@ -1141,14 +1107,14 @@ Type3=2
 Type4=1
 Type5=2
 Type6=2
-Type7=2
+Type7=0
 Type8=2
 Type9=2
 Type10=2
 Type11=2
-Type12=0
+Type12=1
 Type13=0
-Type14=0
+Type14=1
 Type15=2
 Type16=2
 Type17=1
@@ -1167,7 +1133,7 @@ Type29=1
 Type30=1
 Type31=1
 Type32=2
-Type33=2
+Type33=0
 Type34=2
 Type35=1
 Type36=2
@@ -1195,8 +1161,8 @@ Type57=2
 Type58=2
 Type59=2
 Type60=0
-Type61=1
-Type62=1
+Type61=0
+Type62=0
 Type63=0
 Type64=0
 Type65=2
@@ -1261,19 +1227,19 @@ Type122=2
 [ERC Connection Matrix]
 L1=NNNNNNNNNNNWNNNWE
 L2=NNWNNNNWWWNWNWNWE
-L3=NWEENEEEENEWNEEWE
+L3=NWEENEEEENWWNEWWE
 L4=NNENNNWEENNWNENWE
 L5=NNNNNNNNNNNNNNNNE
 L6=NNENNNNEENNWNENWE
 L7=NNEWNNWEENNWNENWE
-L8=NWEENEENEEENNEENE
-L9=NWEENEEEENEWNEEWE
-L10=NWNNNNNENNEWNNEWE
-L11=NNENNNNEEENWNENWE
+L8=NWEENEENEEWNNEWNE
+L9=NWEENEEEENWWNEWWE
+L10=NWNNNNNENNWWNNWWE
+L11=NNWNNNNWWWNWNWNWE
 L12=WWWWNWWNWWWNWWWNE
 L13=NNNNNNNNNNNWNNNWE
-L14=NWEENEEEENEWNEEWE
-L15=NNENNNNEEENWNENWE
+L14=NWEENEEEENWWNEWWE
+L15=NNWNNNNWWWNWNWNWE
 L16=WWWWNWWNWWWNWWWNE
 L17=EEEEEEEEEEEEEEEEE
 
