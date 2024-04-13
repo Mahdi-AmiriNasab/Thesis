@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : D:\Thesis\PCB\SW_balance\balancer.PcbDoc
-Date     : 4/12/2024
-Time     : 9:35:24 PM
+Date     : 4/13/2024
+Time     : 10:13:12 PM
 
 Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
 Rule Violations :0
@@ -33,7 +33,7 @@ Rule Violations :0
 Processing Rule : Silk To Solder Mask (Clearance=0.01mm) (IsPad),(All)
 Rule Violations :0
 
-Processing Rule : Silk to Silk (Clearance=0.1mm) (All),(All)
+Processing Rule : Silk to Silk (Clearance=0mm) (All),(All)
 Rule Violations :0
 
 Processing Rule : Net Antennae (Tolerance=0mm) (All)
@@ -249,4 +249,4 @@ Rule Violations :0
 
 Violations Detected : 0
 Waived Violations : 0
-Time Elapsed        : 00:00:01
+Time Elapsed        : 00:00:02
