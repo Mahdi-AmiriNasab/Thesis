@@ -1,7 +1,7 @@
 Protel Design System Design Rule Check
 PCB File : D:\Thesis\PCB\SW_balance\balancer.PcbDoc
-Date     : 4/15/2024
-Time     : 11:52:00 PM
+Date     : 4/18/2024
+Time     : 6:58:12 PM
 
 Processing Rule : Clearance Constraint (Gap=0.254mm) (All),(All)
 Rule Violations :0
@@ -100,8 +100,7 @@ Processing Rule : Room driver_isolated_opto_neg_N10 (Bounding Region = (145.415m
 Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_DCDC_i (Bounding Region = (91.904mm, 92.648mm, 124.67mm, 101.538mm) (InComponentClass('bidirectional_switch_neg_DCDC_i'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_DCDC_i (Bounding Region = (91.904mm, 92.648mm, 124.67mm, 101.538mm) (InComponentClass('bidirectional_switch_neg_DCDC_i')) And SMT Small Component R25C-100 (108.617mm,93.245mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room driver_isolated_opto_neg_N7 (Bounding Region = (145.415mm, 45.531mm, 165.354mm, 51.881mm) (InComponentClass('driver_isolated_opto_neg_N7'))
 Rule Violations :0
@@ -113,28 +112,22 @@ Processing Rule : Room driver_isolated_opto_neg_N9 (Bounding Region = (145.415mm
 Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N3 (Bounding Region = (48.895mm, 93.305mm, 81.607mm, 102.016mm) (InComponentClass('bidirectional_switch_neg_N3'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N3 (Bounding Region = (48.895mm, 93.305mm, 81.607mm, 102.016mm) (InComponentClass('bidirectional_switch_neg_N3')) And SMT Small Component R26B-100 (65.327mm,93.3mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N2 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_neg_N2'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N2 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_neg_N2')) And SMT Small Component R26A-100 (65.175mm,103.575mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N9 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_pos_N9'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N9 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_pos_N9')) And SMT Small Component R25T-100 (83.675mm,31.019mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_AXBATT_i (Bounding Region = (150.876mm, 92.837mm, 183.642mm, 101.727mm) (InComponentClass('bidirectional_switch_neg_AXBATT_i'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_AXBATT_i (Bounding Region = (150.876mm, 92.837mm, 183.642mm, 101.727mm) (InComponentClass('bidirectional_switch_neg_AXBATT_i')) And SMT Small Component R25A-100 (167.6mm,92.725mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_neg_DCDC_o'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_neg_DCDC_o')) And SMT Small Component R25D-100 (106.45mm,110.5mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_AXBATT_o (Bounding Region = (150.876mm, 102.219mm, 183.642mm, 111.109mm) (InComponentClass('bidirectional_switch_neg_AXBATT_o'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_AXBATT_o (Bounding Region = (150.876mm, 102.219mm, 183.642mm, 111.109mm) (InComponentClass('bidirectional_switch_neg_AXBATT_o')) And SMT Small Component R25B-100 (167.6mm,102.2mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room driver_isolated_opto_neg_N4 (Bounding Region = (145.415mm, 65.631mm, 165.354mm, 71.981mm) (InComponentClass('driver_isolated_opto_neg_N4'))
 Rule Violations :0
@@ -176,35 +169,28 @@ Processing Rule : Room opto_off7 (Bounding Region = (121.158mm, 34.925mm, 141.09
 Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N8 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_pos_N8'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N8 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_pos_N8')) And SMT Small Component R25S-100 (65.327mm,35.05mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N7 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_neg_N7'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N7 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_neg_N7')) And SMT Small Component R25G-100 (65.608mm,55.1mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N6 (Bounding Region = (48.895mm, 64.414mm, 81.661mm, 73.304mm) (InComponentClass('bidirectional_switch_neg_N6'))
 Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N5 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_neg_N5'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N5 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_neg_N5')) And SMT Small Component R25E-100 (65.608mm,74.332mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N4 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_neg_N4'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N4 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_neg_N4')) And SMT Small Component R26C-100 (65.5mm,84.05mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N8 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_neg_N8'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N8 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_neg_N8')) And SMT Small Component R25H-100 (65.608mm,45.5mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N9 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_neg_N9'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N9 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_neg_N9')) And SMT Small Component R25I-100 (61.5mm,44.175mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_neg_N10 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_neg_N10'))
-   Violation between Room Definition: Between Room bidirectional_switch_neg_N10 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_neg_N10')) And SMT Small Component R25J-100 (65.608mm,34.575mm) on Bottom Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room main2020 (Bounding Region = (642.239mm, 64.262mm, 796.925mm, 120.65mm) (Disabled)(InComponentClass('main2020'))
 Rule Violations :0
@@ -225,56 +211,142 @@ Processing Rule : Room U_DCDC (Bounding Region = (642.239mm, 132.08mm, 701.802mm
 Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N1 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_pos_N1'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N1 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_pos_N1')) And SMT Small Component R26D-100 (67.207mm,102.75mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N4 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_pos_N4'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N4 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_pos_N4')) And SMT Small Component R25O-100 (65.225mm,73.875mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_pos_DCDC_o'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_pos_DCDC_o')) And SMT Small Component R25N-100 (108.351mm,101.85mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_DCDC_i (Bounding Region = (91.918mm, 93.121mm, 124.684mm, 102.011mm) (InComponentClass('bidirectional_switch_pos_DCDC_i'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_DCDC_i (Bounding Region = (91.918mm, 93.121mm, 124.684mm, 102.011mm) (InComponentClass('bidirectional_switch_pos_DCDC_i')) And SMT Small Component R25M-100 (108.351mm,93.125mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N7 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_pos_N7'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N7 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_pos_N7')) And SMT Small Component R25R-100 (65.327mm,44.85mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N6 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_pos_N6'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N6 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_pos_N6')) And SMT Small Component R25Q-100 (65.327mm,54.65mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N5 (Bounding Region = (48.895mm, 64.414mm, 81.661mm, 73.304mm) (InComponentClass('bidirectional_switch_pos_N5'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N5 (Bounding Region = (48.895mm, 64.414mm, 81.661mm, 73.304mm) (InComponentClass('bidirectional_switch_pos_N5')) And SMT Small Component R25P-100 (65.225mm,64.225mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_AXBATT_i (Bounding Region = (151.003mm, 92.964mm, 183.769mm, 101.854mm) (InComponentClass('bidirectional_switch_pos_AXBATT_i'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_AXBATT_i (Bounding Region = (151.003mm, 92.964mm, 183.769mm, 101.854mm) (InComponentClass('bidirectional_switch_pos_AXBATT_i')) And SMT Small Component R25K-100 (167.435mm,92.65mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N3 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_pos_N3'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_N3 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_pos_N3')) And SMT Small Component R26F-100 (65.225mm,83.875mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_N2 (Bounding Region = (48.895mm, 93.305mm, 81.607mm, 102.016mm) (InComponentClass('bidirectional_switch_pos_N2'))
 Rule Violations :0
 
 Processing Rule : Room bidirectional_switch_pos_AXBATT_o (Bounding Region = (150.876mm, 101.974mm, 183.642mm, 110.864mm) (InComponentClass('bidirectional_switch_pos_AXBATT_o'))
-   Violation between Room Definition: Between Room bidirectional_switch_pos_AXBATT_o (Bounding Region = (150.876mm, 101.974mm, 183.642mm, 110.864mm) (InComponentClass('bidirectional_switch_pos_AXBATT_o')) And SMT Small Component R25L-100 (167.308mm,110.125mm) on Top Layer 
-Rule Violations :1
+Rule Violations :0
 
 Processing Rule : Height Constraint (Min=0mm) (Max=25.4mm) (Prefered=12.7mm) (All)
 Rule Violations :0
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_DCDC_i (Bounding Region = (91.904mm, 92.648mm, 124.67mm, 101.538mm) (InComponentClass('bidirectional_switch_neg_DCDC_i'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_DCDC_i (Bounding Region = (91.904mm, 92.648mm, 124.67mm, 101.538mm) (InComponentClass('bidirectional_switch_neg_DCDC_i')) And SMT Small Component R25C-100 (108.617mm,93.245mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N3 (Bounding Region = (48.895mm, 93.305mm, 81.607mm, 102.016mm) (InComponentClass('bidirectional_switch_neg_N3'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N3 (Bounding Region = (48.895mm, 93.305mm, 81.607mm, 102.016mm) (InComponentClass('bidirectional_switch_neg_N3')) And SMT Small Component R26B-100 (65.327mm,93.3mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N2 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_neg_N2'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N2 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_neg_N2')) And SMT Small Component R26A-100 (65.175mm,103.575mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N9 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_pos_N9'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N9 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_pos_N9')) And SMT Small Component R25T-100 (83.675mm,31.019mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_AXBATT_i (Bounding Region = (150.876mm, 92.837mm, 183.642mm, 101.727mm) (InComponentClass('bidirectional_switch_neg_AXBATT_i'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_AXBATT_i (Bounding Region = (150.876mm, 92.837mm, 183.642mm, 101.727mm) (InComponentClass('bidirectional_switch_neg_AXBATT_i')) And SMT Small Component R25A-100 (167.6mm,92.725mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_neg_DCDC_o'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_neg_DCDC_o')) And SMT Small Component R25D-100 (106.45mm,110.5mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_AXBATT_o (Bounding Region = (150.876mm, 102.219mm, 183.642mm, 111.109mm) (InComponentClass('bidirectional_switch_neg_AXBATT_o'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_AXBATT_o (Bounding Region = (150.876mm, 102.219mm, 183.642mm, 111.109mm) (InComponentClass('bidirectional_switch_neg_AXBATT_o')) And SMT Small Component R25B-100 (167.6mm,102.2mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N8 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_pos_N8'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N8 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_pos_N8')) And SMT Small Component R25S-100 (65.327mm,35.05mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N7 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_neg_N7'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N7 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_neg_N7')) And SMT Small Component R25G-100 (65.608mm,55.1mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N5 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_neg_N5'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N5 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_neg_N5')) And SMT Small Component R25E-100 (65.608mm,74.332mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N4 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_neg_N4'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N4 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_neg_N4')) And SMT Small Component R26C-100 (65.5mm,84.05mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N8 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_neg_N8'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N8 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_neg_N8')) And SMT Small Component R25H-100 (65.608mm,45.5mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N9 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_neg_N9'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N9 (Bounding Region = (48.895mm, 35.344mm, 81.661mm, 44.234mm) (InComponentClass('bidirectional_switch_neg_N9')) And SMT Small Component R25I-100 (61.5mm,44.175mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_neg_N10 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_neg_N10'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_neg_N10 (Bounding Region = (48.895mm, 25.654mm, 81.661mm, 34.544mm) (InComponentClass('bidirectional_switch_neg_N10')) And SMT Small Component R25J-100 (65.608mm,34.575mm) on Bottom Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N1 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_pos_N1'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N1 (Bounding Region = (48.895mm, 102.816mm, 81.607mm, 111.528mm) (InComponentClass('bidirectional_switch_pos_N1')) And SMT Small Component R26D-100 (67.207mm,102.75mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N4 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_pos_N4'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N4 (Bounding Region = (48.895mm, 74.104mm, 81.661mm, 82.994mm) (InComponentClass('bidirectional_switch_pos_N4')) And SMT Small Component R25O-100 (65.225mm,73.875mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_pos_DCDC_o'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_DCDC_o (Bounding Region = (91.918mm, 102.011mm, 124.684mm, 110.901mm) (InComponentClass('bidirectional_switch_pos_DCDC_o')) And SMT Small Component R25N-100 (108.351mm,101.85mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_DCDC_i (Bounding Region = (91.918mm, 93.121mm, 124.684mm, 102.011mm) (InComponentClass('bidirectional_switch_pos_DCDC_i'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_DCDC_i (Bounding Region = (91.918mm, 93.121mm, 124.684mm, 102.011mm) (InComponentClass('bidirectional_switch_pos_DCDC_i')) And SMT Small Component R25M-100 (108.351mm,93.125mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N7 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_pos_N7'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N7 (Bounding Region = (48.895mm, 45.034mm, 81.661mm, 53.924mm) (InComponentClass('bidirectional_switch_pos_N7')) And SMT Small Component R25R-100 (65.327mm,44.85mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N6 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_pos_N6'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N6 (Bounding Region = (48.895mm, 54.724mm, 81.661mm, 63.614mm) (InComponentClass('bidirectional_switch_pos_N6')) And SMT Small Component R25Q-100 (65.327mm,54.65mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N5 (Bounding Region = (48.895mm, 64.414mm, 81.661mm, 73.304mm) (InComponentClass('bidirectional_switch_pos_N5'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N5 (Bounding Region = (48.895mm, 64.414mm, 81.661mm, 73.304mm) (InComponentClass('bidirectional_switch_pos_N5')) And SMT Small Component R25P-100 (65.225mm,64.225mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_AXBATT_i (Bounding Region = (151.003mm, 92.964mm, 183.769mm, 101.854mm) (InComponentClass('bidirectional_switch_pos_AXBATT_i'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_AXBATT_i (Bounding Region = (151.003mm, 92.964mm, 183.769mm, 101.854mm) (InComponentClass('bidirectional_switch_pos_AXBATT_i')) And SMT Small Component R25K-100 (167.435mm,92.65mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
+
+Waived Violations Of Rule : Room bidirectional_switch_pos_N3 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_pos_N3'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N3 (Bounding Region = (48.895mm, 83.794mm, 81.607mm, 92.505mm) (InComponentClass('bidirectional_switch_pos_N3')) And SMT Small Component R26F-100 (65.225mm,83.875mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
 
 Waived Violations Of Rule : Room bidirectional_switch_pos_N2 (Bounding Region = (48.895mm, 93.305mm, 81.607mm, 102.016mm) (InComponentClass('bidirectional_switch_pos_N2'))
    Waived Violation between Room Definition: Between Room bidirectional_switch_pos_N2 (Bounding Region = (48.895mm, 93.305mm, 81.607mm, 102.016mm) (InComponentClass('bidirectional_switch_pos_N2')) And SMT Small Component R26E-100 (65.225mm,93.375mm) on Top Layer Waived by  at 4/15/2024 11:47:38 PM
 Waived Violations :1
 
+Waived Violations Of Rule : Room bidirectional_switch_pos_AXBATT_o (Bounding Region = (150.876mm, 101.974mm, 183.642mm, 110.864mm) (InComponentClass('bidirectional_switch_pos_AXBATT_o'))
+   Waived Violation between Room Definition: Between Room bidirectional_switch_pos_AXBATT_o (Bounding Region = (150.876mm, 101.974mm, 183.642mm, 110.864mm) (InComponentClass('bidirectional_switch_pos_AXBATT_o')) And SMT Small Component R25L-100 (167.308mm,110.125mm) on Top Layer Waived by  at 4/15/2024 11:52:11 PM
+Waived Violations :1
 
-Violations Detected : 24
-Waived Violations : 1
+
+Violations Detected : 0
+Waived Violations : 25
 Time Elapsed        : 00:00:03
