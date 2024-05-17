@@ -113,12 +113,15 @@ soc_profile(any(isnan(soc_profile), 2), :) = [];  % Remove any row with NaN
 
 lg_time = blc_time_total;
 lg_inconsistency = max(soc) - min(soc);
+global no_ovp_plot_flag;
 
+no_ovp_plot_flag = 1;
 % summing equalization overlap value of each cell after balancing 
 for n = 1:cluster.cell_cnt
     OE = calculate_overlap(soc_profile(:, n)');
     lg_eq_overlap = lg_eq_overlap + OE;
 end
+no_ovp_plot_flag = 0;
 
 % results
 time = lg_time;

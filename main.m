@@ -21,8 +21,10 @@ blc_time_total = 0;
 ep_domain = 0.1:0.1:20;
 
 
+global no_ovp_plot_flag;
 
 [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc, mp, ep_domain);
+no_ovp_plot_flag = 1;
 [global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.7, 0);
 
 src_q_cls = zeros(50, 2);
