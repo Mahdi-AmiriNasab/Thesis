@@ -1,4 +1,4 @@
-function [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
+function [soc_profile, lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in, mp, ep_arr)
 
 coder.extrinsic('plot', 'nexttile', 'tiledlayout');
 
@@ -29,7 +29,7 @@ for ep = ep_arr
     
     
         % balancing
-        [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, 1, 2200, 2000);
+        [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, ep, 2200, 2000);
 
         % store charge profile
         soc_profile(itteration + 2, :) = soc;

@@ -199,10 +199,19 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 
 			% subtract noise value and lower neighbor value
 			value_lower_diff_s = abs(soc_out(1, source_neighbor_lower_cell) - sweep_source); 
-			% if the differential is within the valid range
+			
+            % clustering
+            [tmp_cluster] = pso_DBSCAN(soc_out, mp, ep);
+            
+            % just check the corresponding source cluster variations
+            if tmp_cluster.clt_max_count ~= cluster.clt_max_count
+                soc_mismatch = 0; % the neighbors are balanced
+                eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
+            end
+            % if the differential is within the valid range
 			if value_lower_diff_s < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
-				eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
+			% 	soc_mismatch = 0; % the neighbors are balanced
+			 	% eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
 			end
 				
 		end
@@ -211,10 +220,18 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 
 			% subtract noise value and lower neighbor value
 			value_higher_diff_s = abs(soc_out(1, source_neighbor_upper_cell) - sweep_source); 
-			% if the differential is within the valid range
+            
+            % clustering
+            [tmp_cluster] = pso_DBSCAN(soc_out, mp, ep);
+            % just check the corresponding source cluster variations
+            if tmp_cluster.clt_max_count ~= cluster.clt_max_count
+                soc_mismatch = 0; % the neighbors are balanced
+    			eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
+            end
+            % if the differential is within the valid range
 			if value_higher_diff_s < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
-				eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
+				% soc_mismatch = 0; % the neighbors are balanced
+				% eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
 			end
 		end
 
@@ -226,10 +243,17 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 
 			% subtract noise value and lower neighbor value
 			value_lower_diff_d = abs(soc_out(1, destination_neighbor_lower_cell) - sweep_destination); 
-			% if the differential is within the valid range
-			if value_lower_diff_d < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
+			% clustering
+            [tmp_cluster] = pso_DBSCAN(soc_out, mp, ep);
+            % just check the corresponding destination cluster variations
+            if tmp_cluster.clt_max_count ~= cluster.clt_max_count
+                soc_mismatch = 0; % the neighbors are balanced
 				eq_step.destination_target_soc_av = sweep_destination;	% store the target soc of neighbors
+        	end
+            % if the differential is within the valid range
+			if value_lower_diff_d < blc_range 
+				% soc_mismatch = 0; % the neighbors are balanced
+				% eq_step.destination_target_soc_av = sweep_destination;	% store the target soc of neighbors
 			end
 				
 		end
@@ -238,10 +262,17 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 
 			% subtract noise value and lower neighbor value
 			value_higher_diff_d = abs(soc_out(1, destination_neighbor_upper_cell) - sweep_destination); 
-			% if the differential is within the valid range
-			if value_higher_diff_d < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
+			% clustering
+            [tmp_cluster] = pso_DBSCAN(soc_out, mp, ep);
+            % just check the corresponding destination cluster variations
+            if tmp_cluster.clt_max_count ~= cluster.clt_max_count
+                soc_mismatch = 0; % the neighbors are balanced
 				eq_step.destination_target_soc_av = sweep_destination; % store the target soc of neighbors	
+            end
+            % if the differential is within the valid range
+			if value_higher_diff_d < blc_range 
+				% soc_mismatch = 0; % the neighbors are balanced
+				% eq_step.destination_target_soc_av = sweep_destination; % store the target soc of neighbors	
 			end
 		end
 
