@@ -21,10 +21,10 @@ function plot_final(soc_in, mp, best_ep)
     
     
         % balancing
-        [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, 1, 2200, 2000);
+        [~, soc, ~] = balance_soc(cluster, soc, mp, ep, 2200, 2000);
 
         % store charge profile
-        soc_profile(itteration + 2, :) = soc;
+        % soc_profile(itteration + 2, :) = soc;
         
         % clustering
         [cluster] = pso_DBSCAN(soc, mp, ep);

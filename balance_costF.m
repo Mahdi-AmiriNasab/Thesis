@@ -80,7 +80,7 @@ while cluster.clt_max_count > 1
 
 
     % balancing
-    [soc_transfered, soc, blc_time, eq_step(itteration + 1)] = balance_soc(cluster, soc, mp, ep, 1, 2200, 2000);
+    [soc_transfered, soc, blc_time, eq_step(itteration + 1)] = balance_soc(cluster, soc, mp, ep, 2200, 2000);
 
     % store charge profile
     soc_profile(itteration + 2, :) = soc;

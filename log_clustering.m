@@ -31,7 +31,7 @@ for ep = ep_arr
     
     
         % balancing
-        [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, ep, 2200, 2000);
+        [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, 2200, 2000);
 
         % store charge profile
         soc_profile(itteration + 2, :) = soc;
