@@ -115,7 +115,7 @@ lg_time = blc_time_total;
 lg_inconsistency = max(soc) - min(soc);
 global no_ovp_plot_flag;
 
-no_ovp_plot_flag = 1;
+no_ovp_plot_flag = 0;
 % summing equalization overlap value of each cell after balancing 
 for n = 1:cluster.cell_cnt
     OE = calculate_overlap(soc_profile(:, n)');
@@ -133,7 +133,7 @@ eq_overlap = lg_eq_overlap;
 % calculating maximum time just once
 if isempty(max_t_res)
     ep = 0.1;
-    [max_t_res, ~, ~] = log_clustering(soc_in, mp, ep);
+    [max_t_res, ~, ~, ~] = log_clustering(soc_in, mp, ep);
 end
 
 lg_time = lg_time / max_t_res;
