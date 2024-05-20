@@ -6,7 +6,7 @@ close all
 cell_count = 9;
 cell_cap_Ah = 2.2;
 
-soc = [70    88    10    95    52    50    48    42    76];
+soc = [39    39    20    72    81    92    51    19    60]; % good one
 %soc = fix(rand (1, cell_count) * 100);
 soc_init = soc;
 
