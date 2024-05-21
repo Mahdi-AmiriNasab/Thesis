@@ -71,7 +71,7 @@ for ep = ep_arr
     global no_ovp_plot_flag;
     % summing equalization overlap value of each cell after balancing 
     for n = 1:cluster.cell_cnt
-        no_ovp_plot_flag = 1;
+        no_ovp_plot_flag = 0;
         OE = calculate_overlap(soc_profile(:, n)');
         lg_eq_overlap(ep_i) = lg_eq_overlap(ep_i) + OE;
     end
