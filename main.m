@@ -25,7 +25,7 @@ global no_ovp_plot_flag;
 
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
-[global_best, eq_step, stio] = pso(soc, 2, 0.4, 0.7, 0);
+[global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.8, 0);
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);
@@ -35,3 +35,11 @@ dst_trg_soc_av = zeros(50, 1);
 % plot the final result obtained using PSO
 [eq_step] = plot_final(soc_init, mp, global_best.position);
 
+%% preparing output steps for for matlab simulink file
+for n = 1:length(eq_step)
+    src_q_cls(n, :) = eq_step(n).source_queue_cells;
+    dst_q_cls(n, :) = eq_step(n).destination_queue_cells;
+    src_trg_soc_av(n, 1) = eq_step(n).source_target_soc_av;
+    dst_trg_soc_av(n, 1) = eq_step(n).destination_target_soc_av;
+
+end
