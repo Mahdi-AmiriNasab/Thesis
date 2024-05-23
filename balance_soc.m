@@ -282,7 +282,7 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
         end
 
         blc_time = (soc_transfered/100 * capacity) / blc_current;
-
+        blc_time = blc_time * 2;
         if sweep_destination > 100 || sweep_destination < 0 ...
             || sweep_source > 100 || sweep_source < 0
            error("soc sweep limit exceed");
