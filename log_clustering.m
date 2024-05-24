@@ -96,7 +96,7 @@ nexttile;
 plot(ep_arr', lg_time);
 title('equalization time')
 xlabel('eps')
-ylabel('time(h)')
+ylabel('time(S)')
 
 nexttile;
 plot(ep_arr', lg_eq_overlap);

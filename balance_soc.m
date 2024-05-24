@@ -278,11 +278,11 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
         if(soc_transfered_s ~= soc_transfered_d)
             error("soc transfer mismatch");
         else
-            soc_transfered =  soc_transfered_s;
-        end
-
-        blc_time = (soc_transfered/100 * capacity) / blc_current;
-        blc_time = blc_time * 2;
+			soc_transfered =  soc_transfered_s;
+			soc_diff_s = soc_transfered_s / source_clt_cnt; % single cell soc transfer
+			soc_diff_d = soc_transfered_d / destination_clt_cnt; % single cell  soc transfer
+		end
+				
         if sweep_destination > 100 || sweep_destination < 0 ...
             || sweep_source > 100 || sweep_source < 0
            error("soc sweep limit exceed");
@@ -292,5 +292,30 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
             clear dec inc
         end
 	end
+
+		%% calculate balancing time
+		source_batt_number = source_clt_cnt;
+		destination_batt_number = destination_clt_cnt;
+        
+	
+		
+		% calculate balancing current
+		if (source_batt_number > destination_batt_number)
+			blc_current_actual = ((destination_batt_number / source_batt_number)/3 + 1/6) * blc_current;
+            cap_diff = soc_diff_s / 100 * capacity; % calculate transfered capacity for source
+		elseif source_batt_number < destination_batt_number
+            cap_diff = soc_diff_d / 100 * capacity; % calculate transfered capacity for source
+			blc_current_actual = ((source_batt_number / destination_batt_number)/3 + 1/6) * blc_current;
+		else
+			blc_current_actual = ((1)/3 + 1/6) * blc_current;
+             cap_diff = soc_diff_s / 100 * capacity; % calculate transfered capacity for source
+		end
+
+		% calculate the final balancing time (hour)
+		blc_time = cap_diff / blc_current_actual;
+
+		% convert to seconds
+		blc_time = blc_time * 60 * 60;
+
 
 end
