@@ -6,11 +6,11 @@ close all
 cell_count = 9;
 cell_cap_Ah = 2.2;
 
-soc = [39    39    20    72    81    92    51    11    60]; % good one
+%soc = [39    39    20    72    81    92    51    11    60]; % good one
 
-soc = [1    10    20    30    40    50    50    50    50]; % test
+%soc = [1    10    20    30    40    50    50    50    50]; % test
 
-%soc = fix(rand (1, cell_count) * 100);
+soc = fix(rand (1, cell_count) * 100);
 
 if any(soc == 0)
     error("soc equal to 0 is not supproted")
