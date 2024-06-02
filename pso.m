@@ -51,7 +51,7 @@ for i=1:npop
     [particle(i).cost, eq_step, stio.soc, stio.time, stio.inconsistency, stio.eq_overlap] = costfunction(particle(i).position);
 
     %update the personal best
-    particle(i).best.position = particle(i).position;
+    particle(i).best.position = round(particle(i).position, 1);
     particle(i).best.cost = particle(i).cost;
 
     %update global best
@@ -74,6 +74,7 @@ for it=1:maxit
 
         % update position
         particle(i).position = particle(i).position + particle(i).velocity;
+        particle(i).position = round(particle(i).position, 1);
         
         % limitation
         particle(i).position = max(particle(i).position, varmin);
@@ -87,7 +88,7 @@ for it=1:maxit
         if(particle(i).cost < particle(i).best.cost)
 
             particle(i).best.cost = particle(i).cost;
-            particle(i).best.position = particle(i).position;
+            particle(i).best.position = round(particle(i).position, 1);
 
             %update global best
             if(particle(i).best.cost < global_best.cost)

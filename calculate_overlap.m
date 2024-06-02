@@ -52,7 +52,7 @@ function [equalization_overlap] = calculate_overlap(cell_values)
         
         f_ovp = figure;
         plot(cell_values)
-        xlim([1 20]);
+        xlim([1 size(cell_values, 2)]);
         ylim([0 100]);
         ylabel('% SOC');
         xlabel('step');

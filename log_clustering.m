@@ -31,7 +31,7 @@ for ep = ep_arr
     
     
         % balancing
-        [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, ep, 2200, 2000);
+        [soc_transfered, soc, blc_time] = balance_soc(cluster, soc, mp, ep, 2200, 2000);
 
         % store charge profile
         soc_profile(itteration + 2, :) = soc;
@@ -69,9 +69,9 @@ for ep = ep_arr
     lg_time(ep_i) = blc_time_total;
     lg_inconsistency(ep_i) = max(soc) - min(soc);
     global no_ovp_plot_flag;
-    no_ovp_plot_flag = 0;
     % summing equalization overlap value of each cell after balancing 
     for n = 1:cluster.cell_cnt
+        no_ovp_plot_flag = 0;
         OE = calculate_overlap(soc_profile(:, n)');
         lg_eq_overlap(ep_i) = lg_eq_overlap(ep_i) + OE;
     end
@@ -96,7 +96,7 @@ nexttile;
 plot(ep_arr', lg_time);
 title('equalization time')
 xlabel('eps')
-ylabel('time(h)')
+ylabel('time(S)')
 
 nexttile;
 plot(ep_arr', lg_eq_overlap);
