@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -59,12 +61,24 @@ void Error_Handler(void);
 /* Private defines -----------------------------------------------------------*/
 #define DCDC_RST_Pin GPIO_PIN_2
 #define DCDC_RST_GPIO_Port GPIOE
+#define CurrentSensor_AX_Pin GPIO_PIN_1
+#define CurrentSensor_AX_GPIO_Port GPIOA
+#define CurrentSensor_pack_Pin GPIO_PIN_2
+#define CurrentSensor_pack_GPIO_Port GPIOA
+#define trig_neg_2_Pin GPIO_PIN_3
+#define trig_neg_2_GPIO_Port GPIOA
 #define DAC_Voltage_Pin GPIO_PIN_4
 #define DAC_Voltage_GPIO_Port GPIOA
 #define DAC_Current_Pin GPIO_PIN_5
 #define DAC_Current_GPIO_Port GPIOA
-#define CurrentSensor_pack_Pin GPIO_PIN_0
-#define CurrentSensor_pack_GPIO_Port GPIOB
+#define trig_pos_1_Pin GPIO_PIN_6
+#define trig_pos_1_GPIO_Port GPIOA
+#define reset_ax2pack_AXBATT_i_n_Pin GPIO_PIN_7
+#define reset_ax2pack_AXBATT_i_n_GPIO_Port GPIOA
+#define trig_neg_3_Pin GPIO_PIN_4
+#define trig_neg_3_GPIO_Port GPIOC
+#define trig_pos_2_Pin GPIO_PIN_5
+#define trig_pos_2_GPIO_Port GPIOC
 #define en_pack2ax_Pin GPIO_PIN_1
 #define en_pack2ax_GPIO_Port GPIOB
 #define trig_neg_8_Pin GPIO_PIN_2
@@ -77,36 +91,56 @@ void Error_Handler(void);
 #define trig_pos_8_GPIO_Port GPIOE
 #define trig_pos_9_Pin GPIO_PIN_10
 #define trig_pos_9_GPIO_Port GPIOE
-#define trig_neg_2_Pin GPIO_PIN_11
-#define trig_neg_2_GPIO_Port GPIOE
-#define trig_neg_3_Pin GPIO_PIN_12
-#define trig_neg_3_GPIO_Port GPIOE
-#define trig_neg_4_Pin GPIO_PIN_13
-#define trig_neg_4_GPIO_Port GPIOE
-#define trig_neg_5_Pin GPIO_PIN_14
-#define trig_neg_5_GPIO_Port GPIOE
-#define trig_neg_6_Pin GPIO_PIN_15
+#define trig_pos_4_Pin GPIO_PIN_11
+#define trig_pos_4_GPIO_Port GPIOE
+#define clr_pack2ax_DCDC_o_n_Pin GPIO_PIN_12
+#define clr_pack2ax_DCDC_o_n_GPIO_Port GPIOE
+#define trig_neg_6_Pin GPIO_PIN_13
 #define trig_neg_6_GPIO_Port GPIOE
+#define trig_pos_5_Pin GPIO_PIN_14
+#define trig_pos_5_GPIO_Port GPIOE
+#define clr_ax2pack_AXBATT_i_p_Pin GPIO_PIN_15
+#define clr_ax2pack_AXBATT_i_p_GPIO_Port GPIOE
 #define trig_neg_7_Pin GPIO_PIN_10
 #define trig_neg_7_GPIO_Port GPIOB
-#define en_ax2pack_Pin GPIO_PIN_11
-#define en_ax2pack_GPIO_Port GPIOB
-#define trig_pos_1_Pin GPIO_PIN_14
-#define trig_pos_1_GPIO_Port GPIOB
-#define trig_pos_2_Pin GPIO_PIN_15
-#define trig_pos_2_GPIO_Port GPIOB
-#define trig_pos_3_Pin GPIO_PIN_8
-#define trig_pos_3_GPIO_Port GPIOD
-#define trig_pos_4_Pin GPIO_PIN_9
-#define trig_pos_4_GPIO_Port GPIOD
-#define trig_pos_5_Pin GPIO_PIN_10
-#define trig_pos_5_GPIO_Port GPIOD
-#define trig_pos_7_Pin GPIO_PIN_11
+#define trig_pos_6_Pin GPIO_PIN_14
+#define trig_pos_6_GPIO_Port GPIOB
+#define clr_pack2ax_AXBATT_o_p_Pin GPIO_PIN_15
+#define clr_pack2ax_AXBATT_o_p_GPIO_Port GPIOB
+#define trig_neg_8D8_Pin GPIO_PIN_8
+#define trig_neg_8D8_GPIO_Port GPIOD
+#define trig_pos_7_Pin GPIO_PIN_9
 #define trig_pos_7_GPIO_Port GPIOD
-#define trig_pos_6_Pin GPIO_PIN_12
-#define trig_pos_6_GPIO_Port GPIOD
-#define CAN_STB_Pin GPIO_PIN_2
+#define trig_pos_8D10_Pin GPIO_PIN_10
+#define trig_pos_8D10_GPIO_Port GPIOD
+#define trig_neg_9D11_Pin GPIO_PIN_11
+#define trig_neg_9D11_GPIO_Port GPIOD
+#define pwm_ax2pack_DCDC_o_n_Pin GPIO_PIN_12
+#define pwm_ax2pack_DCDC_o_n_GPIO_Port GPIOD
+#define pwm_pack2ax_DCDC_i_n_Pin GPIO_PIN_13
+#define pwm_pack2ax_DCDC_i_n_GPIO_Port GPIOD
+#define CAN_STB_Pin GPIO_PIN_15
 #define CAN_STB_GPIO_Port GPIOD
+#define pwm_pack2ax_DCDC_o_p_Pin GPIO_PIN_6
+#define pwm_pack2ax_DCDC_o_p_GPIO_Port GPIOC
+#define pwm_pack2ax_DCDC_i_p_Pin GPIO_PIN_7
+#define pwm_pack2ax_DCDC_i_p_GPIO_Port GPIOC
+#define pwm_pack2ax_AXBATT_o_p_Pin GPIO_PIN_8
+#define pwm_pack2ax_AXBATT_o_p_GPIO_Port GPIOC
+#define pwm_ax2pack_AXBATT_i_p_Pin GPIO_PIN_9
+#define pwm_ax2pack_AXBATT_i_p_GPIO_Port GPIOC
+#define reset_pack2ax_DCDC_o_p_Pin GPIO_PIN_8
+#define reset_pack2ax_DCDC_o_p_GPIO_Port GPIOA
+#define reset_pack2ax_DCDC_i_p_Pin GPIO_PIN_9
+#define reset_pack2ax_DCDC_i_p_GPIO_Port GPIOA
+#define trig_neg_10A10_Pin GPIO_PIN_10
+#define trig_neg_10A10_GPIO_Port GPIOA
+#define trig_pos_9A11_Pin GPIO_PIN_11
+#define trig_pos_9A11_GPIO_Port GPIOA
+#define DCDC_RST1_Pin GPIO_PIN_12
+#define DCDC_RST1_GPIO_Port GPIOA
+#define CAN_STBD2_Pin GPIO_PIN_2
+#define CAN_STBD2_GPIO_Port GPIOD
 #define LED1_Pin GPIO_PIN_3
 #define LED1_GPIO_Port GPIOD
 #define LED2_Pin GPIO_PIN_4
@@ -115,6 +149,10 @@ void Error_Handler(void);
 #define LED3_GPIO_Port GPIOD
 #define LED4_Pin GPIO_PIN_6
 #define LED4_GPIO_Port GPIOD
+#define pwm_pack2ax_AXBATT_o_n_Pin GPIO_PIN_8
+#define pwm_pack2ax_AXBATT_o_n_GPIO_Port GPIOB
+#define pwm_ax2pack_AXBATT_i_n_Pin GPIO_PIN_9
+#define pwm_ax2pack_AXBATT_i_n_GPIO_Port GPIOB
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

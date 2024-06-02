@@ -6,11 +6,11 @@ close all
 cell_count = 9;
 cell_cap_Ah = 2.2;
 
-%soc = [39    39    20    72    81    92    51    11    60]; % good one
+soc = [39    39    20    72    81    92    51    11    60]; % good one
 
 %soc = [1    10    20    30    40    50    50    50    50]; % test
 
-soc = fix(rand (1, cell_count) * 100);
+%soc = fix(rand (1, cell_count) * 100);
 
 if any(soc == 0)
     error("soc equal to 0 is not supproted")
@@ -32,7 +32,7 @@ global no_ovp_plot_flag;
 
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
-[global_best, eq_step, stio] = pso(soc, 2, 0, 1, 0);
+[global_best, eq_step, stio] = pso(soc, 2, 0, 0.7, 0.3);
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);

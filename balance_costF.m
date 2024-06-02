@@ -55,11 +55,6 @@ lg_inconsistency = 0;
 lg_eq_overlap = 0;
 persistent max_t_res; % assume eps = 0.1        
 
-% maximum possible values
-max_lg_time = 1.5;
-max_lg_inconsistency = 100;
-max_lg_eq_overlap = 300;
-
 
 % w_time = 0.8;           % weight for time
 % w_inconsistency = 0.2;  % weight for inconsitency
@@ -126,9 +121,15 @@ no_ovp_plot_flag = 0;
 % results
 time = lg_time;
 inconsistency = lg_inconsistency;
-eq_overlap = lg_eq_overlap;
 
-% normalize each component
+%% normalize each component
+
+% maximum possible values
+max_lg_inconsistency = 100;
+max_lg_eq_overlap = 50;
+if(lg_eq_overlap > max_lg_eq_overlap)
+    lg_eq_overlap = max_lg_eq_overlap;
+end
 
 % calculating maximum time just once
 if isempty(max_t_res)
@@ -140,7 +141,9 @@ lg_time = lg_time / max_t_res;
 lg_inconsistency = lg_inconsistency / max_lg_inconsistency;
 lg_eq_overlap = lg_eq_overlap / max_lg_eq_overlap;
 
-% combined cost
+eq_overlap = lg_eq_overlap;
+
+%% combined cost
 cost = w_time * lg_time + w_inconsistency * lg_inconsistency + w_eq_overlap * lg_eq_overlap;
 
 end
