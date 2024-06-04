@@ -6,11 +6,9 @@
                 "${workspaceFolder}/**",
                 "${workspaceFolder}/codegen/lib/",
                 "${workspaceFolder}/ST/balancer/Core/Inc",
-                "${workspaceFolder}/ST/balancer/MDK-ARM/../Drivers/STM32F4xx_HAL_Driver/Inc",
-                "${workspaceFolder}/ST/balancer/MDK-ARM/../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy",
-                "${workspaceFolder}/ST/balancer/MDK-ARM/../Middlewares/ST/STM32_USB_Host_Library/Core/Inc",
-                "${workspaceFolder}/ST/balancer/MDK-ARM/../Middlewares/ST/STM32_USB_Host_Library/Class/CDC/Inc",
-                "${workspaceFolder}/ST/balancer/MDK-ARM/../Drivers/CMSIS/Device/ST/STM32F4xx/Include",
+                "${workspaceFolder}/ST/balancer/Drivers/STM32h7xx_HAL_Driver/Inc",
+                "${workspaceFolder}/ST/balancer/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
+                "${workspaceFolder}/ST/balancer/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
                 "${workspaceFolder}/ST/balancer/MDK-ARM/../Drivers/CMSIS/Include",
                 "${workspaceFolder}/ST/balancer/MDK-ARM/../../../codegen/lib/pso",
                 "C:/Keil_v5/ARM/ARMCC/include"
@@ -20,10 +18,10 @@
                 "UNICODE",
                 "_UNICODE",
                 "USE_HAL_DRIVER",
-                "STM32F407xx"
+                "STM32H750xx"
             ],
             "compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
-            "cStandard": "c17",
+            "cStandard": "c99",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "windows-gcc-x64"
         }

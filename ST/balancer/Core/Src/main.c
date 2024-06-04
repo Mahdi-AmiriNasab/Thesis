@@ -6,7 +6,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2023 STMicroelectronics.
+  * Copyright (c) 2024 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -53,14 +53,18 @@ double soc[9];
 GPIO_PinState dcdc_rst1 = 0, dcdc_rst2 = 0;
 GPIO_PinState main_relay = 0;
 
-enum DCDCState 
+typedef enum 
 {
 	DCDC_Off,
 	DCDC_P2B,
 	DCDC_B2P
-}e_DCDC_status;
+}DCDCState;
 
+DCDCState e_DCDC_status;
 
+  emxArray_struct1_T_1x100 eq_step;
+  struct0_T global_best;
+  struct2_T stio;
 
 /* USER CODE END PTD */
 
@@ -115,9 +119,6 @@ void Set_DAC_Voltage(float voltage, uint32_t dac_channel);
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  emxArray_struct1_T_1x100 eq_step;
-  struct0_T global_best;
-  struct2_T stio;
 
   /* USER CODE END 1 */
 
@@ -151,28 +152,47 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  
+ 
   
   	/* Call the entry-point 'pso'. */
  
     
-    HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
-    HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
-
-	HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4);
-	uint16_t oc_pwm_ax2pack_AXBATT_i_n = 10;
+    // HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
+    // HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
 
 
 
-  
+
+
+		// set_reset_trig_pos(1, GPIO_PIN_SET);
+		// set_reset_trig_pos(2, GPIO_PIN_SET);
+		// set_reset_trig_pos(3, GPIO_PIN_SET);
+		// set_reset_trig_pos(4, GPIO_PIN_SET);
+		// set_reset_trig_pos(5, GPIO_PIN_SET);
+		// set_reset_trig_pos(6, GPIO_PIN_SET);
+		// set_reset_trig_pos(7, GPIO_PIN_SET);
+		// set_reset_trig_pos(8, GPIO_PIN_SET);
+		// set_reset_trig_pos(9, GPIO_PIN_SET);
+	
+		// set_reset_trig_neg(2,   GPIO_PIN_SET);
+		// set_reset_trig_neg(3,   GPIO_PIN_SET);
+		// set_reset_trig_neg(4,   GPIO_PIN_SET);
+		// set_reset_trig_neg(5,   GPIO_PIN_SET);
+		// set_reset_trig_neg(6,   GPIO_PIN_SET);
+		// set_reset_trig_neg(7,   GPIO_PIN_SET);
+		// set_reset_trig_neg(8,   GPIO_PIN_SET);
+		// set_reset_trig_neg(9,   GPIO_PIN_SET);
+    	// set_reset_trig_neg(10,  GPIO_PIN_SET);
+
+        set_reset_trig_DCDC(DCDC_Off);
   
 	while(1)
 	{
-		__HAL_TIM_SET_COMPARE(&htim4, TIM_CHANNEL_4, oc_pwm_ax2pack_AXBATT_i_n);
         memcpy(soc, soc_init, sizeof(soc));
         HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
 		pso(soc, 2, w_time, w_inc, 0, &global_best, eq_step.data, eq_step.size, &stio);
         HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
+        HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
 		HAL_Delay(500);
         if(main_relay == GPIO_PIN_RESET)
             e_DCDC_status = DCDC_Off;
@@ -192,7 +212,6 @@ int main(void)
 			dcdc_rst2 = 1;
 			dcdc_rst1 = 0;
 		}
-	
 
 		HAL_GPIO_WritePin(DCDC_RST_GPIO_Port, DCDC_RST_Pin, dcdc_rst1);
 		HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, !dcdc_rst1);
@@ -213,17 +232,17 @@ int main(void)
         if(vol < 0)
             vol = 0;
         
-        Set_DAC_Voltage(vol, DAC_CHANNEL_1);
-        Set_DAC_Voltage(cur, DAC_CHANNEL_2);
+        // Set_DAC_Voltage(vol, DAC_CHANNEL_1);
+        // Set_DAC_Voltage(cur, DAC_CHANNEL_2);
 		
 
 	}
 
-	
-		
-			
-			
 
+
+
+
+		
   while (1)
   {
     /* USER CODE END WHILE */
@@ -572,7 +591,7 @@ static void MX_TIM4_Init(void)
     Error_Handler();
   }
   sConfigOC.OCMode = TIM_OCMODE_PWM1;
-  sConfigOC.Pulse = 100;
+  sConfigOC.Pulse = 10;
   sConfigOC.OCPolarity = TIM_OCPOLARITY_HIGH;
   sConfigOC.OCFastMode = TIM_OCFAST_DISABLE;
   if (HAL_TIM_PWM_ConfigChannel(&htim4, &sConfigOC, TIM_CHANNEL_1) != HAL_OK)
@@ -664,41 +683,41 @@ static void MX_GPIO_Init(void)
   __HAL_RCC_GPIOD_CLK_ENABLE();
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOE, DCDC_RST_Pin|trig_neg_9_Pin|trig_neg_10_Pin|trig_pos_8_Pin
-                          |trig_pos_9_Pin|trig_pos_4_Pin|clr_pack2ax_DCDC_o_n_Pin|trig_neg_6_Pin
-                          |trig_pos_5_Pin|clr_ax2pack_AXBATT_i_p_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOE, DCDC_RST_Pin|trig_neg_4_Pin|trig_pos_3_Pin|reset_pack2ax_DCDC_i_n_Pin
+                          |trig_neg_5_Pin|trig_pos_4_Pin|reset_ax2pack_DCDC_o_n_Pin|trig_neg_6_Pin
+                          |trig_pos_5_Pin|reset_ax2pack_AXBATT_i_p_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOA, trig_neg_2_Pin|trig_pos_1_Pin|reset_ax2pack_AXBATT_i_n_Pin|reset_pack2ax_DCDC_o_p_Pin
-                          |reset_pack2ax_DCDC_i_p_Pin|trig_neg_10A10_Pin|trig_pos_9A11_Pin|DCDC_RST1_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOA, trig_neg_2_Pin|trig_pos_1_Pin|reset_ax2pack_AXBATT_i_n_Pin|reset_ax2pack_DCDC_o_p_Pin
+                          |reset_pack2ax_DCDC_i_p_Pin|trig_neg_10_Pin|trig_pos_9_Pin|DCDC_RST1_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
   HAL_GPIO_WritePin(GPIOC, trig_neg_3_Pin|trig_pos_2_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOB, en_pack2ax_Pin|trig_neg_8_Pin|trig_neg_7_Pin|trig_pos_6_Pin
-                          |clr_pack2ax_AXBATT_o_p_Pin, GPIO_PIN_RESET);
+  HAL_GPIO_WritePin(GPIOB, en_pack2ax_Pin|reset_pack2ax_AXBATT_o_n_Pin|trig_neg_7_Pin|trig_pos_6_Pin
+                          |reset_pack2ax_AXBATT_o_p_Pin, GPIO_PIN_RESET);
 
   /*Configure GPIO pin Output Level */
-  HAL_GPIO_WritePin(GPIOD, trig_neg_8D8_Pin|trig_pos_7_Pin|trig_pos_8D10_Pin|trig_neg_9D11_Pin
+  HAL_GPIO_WritePin(GPIOD, trig_neg_8_Pin|trig_pos_7_Pin|trig_pos_8_Pin|trig_neg_9_Pin
                           |CAN_STB_Pin|CAN_STBD2_Pin|LED1_Pin|LED2_Pin
                           |LED3_Pin|LED4_Pin, GPIO_PIN_RESET);
 
-  /*Configure GPIO pins : DCDC_RST_Pin trig_neg_9_Pin trig_neg_10_Pin trig_pos_8_Pin
-                           trig_pos_9_Pin trig_pos_4_Pin clr_pack2ax_DCDC_o_n_Pin trig_neg_6_Pin
-                           trig_pos_5_Pin clr_ax2pack_AXBATT_i_p_Pin */
-  GPIO_InitStruct.Pin = DCDC_RST_Pin|trig_neg_9_Pin|trig_neg_10_Pin|trig_pos_8_Pin
-                          |trig_pos_9_Pin|trig_pos_4_Pin|clr_pack2ax_DCDC_o_n_Pin|trig_neg_6_Pin
-                          |trig_pos_5_Pin|clr_ax2pack_AXBATT_i_p_Pin;
+  /*Configure GPIO pins : DCDC_RST_Pin trig_neg_4_Pin trig_pos_3_Pin reset_pack2ax_DCDC_i_n_Pin
+                           trig_neg_5_Pin trig_pos_4_Pin reset_ax2pack_DCDC_o_n_Pin trig_neg_6_Pin
+                           trig_pos_5_Pin reset_ax2pack_AXBATT_i_p_Pin */
+  GPIO_InitStruct.Pin = DCDC_RST_Pin|trig_neg_4_Pin|trig_pos_3_Pin|reset_pack2ax_DCDC_i_n_Pin
+                          |trig_neg_5_Pin|trig_pos_4_Pin|reset_ax2pack_DCDC_o_n_Pin|trig_neg_6_Pin
+                          |trig_pos_5_Pin|reset_ax2pack_AXBATT_i_p_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOE, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : trig_neg_2_Pin trig_pos_1_Pin reset_ax2pack_AXBATT_i_n_Pin reset_pack2ax_DCDC_o_p_Pin
-                           reset_pack2ax_DCDC_i_p_Pin trig_neg_10A10_Pin trig_pos_9A11_Pin DCDC_RST1_Pin */
-  GPIO_InitStruct.Pin = trig_neg_2_Pin|trig_pos_1_Pin|reset_ax2pack_AXBATT_i_n_Pin|reset_pack2ax_DCDC_o_p_Pin
-                          |reset_pack2ax_DCDC_i_p_Pin|trig_neg_10A10_Pin|trig_pos_9A11_Pin|DCDC_RST1_Pin;
+  /*Configure GPIO pins : trig_neg_2_Pin trig_pos_1_Pin reset_ax2pack_AXBATT_i_n_Pin reset_ax2pack_DCDC_o_p_Pin
+                           reset_pack2ax_DCDC_i_p_Pin trig_neg_10_Pin trig_pos_9_Pin DCDC_RST1_Pin */
+  GPIO_InitStruct.Pin = trig_neg_2_Pin|trig_pos_1_Pin|reset_ax2pack_AXBATT_i_n_Pin|reset_ax2pack_DCDC_o_p_Pin
+                          |reset_pack2ax_DCDC_i_p_Pin|trig_neg_10_Pin|trig_pos_9_Pin|DCDC_RST1_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
@@ -711,19 +730,19 @@ static void MX_GPIO_Init(void)
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOC, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : en_pack2ax_Pin trig_neg_8_Pin trig_neg_7_Pin trig_pos_6_Pin
-                           clr_pack2ax_AXBATT_o_p_Pin */
-  GPIO_InitStruct.Pin = en_pack2ax_Pin|trig_neg_8_Pin|trig_neg_7_Pin|trig_pos_6_Pin
-                          |clr_pack2ax_AXBATT_o_p_Pin;
+  /*Configure GPIO pins : en_pack2ax_Pin reset_pack2ax_AXBATT_o_n_Pin trig_neg_7_Pin trig_pos_6_Pin
+                           reset_pack2ax_AXBATT_o_p_Pin */
+  GPIO_InitStruct.Pin = en_pack2ax_Pin|reset_pack2ax_AXBATT_o_n_Pin|trig_neg_7_Pin|trig_pos_6_Pin
+                          |reset_pack2ax_AXBATT_o_p_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
-  /*Configure GPIO pins : trig_neg_8D8_Pin trig_pos_7_Pin trig_pos_8D10_Pin trig_neg_9D11_Pin
+  /*Configure GPIO pins : trig_neg_8_Pin trig_pos_7_Pin trig_pos_8_Pin trig_neg_9_Pin
                            CAN_STB_Pin CAN_STBD2_Pin LED1_Pin LED2_Pin
                            LED3_Pin LED4_Pin */
-  GPIO_InitStruct.Pin = trig_neg_8D8_Pin|trig_pos_7_Pin|trig_pos_8D10_Pin|trig_neg_9D11_Pin
+  GPIO_InitStruct.Pin = trig_neg_8_Pin|trig_pos_7_Pin|trig_pos_8_Pin|trig_neg_9_Pin
                           |CAN_STB_Pin|CAN_STBD2_Pin|LED1_Pin|LED2_Pin
                           |LED3_Pin|LED4_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
@@ -743,6 +762,192 @@ void Set_DAC_Voltage(float voltage, uint32_t dac_channel)
         voltage = 3.0f; // Assuming a 3.3V power supply
     uint32_t value = (uint32_t)((voltage / 3.0f) * 4095);
     HAL_DAC_SetValue(&hdac1, dac_channel, DAC_ALIGN_12B_R, value);
+}
+
+void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
+{
+    switch(trig_num) {
+
+        case 2:
+            HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, action);
+        break;
+
+        case 3:
+            HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, action);
+        break;
+
+        case 4:
+            HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, action);
+        break;
+
+        case 5:
+            HAL_GPIO_WritePin(trig_neg_5_GPIO_Port, trig_neg_5_Pin, action);
+        break;
+
+        case 6:
+            HAL_GPIO_WritePin(trig_neg_6_GPIO_Port, trig_neg_6_Pin, action);
+        break;
+
+        case 7:
+            HAL_GPIO_WritePin(trig_neg_7_GPIO_Port, trig_neg_7_Pin, action);
+        break;
+
+        case 8:
+            HAL_GPIO_WritePin(trig_neg_8_GPIO_Port, trig_neg_8_Pin, action);
+        break;
+
+        case 9:
+            HAL_GPIO_WritePin(trig_neg_9_GPIO_Port, trig_neg_9_Pin, action);
+        break;
+
+        case 10:
+            HAL_GPIO_WritePin(trig_neg_10_GPIO_Port, trig_neg_10_Pin, action);
+        break;
+        
+        default:
+            Error_Handler();
+        break;
+    }
+}
+
+void set_reset_trig_pos(uint8_t trig_num, GPIO_PinState action) 
+{
+    switch(trig_num) {
+
+        case 1:
+            HAL_GPIO_WritePin(trig_pos_1_GPIO_Port, trig_pos_1_Pin, action);
+        break;
+
+        case 2:
+            HAL_GPIO_WritePin(trig_pos_2_GPIO_Port, trig_pos_2_Pin, action);
+        break;
+
+        case 3:
+            HAL_GPIO_WritePin(trig_pos_3_GPIO_Port, trig_pos_3_Pin, action);
+        break;
+
+        case 4:
+            HAL_GPIO_WritePin(trig_pos_4_GPIO_Port, trig_pos_4_Pin, action);
+        break;
+
+        case 5:
+            HAL_GPIO_WritePin(trig_pos_5_GPIO_Port, trig_pos_5_Pin, action);
+        break;
+
+        case 6:
+            HAL_GPIO_WritePin(trig_pos_6_GPIO_Port, trig_pos_6_Pin, action);
+        break;
+
+        case 7:
+            HAL_GPIO_WritePin(trig_pos_7_GPIO_Port, trig_pos_7_Pin, action);
+        break;
+
+        case 8:
+            HAL_GPIO_WritePin(trig_pos_8_GPIO_Port, trig_pos_8_Pin, action);
+        break;
+
+        case 9:
+            HAL_GPIO_WritePin(trig_pos_9_GPIO_Port, trig_pos_9_Pin, action);
+        break;
+        
+        default:
+            Error_Handler();
+        break;
+    }
+}
+
+void set_reset_trig_DCDC(DCDCState state) 
+{
+    switch(state) {
+
+        case DCDC_Off:
+
+
+            // reset optos
+            HAL_GPIO_WritePin(reset_ax2pack_AXBATT_i_n_GPIO_Port, reset_ax2pack_AXBATT_i_n_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_ax2pack_AXBATT_i_p_GPIO_Port, reset_ax2pack_AXBATT_i_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_ax2pack_DCDC_o_p_GPIO_Port, reset_ax2pack_DCDC_o_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_ax2pack_DCDC_o_n_GPIO_Port, reset_ax2pack_DCDC_o_n_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_pack2ax_DCDC_i_p_GPIO_Port, reset_pack2ax_DCDC_i_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_pack2ax_DCDC_i_n_GPIO_Port, reset_pack2ax_DCDC_i_n_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_pack2ax_AXBATT_o_p_GPIO_Port, reset_pack2ax_AXBATT_o_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_pack2ax_AXBATT_o_n_GPIO_Port, reset_pack2ax_AXBATT_o_n_Pin, GPIO_PIN_SET);
+
+            // reset timers
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_4); // pwm_ax2pack_AXBATT_i_n (1)
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_n (2)
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_n (3)
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_1); // pwm_ax2pack_DCDC_o_n (4)
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1); // pwm_ax2pack_AXBATT_i_p (5)
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_p (6)
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_p (7)
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_4); // pwm_ax2pack_DCDC_o_p (8)
+
+        break;
+
+        case DCDC_P2B:
+
+            // set timers
+            HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_n (3)
+            HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_n (2)
+            
+            HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_p (7)
+            HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_p (6)
+
+            // set optos
+            HAL_GPIO_WritePin(reset_ax2pack_AXBATT_i_n_GPIO_Port, reset_ax2pack_AXBATT_i_n_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_ax2pack_AXBATT_i_p_GPIO_Port, reset_ax2pack_AXBATT_i_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_ax2pack_DCDC_o_p_GPIO_Port, reset_ax2pack_DCDC_o_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_ax2pack_DCDC_o_n_GPIO_Port, reset_ax2pack_DCDC_o_n_Pin, GPIO_PIN_SET);
+
+            // reset optos
+            HAL_GPIO_WritePin(reset_pack2ax_DCDC_i_p_GPIO_Port, reset_pack2ax_DCDC_i_p_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(reset_pack2ax_DCDC_i_n_GPIO_Port, reset_pack2ax_DCDC_i_n_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(reset_pack2ax_AXBATT_o_p_GPIO_Port, reset_pack2ax_AXBATT_o_p_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(reset_pack2ax_AXBATT_o_n_GPIO_Port, reset_pack2ax_AXBATT_o_n_Pin, GPIO_PIN_RESET);
+
+            // reset timers
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_1); // pwm_ax2pack_DCDC_o_n (4)
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_4); // pwm_ax2pack_AXBATT_i_n (1)
+
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1); // pwm_ax2pack_AXBATT_i_p (5)
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_4); // pwm_ax2pack_DCDC_o_p (8)
+        break;
+
+        case DCDC_B2P:
+
+            // set timers
+            HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1); // pwm_ax2pack_DCDC_o_n (4)
+            HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4); // pwm_ax2pack_AXBATT_i_n (1)
+
+            HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // pwm_ax2pack_AXBATT_i_p (5)
+            HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4); // pwm_ax2pack_DCDC_o_p (8)
+
+            // set optos
+            HAL_GPIO_WritePin(reset_pack2ax_DCDC_i_p_GPIO_Port, reset_pack2ax_DCDC_i_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_pack2ax_DCDC_i_n_GPIO_Port, reset_pack2ax_DCDC_i_n_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_pack2ax_AXBATT_o_p_GPIO_Port, reset_pack2ax_AXBATT_o_p_Pin, GPIO_PIN_SET);
+            HAL_GPIO_WritePin(reset_pack2ax_AXBATT_o_n_GPIO_Port, reset_pack2ax_AXBATT_o_n_Pin, GPIO_PIN_SET);
+
+            // reset optos
+            HAL_GPIO_WritePin(reset_ax2pack_AXBATT_i_n_GPIO_Port, reset_ax2pack_AXBATT_i_n_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(reset_ax2pack_AXBATT_i_p_GPIO_Port, reset_ax2pack_AXBATT_i_p_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(reset_ax2pack_DCDC_o_p_GPIO_Port, reset_ax2pack_DCDC_o_p_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(reset_ax2pack_DCDC_o_n_GPIO_Port, reset_ax2pack_DCDC_o_n_Pin, GPIO_PIN_RESET);
+
+            // reset timers
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_n (3)
+            HAL_TIM_PWM_Stop(&htim4, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_n (2)
+            
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_p (7)
+            HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_p (6)
+
+        break;
+
+        default:
+            Error_Handler();
+        break;
+    }
 }
 
 /* USER CODE END 4 */
