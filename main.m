@@ -33,141 +33,14 @@ global no_ovp_plot_flag;
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
 %[global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.4, 0.3); % run 1
-[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.8, 0.1); % run 2
-
-
-
-
-
-
-
-Sure, let's generate all possible combinations where each weight is intensified individually and in pairs while keeping the sum equal to 1. We'll use weights with larger variations, ensuring all possible combinations are covered. Here are the combinations:
-
-Intensifying Each Weight Individually:
-(
-0.8
-,
-0.1
-,
-0.1
-)
-(0.8,0.1,0.1) - Intensifying the first weight.
-(
-0.1
-,
-0.8
-,
-0.1
-)
-(0.1,0.8,0.1) - Intensifying the second weight.
-(
-0.1
-,
-0.1
-,
-0.8
-)
-(0.1,0.1,0.8) - Intensifying the third weight.
-Intensifying Two Weights Together:
-(
-0.7
-,
-0.2
-,
-0.1
-)
-(0.7,0.2,0.1) - Intensifying the first and second weights.
-(
-0.7
-,
-0.1
-,
-0.2
-)
-(0.7,0.1,0.2) - Intensifying the first and third weights.
-(
-0.2
-,
-0.7
-,
-0.1
-)
-(0.2,0.7,0.1) - Intensifying the second and third weights.
-(
-0.2
-,
-0.1
-,
-0.7
-)
-(0.2,0.1,0.7) - Intensifying the first and third weights in reverse.
-(
-0.1
-,
-0.7
-,
-0.2
-)
-(0.1,0.7,0.2) - Intensifying the second and third weights in reverse.
-(
-0.1
-,
-0.2
-,
-0.7
-)
-(0.1,0.2,0.7) - Intensifying the first and second weights in reverse.
-Mixed Intensifications:
-(
-0.6
-,
-0.3
-,
-0.1
-)
-(0.6,0.3,0.1) - Moderate intensification of the first two weights.
-(
-0.6
-,
-0.1
-,
-0.3
-)
-(0.6,0.1,0.3) - Moderate intensification of the first and third weights.
-(
-0.3
-,
-0.6
-,
-0.1
-)
-(0.3,0.6,0.1) - Moderate intensification of the second and first weights.
-(
-0.3
-,
-0.1
-,
-0.6
-)
-(0.3,0.1,0.6) - Moderate intensification of the third and first weights.
-(
-0.1
-,
-0.6
-,
-0.3
-)
-(0.1,0.6,0.3) - Moderate intensification of the third and second weights.
-(
-0.1
-,
-0.3
-,
-0.6
-)
-(0.1,0.3,0.6) - Moderate intensification of the second and third weights.
-These 15 combinations cover a range of scenarios where weights are intensified individually and in pairs, providing a comprehensive set of test cases for your cost function.
-
+%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.8, 0.1); % run 2
+%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.1, 0.8); % run 3
+%[global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.6, 0.1); % run 4
+%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.3, 0.6); % run 5
+%[global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.1, 0.6); % run 6
+%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.2, 0.7); % run 7
+%[global_best, eq_step, stio] = pso(soc, 2, 0.4, 0.4, 0.2); % run 8
+[global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.4, 0.4); % run 9
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);
