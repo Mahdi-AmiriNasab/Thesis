@@ -338,7 +338,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;..\..\..\codegen\lib\pso</IncludePath>
+              <IncludePath>../Core/Inc;  ../Drivers/STM32H7xx_HAL_Driver/Inc;  ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;  ../Drivers/CMSIS/Include;  ..\..\..\codegen\lib\pso</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -540,9 +540,6 @@
           </Files>
         </Group>
         <Group>
-          <GroupName>::CMSIS</GroupName>
-        </Group>
-        <Group>
           <GroupName>Application/User/Core</GroupName>
           <Files>
             <File>
@@ -701,6 +698,9 @@
               <FilePath>../Core/Src/system_stm32h7xx.c</FilePath>
             </File>
           </Files>
+        </Group>
+        <Group>
+          <GroupName>::CMSIS</GroupName>
         </Group>
       </Groups>
     </Target>
