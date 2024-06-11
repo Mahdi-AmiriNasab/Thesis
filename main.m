@@ -32,15 +32,15 @@ global no_ovp_plot_flag;
 
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
-%[global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.4, 0.3); % run 1
-%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.8, 0.1); % run 2
-%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.1, 0.8); % run 3
-%[global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.6, 0.1); % run 4
-%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.3, 0.6); % run 5
-%[global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.1, 0.6); % run 6
-%[global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.2, 0.7); % run 7
-%[global_best, eq_step, stio] = pso(soc, 2, 0.4, 0.4, 0.2); % run 8
-[global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.4, 0.4); % run 9
+[global_best, eq_step, stio] = pso(soc, 2, 0.33, 0.33, 0.33); % run 1
+% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.8, 0.1); % run 2
+% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.1, 0.8); % run 3
+% [global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.6, 0.1); % run 4
+% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.3, 0.6); % run 5
+% [global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.1, 0.6); % run 6
+% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.2, 0.7); % run 7
+% [global_best, eq_step, stio] = pso(soc, 2, 0.4, 0.4, 0.2); % run 8
+% [global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.4, 0.4); % run 9
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);
