@@ -80,31 +80,59 @@ for ep = ep_arr
 end
 
 
-figure;
-tiledlayout(3 ,1);  % Create a 2x1 grid layout
+% Create a new figure
+figure('Name', 'sto');
 
+% Create a 3x1 tiled layout
+tiledlayout(3, 1);
+
+% Font and line width settings
+font_name = 'Helvetica';
+font_size = 22;
+line_width = 2.5;
+
+% First plot
 nexttile;
-plot(ep_arr', lg_inconsistency);
-title('inconsistency')
-xlabel('eps')
-ylabel('% SOC')
+yyaxis left;
+set(gca, 'YColor', 'k'); % Set y-axis ticks to black
+plot(ep_arr', lg_inconsistency, 'LineWidth', line_width);
+ylabel('% SOC', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set the color to black
+yyaxis right;
+set(gca, 'YColor', 'none'); % Hide right y-axis tick labels and line
+ylabel('(الف)', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Add label
 
+title('inconsistency', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set title color to black
+xlabel('eps', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set x-axis color to black
 
-
-
+% Second plot
 nexttile;
-plot(ep_arr', lg_time);
-title('equalization time')
-xlabel('eps')
-ylabel('time(S)')
+yyaxis left;
+set(gca, 'YColor', 'k'); % Set y-axis ticks to black
+plot(ep_arr', lg_time, 'LineWidth', line_width);
+ylabel('time(S)', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set the color to black
+yyaxis right;
+set(gca, 'YColor', 'none'); % Hide right y-axis tick labels and line
+ylabel('(ب)', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Add label
 
+title('equalization time', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set title color to black
+xlabel('eps', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set x-axis color to black
+
+% Third plot
 nexttile;
-plot(ep_arr', lg_eq_overlap);
-title('equalization overlap')
-xlabel('eps')
-ylabel('% SOC')
+yyaxis left;
+set(gca, 'YColor', 'k'); % Set y-axis ticks to black
+plot(ep_arr', lg_eq_overlap, 'LineWidth', line_width);
+ylabel('% SOC', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set the color to black
+yyaxis right;
+set(gca, 'YColor', 'none'); % Hide right y-axis tick labels and line
+ylabel('(ج)', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Add label
 
+title('equalization overlap', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set title color to black
+xlabel('eps', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set x-axis color to black
 
+% Set font properties for the entire figure (if needed)
+% set(findall(gcf, '-property', 'FontName'), 'FontName', font_name);
+% set(findall(gcf, '-property', 'FontSize'), 'FontSize', font_size);
 
 
 end

@@ -1,4 +1,3 @@
-
 %% start clustering
 
 clear 
@@ -13,10 +12,9 @@ soc = [39    39    20    72    81    92    51    11    60]; % good one
 %soc = fix(rand (1, cell_count) * 100);
 
 if any(soc == 0)
-    error("soc equal to 0 is not supproted")
+    error("soc equal to 0 is not supported")
 end
 soc_init = soc;
-
 
 mp = 2;
 ep = 1;
@@ -27,20 +25,13 @@ blc_time_total = 0;
 
 ep_domain = 0.1:0.1:20;
 
-
 global no_ovp_plot_flag;
 
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
-[global_best, eq_step, stio] = pso(soc, 2, 0.33, 0.33, 0.33); % run 1
-% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.8, 0.1); % run 2
-% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.1, 0.8); % run 3
-% [global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.6, 0.1); % run 4
-% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.3, 0.6); % run 5
-% [global_best, eq_step, stio] = pso(soc, 2, 0.3, 0.1, 0.6); % run 6
-% [global_best, eq_step, stio] = pso(soc, 2, 0.1, 0.2, 0.7); % run 7
-% [global_best, eq_step, stio] = pso(soc, 2, 0.4, 0.4, 0.2); % run 8
-% [global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.4, 0.4); % run 9
+
+run_number = 10; % select the run number you want to execute
+[global_best, eq_step, stio] = run_selected_pso(soc, run_number);
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);
@@ -50,11 +41,27 @@ dst_trg_soc_av = zeros(50, 1);
 % plot the final result obtained using PSO
 [eq_step] = plot_final(soc_init, mp, global_best.position);
 
+% Save all open figures in the dedicated folder for the current run
+folder_name = sprintf('run%d', run_number);
+if ~exist(folder_name, 'dir')
+    mkdir(folder_name);
+end
+figHandles = findall(0, 'Type', 'figure');
+for i = 1:length(figHandles)
+    fig = figHandles(i);
+    set(fig, 'Units', 'normalized', 'OuterPosition', [0 0 1 1]); % Maximize the figure
+    fig_name = get(fig, 'Name'); % Get the name of the figure
+    if isempty(fig_name)
+        fig_name = sprintf('figure%d', i); % Default name if no name is set
+    end
+    saveas(fig, fullfile(folder_name, [fig_name, '.fig']));
+    saveas(fig, fullfile(folder_name, [fig_name, '.png'])); % Save as PNG for easier viewing
+end
+
 %% preparing output steps for for matlab simulink file
 for n = 1:length(eq_step)
     src_q_cls(n, :) = eq_step(n).source_queue_cells;
     dst_q_cls(n, :) = eq_step(n).destination_queue_cells;
     src_trg_soc_av(n, 1) = eq_step(n).source_target_soc_av;
     dst_trg_soc_av(n, 1) = eq_step(n).destination_target_soc_av;
-
 end
