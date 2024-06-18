@@ -59,8 +59,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define DCDC_RST_Pin GPIO_PIN_2
-#define DCDC_RST_GPIO_Port GPIOE
 #define CurrentSensor_AX_Pin GPIO_PIN_1
 #define CurrentSensor_AX_GPIO_Port GPIOA
 #define CurrentSensor_pack_Pin GPIO_PIN_2
