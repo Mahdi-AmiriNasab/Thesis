@@ -109,11 +109,17 @@ for it=1:maxit
 
 end
 %% results
+% Font and line width settings
+font_name = 'Helvetica';
+font_size = 22;
+line_width = 2.5;
 
-figure;
-plot(best_costs);
-xlabel('iteration');
-ylabel('best cost');
+figure('Name', 'cost');
+plot(best_costs,'LineWidth', line_width);
+
+ylabel('best cost', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set the color to black
+xlabel('iteration', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set x-axis color to black
+
 
 end
 
