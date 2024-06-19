@@ -1,8 +1,8 @@
 /*
  * File: pso.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -17,6 +17,7 @@
 #include "pso_data.h"
 #include "pso_initialize.h"
 #include "pso_internal_types.h"
+#include "pso_rtwutil.h"
 #include "pso_types.h"
 #include "rand.h"
 #include "rt_nonfinite.h"
@@ -36,32 +37,25 @@ typedef struct {
 } struct_T;
 #endif /* typedef_struct_T */
 
-#ifndef typedef_emxArray_struct1_T_1x50
-#define typedef_emxArray_struct1_T_1x50
-typedef struct {
-  struct1_T data[50];
-  int size[2];
-} emxArray_struct1_T_1x50;
-#endif /* typedef_emxArray_struct1_T_1x50 */
-
 /* Function Declarations */
-static void
-cast(const double t2_source_queue_cells[2],
-     const double t2_destination_queue_cells[2], double t2_source_target_soc_av,
-     double t2_destination_target_soc_av, double t0_source_queue_cells_data[],
-     int t0_source_queue_cells_size[2],
-     double t0_destination_queue_cells_data[],
-     int t0_destination_queue_cells_size[2],
-     double t0_source_target_soc_av_data[], int *t0_source_target_soc_av_size,
-     double c_t0_destination_target_soc_av_[],
-     int *d_t0_destination_target_soc_av_);
+static int cast(const double t2_source_queue_cells[2],
+                const double t2_destination_queue_cells[2],
+                double t2_source_target_soc_av,
+                double t2_destination_target_soc_av,
+                double t0_source_queue_cells_data[],
+                int t0_source_queue_cells_size[2],
+                double t0_destination_queue_cells_data[],
+                int t0_destination_queue_cells_size[2],
+                double t0_source_target_soc_av_data[],
+                double c_t0_destination_target_soc_av_[],
+                int *d_t0_destination_target_soc_av_);
 
-static void pso_anonFcn1(const double soc_in[9], double mp, double w_time,
-                         double w_inconsistency, double w_eq_overlap, double ep,
-                         double *varargout_1, struct1_T varargout_2_data[],
-                         int varargout_2_size[2], double varargout_3[9],
-                         double *varargout_4, double *varargout_5,
-                         double *varargout_6);
+static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
+                           double w_inconsistency, double w_eq_overlap,
+                           double ep, struct1_T varargout_2_data[],
+                           int varargout_2_size[2], double varargout_3[9],
+                           double *varargout_4, double *varargout_5,
+                           double *varargout_6);
 
 /* Function Definitions */
 /*
@@ -74,22 +68,23 @@ static void pso_anonFcn1(const double soc_in[9], double mp, double w_time,
  *                double t0_destination_queue_cells_data[]
  *                int t0_destination_queue_cells_size[2]
  *                double t0_source_target_soc_av_data[]
- *                int *t0_source_target_soc_av_size
  *                double c_t0_destination_target_soc_av_[]
  *                int *d_t0_destination_target_soc_av_
- * Return Type  : void
+ * Return Type  : int
  */
-static void
-cast(const double t2_source_queue_cells[2],
-     const double t2_destination_queue_cells[2], double t2_source_target_soc_av,
-     double t2_destination_target_soc_av, double t0_source_queue_cells_data[],
-     int t0_source_queue_cells_size[2],
-     double t0_destination_queue_cells_data[],
-     int t0_destination_queue_cells_size[2],
-     double t0_source_target_soc_av_data[], int *t0_source_target_soc_av_size,
-     double c_t0_destination_target_soc_av_[],
-     int *d_t0_destination_target_soc_av_)
+static int cast(const double t2_source_queue_cells[2],
+                const double t2_destination_queue_cells[2],
+                double t2_source_target_soc_av,
+                double t2_destination_target_soc_av,
+                double t0_source_queue_cells_data[],
+                int t0_source_queue_cells_size[2],
+                double t0_destination_queue_cells_data[],
+                int t0_destination_queue_cells_size[2],
+                double t0_source_target_soc_av_data[],
+                double c_t0_destination_target_soc_av_[],
+                int *d_t0_destination_target_soc_av_)
 {
+  int t0_source_target_soc_av_size;
   t0_source_queue_cells_size[0] = 1;
   t0_source_queue_cells_size[1] = 2;
   t0_destination_queue_cells_size[0] = 1;
@@ -98,10 +93,11 @@ cast(const double t2_source_queue_cells[2],
   t0_destination_queue_cells_data[0] = t2_destination_queue_cells[0];
   t0_source_queue_cells_data[1] = t2_source_queue_cells[1];
   t0_destination_queue_cells_data[1] = t2_destination_queue_cells[1];
-  *t0_source_target_soc_av_size = 1;
+  t0_source_target_soc_av_size = 1;
   t0_source_target_soc_av_data[0] = t2_source_target_soc_av;
   *d_t0_destination_target_soc_av_ = 1;
   c_t0_destination_target_soc_av_[0] = t2_destination_target_soc_av;
+  return t0_source_target_soc_av_size;
 }
 
 /*
@@ -113,21 +109,20 @@ cast(const double t2_source_queue_cells[2],
  *                double w_inconsistency
  *                double w_eq_overlap
  *                double ep
- *                double *varargout_1
  *                struct1_T varargout_2_data[]
  *                int varargout_2_size[2]
  *                double varargout_3[9]
  *                double *varargout_4
  *                double *varargout_5
  *                double *varargout_6
- * Return Type  : void
+ * Return Type  : double
  */
-static void pso_anonFcn1(const double soc_in[9], double mp, double w_time,
-                         double w_inconsistency, double w_eq_overlap, double ep,
-                         double *varargout_1, struct1_T varargout_2_data[],
-                         int varargout_2_size[2], double varargout_3[9],
-                         double *varargout_4, double *varargout_5,
-                         double *varargout_6)
+static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
+                           double w_inconsistency, double w_eq_overlap,
+                           double ep, struct1_T varargout_2_data[],
+                           int varargout_2_size[2], double varargout_3[9],
+                           double *varargout_4, double *varargout_5,
+                           double *varargout_6)
 {
   static emxArray_struct1_T_1x50 varargout_2;
   static struct1_T rv[50];
@@ -139,52 +134,55 @@ static void pso_anonFcn1(const double soc_in[9], double mp, double w_time,
   static double c_expl_temp[18];
   static double d_expl_temp[18];
   static double expl_temp[9];
-  static double cluster_noise_max[2];
-  static double cluster_noise_min[2];
-  static double e_expl_temp[2];
-  static double t3_destination_queue_cells[2];
   static double max_t_res;
-  static int b_soc_profile_size[2];
-  static int soc_profile_size[2];
-  static signed char c_tmp_data[9];
-  static signed char d_tmp_data[9];
-  static boolean_T tmp_data[900];
-  static boolean_T b_tmp_data[100];
+  static bool tmp_data[900];
+  static bool b_tmp_data[100];
+  double cluster_noise_max[2];
+  double cluster_noise_min[2];
+  double e_expl_temp[2];
   double OE;
   double blc_time;
-  double blc_time_total;
   double cluster_clt_max_count;
   double f_expl_temp;
-  double lg_eq_overlap;
   double lg_inconsistency;
+  int b_soc_profile_size[2];
+  int soc_profile_size[2];
+  int tmp_size[2];
   int i;
   int itteration;
   int partialTrueCount;
-  boolean_T exitg1;
+  signed char c_tmp_data[9];
+  signed char d_tmp_data[9];
+  bool exitg1;
   e_noise_stat g_expl_temp;
   /* 'pso:5' @(ep) balance_costF(soc_in, mp, ep, w_time, w_inconsistency,
    * w_eq_overlap) */
-  /* 'balance_costF:3' cell_count = length(soc_in); */
-  /* 'balance_costF:5' if coder.target('MATLAB') */
-  /* 'balance_costF:28' else */
-  /* 'balance_costF:29' eq_step = struct('source_queue_cells', zeros(0,2),... */
-  /* 'balance_costF:30' 		'destination_queue_cells', zeros(0,2),...
+  /* no_ovp_plot_flag = 0; */
+  /* global no_ovp_plot_flag; */
+  /* if isempty(no_ovp_plot_flag) */
+  /* 	no_ovp_plot_flag = 0; */
+  /* end */
+  /* 'balance_costF:9' cell_count = length(soc_in); */
+  /* 'balance_costF:11' if coder.target('MATLAB') */
+  /* 'balance_costF:34' else */
+  /* 'balance_costF:35' eq_step = struct('source_queue_cells', zeros(0,2),... */
+  /* 'balance_costF:36' 		'destination_queue_cells', zeros(0,2),...
    */
-  /* 'balance_costF:31' 		'source_target_soc_av', zeros(0,1),...
+  /* 'balance_costF:37' 		'source_target_soc_av', zeros(0,1),...
    */
-  /* 'balance_costF:32' 		'destination_target_soc_av', zeros(0,1));
+  /* 'balance_costF:38' 		'destination_target_soc_av', zeros(0,1));
    */
-  /* 'balance_costF:33' max_itteration = 50; */
+  /* 'balance_costF:39' max_itteration = 50; */
   /*  or whatever the maximum value of itteration is */
   /*  Initialize eq_step as an empty structure array with max_itteration
    * elements */
-  /* 'balance_costF:36' eq_step = repmat(struct('source_queue_cells',
+  /* 'balance_costF:42' eq_step = repmat(struct('source_queue_cells',
    * zeros(0,2),... */
-  /* 'balance_costF:37' 		'destination_queue_cells', zeros(0,2),...
+  /* 'balance_costF:43' 		'destination_queue_cells', zeros(0,2),...
    */
-  /* 'balance_costF:38' 		'source_target_soc_av', zeros(0,1),...
+  /* 'balance_costF:44' 		'source_target_soc_av', zeros(0,1),...
    */
-  /* 'balance_costF:39' 		'destination_target_soc_av', zeros(0,1)), 1,
+  /* 'balance_costF:45' 		'destination_target_soc_av', zeros(0,1)), 1,
    * max_itteration); */
   rv[0].source_queue_cells.size[0] = 0;
   rv[0].source_queue_cells.size[1] = 2;
@@ -487,106 +485,104 @@ static void pso_anonFcn1(const double soc_in[9], double mp, double w_time,
   rv[49].source_target_soc_av.size[0] = 0;
   rv[49].destination_target_soc_av.size[0] = 0;
   memcpy(&varargout_2.data[0], &rv[0], 50U * sizeof(struct1_T));
-  /* 'balance_costF:41' coder.varsize('eq_step.source_queue_cells', [inf, 2],
+  /* 'balance_costF:47' coder.varsize('eq_step.source_queue_cells', [inf, 2],
    * [1, 0]); */
-  /* 'balance_costF:42' coder.varsize('eq_step.destination_queue_cells', [inf,
+  /* 'balance_costF:48' coder.varsize('eq_step.destination_queue_cells', [inf,
    * 2], [1, 0]); */
-  /* 'balance_costF:43' coder.varsize('eq_step.source_target_soc_av', [inf, 1],
+  /* 'balance_costF:49' coder.varsize('eq_step.source_target_soc_av', [inf, 1],
    * [1, 0]); */
-  /* 'balance_costF:44' coder.varsize('eq_step.destination_target_soc_av', [inf,
+  /* 'balance_costF:50' coder.varsize('eq_step.destination_target_soc_av', [inf,
    * 1], [1, 0]); */
-  /* 'balance_costF:47' coder.varsize('soc_profile', [inf, cell_count], [1, 0]);
+  /* 'balance_costF:53' coder.varsize('soc_profile', [inf, cell_count], [1, 0]);
    */
   /*  Variable rows, fixed 9 columns, 0 and 1 shows which one dimension is
    * variable */
-  /* 'balance_costF:48' soc_profile = NaN(100, cell_count); */
+  /* 'balance_costF:54' soc_profile = NaN(100, cell_count); */
   soc_profile_size[0] = 100;
   soc_profile_size[1] = 9;
   for (i = 0; i < 900; i++) {
     soc_profile_data[i] = rtNaN;
   }
-  /* 'balance_costF:53' lg_time = 0; */
-  /* 'balance_costF:54' lg_inconsistency = 0; */
-  /* 'balance_costF:55' lg_eq_overlap = 0; */
-  lg_eq_overlap = 0.0;
+  /* 'balance_costF:59' lg_time = 0; */
+  /* 'balance_costF:60' lg_inconsistency = 0; */
+  /* 'balance_costF:61' lg_eq_overlap = 0; */
+  *varargout_6 = 0.0;
   /*  assume eps = 0.1         */
-  /*  maximum possible values */
-  /* 'balance_costF:59' max_lg_time = 1.5; */
-  /* 'balance_costF:60' max_lg_inconsistency = 100; */
-  /* 'balance_costF:61' max_lg_eq_overlap = 300; */
   /*  w_time = 0.8;           % weight for time */
   /*  w_inconsistency = 0.2;  % weight for inconsitency */
   /*  w_eq_overlap = 0;     % weight for overlap equalization */
-  /* 'balance_costF:69' soc = soc_in; */
-  /* 'balance_costF:70' itteration = 0; */
+  /* 'balance_costF:70' soc = soc_in; */
+  /* 'balance_costF:71' itteration = 0; */
   itteration = 0;
-  /* 'balance_costF:71' soc_transfered_total = 0; */
-  /* 'balance_costF:72' blc_time_total = 0; */
-  blc_time_total = 0.0;
-  /* 'balance_costF:73' soc_profile(itteration + 1, :) = soc; */
+  /* 'balance_costF:72' soc_transfered_total = 0; */
+  /* 'balance_costF:73' blc_time_total = 0; */
+  *varargout_4 = 0.0;
+  /* 'balance_costF:74' soc_profile(itteration + 1, :) = soc; */
   for (i = 0; i < 9; i++) {
     OE = soc_in[i];
     varargout_3[i] = OE;
     soc_profile_data[100 * i] = OE;
   }
   /*  clustering */
-  /* 'balance_costF:77' [cluster] = pso_DBSCAN(soc, mp, ep); */
-  pso_DBSCAN(soc_in, mp, ep, &OE, &f_expl_temp, expl_temp, cluster_clt_res_cell,
-             b_expl_temp, V, &cluster_clt_max_count, c_expl_temp, d_expl_temp,
-             cluster_noise_max, cluster_noise_min, e_expl_temp, &g_expl_temp);
-  /* 'balance_costF:79' while cluster.clt_max_count > 1 */
+  /* 'balance_costF:78' [cluster] = pso_DBSCAN(soc, mp, ep); */
+  OE = pso_DBSCAN(soc_in, mp, ep, &f_expl_temp, expl_temp, cluster_clt_res_cell,
+                  b_expl_temp, V, &cluster_clt_max_count, c_expl_temp,
+                  d_expl_temp, cluster_noise_max, cluster_noise_min,
+                  e_expl_temp, &g_expl_temp);
+  /* 'balance_costF:80' while cluster.clt_max_count > 1 */
   exitg1 = false;
   while ((!exitg1) && (cluster_clt_max_count > 1.0)) {
+    double t3_destination_queue_cells[2];
     int trueCount;
-    boolean_T b;
+    bool b;
     /*  balancing */
-    /* 'balance_costF:83' [soc_transfered, soc, blc_time, eq_step(itteration +
-     * 1)] = balance_soc(cluster, soc, mp, ep, 1, 2200, 2000); */
+    /* 'balance_costF:84' [soc_transfered, soc, blc_time, eq_step(itteration +
+     * 1)] = balance_soc(cluster, soc, mp, ep, 2200, 2000); */
     balance_soc(cluster_clt_res_cell, V, cluster_clt_max_count,
-                cluster_noise_max, cluster_noise_min, varargout_3, &OE,
+                cluster_noise_max, cluster_noise_min, varargout_3, ep,
                 &blc_time, e_expl_temp, t3_destination_queue_cells,
                 &f_expl_temp, &lg_inconsistency);
-    cast(e_expl_temp, t3_destination_queue_cells, f_expl_temp, lg_inconsistency,
-         varargout_2.data[itteration].source_queue_cells.data,
-         varargout_2.data[itteration].source_queue_cells.size,
-         varargout_2.data[itteration].destination_queue_cells.data,
-         varargout_2.data[itteration].destination_queue_cells.size,
-         varargout_2.data[itteration].source_target_soc_av.data,
-         &varargout_2.data[itteration].source_target_soc_av.size[0],
-         varargout_2.data[itteration].destination_target_soc_av.data,
-         &varargout_2.data[itteration].destination_target_soc_av.size[0]);
+    varargout_2.data[itteration].source_target_soc_av.size[0] = cast(
+        e_expl_temp, t3_destination_queue_cells, f_expl_temp, lg_inconsistency,
+        varargout_2.data[itteration].source_queue_cells.data,
+        varargout_2.data[itteration].source_queue_cells.size,
+        varargout_2.data[itteration].destination_queue_cells.data,
+        varargout_2.data[itteration].destination_queue_cells.size,
+        varargout_2.data[itteration].source_target_soc_av.data,
+        varargout_2.data[itteration].destination_target_soc_av.data,
+        &varargout_2.data[itteration].destination_target_soc_av.size[0]);
     /*  store charge profile */
-    /* 'balance_costF:86' soc_profile(itteration + 2, :) = soc; */
+    /* 'balance_costF:87' soc_profile(itteration + 2, :) = soc; */
     for (i = 0; i < 9; i++) {
       soc_profile_data[(itteration + 100 * i) + 1] = varargout_3[i];
     }
     /*  clustering */
-    /* 'balance_costF:89' [cluster] = pso_DBSCAN(soc, mp, ep); */
-    pso_DBSCAN(varargout_3, mp, ep, &OE, &f_expl_temp, expl_temp,
-               cluster_clt_res_cell, b_expl_temp, V, &cluster_clt_max_count,
-               c_expl_temp, d_expl_temp, cluster_noise_max, cluster_noise_min,
-               e_expl_temp, &g_expl_temp);
-    /* 'balance_costF:91' itteration = itteration + 1; */
+    /* 'balance_costF:90' [cluster] = pso_DBSCAN(soc, mp, ep); */
+    OE = pso_DBSCAN(
+        varargout_3, mp, ep, &f_expl_temp, expl_temp, cluster_clt_res_cell,
+        b_expl_temp, V, &cluster_clt_max_count, c_expl_temp, d_expl_temp,
+        cluster_noise_max, cluster_noise_min, e_expl_temp, &g_expl_temp);
+    /* 'balance_costF:92' itteration = itteration + 1; */
     itteration++;
     /*  sorting cluster.clt_res_soc_av  */
-    /* 'balance_costF:94' V = cluster.clt_res_soc_av; */
-    /* 'balance_costF:95' V(V(:,2)==0,2) = Inf; */
+    /* 'balance_costF:95' V = cluster.clt_res_soc_av; */
+    /* 'balance_costF:96' V(V(:,2)==0,2) = Inf; */
     trueCount = 0;
     partialTrueCount = 0;
     for (i = 0; i < 9; i++) {
       b = (V[i + 9] == 0.0);
       if (b) {
         trueCount++;
-        c_tmp_data[partialTrueCount] = (signed char)(i + 1);
+        c_tmp_data[partialTrueCount] = (signed char)i;
         partialTrueCount++;
       }
     }
     for (i = 0; i < trueCount; i++) {
-      V[c_tmp_data[i] + 8] = rtInf;
+      V[c_tmp_data[i] + 9] = rtInf;
     }
-    /* 'balance_costF:96' cluster.clt_res_soc_av = sortrows(V, 2,'ascend'); */
+    /* 'balance_costF:97' cluster.clt_res_soc_av = sortrows(V, 2,'ascend'); */
     c_sortrows(V);
-    /* 'balance_costF:97'
+    /* 'balance_costF:98'
      * cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0; */
     trueCount = 0;
     partialTrueCount = 0;
@@ -594,82 +590,94 @@ static void pso_anonFcn1(const double soc_in[9], double mp, double w_time,
       b = (V[i + 9] == rtInf);
       if (b) {
         trueCount++;
-        d_tmp_data[partialTrueCount] = (signed char)(i + 1);
+        d_tmp_data[partialTrueCount] = (signed char)i;
         partialTrueCount++;
       }
     }
     for (i = 0; i < trueCount; i++) {
-      V[d_tmp_data[i] + 8] = 0.0;
+      V[d_tmp_data[i] + 9] = 0.0;
     }
-    /* 'balance_costF:98' soc_transfered_total = soc_transfered_total +
+    /* 'balance_costF:99' soc_transfered_total = soc_transfered_total +
      * soc_transfered; */
-    /* 'balance_costF:99' blc_time_total = blc_time_total + blc_time; */
-    blc_time_total += blc_time;
-    /* 'balance_costF:101' if itteration > 20 */
+    /* 'balance_costF:100' blc_time_total = blc_time_total + blc_time; */
+    *varargout_4 += blc_time;
+    /* 'balance_costF:102' if itteration > 20 */
     if (itteration > 20) {
       /*  error("maximum itteration reached"); */
       /*  disp("maximum itteration reached"); */
       exitg1 = true;
     }
   }
-  /* 'balance_costF:108' if coder.target('MATLAB') */
-  /* 'balance_costF:112' soc_profile(any(isnan(soc_profile), 2), :) = []; */
+  /* 'balance_costF:109' if coder.target('MATLAB') */
+  /* 'balance_costF:113' soc_profile(any(isnan(soc_profile), 2), :) = []; */
+  tmp_size[0] = 100;
+  tmp_size[1] = 9;
   for (i = 0; i < 900; i++) {
     tmp_data[i] = rtIsNaN(soc_profile_data[i]);
   }
-  any(tmp_data, b_tmp_data, &partialTrueCount);
-  nullAssignment(soc_profile_data, soc_profile_size, b_tmp_data);
+  partialTrueCount = any(tmp_data, tmp_size, b_tmp_data);
+  nullAssignment(soc_profile_data, soc_profile_size, b_tmp_data,
+                 partialTrueCount);
   /*  Remove any row with NaN */
-  /* 'balance_costF:114' lg_time = blc_time_total; */
-  /* 'balance_costF:115' lg_inconsistency = max(soc) - min(soc); */
+  /* 'balance_costF:115' lg_time = blc_time_total; */
+  /* 'balance_costF:116' lg_inconsistency = max(soc) - min(soc); */
   lg_inconsistency = f_maximum(varargout_3) - e_minimum(varargout_3);
+  /* no_ovp_plot_flag = 0; */
   /*  summing equalization overlap value of each cell after balancing  */
-  /* 'balance_costF:118' for n = 1:cluster.cell_cnt */
+  /* 'balance_costF:120' for n = 1:cluster.cell_cnt */
   partialTrueCount = soc_profile_size[0];
   b_soc_profile_size[0] = 1;
-  b_soc_profile_size[1] = partialTrueCount;
+  b_soc_profile_size[1] = soc_profile_size[0];
   for (itteration = 0; itteration < 9; itteration++) {
-    /* 'balance_costF:119' OE = calculate_overlap(soc_profile(:, n)'); */
+    /* 'balance_costF:121' OE = calculate_overlap(soc_profile(:, n)'); */
     for (i = 0; i < partialTrueCount; i++) {
       b_soc_profile_data[i] =
           soc_profile_data[i + soc_profile_size[0] * itteration];
     }
     OE = calculate_overlap(b_soc_profile_data, b_soc_profile_size);
-    /* 'balance_costF:120' lg_eq_overlap = lg_eq_overlap + OE; */
-    lg_eq_overlap += OE;
+    /* 'balance_costF:122' lg_eq_overlap = lg_eq_overlap + OE; */
+    *varargout_6 += OE;
   }
+  /* no_ovp_plot_flag = 0; */
   /*  results */
-  /* 'balance_costF:124' time = lg_time; */
-  /* 'balance_costF:125' inconsistency = lg_inconsistency; */
+  /* 'balance_costF:127' time = lg_time; */
+  /* 'balance_costF:128' inconsistency = lg_inconsistency; */
   *varargout_5 = lg_inconsistency;
-  /* 'balance_costF:126' eq_overlap = lg_eq_overlap; */
-  *varargout_6 = lg_eq_overlap;
   /*  normalize each component */
+  /*  maximum possible values */
+  /* 'balance_costF:133' max_lg_inconsistency = 100; */
+  /* 'balance_costF:134' max_lg_eq_overlap = 50; */
+  /* 'balance_costF:135' if(lg_eq_overlap > max_lg_eq_overlap) */
+  if (*varargout_6 > 50.0) {
+    /* 'balance_costF:136' lg_eq_overlap = max_lg_eq_overlap; */
+    *varargout_6 = 50.0;
+  }
   /*  calculating maximum time just once */
-  /* 'balance_costF:131' if isempty(max_t_res) */
+  /* 'balance_costF:140' if isempty(max_t_res) */
   if (!max_t_res_not_empty) {
-    /* 'balance_costF:132' ep = 0.1; */
-    /* 'balance_costF:133' [max_t_res, ~, ~] = log_clustering(soc_in, mp, ep);
-     */
-    log_clustering(soc_in, mp, &max_t_res, &OE, &f_expl_temp);
+    /* 'balance_costF:141' ep = 0.1; */
+    /* 'balance_costF:142' [max_t_res, ~, ~, ~] = log_clustering(soc_in, mp,
+     * ep); */
+    max_t_res = log_clustering(soc_in, mp, &OE, &f_expl_temp, soc_profile_data,
+                               soc_profile_size);
     max_t_res_not_empty = true;
   }
-  /* 'balance_costF:136' lg_time = lg_time / max_t_res; */
-  /* 'balance_costF:137' lg_inconsistency = lg_inconsistency /
+  /* 'balance_costF:145' lg_time = lg_time / max_t_res; */
+  /* 'balance_costF:146' lg_inconsistency = lg_inconsistency /
    * max_lg_inconsistency; */
   lg_inconsistency /= 100.0;
-  /* 'balance_costF:138' lg_eq_overlap = lg_eq_overlap / max_lg_eq_overlap; */
-  lg_eq_overlap /= 300.0;
+  /* 'balance_costF:147' lg_eq_overlap = lg_eq_overlap / max_lg_eq_overlap; */
+  *varargout_6 /= 50.0;
+  /* 'balance_costF:149' eq_overlap = lg_eq_overlap; */
   /*  combined cost */
-  /* 'balance_costF:141' cost = w_time * lg_time + w_inconsistency *
+  /* 'balance_costF:152' cost = w_time * lg_time + w_inconsistency *
    * lg_inconsistency + w_eq_overlap * lg_eq_overlap; */
-  *varargout_1 = (w_time * (blc_time_total / max_t_res) +
-                  w_inconsistency * lg_inconsistency) +
-                 w_eq_overlap * lg_eq_overlap;
   varargout_2_size[0] = 1;
   varargout_2_size[1] = 50;
   memcpy(&varargout_2_data[0], &varargout_2.data[0], 50U * sizeof(struct1_T));
-  *varargout_4 = blc_time_total;
+  return (w_time * (*varargout_4 / max_t_res) +
+          w_inconsistency * lg_inconsistency) +
+         w_eq_overlap * *varargout_6;
 }
 
 /*
@@ -768,34 +776,35 @@ void pso(const double soc_in[9], double mp, double w_time,
     /* 'pso:51' [particle(i).cost, eq_step, stio.soc, stio.time,
      * stio.inconsistency, stio.eq_overlap] =
      * costfunction(particle(i).position); */
-    pso_anonFcn1(soc_in, mp, w_time, w_inconsistency, w_eq_overlap,
-                 particle[i].position, &particle[i].cost, eq_step_data,
-                 eq_step_size, stio->soc, &stio->time, &stio->inconsistency,
-                 &stio->eq_overlap);
+    particle[i].cost = pso_anonFcn1(
+        soc_in, mp, w_time, w_inconsistency, w_eq_overlap, particle[i].position,
+        eq_step_data, eq_step_size, stio->soc, &stio->time,
+        &stio->inconsistency, &stio->eq_overlap);
     /* update the personal best */
-    /* 'pso:54' particle(i).best.position = particle(i).position; */
-    particle[i].best.position = particle[i].position;
-    /* 'pso:55' particle(i).best.cost = particle(i).cost; */
+    /* 'pso:56' if coder.target('MATLAB') */
+    /* 'pso:58' else */
+    /* 'pso:59' round(particle(i).position * 10) / 10; */
+    /* 'pso:62' particle(i).best.cost = particle(i).cost; */
     particle[i].best.cost = particle[i].cost;
     /* update global best */
-    /* 'pso:58' if(particle(i).best.cost < global_best.cost) */
+    /* 'pso:64' if(particle(i).best.cost < global_best.cost) */
     if (particle[i].best.cost < global_best->cost) {
-      /* 'pso:59' global_best = particle(i).best; */
+      /* 'pso:65' global_best = particle(i).best; */
       *global_best = particle[i].best;
     }
   }
   /*  array to hold best costs */
-  /* 'pso:64' best_costs = zeros(maxit, 1); */
+  /* 'pso:70' best_costs = zeros(maxit, 1); */
   /*  main loop of PSO */
-  /* 'pso:67' for it=1:maxit */
+  /* 'pso:73' for it=1:maxit */
   for (it = 0; it < 20; it++) {
-    /* 'pso:68' for i=1:npop */
+    /* 'pso:74' for i=1:npop */
     for (i = 0; i < 10; i++) {
       /*  update velocity */
-      /* 'pso:71' particle(i).velocity = w*particle(i).velocity... */
-      /* 'pso:72'             + c1*rand(varsize).*(particle(i).best.position -
+      /* 'pso:77' particle(i).velocity = w*particle(i).velocity... */
+      /* 'pso:78'             + c1*rand(varsize).*(particle(i).best.position -
        * particle(i).position)... */
-      /* 'pso:73'             + c2*rand(varsize).*(global_best.position -
+      /* 'pso:79'             + c2*rand(varsize).*(global_best.position -
        * particle(i).position); */
       b_r = particle[i].position;
       particle[i].velocity =
@@ -803,48 +812,65 @@ void pso(const double soc_in[9], double mp, double w_time,
            2.0 * b_rand() * (particle[i].best.position - b_r)) +
           2.0 * b_rand() * (global_best->position - b_r);
       /*  update position */
-      /* 'pso:76' particle(i).position = particle(i).position +
+      /* 'pso:82' particle(i).position = particle(i).position +
        * particle(i).velocity; */
       particle[i].position = b_r + particle[i].velocity;
+      /* 'pso:84' if coder.target('MATLAB') */
+      /* 'pso:86' else */
+      /* 'pso:87' particle(i).position = round(particle(i).position * 10) / 10;
+       */
+      particle[i].position = rt_roundd_snf(particle[i].position * 10.0) / 10.0;
       /*  limitation */
-      /* 'pso:79' particle(i).position = max(particle(i).position, varmin); */
+      /* 'pso:90' particle(i).position = max(particle(i).position, varmin); */
       particle[i].position = fmax(particle[i].position, 0.1);
-      /* 'pso:80' particle(i).position = min(particle(i).position, varmax); */
+      /* 'pso:91' particle(i).position = min(particle(i).position, varmax); */
       particle[i].position = fmin(particle[i].position, 20.0);
       /*  evaluation */
-      /* 'pso:84' [particle(i).cost, eq_step, stio.soc, stio.time,
+      /* 'pso:95' [particle(i).cost, eq_step, stio.soc, stio.time,
        * stio.inconsistency, stio.eq_overlap] =
        * costfunction(particle(i).position); */
-      pso_anonFcn1(soc_in, mp, w_time, w_inconsistency, w_eq_overlap,
-                   particle[i].position, &particle[i].cost, eq_step_data,
-                   eq_step_size, stio->soc, &stio->time, &stio->inconsistency,
-                   &stio->eq_overlap);
+      particle[i].cost = pso_anonFcn1(
+          soc_in, mp, w_time, w_inconsistency, w_eq_overlap,
+          particle[i].position, eq_step_data, eq_step_size, stio->soc,
+          &stio->time, &stio->inconsistency, &stio->eq_overlap);
       /*  update personal best */
-      /* 'pso:87' if(particle(i).cost < particle(i).best.cost) */
+      /* 'pso:98' if(particle(i).cost < particle(i).best.cost) */
       if (particle[i].cost < particle[i].best.cost) {
-        /* 'pso:89' particle(i).best.cost = particle(i).cost; */
+        /* 'pso:100' particle(i).best.cost = particle(i).cost; */
         particle[i].best.cost = particle[i].cost;
-        /* 'pso:90' particle(i).best.position = particle(i).position; */
-        particle[i].best.position = particle[i].position;
+        /* 'pso:102' if coder.target('MATLAB') */
+        /* 'pso:104' else */
+        /* 'pso:105' particle(i).best.position = round(particle(i).position *
+         * 10) / 10; */
+        particle[i].best.position =
+            rt_roundd_snf(particle[i].position * 10.0) / 10.0;
         /* update global best */
-        /* 'pso:93' if(particle(i).best.cost < global_best.cost) */
+        /* 'pso:108' if(particle(i).best.cost < global_best.cost) */
         if (particle[i].best.cost < global_best->cost) {
-          /* 'pso:94' global_best = particle(i).best; */
+          /* 'pso:109' global_best = particle(i).best; */
           *global_best = particle[i].best;
         }
       }
     }
     /*  store the best cost value */
-    /* 'pso:100' best_costs(it) = global_best.cost; */
-    /* 'pso:102' if coder.target('MATLAB') */
-    /* 'pso:107' w = w * wdamp; */
+    /* 'pso:115' best_costs(it) = global_best.cost; */
+    /* 'pso:117' if coder.target('MATLAB') */
+    /* 'pso:122' w = w * wdamp; */
     w *= 0.99;
   }
   /*  results */
-  /* 'pso:112' figure; */
-  /* 'pso:113' plot(best_costs); */
-  /* 'pso:114' xlabel('iteration'); */
-  /* 'pso:115' ylabel('best cost'); */
+  /*  Font and line width settings */
+  /* 'pso:127' font_name = 'Helvetica'; */
+  /* 'pso:128' font_size = 22; */
+  /* 'pso:129' line_width = 2.5; */
+  /* 'pso:131' figure('Name', 'cost'); */
+  /* 'pso:132' plot(best_costs,'LineWidth', line_width); */
+  /* 'pso:134' ylabel('best cost', 'FontName', font_name, 'FontSize', font_size,
+   * 'Color', 'k'); */
+  /*  Set the color to black */
+  /* 'pso:135' xlabel('iteration', 'FontName', font_name, 'FontSize', font_size,
+   * 'Color', 'k'); */
+  /*  Set x-axis color to black */
 }
 
 /*

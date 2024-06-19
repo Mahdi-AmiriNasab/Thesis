@@ -17,6 +17,9 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 
 	eq_step.destination_target_soc_av = 0; 		% [des cluster average soc]
 
+    soc_diff_s = 0; % Initialize soc_diff_s
+    soc_diff_d = 0; % Initialize soc_diff_d
+
 	% validity of source/destination cluster neighbors (valid by default)
 	snlc_validity = 1;
 	snuc_validity = 1;

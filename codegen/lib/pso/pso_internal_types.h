@@ -1,8 +1,8 @@
 /*
  * File: pso_internal_types.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef PSO_INTERNAL_TYPES_H
@@ -44,7 +44,7 @@ typedef struct {
 #ifndef typedef_c_captured_var
 #define typedef_c_captured_var
 typedef struct {
-  boolean_T contents[9];
+  bool contents[9];
 } c_captured_var;
 #endif /* typedef_c_captured_var */
 
@@ -54,6 +54,14 @@ typedef struct {
   double contents[81];
 } d_captured_var;
 #endif /* typedef_d_captured_var */
+
+#ifndef typedef_emxArray_struct1_T_1x50
+#define typedef_emxArray_struct1_T_1x50
+typedef struct {
+  struct1_T data[50];
+  int size[2];
+} emxArray_struct1_T_1x50;
+#endif /* typedef_emxArray_struct1_T_1x50 */
 
 #endif
 /*

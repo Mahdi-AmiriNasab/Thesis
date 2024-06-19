@@ -1,8 +1,8 @@
 /*
  * File: diff.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -14,23 +14,23 @@
  * Arguments    : const double x_data[]
  *                int x_size
  *                double y_data[]
- *                int *y_size
- * Return Type  : void
+ * Return Type  : int
  */
-void diff(const double x_data[], int x_size, double y_data[], int *y_size)
+int diff(const double x_data[], int x_size, double y_data[])
 {
   int u0;
+  int y_size;
   if (x_size == 0) {
-    *y_size = 0;
+    y_size = 0;
   } else {
     u0 = x_size - 1;
     if (u0 > 1) {
       u0 = 1;
     }
     if (u0 < 1) {
-      *y_size = 0;
+      y_size = 0;
     } else {
-      *y_size = x_size - 1;
+      y_size = x_size - 1;
       if (x_size - 1 != 0) {
         double work_data;
         work_data = x_data[0];
@@ -43,6 +43,7 @@ void diff(const double x_data[], int x_size, double y_data[], int *y_size)
       }
     }
   }
+  return y_size;
 }
 
 /*

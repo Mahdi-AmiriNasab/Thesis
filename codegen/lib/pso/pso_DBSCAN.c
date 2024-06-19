@@ -1,8 +1,8 @@
 /*
  * File: pso_DBSCAN.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -29,7 +29,6 @@
  *
  * Arguments    : const double socs[9]
  *                double minPts
- *                double *cluster_cell_cnt
  *                double *cluster_average
  *                double cluster_dbscan_res[9]
  *                double cluster_clt_res_cell[81]
@@ -42,45 +41,43 @@
  *                double cluster_noise_min[2]
  *                double cluster_single_noise[2]
  *                e_noise_stat *cluster_noise_status
- * Return Type  : void
+ * Return Type  : double
  */
-void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
-                  double *cluster_average, double cluster_dbscan_res[9],
-                  double cluster_clt_res_cell[81],
-                  double cluster_clt_res_soc[81],
-                  double cluster_clt_res_soc_av[18],
-                  double *cluster_clt_max_count,
-                  double cluster_clt_noise_soc[18], double cluster_clt_soc[18],
-                  double cluster_noise_max[2], double cluster_noise_min[2],
-                  double cluster_single_noise[2],
-                  e_noise_stat *cluster_noise_status)
+double
+b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
+             double cluster_dbscan_res[9], double cluster_clt_res_cell[81],
+             double cluster_clt_res_soc[81], double cluster_clt_res_soc_av[18],
+             double *cluster_clt_max_count, double cluster_clt_noise_soc[18],
+             double cluster_clt_soc[18], double cluster_noise_max[2],
+             double cluster_noise_min[2], double cluster_single_noise[2],
+             e_noise_stat *cluster_noise_status)
 {
   static b_captured_var IDX;
   static d_captured_var D;
   static double clt_noise_soc_cpy[18];
   static double Neighbors_data[9];
-  static int tmp_data[9];
   c_captured_var visited;
   captured_var MinPts;
   captured_var epsilon;
   emxArray_real_T *r;
-  double C;
+  double cluster_cell_cnt;
+  double mn_tmp;
   double *r1;
+  int tmp_data[9];
   int Neighbors_size[2];
+  int C;
   int b_i;
   int i;
   int k;
-  int loop_ub;
   int n;
   int s_column;
   int s_index;
   signed char b_tmp_data[9];
   signed char c_tmp_data[9];
-  boolean_T b_cluster_clt_noise_soc[18];
-  boolean_T b_cluster_clt_res_soc_av[9];
-  boolean_T non_zero_indices[9];
-  boolean_T exitg1;
-  boolean_T y;
+  bool b_cluster_clt_noise_soc[18];
+  bool b_D[9];
+  bool exitg1;
+  bool y;
   /* 'pso_DBSCAN:6' cell_cnt = length(socs); */
   /* 'pso_DBSCAN:8' cluster = struct('cell_cnt', 0, 'average', 0, 'dbscan_res',
    * zeros(1, 9) ... */
@@ -92,24 +89,24 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
    * 'noise_min', zeros(2, 1), 'single_noise', zeros(2, 1) ... */
   /* 'pso_DBSCAN:12' , 'noise_status', e_noise_stat.noise_found); */
   /* 'pso_DBSCAN:14' cluster.cell_cnt = length(socs); */
-  *cluster_cell_cnt = 9.0;
+  cluster_cell_cnt = 9.0;
   /* socs = fix(rand (1, cell_cnt) * 100); */
   /*  eps = 10; */
   /*  minPts = 3; */
   /*  clustering */
   /* 'pso_DBSCAN:19' cluster.average = double(fix(mean(socs))); */
-  C = socs[0];
+  mn_tmp = socs[0];
   for (k = 0; k < 8; k++) {
-    C += socs[k + 1];
+    mn_tmp += socs[k + 1];
   }
-  *cluster_average = trunc(C / 9.0);
+  *cluster_average = trunc(mn_tmp / 9.0);
   /* 'pso_DBSCAN:20' error = [(1:cell_cnt); socs - repmat(cluster.average, 1,
    * cell_cnt)]; */
   /* 'pso_DBSCAN:22' dbscan_res_clm = db(error(2, :)', eps, minPts); */
-  epsilon.contents = 0.1;
   MinPts.contents = minPts;
+  epsilon.contents = 0.1;
   /* 'db:3' C=0; */
-  C = 0.0;
+  C = 0;
   /* 'db:4' n=size(X,1); */
   /* 'db:5' IDX=zeros(n,1); */
   for (i = 0; i < 9; i++) {
@@ -133,11 +130,11 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
       /* 'db:12' Neighbors=RegionQuery(i); */
       /* 'db:46' Neighbors=find(D(i,:)<=epsilon); */
       for (b_i = 0; b_i < 9; b_i++) {
-        non_zero_indices[b_i] = (D.contents[i + 9 * b_i] <= 0.1);
+        b_D[b_i] = (D.contents[i + 9 * b_i] <= 0.1);
       }
-      eml_find(non_zero_indices, tmp_data, tmp_size);
-      loop_ub = tmp_size[1];
-      for (b_i = 0; b_i < loop_ub; b_i++) {
+      eml_find(b_D, tmp_data, tmp_size);
+      k = tmp_size[1];
+      for (b_i = 0; b_i < k; b_i++) {
         Neighbors_data[b_i] = tmp_data[b_i];
       }
       /* 'db:13' if numel(Neighbors)<MinPts */
@@ -155,8 +152,8 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
         r->size[1] = tmp_size[1];
         emxEnsureCapacity_real_T(r, b_i);
         r1 = r->data;
-        loop_ub = tmp_size[1] - 1;
-        for (b_i = 0; b_i <= loop_ub; b_i++) {
+        k = tmp_size[1] - 1;
+        for (b_i = 0; b_i <= k; b_i++) {
           r1[b_i] = Neighbors_data[b_i];
         }
         ExpandCluster(&D, &epsilon, &IDX, &visited, &MinPts, (double)i + 1.0, r,
@@ -195,58 +192,61 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
       cluster_clt_res_cell[b_i] = (double)n + 1.0;
       /* 'pso_DBSCAN:37' cluster.clt_res_soc(s_index, s_column) = socs(1, n); */
       cluster_clt_res_soc[b_i] = socs[n];
-
+    } else {
       /* 'pso_DBSCAN:38' else */
       /*  find simularities whilest the data is not noise */
       /* 'pso_DBSCAN:40' if(cluster.dbscan_res(1, n) == cluster.dbscan_res(1,
        * n-1) && cluster.dbscan_res(1, n) ~= -1) */
-    } else if ((IDX.contents[n] == IDX.contents[n - 1]) &&
-               (IDX.contents[n] != -1.0)) {
-      /* 'pso_DBSCAN:41' s_column = s_column + 1; */
-      s_column++;
-      /* 'pso_DBSCAN:42' cluster.clt_res_cell(s_index, s_column) = n; */
-      loop_ub = s_index + 9 * s_column;
-      cluster_clt_res_cell[loop_ub] = (double)n + 1.0;
-      /* 'pso_DBSCAN:43' cluster.clt_res_soc(s_index, s_column) = socs(1, n); */
-      cluster_clt_res_soc[loop_ub] = socs[n];
-    } else {
-      /* 'pso_DBSCAN:44' else */
-      /*  update the cluster index if no similarities found */
-      /* 'pso_DBSCAN:46' s_column = 1; */
-      s_column = 0;
-      /* 'pso_DBSCAN:47' s_index = s_index + 1; */
-      s_index++;
-      /* 'pso_DBSCAN:48' cluster.clt_res_cell(s_index, s_column) = n; */
-      cluster_clt_res_cell[s_index] = (double)n + 1.0;
-      /* 'pso_DBSCAN:49' cluster.clt_res_soc(s_index, s_column) = socs(1, n); */
-      cluster_clt_res_soc[s_index] = socs[n];
+      mn_tmp = IDX.contents[n];
+      if ((mn_tmp == IDX.contents[n - 1]) && (mn_tmp != -1.0)) {
+        /* 'pso_DBSCAN:41' s_column = s_column + 1; */
+        s_column++;
+        /* 'pso_DBSCAN:42' cluster.clt_res_cell(s_index, s_column) = n; */
+        C = s_index + 9 * s_column;
+        cluster_clt_res_cell[C] = (double)n + 1.0;
+        /* 'pso_DBSCAN:43' cluster.clt_res_soc(s_index, s_column) = socs(1, n);
+         */
+        cluster_clt_res_soc[C] = socs[n];
+      } else {
+        /* 'pso_DBSCAN:44' else */
+        /*  update the cluster index if no similarities found */
+        /* 'pso_DBSCAN:46' s_column = 1; */
+        s_column = 0;
+        /* 'pso_DBSCAN:47' s_index = s_index + 1; */
+        s_index++;
+        /* 'pso_DBSCAN:48' cluster.clt_res_cell(s_index, s_column) = n; */
+        cluster_clt_res_cell[s_index] = (double)n + 1.0;
+        /* 'pso_DBSCAN:49' cluster.clt_res_soc(s_index, s_column) = socs(1, n);
+         */
+        cluster_clt_res_soc[s_index] = socs[n];
+      }
     }
     /*  calculating average of each cluster */
     /* 'pso_DBSCAN:53' mn_tmp = mean(nonzeros(cluster.clt_res_soc(s_index, :)));
      */
-    loop_ub = 0;
+    C = 0;
     i = -1;
     for (k = 0; k < 9; k++) {
-      C = cluster_clt_res_soc[s_index + 9 * k];
-      if (C != 0.0) {
-        loop_ub++;
+      mn_tmp = cluster_clt_res_soc[s_index + 9 * k];
+      if (mn_tmp != 0.0) {
+        C++;
         i++;
-        Neighbors_data[i] = C;
+        Neighbors_data[i] = mn_tmp;
       }
     }
-    if (loop_ub == 0) {
-      C = 0.0;
+    if (C == 0) {
+      mn_tmp = 0.0;
     } else {
-      C = Neighbors_data[0];
-      for (k = 2; k <= loop_ub; k++) {
-        C += Neighbors_data[k - 1];
+      mn_tmp = Neighbors_data[0];
+      for (k = 2; k <= C; k++) {
+        mn_tmp += Neighbors_data[k - 1];
       }
     }
-    C /= (double)loop_ub;
+    mn_tmp /= (double)C;
     /* 'pso_DBSCAN:54' if(~isnan(mn_tmp)) */
-    if (!rtIsNaN(C)) {
+    if (!rtIsNaN(mn_tmp)) {
       /* 'pso_DBSCAN:55' cluster.clt_res_soc_av(s_index, 1) = fix(mn_tmp); */
-      cluster_clt_res_soc_av[s_index] = trunc(C);
+      cluster_clt_res_soc_av[s_index] = trunc(mn_tmp);
       /* 'pso_DBSCAN:56' cluster.clt_res_soc_av(s_index, 2) = s_index; */
       cluster_clt_res_soc_av[s_index + 9] = s_index + 1;
     }
@@ -257,7 +257,7 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
   sortrows(cluster_clt_res_soc_av);
   /* 'pso_DBSCAN:64' cluster.clt_max_count = max(cluster.clt_res_soc_av(:, 2));
    */
-  *cluster_clt_max_count = maximum(*(double(*)[9]) & cluster_clt_res_soc_av[9]);
+  *cluster_clt_max_count = maximum(&cluster_clt_res_soc_av[9]);
   /*  finding noises */
   /* 'pso_DBSCAN:68' s_column = 1; */
   s_column = 0;
@@ -272,34 +272,33 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
   /* 'pso_DBSCAN:72' for n = 1:cell_cnt */
   for (n = 0; n < 9; n++) {
     /* 'pso_DBSCAN:74' if cluster.clt_res_cell(n , 1) ~= 0 */
-    C = cluster_clt_res_cell[n];
-    if (C != 0.0) {
+    mn_tmp = cluster_clt_res_cell[n];
+    if (mn_tmp != 0.0) {
       /*  noise detected */
       /* 'pso_DBSCAN:75' if (cluster.clt_res_cell(n, 2) == 0) */
       if (cluster_clt_res_cell[n + 9] == 0.0) {
         /* 'pso_DBSCAN:76' cluster.clt_noise_soc(1, s_column) = n; */
-        loop_ub = s_column << 1;
-        cluster_clt_noise_soc[loop_ub] = (double)n + 1.0;
+        C = s_column << 1;
+        cluster_clt_noise_soc[C] = (double)n + 1.0;
         /* cluster.clt_res_cell(n, 1); */
         /* 'pso_DBSCAN:77' cluster.clt_noise_soc(2, s_column) = socs(1,
          * cluster.clt_res_cell(n, 1)); */
-        cluster_clt_noise_soc[loop_ub + 1] = socs[(int)C - 1];
+        cluster_clt_noise_soc[C + 1] = socs[(int)mn_tmp - 1];
         /* 'pso_DBSCAN:78' s_column = s_column + 1; */
         s_column++;
       } else {
         /* 'pso_DBSCAN:79' else */
         /* cluster detected */
         /* 'pso_DBSCAN:80' cluster.clt_soc(1, c_column) = n; */
-        loop_ub = s_index << 1;
-        cluster_clt_soc[loop_ub] = (double)n + 1.0;
+        C = s_index << 1;
+        cluster_clt_soc[C] = (double)n + 1.0;
         /*  find the corresponding soc of the index (n) */
         /* 'pso_DBSCAN:82' found_index = find(cluster.clt_res_soc_av(:, 2) ==
          * n); */
         for (b_i = 0; b_i < 9; b_i++) {
-          b_cluster_clt_res_soc_av[b_i] =
-              (cluster_clt_res_soc_av[b_i + 9] == (double)n + 1.0);
+          b_D[b_i] = (cluster_clt_res_soc_av[b_i + 9] == (double)n + 1.0);
         }
-        b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+        k = b_eml_find(b_D, tmp_data);
         for (b_i = 0; b_i < k; b_i++) {
           Neighbors_data[b_i] = tmp_data[b_i];
         }
@@ -308,7 +307,7 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
         if (k != 0) {
           /* 'pso_DBSCAN:85' cluster.clt_soc(2, c_column) =
            * cluster.clt_res_soc_av(found_index(1, 1) ,1); */
-          cluster_clt_soc[loop_ub + 1] =
+          cluster_clt_soc[C + 1] =
               cluster_clt_res_soc_av[(int)Neighbors_data[0] - 1];
         }
         /* 'pso_DBSCAN:87' c_column = c_column + 1; */
@@ -326,12 +325,12 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
   for (b_i = 0; b_i < 18; b_i++) {
     b_cluster_clt_noise_soc[b_i] = (cluster_clt_noise_soc[b_i] == 0.0);
   }
-  all(b_cluster_clt_noise_soc, non_zero_indices);
+  all(b_cluster_clt_noise_soc, b_D);
   y = true;
   k = 0;
   exitg1 = false;
   while ((!exitg1) && (k < 9)) {
-    if (!non_zero_indices[k]) {
+    if (!b_D[k]) {
       y = false;
       exitg1 = true;
     } else {
@@ -346,27 +345,24 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
     /* 'pso_DBSCAN:102' cluster.noise_min(2, 1) =
      * min(cluster.clt_res_soc_av(non_zero_indices, 1)); */
     k = 0;
-    loop_ub = 0;
+    C = 0;
     for (i = 0; i < 9; i++) {
-      y = (cluster_clt_res_soc_av[i + 9] != 0.0);
-      non_zero_indices[i] = y;
-      if (y) {
+      if (cluster_clt_res_soc_av[i + 9] != 0.0) {
         k++;
-        b_tmp_data[loop_ub] = (signed char)(i + 1);
-        loop_ub++;
+        b_tmp_data[C] = (signed char)i;
+        C++;
       }
     }
     for (b_i = 0; b_i < k; b_i++) {
-      Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i] - 1];
+      Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i]];
     }
     cluster_noise_min[1] = minimum(Neighbors_data, k);
     /* 'pso_DBSCAN:103' tmp = find(cluster.clt_res_soc_av(:, 1) ==
      * cluster.noise_min(2, 1)); */
     for (b_i = 0; b_i < 9; b_i++) {
-      b_cluster_clt_res_soc_av[b_i] =
-          (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
+      b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
     }
-    b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+    k = b_eml_find(b_D, tmp_data);
     for (b_i = 0; b_i < k; b_i++) {
       Neighbors_data[b_i] = tmp_data[b_i];
     }
@@ -378,25 +374,24 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
     /* 'pso_DBSCAN:108' cluster.noise_max(2, 1) =
      * max(cluster.clt_res_soc_av(non_zero_indices, 1)); */
     k = 0;
-    loop_ub = 0;
+    C = 0;
     for (i = 0; i < 9; i++) {
-      if (non_zero_indices[i]) {
+      if (cluster_clt_res_soc_av[i + 9] != 0.0) {
         k++;
-        c_tmp_data[loop_ub] = (signed char)(i + 1);
-        loop_ub++;
+        c_tmp_data[C] = (signed char)i;
+        C++;
       }
     }
     for (b_i = 0; b_i < k; b_i++) {
-      Neighbors_data[b_i] = cluster_clt_res_soc_av[c_tmp_data[b_i] - 1];
+      Neighbors_data[b_i] = cluster_clt_res_soc_av[c_tmp_data[b_i]];
     }
     cluster_noise_max[1] = b_maximum(Neighbors_data, k);
     /* 'pso_DBSCAN:109' tmp = find(cluster.clt_res_soc_av(:, 1) ==
      * cluster.noise_max(2, 1)); */
     for (b_i = 0; b_i < 9; b_i++) {
-      b_cluster_clt_res_soc_av[b_i] =
-          (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
+      b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
     }
-    b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+    k = b_eml_find(b_D, tmp_data);
     for (b_i = 0; b_i < k; b_i++) {
       Neighbors_data[b_i] = tmp_data[b_i];
     }
@@ -430,26 +425,24 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
         /* 'pso_DBSCAN:126' cluster.noise_min(2, 1) =
          * min(cluster.clt_res_soc_av(non_zero_indices, 1)); */
         k = 0;
-        loop_ub = 0;
+        C = 0;
         for (i = 0; i < 9; i++) {
-          y = (cluster_clt_res_soc_av[i + 9] != 0.0);
-          if (y) {
+          if (cluster_clt_res_soc_av[i + 9] != 0.0) {
             k++;
-            b_tmp_data[loop_ub] = (signed char)(i + 1);
-            loop_ub++;
+            b_tmp_data[C] = (signed char)i;
+            C++;
           }
         }
         for (b_i = 0; b_i < k; b_i++) {
-          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i] - 1];
+          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i]];
         }
         cluster_noise_min[1] = minimum(Neighbors_data, k);
         /* 'pso_DBSCAN:127' tmp = find(cluster.clt_res_soc_av(:, 1) ==
          * cluster.noise_min(2, 1)); */
         for (b_i = 0; b_i < 9; b_i++) {
-          b_cluster_clt_res_soc_av[b_i] =
-              (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
+          b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
         }
-        b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+        k = b_eml_find(b_D, tmp_data);
         for (b_i = 0; b_i < k; b_i++) {
           Neighbors_data[b_i] = tmp_data[b_i];
         }
@@ -465,26 +458,24 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
         /* 'pso_DBSCAN:134' cluster.noise_max(2, 1) =
          * max(cluster.clt_res_soc_av(non_zero_indices, 1)); */
         k = 0;
-        loop_ub = 0;
+        C = 0;
         for (i = 0; i < 9; i++) {
-          y = (cluster_clt_res_soc_av[i + 9] != 0.0);
-          if (y) {
+          if (cluster_clt_res_soc_av[i + 9] != 0.0) {
             k++;
-            b_tmp_data[loop_ub] = (signed char)(i + 1);
-            loop_ub++;
+            b_tmp_data[C] = (signed char)i;
+            C++;
           }
         }
         for (b_i = 0; b_i < k; b_i++) {
-          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i] - 1];
+          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i]];
         }
         cluster_noise_max[1] = b_maximum(Neighbors_data, k);
         /* 'pso_DBSCAN:135' tmp = find(cluster.clt_res_soc_av(:, 1) ==
          * cluster.noise_max(2, 1)); */
         for (b_i = 0; b_i < 9; b_i++) {
-          b_cluster_clt_res_soc_av[b_i] =
-              (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
+          b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
         }
-        b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+        k = b_eml_find(b_D, tmp_data);
         for (b_i = 0; b_i < k; b_i++) {
           Neighbors_data[b_i] = tmp_data[b_i];
         }
@@ -512,64 +503,52 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
       /* 'pso_DBSCAN:154' [cluster.noise_min(2, 1), indice_to_clear] = min(
        * clt_noise_soc_cpy(2, non_zero_indices)); */
       k = 0;
-      loop_ub = 0;
+      C = 0;
       for (i = 0; i < 9; i++) {
-        y = (cluster_clt_noise_soc[i << 1] != 0.0);
-        non_zero_indices[i] = y;
-        if (y) {
+        if (cluster_clt_noise_soc[i << 1] != 0.0) {
           k++;
-          b_tmp_data[loop_ub] = (signed char)(i + 1);
-          loop_ub++;
+          b_tmp_data[C] = (signed char)i;
+          C++;
         }
       }
       Neighbors_size[0] = 1;
       Neighbors_size[1] = k;
       for (b_i = 0; b_i < k; b_i++) {
-        Neighbors_data[b_i] =
-            cluster_clt_noise_soc[((b_tmp_data[b_i] - 1) << 1) + 1];
+        Neighbors_data[b_i] = cluster_clt_noise_soc[(b_tmp_data[b_i] << 1) + 1];
       }
-      b_minimum(Neighbors_data, Neighbors_size, &C, &loop_ub);
+      b_minimum(Neighbors_data, Neighbors_size, &C);
       /* tmp = find( clt_noise_soc_cpy(2, non_zero_indices) ==
        * cluster.noise_min(2, 1)); */
       /* 'pso_DBSCAN:156' cluster.noise_min =  clt_noise_soc_cpy(:,
        * indice_to_clear); */
-      loop_ub = (loop_ub - 1) << 1;
-      cluster_noise_min[0] = cluster_clt_noise_soc[loop_ub];
-      cluster_noise_min[1] = cluster_clt_noise_soc[loop_ub + 1];
+      C = (C - 1) << 1;
+      cluster_noise_min[0] = cluster_clt_noise_soc[C];
+      cluster_noise_min[1] = cluster_clt_noise_soc[C + 1];
       /*  clear the picked noise as minimum to avoid repeated selection */
       /* 'pso_DBSCAN:160' clt_noise_soc_cpy(1, indice_to_clear) = -1; */
-      clt_noise_soc_cpy[loop_ub] = -1.0;
+      clt_noise_soc_cpy[C] = -1.0;
       /* 'pso_DBSCAN:161' clt_noise_soc_cpy(2, indice_to_clear) = -1; */
-      clt_noise_soc_cpy[loop_ub + 1] = -1.0;
+      clt_noise_soc_cpy[C + 1] = -1.0;
       /*  maximum niose */
       /* 'pso_DBSCAN:165' [cluster.noise_max(2, 1), indice_to_clear] = max(
        * clt_noise_soc_cpy(2, non_zero_indices)); */
-      k = 0;
-      loop_ub = 0;
-      for (i = 0; i < 9; i++) {
-        if (non_zero_indices[i]) {
-          k++;
-          c_tmp_data[loop_ub] = (signed char)(i + 1);
-          loop_ub++;
-        }
-      }
       Neighbors_size[0] = 1;
       Neighbors_size[1] = k;
       for (b_i = 0; b_i < k; b_i++) {
-        Neighbors_data[b_i] =
-            clt_noise_soc_cpy[((c_tmp_data[b_i] - 1) << 1) + 1];
+        Neighbors_data[b_i] = clt_noise_soc_cpy[(b_tmp_data[b_i] << 1) + 1];
       }
-      c_maximum(Neighbors_data, Neighbors_size, &C, &loop_ub);
+      c_maximum(Neighbors_data, Neighbors_size, &C);
       /* tmp = find( clt_noise_soc_cpy(2, non_zero_indices) ==
        * cluster.noise_max(2, 1)); */
       /* 'pso_DBSCAN:167' cluster.noise_max =  clt_noise_soc_cpy(:,
        * indice_to_clear); */
-      loop_ub = (loop_ub - 1) << 1;
-      cluster_noise_max[0] = clt_noise_soc_cpy[loop_ub];
-      cluster_noise_max[1] = clt_noise_soc_cpy[loop_ub + 1];
+      C = (C - 1) << 1;
+      cluster_noise_max[0] = clt_noise_soc_cpy[C];
+      cluster_noise_max[1] = clt_noise_soc_cpy[C + 1];
       /* 'pso_DBSCAN:169' if coder.target('MATLAB') */
     }
   }
+  return cluster_cell_cnt;
 }
 
 /*
@@ -580,7 +559,6 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
  * Arguments    : const double socs[9]
  *                double minPts
  *                double eps
- *                double *cluster_cell_cnt
  *                double *cluster_average
  *                double cluster_dbscan_res[9]
  *                double cluster_clt_res_cell[81]
@@ -593,17 +571,16 @@ void b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_cell_cnt,
  *                double cluster_noise_min[2]
  *                double cluster_single_noise[2]
  *                e_noise_stat *cluster_noise_status
- * Return Type  : void
+ * Return Type  : double
  */
-void pso_DBSCAN(const double socs[9], double minPts, double eps,
-                double *cluster_cell_cnt, double *cluster_average,
-                double cluster_dbscan_res[9], double cluster_clt_res_cell[81],
-                double cluster_clt_res_soc[81],
-                double cluster_clt_res_soc_av[18],
-                double *cluster_clt_max_count, double cluster_clt_noise_soc[18],
-                double cluster_clt_soc[18], double cluster_noise_max[2],
-                double cluster_noise_min[2], double cluster_single_noise[2],
-                e_noise_stat *cluster_noise_status)
+double
+pso_DBSCAN(const double socs[9], double minPts, double eps,
+           double *cluster_average, double cluster_dbscan_res[9],
+           double cluster_clt_res_cell[81], double cluster_clt_res_soc[81],
+           double cluster_clt_res_soc_av[18], double *cluster_clt_max_count,
+           double cluster_clt_noise_soc[18], double cluster_clt_soc[18],
+           double cluster_noise_max[2], double cluster_noise_min[2],
+           double cluster_single_noise[2], e_noise_stat *cluster_noise_status)
 {
   static d_captured_var D;
   static double clt_noise_soc_cpy[18];
@@ -613,24 +590,24 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
   captured_var MinPts;
   captured_var epsilon;
   emxArray_real_T *r;
-  double C;
+  double cluster_cell_cnt;
+  double mn_tmp;
   double *r1;
   int tmp_data[9];
   int Neighbors_size[2];
+  int C;
   int b_i;
   int i;
   int k;
-  int loop_ub;
   int n;
   int s_column;
   int s_index;
   signed char b_tmp_data[9];
   signed char c_tmp_data[9];
-  boolean_T b_cluster_clt_noise_soc[18];
-  boolean_T b_cluster_clt_res_soc_av[9];
-  boolean_T non_zero_indices[9];
-  boolean_T exitg1;
-  boolean_T y;
+  bool b_cluster_clt_noise_soc[18];
+  bool b_D[9];
+  bool exitg1;
+  bool y;
   /* 'pso_DBSCAN:6' cell_cnt = length(socs); */
   /* 'pso_DBSCAN:8' cluster = struct('cell_cnt', 0, 'average', 0, 'dbscan_res',
    * zeros(1, 9) ... */
@@ -642,24 +619,24 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
    * 'noise_min', zeros(2, 1), 'single_noise', zeros(2, 1) ... */
   /* 'pso_DBSCAN:12' , 'noise_status', e_noise_stat.noise_found); */
   /* 'pso_DBSCAN:14' cluster.cell_cnt = length(socs); */
-  *cluster_cell_cnt = 9.0;
+  cluster_cell_cnt = 9.0;
   /* socs = fix(rand (1, cell_cnt) * 100); */
   /*  eps = 10; */
   /*  minPts = 3; */
   /*  clustering */
   /* 'pso_DBSCAN:19' cluster.average = double(fix(mean(socs))); */
-  C = socs[0];
+  mn_tmp = socs[0];
   for (k = 0; k < 8; k++) {
-    C += socs[k + 1];
+    mn_tmp += socs[k + 1];
   }
-  *cluster_average = trunc(C / 9.0);
+  *cluster_average = trunc(mn_tmp / 9.0);
   /* 'pso_DBSCAN:20' error = [(1:cell_cnt); socs - repmat(cluster.average, 1,
    * cell_cnt)]; */
   /* 'pso_DBSCAN:22' dbscan_res_clm = db(error(2, :)', eps, minPts); */
-  epsilon.contents = eps;
   MinPts.contents = minPts;
+  epsilon.contents = eps;
   /* 'db:3' C=0; */
-  C = 0.0;
+  C = 0;
   /* 'db:4' n=size(X,1); */
   /* 'db:5' IDX=zeros(n,1); */
   for (i = 0; i < 9; i++) {
@@ -683,11 +660,11 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
       /* 'db:12' Neighbors=RegionQuery(i); */
       /* 'db:46' Neighbors=find(D(i,:)<=epsilon); */
       for (b_i = 0; b_i < 9; b_i++) {
-        non_zero_indices[b_i] = (D.contents[i + 9 * b_i] <= eps);
+        b_D[b_i] = (D.contents[i + 9 * b_i] <= eps);
       }
-      eml_find(non_zero_indices, tmp_data, tmp_size);
-      loop_ub = tmp_size[1];
-      for (b_i = 0; b_i < loop_ub; b_i++) {
+      eml_find(b_D, tmp_data, tmp_size);
+      k = tmp_size[1];
+      for (b_i = 0; b_i < k; b_i++) {
         Neighbors_data[b_i] = tmp_data[b_i];
       }
       /* 'db:13' if numel(Neighbors)<MinPts */
@@ -705,8 +682,8 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
         r->size[1] = tmp_size[1];
         emxEnsureCapacity_real_T(r, b_i);
         r1 = r->data;
-        loop_ub = tmp_size[1] - 1;
-        for (b_i = 0; b_i <= loop_ub; b_i++) {
+        k = tmp_size[1] - 1;
+        for (b_i = 0; b_i <= k; b_i++) {
           r1[b_i] = Neighbors_data[b_i];
         }
         ExpandCluster(&D, &epsilon, &IDX, &visited, &MinPts, (double)i + 1.0, r,
@@ -745,58 +722,61 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
       cluster_clt_res_cell[b_i] = (double)n + 1.0;
       /* 'pso_DBSCAN:37' cluster.clt_res_soc(s_index, s_column) = socs(1, n); */
       cluster_clt_res_soc[b_i] = socs[n];
-
+    } else {
       /* 'pso_DBSCAN:38' else */
       /*  find simularities whilest the data is not noise */
       /* 'pso_DBSCAN:40' if(cluster.dbscan_res(1, n) == cluster.dbscan_res(1,
        * n-1) && cluster.dbscan_res(1, n) ~= -1) */
-    } else if ((IDX.contents[n] == IDX.contents[n - 1]) &&
-               (IDX.contents[n] != -1.0)) {
-      /* 'pso_DBSCAN:41' s_column = s_column + 1; */
-      s_column++;
-      /* 'pso_DBSCAN:42' cluster.clt_res_cell(s_index, s_column) = n; */
-      loop_ub = s_index + 9 * s_column;
-      cluster_clt_res_cell[loop_ub] = (double)n + 1.0;
-      /* 'pso_DBSCAN:43' cluster.clt_res_soc(s_index, s_column) = socs(1, n); */
-      cluster_clt_res_soc[loop_ub] = socs[n];
-    } else {
-      /* 'pso_DBSCAN:44' else */
-      /*  update the cluster index if no similarities found */
-      /* 'pso_DBSCAN:46' s_column = 1; */
-      s_column = 0;
-      /* 'pso_DBSCAN:47' s_index = s_index + 1; */
-      s_index++;
-      /* 'pso_DBSCAN:48' cluster.clt_res_cell(s_index, s_column) = n; */
-      cluster_clt_res_cell[s_index] = (double)n + 1.0;
-      /* 'pso_DBSCAN:49' cluster.clt_res_soc(s_index, s_column) = socs(1, n); */
-      cluster_clt_res_soc[s_index] = socs[n];
+      mn_tmp = IDX.contents[n];
+      if ((mn_tmp == IDX.contents[n - 1]) && (mn_tmp != -1.0)) {
+        /* 'pso_DBSCAN:41' s_column = s_column + 1; */
+        s_column++;
+        /* 'pso_DBSCAN:42' cluster.clt_res_cell(s_index, s_column) = n; */
+        C = s_index + 9 * s_column;
+        cluster_clt_res_cell[C] = (double)n + 1.0;
+        /* 'pso_DBSCAN:43' cluster.clt_res_soc(s_index, s_column) = socs(1, n);
+         */
+        cluster_clt_res_soc[C] = socs[n];
+      } else {
+        /* 'pso_DBSCAN:44' else */
+        /*  update the cluster index if no similarities found */
+        /* 'pso_DBSCAN:46' s_column = 1; */
+        s_column = 0;
+        /* 'pso_DBSCAN:47' s_index = s_index + 1; */
+        s_index++;
+        /* 'pso_DBSCAN:48' cluster.clt_res_cell(s_index, s_column) = n; */
+        cluster_clt_res_cell[s_index] = (double)n + 1.0;
+        /* 'pso_DBSCAN:49' cluster.clt_res_soc(s_index, s_column) = socs(1, n);
+         */
+        cluster_clt_res_soc[s_index] = socs[n];
+      }
     }
     /*  calculating average of each cluster */
     /* 'pso_DBSCAN:53' mn_tmp = mean(nonzeros(cluster.clt_res_soc(s_index, :)));
      */
-    loop_ub = 0;
+    C = 0;
     i = -1;
     for (k = 0; k < 9; k++) {
-      C = cluster_clt_res_soc[s_index + 9 * k];
-      if (C != 0.0) {
-        loop_ub++;
+      mn_tmp = cluster_clt_res_soc[s_index + 9 * k];
+      if (mn_tmp != 0.0) {
+        C++;
         i++;
-        Neighbors_data[i] = C;
+        Neighbors_data[i] = mn_tmp;
       }
     }
-    if (loop_ub == 0) {
-      C = 0.0;
+    if (C == 0) {
+      mn_tmp = 0.0;
     } else {
-      C = Neighbors_data[0];
-      for (k = 2; k <= loop_ub; k++) {
-        C += Neighbors_data[k - 1];
+      mn_tmp = Neighbors_data[0];
+      for (k = 2; k <= C; k++) {
+        mn_tmp += Neighbors_data[k - 1];
       }
     }
-    C /= (double)loop_ub;
+    mn_tmp /= (double)C;
     /* 'pso_DBSCAN:54' if(~isnan(mn_tmp)) */
-    if (!rtIsNaN(C)) {
+    if (!rtIsNaN(mn_tmp)) {
       /* 'pso_DBSCAN:55' cluster.clt_res_soc_av(s_index, 1) = fix(mn_tmp); */
-      cluster_clt_res_soc_av[s_index] = trunc(C);
+      cluster_clt_res_soc_av[s_index] = trunc(mn_tmp);
       /* 'pso_DBSCAN:56' cluster.clt_res_soc_av(s_index, 2) = s_index; */
       cluster_clt_res_soc_av[s_index + 9] = s_index + 1;
     }
@@ -807,7 +787,7 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
   sortrows(cluster_clt_res_soc_av);
   /* 'pso_DBSCAN:64' cluster.clt_max_count = max(cluster.clt_res_soc_av(:, 2));
    */
-  *cluster_clt_max_count = maximum(*(double(*)[9]) & cluster_clt_res_soc_av[9]);
+  *cluster_clt_max_count = maximum(&cluster_clt_res_soc_av[9]);
   /*  finding noises */
   /* 'pso_DBSCAN:68' s_column = 1; */
   s_column = 0;
@@ -822,34 +802,33 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
   /* 'pso_DBSCAN:72' for n = 1:cell_cnt */
   for (n = 0; n < 9; n++) {
     /* 'pso_DBSCAN:74' if cluster.clt_res_cell(n , 1) ~= 0 */
-    C = cluster_clt_res_cell[n];
-    if (C != 0.0) {
+    mn_tmp = cluster_clt_res_cell[n];
+    if (mn_tmp != 0.0) {
       /*  noise detected */
       /* 'pso_DBSCAN:75' if (cluster.clt_res_cell(n, 2) == 0) */
       if (cluster_clt_res_cell[n + 9] == 0.0) {
         /* 'pso_DBSCAN:76' cluster.clt_noise_soc(1, s_column) = n; */
-        loop_ub = s_column << 1;
-        cluster_clt_noise_soc[loop_ub] = (double)n + 1.0;
+        C = s_column << 1;
+        cluster_clt_noise_soc[C] = (double)n + 1.0;
         /* cluster.clt_res_cell(n, 1); */
         /* 'pso_DBSCAN:77' cluster.clt_noise_soc(2, s_column) = socs(1,
          * cluster.clt_res_cell(n, 1)); */
-        cluster_clt_noise_soc[loop_ub + 1] = socs[(int)C - 1];
+        cluster_clt_noise_soc[C + 1] = socs[(int)mn_tmp - 1];
         /* 'pso_DBSCAN:78' s_column = s_column + 1; */
         s_column++;
       } else {
         /* 'pso_DBSCAN:79' else */
         /* cluster detected */
         /* 'pso_DBSCAN:80' cluster.clt_soc(1, c_column) = n; */
-        loop_ub = s_index << 1;
-        cluster_clt_soc[loop_ub] = (double)n + 1.0;
+        C = s_index << 1;
+        cluster_clt_soc[C] = (double)n + 1.0;
         /*  find the corresponding soc of the index (n) */
         /* 'pso_DBSCAN:82' found_index = find(cluster.clt_res_soc_av(:, 2) ==
          * n); */
         for (b_i = 0; b_i < 9; b_i++) {
-          b_cluster_clt_res_soc_av[b_i] =
-              (cluster_clt_res_soc_av[b_i + 9] == (double)n + 1.0);
+          b_D[b_i] = (cluster_clt_res_soc_av[b_i + 9] == (double)n + 1.0);
         }
-        b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+        k = b_eml_find(b_D, tmp_data);
         for (b_i = 0; b_i < k; b_i++) {
           Neighbors_data[b_i] = tmp_data[b_i];
         }
@@ -858,7 +837,7 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
         if (k != 0) {
           /* 'pso_DBSCAN:85' cluster.clt_soc(2, c_column) =
            * cluster.clt_res_soc_av(found_index(1, 1) ,1); */
-          cluster_clt_soc[loop_ub + 1] =
+          cluster_clt_soc[C + 1] =
               cluster_clt_res_soc_av[(int)Neighbors_data[0] - 1];
         }
         /* 'pso_DBSCAN:87' c_column = c_column + 1; */
@@ -876,12 +855,12 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
   for (b_i = 0; b_i < 18; b_i++) {
     b_cluster_clt_noise_soc[b_i] = (cluster_clt_noise_soc[b_i] == 0.0);
   }
-  all(b_cluster_clt_noise_soc, non_zero_indices);
+  all(b_cluster_clt_noise_soc, b_D);
   y = true;
   k = 0;
   exitg1 = false;
   while ((!exitg1) && (k < 9)) {
-    if (!non_zero_indices[k]) {
+    if (!b_D[k]) {
       y = false;
       exitg1 = true;
     } else {
@@ -896,27 +875,24 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
     /* 'pso_DBSCAN:102' cluster.noise_min(2, 1) =
      * min(cluster.clt_res_soc_av(non_zero_indices, 1)); */
     k = 0;
-    loop_ub = 0;
+    C = 0;
     for (i = 0; i < 9; i++) {
-      y = (cluster_clt_res_soc_av[i + 9] != 0.0);
-      non_zero_indices[i] = y;
-      if (y) {
+      if (cluster_clt_res_soc_av[i + 9] != 0.0) {
         k++;
-        b_tmp_data[loop_ub] = (signed char)(i + 1);
-        loop_ub++;
+        b_tmp_data[C] = (signed char)i;
+        C++;
       }
     }
     for (b_i = 0; b_i < k; b_i++) {
-      Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i] - 1];
+      Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i]];
     }
     cluster_noise_min[1] = minimum(Neighbors_data, k);
     /* 'pso_DBSCAN:103' tmp = find(cluster.clt_res_soc_av(:, 1) ==
      * cluster.noise_min(2, 1)); */
     for (b_i = 0; b_i < 9; b_i++) {
-      b_cluster_clt_res_soc_av[b_i] =
-          (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
+      b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
     }
-    b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+    k = b_eml_find(b_D, tmp_data);
     for (b_i = 0; b_i < k; b_i++) {
       Neighbors_data[b_i] = tmp_data[b_i];
     }
@@ -928,25 +904,24 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
     /* 'pso_DBSCAN:108' cluster.noise_max(2, 1) =
      * max(cluster.clt_res_soc_av(non_zero_indices, 1)); */
     k = 0;
-    loop_ub = 0;
+    C = 0;
     for (i = 0; i < 9; i++) {
-      if (non_zero_indices[i]) {
+      if (cluster_clt_res_soc_av[i + 9] != 0.0) {
         k++;
-        c_tmp_data[loop_ub] = (signed char)(i + 1);
-        loop_ub++;
+        c_tmp_data[C] = (signed char)i;
+        C++;
       }
     }
     for (b_i = 0; b_i < k; b_i++) {
-      Neighbors_data[b_i] = cluster_clt_res_soc_av[c_tmp_data[b_i] - 1];
+      Neighbors_data[b_i] = cluster_clt_res_soc_av[c_tmp_data[b_i]];
     }
     cluster_noise_max[1] = b_maximum(Neighbors_data, k);
     /* 'pso_DBSCAN:109' tmp = find(cluster.clt_res_soc_av(:, 1) ==
      * cluster.noise_max(2, 1)); */
     for (b_i = 0; b_i < 9; b_i++) {
-      b_cluster_clt_res_soc_av[b_i] =
-          (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
+      b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
     }
-    b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+    k = b_eml_find(b_D, tmp_data);
     for (b_i = 0; b_i < k; b_i++) {
       Neighbors_data[b_i] = tmp_data[b_i];
     }
@@ -980,26 +955,24 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
         /* 'pso_DBSCAN:126' cluster.noise_min(2, 1) =
          * min(cluster.clt_res_soc_av(non_zero_indices, 1)); */
         k = 0;
-        loop_ub = 0;
+        C = 0;
         for (i = 0; i < 9; i++) {
-          y = (cluster_clt_res_soc_av[i + 9] != 0.0);
-          if (y) {
+          if (cluster_clt_res_soc_av[i + 9] != 0.0) {
             k++;
-            b_tmp_data[loop_ub] = (signed char)(i + 1);
-            loop_ub++;
+            b_tmp_data[C] = (signed char)i;
+            C++;
           }
         }
         for (b_i = 0; b_i < k; b_i++) {
-          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i] - 1];
+          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i]];
         }
         cluster_noise_min[1] = minimum(Neighbors_data, k);
         /* 'pso_DBSCAN:127' tmp = find(cluster.clt_res_soc_av(:, 1) ==
          * cluster.noise_min(2, 1)); */
         for (b_i = 0; b_i < 9; b_i++) {
-          b_cluster_clt_res_soc_av[b_i] =
-              (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
+          b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_min[1]);
         }
-        b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+        k = b_eml_find(b_D, tmp_data);
         for (b_i = 0; b_i < k; b_i++) {
           Neighbors_data[b_i] = tmp_data[b_i];
         }
@@ -1015,26 +988,24 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
         /* 'pso_DBSCAN:134' cluster.noise_max(2, 1) =
          * max(cluster.clt_res_soc_av(non_zero_indices, 1)); */
         k = 0;
-        loop_ub = 0;
+        C = 0;
         for (i = 0; i < 9; i++) {
-          y = (cluster_clt_res_soc_av[i + 9] != 0.0);
-          if (y) {
+          if (cluster_clt_res_soc_av[i + 9] != 0.0) {
             k++;
-            b_tmp_data[loop_ub] = (signed char)(i + 1);
-            loop_ub++;
+            b_tmp_data[C] = (signed char)i;
+            C++;
           }
         }
         for (b_i = 0; b_i < k; b_i++) {
-          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i] - 1];
+          Neighbors_data[b_i] = cluster_clt_res_soc_av[b_tmp_data[b_i]];
         }
         cluster_noise_max[1] = b_maximum(Neighbors_data, k);
         /* 'pso_DBSCAN:135' tmp = find(cluster.clt_res_soc_av(:, 1) ==
          * cluster.noise_max(2, 1)); */
         for (b_i = 0; b_i < 9; b_i++) {
-          b_cluster_clt_res_soc_av[b_i] =
-              (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
+          b_D[b_i] = (cluster_clt_res_soc_av[b_i] == cluster_noise_max[1]);
         }
-        b_eml_find(b_cluster_clt_res_soc_av, tmp_data, &k);
+        k = b_eml_find(b_D, tmp_data);
         for (b_i = 0; b_i < k; b_i++) {
           Neighbors_data[b_i] = tmp_data[b_i];
         }
@@ -1062,64 +1033,52 @@ void pso_DBSCAN(const double socs[9], double minPts, double eps,
       /* 'pso_DBSCAN:154' [cluster.noise_min(2, 1), indice_to_clear] = min(
        * clt_noise_soc_cpy(2, non_zero_indices)); */
       k = 0;
-      loop_ub = 0;
+      C = 0;
       for (i = 0; i < 9; i++) {
-        y = (cluster_clt_noise_soc[i << 1] != 0.0);
-        non_zero_indices[i] = y;
-        if (y) {
+        if (cluster_clt_noise_soc[i << 1] != 0.0) {
           k++;
-          b_tmp_data[loop_ub] = (signed char)(i + 1);
-          loop_ub++;
+          b_tmp_data[C] = (signed char)i;
+          C++;
         }
       }
       Neighbors_size[0] = 1;
       Neighbors_size[1] = k;
       for (b_i = 0; b_i < k; b_i++) {
-        Neighbors_data[b_i] =
-            cluster_clt_noise_soc[((b_tmp_data[b_i] - 1) << 1) + 1];
+        Neighbors_data[b_i] = cluster_clt_noise_soc[(b_tmp_data[b_i] << 1) + 1];
       }
-      b_minimum(Neighbors_data, Neighbors_size, &C, &loop_ub);
+      b_minimum(Neighbors_data, Neighbors_size, &C);
       /* tmp = find( clt_noise_soc_cpy(2, non_zero_indices) ==
        * cluster.noise_min(2, 1)); */
       /* 'pso_DBSCAN:156' cluster.noise_min =  clt_noise_soc_cpy(:,
        * indice_to_clear); */
-      loop_ub = (loop_ub - 1) << 1;
-      cluster_noise_min[0] = cluster_clt_noise_soc[loop_ub];
-      cluster_noise_min[1] = cluster_clt_noise_soc[loop_ub + 1];
+      C = (C - 1) << 1;
+      cluster_noise_min[0] = cluster_clt_noise_soc[C];
+      cluster_noise_min[1] = cluster_clt_noise_soc[C + 1];
       /*  clear the picked noise as minimum to avoid repeated selection */
       /* 'pso_DBSCAN:160' clt_noise_soc_cpy(1, indice_to_clear) = -1; */
-      clt_noise_soc_cpy[loop_ub] = -1.0;
+      clt_noise_soc_cpy[C] = -1.0;
       /* 'pso_DBSCAN:161' clt_noise_soc_cpy(2, indice_to_clear) = -1; */
-      clt_noise_soc_cpy[loop_ub + 1] = -1.0;
+      clt_noise_soc_cpy[C + 1] = -1.0;
       /*  maximum niose */
       /* 'pso_DBSCAN:165' [cluster.noise_max(2, 1), indice_to_clear] = max(
        * clt_noise_soc_cpy(2, non_zero_indices)); */
-      k = 0;
-      loop_ub = 0;
-      for (i = 0; i < 9; i++) {
-        if (non_zero_indices[i]) {
-          k++;
-          c_tmp_data[loop_ub] = (signed char)(i + 1);
-          loop_ub++;
-        }
-      }
       Neighbors_size[0] = 1;
       Neighbors_size[1] = k;
       for (b_i = 0; b_i < k; b_i++) {
-        Neighbors_data[b_i] =
-            clt_noise_soc_cpy[((c_tmp_data[b_i] - 1) << 1) + 1];
+        Neighbors_data[b_i] = clt_noise_soc_cpy[(b_tmp_data[b_i] << 1) + 1];
       }
-      c_maximum(Neighbors_data, Neighbors_size, &C, &loop_ub);
+      c_maximum(Neighbors_data, Neighbors_size, &C);
       /* tmp = find( clt_noise_soc_cpy(2, non_zero_indices) ==
        * cluster.noise_max(2, 1)); */
       /* 'pso_DBSCAN:167' cluster.noise_max =  clt_noise_soc_cpy(:,
        * indice_to_clear); */
-      loop_ub = (loop_ub - 1) << 1;
-      cluster_noise_max[0] = clt_noise_soc_cpy[loop_ub];
-      cluster_noise_max[1] = clt_noise_soc_cpy[loop_ub + 1];
+      C = (C - 1) << 1;
+      cluster_noise_max[0] = clt_noise_soc_cpy[C];
+      cluster_noise_max[1] = clt_noise_soc_cpy[C + 1];
       /* 'pso_DBSCAN:169' if coder.target('MATLAB') */
     }
   }
+  return cluster_cell_cnt;
 }
 
 /*

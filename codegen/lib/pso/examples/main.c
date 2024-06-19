@@ -1,8 +1,8 @@
 /*
  * File: main.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 06-Dec-2023 18:10:23
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /*************************************************************************/
@@ -38,20 +38,10 @@
 #include "pso_types.h"
 #include "rt_nonfinite.h"
 
-#ifndef typedef_emxArray_struct1_T_1x100
-#define typedef_emxArray_struct1_T_1x100
-typedef struct {
-  struct1_T data[100];
-  int size[2];
-} emxArray_struct1_T_1x100;
-#endif /* typedef_emxArray_struct1_T_1x100 */
-
 /* Function Declarations */
 static void argInit_1x9_real_T(double result[9]);
 
 static double argInit_real_T(void);
-
-static void main_pso(void);
 
 /* Function Definitions */
 /*
@@ -79,50 +69,6 @@ static double argInit_real_T(void)
 }
 
 /*
- * Arguments    : void
- * Return Type  : void
- */
-static void main_pso(void)
-{
-  emxArray_struct1_T_1x100 eq_step;
-  struct0_T global_best;
-  struct2_T stio;
-
-//	double eps = 16.3130;
-//	double cluster_dbscan_res		[100];
-//	double cluster_clt_res_cell		[100];
-//	double cluster_clt_res_soc		[100];
-//	double cluster_res_soc_av		[100];
-//	double cluster_clt_noise_soc	[100];
-//	double cluster_clt_soc			[100];
-//	double cluster_noise_max		[100];
-//	double cluster_noise_min		[100];
-//	double cluster_single_noise 	[100];
-//  	double average;
-//	double cluster_clt_max_count;
-//	e_noise_stat cluster_noise_status;
-
-
-  double dv[9];
-  double mp_tmp;
-  /* Initialize function 'pso' input arguments. */
-  /* Initialize function input argument 'soc_in'. */
-  mp_tmp = argInit_real_T();
-  /* Call the entry-point 'pso'. */
-  argInit_1x9_real_T(dv);
-  double w_time = 0.5;
-  double w_inc = 0.5;
-
-  
-  double soc[9] = {7, 88, 10, 95, 52, 50, 48, 42, 76};
-  pso(soc, 2, w_time, w_inc, 0, &global_best, eq_step.data, eq_step.size, &stio);
-
-
-	// pso_DBSCAN clustering test
-	
-}
-
-/*
  * Arguments    : int argc
  *                char **argv
  * Return Type  : int
@@ -135,12 +81,32 @@ int main(int argc, char **argv)
    * function. So, a call to initialize is not included here. */
   /* Invoke the entry-point functions.
 You can call entry-point functions multiple times. */
-  while(1)
-	  main_pso();
+  main_pso();
   /* Terminate the application.
 You do not need to do this more than one time. */
   pso_terminate();
   return 0;
+}
+
+/*
+ * Arguments    : void
+ * Return Type  : void
+ */
+int main(int argc, char *argv[])
+{
+
+  static emxArray_struct1_T_1x50 eq_step;
+  static struct2_T stio;
+  static double dv[9];
+  struct0_T global_best;
+  double mp_tmp;
+  /* Initialize function 'pso' input arguments. */
+  /* Initialize function input argument 'soc_in'. */
+  mp_tmp = argInit_real_T();
+  /* Call the entry-point 'pso'. */
+  argInit_1x9_real_T(dv);
+  pso(dv, mp_tmp, mp_tmp, mp_tmp, mp_tmp, &global_best, eq_step.data,
+      eq_step.size, &stio);
 }
 
 /*

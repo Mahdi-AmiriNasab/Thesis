@@ -68,7 +68,7 @@ typedef enum
 GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
 GPIO_PinState pinstate_neg = GPIO_PIN_RESET;
 uint8_t num_neg = 2, num_pos = 1;
-DCDCState dcdc_stat = DCDC_Off;
+DCDCState e_DCDC_status = DCDC_Off;
 
 /* USER CODE END PTD */
 
@@ -204,7 +204,7 @@ int main(void)
   
 	while(1)
 	{
-        set_reset_trig_DCDC(dcdc_stat);
+        set_reset_trig_DCDC(e_DCDC_status);
         set_reset_trig_neg(num_neg, pinstate_neg);
         set_reset_trig_pos(num_pos, pinstate_pos);
 

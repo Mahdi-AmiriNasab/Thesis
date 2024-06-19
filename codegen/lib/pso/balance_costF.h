@@ -1,8 +1,8 @@
 /*
  * File: balance_costF.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef BALANCE_COSTF_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void max_t_res_not_empty_init(void);
+void balance_costF_init(void);
 
 #ifdef __cplusplus
 }

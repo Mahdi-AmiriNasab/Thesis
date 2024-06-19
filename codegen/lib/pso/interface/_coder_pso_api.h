@@ -1,8 +1,8 @@
 /*
  * File: _coder_pso_api.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef _CODER_PSO_API_H
@@ -10,6 +10,7 @@
 
 /* Include Files */
 #include "emlrt.h"
+#include "mex.h"
 #include "tmwtypes.h"
 #include <string.h>
 

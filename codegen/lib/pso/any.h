@@ -1,8 +1,8 @@
 /*
  * File: any.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef ANY_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void any(const boolean_T x_data[], boolean_T y_data[], int *y_size);
+int any(const bool x_data[], const int x_size[2], bool y_data[]);
 
 #ifdef __cplusplus
 }

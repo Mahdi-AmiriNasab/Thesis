@@ -2,7 +2,7 @@
 ## Makefile generated for component 'pso'. 
 ## 
 ## Makefile     : pso_rtw.mk
-## Generated on : Wed Dec 06 16:49:26 2023
+## Generated on : Wed Jun 19 19:10:52 2024
 ## Final product: ./pso.lib
 ## Product type : static-library
 ## 
@@ -19,8 +19,8 @@
 
 PRODUCT_NAME              = pso
 MAKEFILE                  = pso_rtw.mk
-MATLAB_ROOT               = C:/PROGRA~1/Matlab/R2022a
-MATLAB_BIN                = C:/PROGRA~1/Matlab/R2022a/bin
+MATLAB_ROOT               = C:/PROGRA~1/Matlab/R2023b
+MATLAB_BIN                = C:/PROGRA~1/Matlab/R2023b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
 START_DIR                 = E:/Thesis
 TGT_FCN_LIB               = ISO_C
@@ -36,16 +36,16 @@ MODELLIB                  = pso.lib
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          Texas Instruments Code Composer Studio (C2000)
+# Toolchain Name:          Texas Instruments Code Composer Studio (ARM)
 # Supported Version(s):    
-# ToolchainInfo Version:   2022a
+# ToolchainInfo Version:   2023b
 # Specification Revision:  1.0
 # 
 #-------------------------------------------
 # Macros assumed to be defined elsewhere
 #-------------------------------------------
 
-# CCSINSTALLDIR
+# CCSARMINSTALLDIR
 # CCSSCRIPTINGDIR
 # TARGET_LOAD_CMD_ARGS
 # TIF28XXXSYSSWDIR
@@ -55,22 +55,18 @@ MODELLIB                  = pso.lib
 #-----------
 
 TARGET_SCRIPTINGTOOLS_INSTALLDIR = $(CCSSCRIPTINGDIR)
-TI_C2000_SHARED_DIR              = $(TARGET_PKG_INSTALLDIR)/../../../shared/supportpackages/tic2000
-TI_TOOLS                         = $(CCSINSTALLDIR)/bin
-TI_INCLUDE                       = $(CCSINSTALLDIR)/include
-TI_LIB                           = $(CCSINSTALLDIR)/lib
+TI_TOOLS                         = $(CCSARMINSTALLDIR)/bin
+TI_INCLUDE                       = $(CCSARMINSTALLDIR)/include
+TI_LIB                           = $(CCSARMINSTALLDIR)/lib
 F28_HEADERS                      = $(TIF28XXXSYSSWDIR)/~SupportFiles/DSP280x_headers
 CCOUTPUTFLAG                     = --output_file=
 LDOUTPUTFLAG                     = --output_file=
 EXE_FILE_EXT                     = $(PROGRAM_FILE_EXT)
-PRODUCT_HEX                      = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).hex
-PRODUCT_DWO                      = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).dwo
-PRODUCT_ELF                      = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).elf
-DOWN_EXE_JS                      = $(TARGET_PKG_INSTALLDIR)/tic2000/CCS_Config/runProgram_generic.js
-CCS_CONFIG                       = $(TARGET_PKG_INSTALLDIR)/tic2000/CCS_Config/f28x_generic.ccxml
-PRODUCT_DEP                      = $(PRODUCT_NAME).txt
-DEPFILE_UPDATE                   = $(TI_C2000_SHARED_DIR)/tools/PostBuildDepedency/win64/DepedencyFileUpdate.ps1
 SHELL                            = %SystemRoot%/system32/cmd.exe
+DOWN_EXE_JS                      = $(MATLAB_ROOT)/toolbox/c2b/tic2000/CCS_Config/runProgram_M3.js
+CCS_CONFIG                       = $(MATLAB_ROOT)/toolbox/c2b/tic2000/CCS_Config/f28x_generic.ccxml
+PRODUCT_HEX                      = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).hex
+PRODUCT_ELF                      = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).elf
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
@@ -80,37 +76,35 @@ TOOLCHAIN_LIBS =
 # BUILD TOOL COMMANDS
 #------------------------
 
-# Assembler: C2000 Assembler
+# Assembler: C2000 ARM Assembler
 AS_PATH = $(TI_TOOLS)
-AS = "$(AS_PATH)/cl2000"
+AS = "$(AS_PATH)/armcl"
 
-# C Compiler: C2000 C Compiler
+# C Compiler: C2000 ARM C Compiler
 CC_PATH = $(TI_TOOLS)
-CC = "$(CC_PATH)/cl2000"
+CC = "$(CC_PATH)/armcl"
 
-# Linker: C2000 Linker
+# Linker: C2000 ARM Linker
 LD_PATH = $(TI_TOOLS)
-LD = "$(LD_PATH)/cl2000"
+LD = "$(LD_PATH)/armcl"
 
-# C++ Compiler: C2000 C++ Compiler
+# C++ Compiler: C2000 ARM C++ Compiler
 CPP_PATH = $(TI_TOOLS)
-CPP = "$(CPP_PATH)/cl2000"
+CPP = "$(CPP_PATH)/armcl"
 
-# C++ Linker: C2000 C++ Linker
+# C++ Linker: C2000 ARM C++ Linker
 CPP_LD_PATH = $(TI_TOOLS)
-CPP_LD = "$(CPP_LD_PATH)/cl2000"
+CPP_LD = "$(CPP_LD_PATH)/armcl"
 
-# Archiver: C2000 Archiver
+# Archiver: C2000 ARM Archiver
 AR_PATH = $(TI_TOOLS)
-AR = "$(AR_PATH)/ar2000"
+AR = "$(AR_PATH)/armar"
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_ARCH_BIN)
 MEX = "$(MEX_PATH)/mex"
 
-# Hex Converter: Hex Converter
-
-# DWO Converter: DWO Converter
+# tiCCSArm: tiCCSArm
 
 # Download: Download
 DOWNLOAD_PATH = $(TARGET_SCRIPTINGTOOLS_INSTALLDIR)/bin
@@ -129,7 +123,7 @@ MAKE = "$(MAKE_PATH)/gmake"
 #-------------------------
 
 ASDEBUG             = -g
-AS_OUTPUT_FLAG      = --output_file=
+AS_OUTPUT_FLAG      =
 CDEBUG              = -g
 C_OUTPUT_FLAG       = --output_file=
 LDDEBUG             =
@@ -151,40 +145,32 @@ RUN                 =
 #--------------------------------
 
 ARFLAGS              = -r
-ASFLAGS              = --abi=coffabi \
-                       -s \
-                       -v28 \
+ASFLAGS              = -s \
                        -ml \
                        $(ASFLAGS_ADDITIONAL)
-CFLAGS               = --abi=coffabi \
-                       --compile_only \
-                       --preproc_dependency="$(@:%.obj=%.dep)" --preproc_with_compile  \
-                       --large_memory_model \
-                       --silicon_version=28 \
+CFLAGS               = --compile_only \
+                       --endian=little \
                        --define="LARGE_MODEL" \
-                       -I"$(F28_HEADERS)" \
-                       -I"$(F28_HEADERS)/include" \
-                       -I"$(TI_INCLUDE)" \
+                       -i"$(F28_HEADERS)" \
+                       -i"$(F28_HEADERS)/include" \
+                       -i"$(TI_INCLUDE)" \
+                       -Ooff \
                        -g
 CPPFLAGS             =
 CPP_LDFLAGS          =
 CPP_SHAREDLIB_LDFLAGS  =
-OBJCOPYFLAGS_DWO     =  "$<"
 DOWNLOAD_FLAGS       = $(TARGET_LOAD_CMD_ARGS) $(PRODUCT)
 EXECUTE_FLAGS        =
-OBJCOPYFLAGS_HEX     =  -i "$<" -o "$@" -order MS -romwidth 16 -q
-LDFLAGS              = --abi=coffabi \
-                       -z -I$(TI_LIB) \
+LDFLAGS              = -z -I$(TI_LIB) \
                        --stack_size=$(STACK_SIZE) --warn_sections \
-                       --heap_size=$(HEAP_SIZE) \
+                       --heap_size=2048 \
                        --reread_libs --rom_model \
-                       --priority \
                        -m"$(PRODUCT_NAME).map"
 MEX_CPPFLAGS         =
 MEX_CPPLDFLAGS       =
 MEX_CFLAGS           =
 MEX_LDFLAGS          =
-MAKE_FLAGS           = -f $(MAKEFILE)
+MAKE_FLAGS           = -B -f $(MAKEFILE)
 SHAREDLIB_LDFLAGS    =
 
 
@@ -273,64 +259,21 @@ CPPFLAGS += $(CPPFLAGS_BASIC)
 ###########################################################################
 
 
-#-------------------------------------------
-# Post build updates - DEP, HEX, DWO/ELF
-#-------------------------------------------
 all :
-ifeq ($(DEPRULES),1)
-ifneq ("$$(wildcard *.dep)","")
-#--------------------------
-# Dependency file updates
-#--------------------------
-postbuild : $(PRODUCT_DEP)
-
-$(PRODUCT_DEP): $(PRODUCT)
-	@echo "### Updating dependency files ..."
-	PowerShell -ExecutionPolicy Bypass -command "& '$(DEPFILE_UPDATE)'"
-	@echo "### Done Updating dependency files ..."
-endif
-endif
 
 ifeq ($(PRODUCT_TYPE),"executable")
-#--------------------------
-# ELF to hex converter
-#--------------------------
-postbuild : $(PRODUCT_HEX)
-
-$(PRODUCT_HEX): $(PRODUCT)
-	@echo "### Invoking postbuild tool "Hex Converter" on "$<"..."
-	$(CCSINSTALLDIR)/bin/hex2000 $(OBJCOPYFLAGS_HEX)
-	@echo "### Done Invoking postbuild tool "Hex Converter" ..."
-
-#--------------------------
-# DWO converter
-#--------------------------
-postbuild : $(PRODUCT_DWO)
-
-$(PRODUCT_DWO): $(PRODUCT)
-	@echo "### Invoking postbuild tool "DWO Converter" on "$<"..."
-	$(TI_C2000_SHARED_DIR)/tools/bin/win64/extractDWARF.exe $(OBJCOPYFLAGS_DWO)
-	@echo "### Done Invoking postbuild tool "DWO Converter" ..."
+postbuild : $(PRODUCT)
+	@echo "### Creating ELF file from "$<"..."
+	copy $(subst /,\,$(PRODUCT)) $(subst /,\,$(PRODUCT_ELF))
+	@echo "### Done creating ELF file ..."
 
 endif
-
-#--------------------------
-# Dependency based build rule
-#--------------------------
-ifeq ($(DEPRULES),1) 
-ALL_DEPS:=$(patsubst %.obj,%.d,$(ALL_OBJS))
-all:
-else
-ALL_DEPS:=
-endif
-
 
 
 
 -include codertarget_assembly_flags.mk
 -include ../codertarget_assembly_flags.mk
 -include ../../codertarget_assembly_flags.mk
--include $(ALL_DEPS)
 
 
 ###########################################################################
@@ -390,7 +333,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 
 
 %.obj : %.asm
-	$(AS) $(ASFLAGS) --output_file="$@" "$<"
+	$(AS) $(ASFLAGS) "$<"
 
 
 %.obj : %.cpp
@@ -406,7 +349,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 
 
 %.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.asm
-	$(AS) $(ASFLAGS) --output_file="$@" "$<"
+	$(AS) $(ASFLAGS) "$<"
 
 
 %.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
@@ -422,7 +365,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 
 
 %.obj : $(START_DIR)/codegen/lib/pso/%.asm
-	$(AS) $(ASFLAGS) --output_file="$@" "$<"
+	$(AS) $(ASFLAGS) "$<"
 
 
 %.obj : $(START_DIR)/codegen/lib/pso/%.cpp
@@ -438,7 +381,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 
 
 %.obj : $(START_DIR)/%.asm
-	$(AS) $(ASFLAGS) --output_file="$@" "$<"
+	$(AS) $(ASFLAGS) "$<"
 
 
 %.obj : $(START_DIR)/%.cpp
@@ -596,15 +539,14 @@ info :
 	@echo "### MEX_CPPFLAGS = $(MEX_CPPFLAGS)"
 	@echo "### MEX_LDFLAGS = $(MEX_LDFLAGS)"
 	@echo "### MEX_CPPLDFLAGS = $(MEX_CPPLDFLAGS)"
-	@echo "### OBJCOPYFLAGS_HEX = $(OBJCOPYFLAGS_HEX)"
-	@echo "### OBJCOPYFLAGS_DWO = $(OBJCOPYFLAGS_DWO)"
+	@echo "###  = "
 	@echo "### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
 	@echo "### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
 	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
 
 
 clean : 
-	$(ECHO) "### Deleting all derived files..."
+	$(ECHO) "### Deleting all derived files ..."
 	$(RM) $(subst /,\,$(PRODUCT))
 	$(RM) $(subst /,\,$(ALL_OBJS))
 	$(RM) *Object

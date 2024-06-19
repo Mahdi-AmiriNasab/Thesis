@@ -1,8 +1,8 @@
 /*
  * File: sort.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -17,29 +17,30 @@
  * Arguments    : double x_data[]
  *                const int *x_size
  *                int idx_data[]
- *                int *idx_size
- * Return Type  : void
+ * Return Type  : int
  */
-void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
+int sort(double x_data[], const int *x_size, int idx_data[])
 {
   static double xwork_data[100];
-  static double x4[4];
   static int iwork_data[100];
   int ib;
+  int idx_size;
   int k;
-  signed char perm[4];
-  ib = (signed char)*x_size;
-  *idx_size = (signed char)*x_size;
+  idx_size = *x_size;
+  ib = *x_size;
   if (ib - 1 >= 0) {
-    memset(&idx_data[0], 0, ib * sizeof(int));
+    memset(&idx_data[0], 0, (unsigned int)ib * sizeof(int));
   }
   if (*x_size != 0) {
+    double x4[4];
+    int b_i1;
+    int i;
+    int i1;
     int i2;
     int i3;
     int i4;
     int n;
     int nNaNs;
-    int quartetOffset;
     signed char idx4[4];
     n = *x_size;
     x4[0] = 0.0;
@@ -50,15 +51,13 @@ void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
     idx4[2] = 0;
     x4[3] = 0.0;
     idx4[3] = 0;
-    if (ib - 1 >= 0) {
-      memset(&iwork_data[0], 0, ib * sizeof(int));
-    }
     ib = *x_size;
     if (ib - 1 >= 0) {
-      memset(&xwork_data[0], 0, ib * sizeof(double));
+      memset(&iwork_data[0], 0, (unsigned int)ib * sizeof(int));
+      memset(&xwork_data[0], 0, (unsigned int)ib * sizeof(double));
     }
     nNaNs = 0;
-    ib = -1;
+    ib = 0;
     for (k = 0; k < n; k++) {
       if (rtIsNaN(x_data[k])) {
         i3 = (n - nNaNs) - 1;
@@ -67,17 +66,17 @@ void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
         nNaNs++;
       } else {
         ib++;
-        idx4[ib] = (signed char)(k + 1);
-        x4[ib] = x_data[k];
-        if (ib + 1 == 4) {
+        idx4[ib - 1] = (signed char)(k + 1);
+        x4[ib - 1] = x_data[k];
+        if (ib == 4) {
           double d;
           double d1;
-          quartetOffset = k - nNaNs;
+          ib = k - nNaNs;
           if (x4[0] >= x4[1]) {
-            ib = 1;
+            i1 = 1;
             i2 = 2;
           } else {
-            ib = 2;
+            i1 = 2;
             i2 = 1;
           }
           if (x4[2] >= x4[3]) {
@@ -87,67 +86,64 @@ void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
             i3 = 4;
             i4 = 3;
           }
-          d = x4[ib - 1];
-          d1 = x4[i3 - 1];
-          if (d >= d1) {
-            d = x4[i2 - 1];
-            if (d >= d1) {
-              perm[0] = (signed char)ib;
-              perm[1] = (signed char)i2;
-              perm[2] = (signed char)i3;
-              perm[3] = (signed char)i4;
-            } else if (d >= x4[i4 - 1]) {
-              perm[0] = (signed char)ib;
-              perm[1] = (signed char)i3;
-              perm[2] = (signed char)i2;
-              perm[3] = (signed char)i4;
+          d = x4[i3 - 1];
+          d1 = x4[i1 - 1];
+          if (d1 >= d) {
+            d1 = x4[i2 - 1];
+            if (d1 >= d) {
+              i = i1;
+              b_i1 = i2;
+              i1 = i3;
+              i2 = i4;
+            } else if (d1 >= x4[i4 - 1]) {
+              i = i1;
+              b_i1 = i3;
+              i1 = i2;
+              i2 = i4;
             } else {
-              perm[0] = (signed char)ib;
-              perm[1] = (signed char)i3;
-              perm[2] = (signed char)i4;
-              perm[3] = (signed char)i2;
+              i = i1;
+              b_i1 = i3;
+              i1 = i4;
             }
           } else {
-            d1 = x4[i4 - 1];
-            if (d >= d1) {
-              if (x4[i2 - 1] >= d1) {
-                perm[0] = (signed char)i3;
-                perm[1] = (signed char)ib;
-                perm[2] = (signed char)i2;
-                perm[3] = (signed char)i4;
+            d = x4[i4 - 1];
+            if (d1 >= d) {
+              if (x4[i2 - 1] >= d) {
+                i = i3;
+                b_i1 = i1;
+                i1 = i2;
+                i2 = i4;
               } else {
-                perm[0] = (signed char)i3;
-                perm[1] = (signed char)ib;
-                perm[2] = (signed char)i4;
-                perm[3] = (signed char)i2;
+                i = i3;
+                b_i1 = i1;
+                i1 = i4;
               }
             } else {
-              perm[0] = (signed char)i3;
-              perm[1] = (signed char)i4;
-              perm[2] = (signed char)ib;
-              perm[3] = (signed char)i2;
+              i = i3;
+              b_i1 = i4;
             }
           }
-          idx_data[quartetOffset - 3] = idx4[perm[0] - 1];
-          idx_data[quartetOffset - 2] = idx4[perm[1] - 1];
-          idx_data[quartetOffset - 1] = idx4[perm[2] - 1];
-          idx_data[quartetOffset] = idx4[perm[3] - 1];
-          x_data[quartetOffset - 3] = x4[perm[0] - 1];
-          x_data[quartetOffset - 2] = x4[perm[1] - 1];
-          x_data[quartetOffset - 1] = x4[perm[2] - 1];
-          x_data[quartetOffset] = x4[perm[3] - 1];
-          ib = -1;
+          idx_data[ib - 3] = idx4[i - 1];
+          idx_data[ib - 2] = idx4[b_i1 - 1];
+          idx_data[ib - 1] = idx4[i1 - 1];
+          idx_data[ib] = idx4[i2 - 1];
+          x_data[ib - 3] = x4[i - 1];
+          x_data[ib - 2] = x4[b_i1 - 1];
+          x_data[ib - 1] = x4[i1 - 1];
+          x_data[ib] = x4[i2 - 1];
+          ib = 0;
         }
       }
     }
-    i4 = (n - nNaNs) - 1;
-    if (ib + 1 > 0) {
+    i4 = *x_size - nNaNs;
+    if (ib > 0) {
+      signed char perm[4];
       perm[1] = 0;
       perm[2] = 0;
       perm[3] = 0;
-      if (ib + 1 == 1) {
+      if (ib == 1) {
         perm[0] = 1;
-      } else if (ib + 1 == 2) {
+      } else if (ib == 2) {
         if (x4[0] >= x4[1]) {
           perm[0] = 1;
           perm[1] = 2;
@@ -182,28 +178,28 @@ void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
         perm[1] = 2;
         perm[2] = 1;
       }
-      for (k = 0; k <= ib; k++) {
-        i3 = perm[k] - 1;
-        quartetOffset = (i4 - ib) + k;
-        idx_data[quartetOffset] = idx4[i3];
-        x_data[quartetOffset] = x4[i3];
+      i = (unsigned char)ib;
+      for (k = 0; k < i; k++) {
+        i3 = (i4 - ib) + k;
+        b_i1 = perm[k];
+        idx_data[i3] = idx4[b_i1 - 1];
+        x_data[i3] = x4[b_i1 - 1];
       }
     }
-    ib = (nNaNs >> 1) + 1;
-    for (k = 0; k <= ib - 2; k++) {
-      quartetOffset = (i4 + k) + 1;
-      i2 = idx_data[quartetOffset];
+    i1 = nNaNs >> 1;
+    for (k = 0; k < i1; k++) {
+      ib = i4 + k;
+      i2 = idx_data[ib];
       i3 = (n - k) - 1;
-      idx_data[quartetOffset] = idx_data[i3];
+      idx_data[ib] = idx_data[i3];
       idx_data[i3] = i2;
-      x_data[quartetOffset] = xwork_data[i3];
-      x_data[i3] = xwork_data[quartetOffset];
+      x_data[ib] = xwork_data[i3];
+      x_data[i3] = xwork_data[ib];
     }
     if ((nNaNs & 1) != 0) {
-      ib += i4;
-      x_data[ib] = xwork_data[ib];
+      i = i4 + i1;
+      x_data[i] = xwork_data[i];
     }
-    i4 = *x_size - nNaNs;
     if (i4 > 1) {
       i3 = i4 >> 2;
       i2 = 4;
@@ -211,10 +207,9 @@ void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
         if ((i3 & 1) != 0) {
           i3--;
           ib = i2 * i3;
-          quartetOffset = i4 - ib;
-          if (quartetOffset > i2) {
-            merge(idx_data, x_data, ib, i2, quartetOffset - i2, iwork_data,
-                  xwork_data);
+          i1 = i4 - ib;
+          if (i1 > i2) {
+            merge(idx_data, x_data, ib, i2, i1 - i2, iwork_data, xwork_data);
           }
         }
         ib = i2 << 1;
@@ -235,14 +230,15 @@ void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size)
         iwork_data[k] = idx_data[ib];
       }
       for (k = i4; k >= 1; k--) {
-        ib = (nNaNs + k) - 1;
-        x_data[ib] = x_data[k - 1];
-        idx_data[ib] = idx_data[k - 1];
+        i = (nNaNs + k) - 1;
+        x_data[i] = x_data[k - 1];
+        idx_data[i] = idx_data[k - 1];
       }
-      memcpy(&x_data[0], &xwork_data[0], nNaNs * sizeof(double));
-      memcpy(&idx_data[0], &iwork_data[0], nNaNs * sizeof(int));
+      memcpy(&x_data[0], &xwork_data[0], (unsigned int)nNaNs * sizeof(double));
+      memcpy(&idx_data[0], &iwork_data[0], (unsigned int)nNaNs * sizeof(int));
     }
   }
+  return idx_size;
 }
 
 /*

@@ -1,4 +1,11 @@
 function [equalization_overlap] = calculate_overlap(cell_values)
+	
+    % global no_ovp_plot_flag;
+	%if isempty(no_ovp_plot_flag)
+	%	no_ovp_plot_flag = 0;
+	%end
+
+    no_ovp_plot_flag = 0;
 
     % Find local maxima (peaks) and minima (valleys)
     is_peak = islocalmax(cell_values);
@@ -6,7 +13,7 @@ function [equalization_overlap] = calculate_overlap(cell_values)
     
     peak_indices = find(is_peak);
     valley_indices = find(is_valley);
-
+	
     % Calculate local heights of peaks
     local_heights = zeros(size(peak_indices));
     for i = 1:length(peak_indices)
@@ -47,23 +54,24 @@ function [equalization_overlap] = calculate_overlap(cell_values)
     equalization_overlap = sum(local_heights) + sum(local_depths);
     
     % Plot cell_values with peaks and valleys highlighted
-    global no_ovp_plot_flag;
-    if no_ovp_plot_flag == 1
-        
-        f_ovp = figure;
-        plot(cell_values)
-        xlim([1 size(cell_values, 2)]);
-        ylim([0 100]);
-        ylabel('% SOC');
-        xlabel('step');
-        hold on
-        plot(peak_indices, cell_values(peak_indices), 'ro')
-        plot(valley_indices, cell_values(valley_indices), 'bo')
-        hold off
-        close(f_ovp);
-        no_ovp_plot_flag = 0;
+	if coder.target('MATLAB')
+		if 0 %no_ovp_plot_flag == 1
+			
+			f_ovp = figure;
+			plot(cell_values)
+			xlim([1 size(cell_values, 2)]);
+			ylim([0 100]);
+			ylabel('% SOC');
+			xlabel('step');
+			hold on
+			plot(peak_indices, cell_values(peak_indices), 'ro')
+			plot(valley_indices, cell_values(valley_indices), 'bo')
+			hold off
+			close(f_ovp);
+			% no_ovp_plot_flag = 0;
 
-    end
+		end
+	end
 end
 
 

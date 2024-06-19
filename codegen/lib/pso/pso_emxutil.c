@@ -1,8 +1,8 @@
 /*
  * File: pso_emxutil.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -36,15 +36,16 @@ void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel)
       i = 16;
     }
     while (i < newNumel) {
-      if (i > 1073741823) {
-        i = MAX_int32_T;
+      if (i > 16383) {
+        i = MAX_int16_T;
       } else {
         i *= 2;
       }
     }
-    newData = calloc((unsigned int)i, sizeof(signed char));
+    newData = malloc((unsigned int)i * sizeof(signed char));
     if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(signed char) * oldNumel);
+      memcpy(newData, emxArray->data,
+             sizeof(signed char) * (unsigned int)oldNumel);
       if (emxArray->canFreeData) {
         free(emxArray->data);
       }
@@ -78,15 +79,15 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
       i = 16;
     }
     while (i < newNumel) {
-      if (i > 1073741823) {
-        i = MAX_int32_T;
+      if (i > 16383) {
+        i = MAX_int16_T;
       } else {
         i *= 2;
       }
     }
-    newData = calloc((unsigned int)i, sizeof(double));
+    newData = malloc((unsigned int)i * sizeof(double));
     if (emxArray->data != NULL) {
-      memcpy(newData, emxArray->data, sizeof(double) * oldNumel);
+      memcpy(newData, emxArray->data, sizeof(double) * (unsigned int)oldNumel);
       if (emxArray->canFreeData) {
         free(emxArray->data);
       }
@@ -163,7 +164,7 @@ void emxInit_real_T(emxArray_real_T **pEmxArray, int numDimensions)
   emxArray = *pEmxArray;
   emxArray->data = (double *)NULL;
   emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc(sizeof(int) * numDimensions);
+  emxArray->size = (int *)malloc(sizeof(int) * (unsigned int)numDimensions);
   emxArray->allocatedSize = 0;
   emxArray->canFreeData = true;
   for (i = 0; i < numDimensions; i++) {

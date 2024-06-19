@@ -1,8 +1,8 @@
 /*
  * File: find.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -11,24 +11,23 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const boolean_T x[9]
+ * Arguments    : const bool x[9]
  *                int i_data[]
- *                int *i_size
- * Return Type  : void
+ * Return Type  : int
  */
-void b_eml_find(const boolean_T x[9], int i_data[], int *i_size)
+int b_eml_find(const bool x[9], int i_data[])
 {
-  int idx;
+  int i_size;
   int ii;
-  boolean_T exitg1;
-  idx = 0;
+  bool exitg1;
+  i_size = 0;
   ii = 0;
   exitg1 = false;
   while ((!exitg1) && (ii < 9)) {
     if (x[ii]) {
-      idx++;
-      i_data[idx - 1] = ii + 1;
-      if (idx >= 9) {
+      i_size++;
+      i_data[i_size - 1] = ii + 1;
+      if (i_size >= 9) {
         exitg1 = true;
       } else {
         ii++;
@@ -37,27 +36,26 @@ void b_eml_find(const boolean_T x[9], int i_data[], int *i_size)
       ii++;
     }
   }
-  if (idx < 1) {
-    *i_size = 0;
-  } else {
-    *i_size = idx;
+  if (i_size < 1) {
+    i_size = 0;
   }
+  return i_size;
 }
 
 /*
- * Arguments    : const boolean_T x_data[]
+ * Arguments    : const bool x_data[]
  *                const int x_size[2]
  *                int i_data[]
  *                int i_size[2]
  * Return Type  : void
  */
-void c_eml_find(const boolean_T x_data[], const int x_size[2], int i_data[],
+void c_eml_find(const bool x_data[], const int x_size[2], int i_data[],
                 int i_size[2])
 {
   int idx;
   int ii;
   int nx;
-  boolean_T exitg1;
+  bool exitg1;
   nx = x_size[1];
   idx = 0;
   i_size[0] = 1;
@@ -90,16 +88,16 @@ void c_eml_find(const boolean_T x_data[], const int x_size[2], int i_data[],
 }
 
 /*
- * Arguments    : const boolean_T x[9]
+ * Arguments    : const bool x[9]
  *                int i_data[]
  *                int i_size[2]
  * Return Type  : void
  */
-void eml_find(const boolean_T x[9], int i_data[], int i_size[2])
+void eml_find(const bool x[9], int i_data[], int i_size[2])
 {
   int idx;
   int ii;
-  boolean_T exitg1;
+  bool exitg1;
   idx = 0;
   i_size[0] = 1;
   ii = 0;

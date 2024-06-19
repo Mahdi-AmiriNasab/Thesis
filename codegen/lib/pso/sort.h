@@ -1,8 +1,8 @@
 /*
  * File: sort.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef SORT_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void sort(double x_data[], const int *x_size, int idx_data[], int *idx_size);
+int sort(double x_data[], const int *x_size, int idx_data[]);
 
 #ifdef __cplusplus
 }
