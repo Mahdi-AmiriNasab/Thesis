@@ -2,7 +2,7 @@
  * File: find.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef FIND_H
@@ -18,12 +18,12 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-int b_eml_find(const bool x[9], int i_data[]);
+int b_eml_find(const boolean_T x[9], int i_data[]);
 
-void c_eml_find(const bool x_data[], const int x_size[2], int i_data[],
+void c_eml_find(const boolean_T x_data[], const int x_size[2], int i_data[],
                 int i_size[2]);
 
-void eml_find(const bool x[9], int i_data[], int i_size[2]);
+void eml_find(const boolean_T x[9], int i_data[], int i_size[2]);
 
 #ifdef __cplusplus
 }

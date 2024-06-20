@@ -2,7 +2,7 @@
  * File: log_clustering.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef LOG_CLUSTERING_H
@@ -19,8 +19,7 @@ extern "C" {
 
 /* Function Declarations */
 double log_clustering(const double soc_in[9], double mp,
-                      double *lg_inconsistency, double *lg_eq_overlap,
-                      double soc_profile_data[], int soc_profile_size[2]);
+                      double *lg_inconsistency, double *lg_eq_overlap);
 
 #ifdef __cplusplus
 }

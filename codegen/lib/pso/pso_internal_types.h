@@ -2,7 +2,7 @@
  * File: pso_internal_types.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef PSO_INTERNAL_TYPES_H
@@ -44,7 +44,7 @@ typedef struct {
 #ifndef typedef_c_captured_var
 #define typedef_c_captured_var
 typedef struct {
-  bool contents[9];
+  boolean_T contents[9];
 } c_captured_var;
 #endif /* typedef_c_captured_var */
 

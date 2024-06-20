@@ -2,7 +2,7 @@
  * File: isLocalExtrema.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef ISLOCALEXTREMA_H
@@ -19,7 +19,7 @@ extern "C" {
 
 /* Function Declarations */
 int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
-                     bool maxVals_data[], double P_data[], int *P_size);
+                     boolean_T maxVals_data[], double P_data[], int *P_size);
 
 #ifdef __cplusplus
 }

@@ -2,7 +2,7 @@
  * File: minOrMax.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -19,8 +19,11 @@
  */
 double b_maximum(const double x_data[], int x_size)
 {
+  double d;
   double ex;
+  int idx;
   int k;
+  boolean_T exitg1;
   if (x_size <= 2) {
     if (x_size == 1) {
       ex = x_data[0];
@@ -31,11 +34,9 @@ double b_maximum(const double x_data[], int x_size)
       }
     }
   } else {
-    int idx;
     if (!rtIsNaN(x_data[0])) {
       idx = 1;
     } else {
-      bool exitg1;
       idx = 0;
       k = 2;
       exitg1 = false;
@@ -54,7 +55,6 @@ double b_maximum(const double x_data[], int x_size)
       ex = x_data[idx - 1];
       idx++;
       for (k = idx; k <= x_size; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex < d) {
           ex = d;
@@ -73,9 +73,12 @@ double b_maximum(const double x_data[], int x_size)
  */
 double b_minimum(const double x_data[], const int x_size[2], int *idx)
 {
+  double d;
   double ex;
+  int i;
   int k;
   int last;
+  boolean_T exitg1;
   last = x_size[1];
   if (x_size[1] <= 2) {
     if (x_size[1] == 1) {
@@ -94,7 +97,6 @@ double b_minimum(const double x_data[], const int x_size[2], int *idx)
     if (!rtIsNaN(x_data[0])) {
       *idx = 1;
     } else {
-      bool exitg1;
       *idx = 0;
       k = 2;
       exitg1 = false;
@@ -111,11 +113,9 @@ double b_minimum(const double x_data[], const int x_size[2], int *idx)
       ex = x_data[0];
       *idx = 1;
     } else {
-      int i;
       ex = x_data[*idx - 1];
       i = *idx + 1;
       for (k = i; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex > d) {
           ex = d;
@@ -135,9 +135,12 @@ double b_minimum(const double x_data[], const int x_size[2], int *idx)
  */
 double c_maximum(const double x_data[], const int x_size[2], int *idx)
 {
+  double d;
   double ex;
+  int i;
   int k;
   int last;
+  boolean_T exitg1;
   last = x_size[1];
   if (x_size[1] <= 2) {
     if (x_size[1] == 1) {
@@ -156,7 +159,6 @@ double c_maximum(const double x_data[], const int x_size[2], int *idx)
     if (!rtIsNaN(x_data[0])) {
       *idx = 1;
     } else {
-      bool exitg1;
       *idx = 0;
       k = 2;
       exitg1 = false;
@@ -173,11 +175,9 @@ double c_maximum(const double x_data[], const int x_size[2], int *idx)
       ex = x_data[0];
       *idx = 1;
     } else {
-      int i;
       ex = x_data[*idx - 1];
       i = *idx + 1;
       for (k = i; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex < d) {
           ex = d;
@@ -196,9 +196,12 @@ double c_maximum(const double x_data[], const int x_size[2], int *idx)
  */
 double c_minimum(const double x_data[], const int x_size[2])
 {
+  double d;
   double ex;
+  int idx;
   int k;
   int last;
+  boolean_T exitg1;
   last = x_size[1];
   if (x_size[1] <= 2) {
     if (x_size[1] == 1) {
@@ -210,11 +213,9 @@ double c_minimum(const double x_data[], const int x_size[2])
       }
     }
   } else {
-    int idx;
     if (!rtIsNaN(x_data[0])) {
       idx = 1;
     } else {
-      bool exitg1;
       idx = 0;
       k = 2;
       exitg1 = false;
@@ -233,7 +234,6 @@ double c_minimum(const double x_data[], const int x_size[2])
       ex = x_data[idx - 1];
       idx++;
       for (k = idx; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex > d) {
           ex = d;
@@ -251,9 +251,12 @@ double c_minimum(const double x_data[], const int x_size[2])
  */
 double d_maximum(const double x_data[], const int x_size[2])
 {
+  double d;
   double ex;
+  int idx;
   int k;
   int last;
+  boolean_T exitg1;
   last = x_size[1];
   if (x_size[1] <= 2) {
     if (x_size[1] == 1) {
@@ -265,11 +268,9 @@ double d_maximum(const double x_data[], const int x_size[2])
       }
     }
   } else {
-    int idx;
     if (!rtIsNaN(x_data[0])) {
       idx = 1;
     } else {
-      bool exitg1;
       idx = 0;
       k = 2;
       exitg1 = false;
@@ -288,7 +289,6 @@ double d_maximum(const double x_data[], const int x_size[2])
       ex = x_data[idx - 1];
       idx++;
       for (k = idx; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex < d) {
           ex = d;
@@ -307,9 +307,12 @@ double d_maximum(const double x_data[], const int x_size[2])
 double d_minimum(const emxArray_real_T *x, int *idx)
 {
   const double *x_data;
+  double d;
   double ex;
+  int i;
   int k;
   int last;
+  boolean_T exitg1;
   x_data = x->data;
   last = x->size[0];
   if (x->size[0] <= 2) {
@@ -329,7 +332,6 @@ double d_minimum(const emxArray_real_T *x, int *idx)
     if (!rtIsNaN(x_data[0])) {
       *idx = 1;
     } else {
-      bool exitg1;
       *idx = 0;
       k = 2;
       exitg1 = false;
@@ -346,11 +348,9 @@ double d_minimum(const emxArray_real_T *x, int *idx)
       ex = x_data[0];
       *idx = 1;
     } else {
-      int i;
       ex = x_data[*idx - 1];
       i = *idx + 1;
       for (k = i; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex > d) {
           ex = d;
@@ -370,9 +370,12 @@ double d_minimum(const emxArray_real_T *x, int *idx)
 double e_maximum(const emxArray_real_T *x, int *idx)
 {
   const double *x_data;
+  double d;
   double ex;
+  int i;
   int k;
   int last;
+  boolean_T exitg1;
   x_data = x->data;
   last = x->size[0];
   if (x->size[0] <= 2) {
@@ -392,7 +395,6 @@ double e_maximum(const emxArray_real_T *x, int *idx)
     if (!rtIsNaN(x_data[0])) {
       *idx = 1;
     } else {
-      bool exitg1;
       *idx = 0;
       k = 2;
       exitg1 = false;
@@ -409,11 +411,9 @@ double e_maximum(const emxArray_real_T *x, int *idx)
       ex = x_data[0];
       *idx = 1;
     } else {
-      int i;
       ex = x_data[*idx - 1];
       i = *idx + 1;
       for (k = i; k <= last; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex < d) {
           ex = d;
@@ -431,13 +431,14 @@ double e_maximum(const emxArray_real_T *x, int *idx)
  */
 double e_minimum(const double x[9])
 {
+  double d;
   double ex;
   int idx;
   int k;
+  boolean_T exitg1;
   if (!rtIsNaN(x[0])) {
     idx = 1;
   } else {
-    bool exitg1;
     idx = 0;
     k = 2;
     exitg1 = false;
@@ -456,7 +457,6 @@ double e_minimum(const double x[9])
     ex = x[idx - 1];
     idx++;
     for (k = idx; k < 10; k++) {
-      double d;
       d = x[k - 1];
       if (ex > d) {
         ex = d;
@@ -472,13 +472,14 @@ double e_minimum(const double x[9])
  */
 double f_maximum(const double x[9])
 {
+  double d;
   double ex;
   int idx;
   int k;
+  boolean_T exitg1;
   if (!rtIsNaN(x[0])) {
     idx = 1;
   } else {
-    bool exitg1;
     idx = 0;
     k = 2;
     exitg1 = false;
@@ -497,7 +498,6 @@ double f_maximum(const double x[9])
     ex = x[idx - 1];
     idx++;
     for (k = idx; k < 10; k++) {
-      double d;
       d = x[k - 1];
       if (ex < d) {
         ex = d;
@@ -513,13 +513,14 @@ double f_maximum(const double x[9])
  */
 double maximum(const double x[9])
 {
+  double d;
   double ex;
   int idx;
   int k;
+  boolean_T exitg1;
   if (!rtIsNaN(x[0])) {
     idx = 1;
   } else {
-    bool exitg1;
     idx = 0;
     k = 2;
     exitg1 = false;
@@ -538,7 +539,6 @@ double maximum(const double x[9])
     ex = x[idx - 1];
     idx++;
     for (k = idx; k < 10; k++) {
-      double d;
       d = x[k - 1];
       if (ex < d) {
         ex = d;
@@ -555,8 +555,11 @@ double maximum(const double x[9])
  */
 double minimum(const double x_data[], int x_size)
 {
+  double d;
   double ex;
+  int idx;
   int k;
+  boolean_T exitg1;
   if (x_size <= 2) {
     if (x_size == 1) {
       ex = x_data[0];
@@ -567,11 +570,9 @@ double minimum(const double x_data[], int x_size)
       }
     }
   } else {
-    int idx;
     if (!rtIsNaN(x_data[0])) {
       idx = 1;
     } else {
-      bool exitg1;
       idx = 0;
       k = 2;
       exitg1 = false;
@@ -590,7 +591,6 @@ double minimum(const double x_data[], int x_size)
       ex = x_data[idx - 1];
       idx++;
       for (k = idx; k <= x_size; k++) {
-        double d;
         d = x_data[k - 1];
         if (ex > d) {
           ex = d;

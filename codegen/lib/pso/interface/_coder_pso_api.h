@@ -2,7 +2,7 @@
  * File: _coder_pso_api.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef _CODER_PSO_API_H
@@ -76,9 +76,10 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void pso(real_T soc_in[9], real_T mp, real_T w_time, real_T w_inconsistency,
-         real_T w_eq_overlap, struct0_T *global_best, struct1_T eq_step_data[],
-         int32_T eq_step_size[2], struct2_T *stio);
+void psoXilWrapper(const real_T soc_in[9], real_T mp, real_T w_time,
+                   real_T w_inconsistency, real_T w_eq_overlap,
+                   struct0_T *global_best, struct1_T eq_step_data[],
+                   int32_T eq_step_size[2], struct2_T *stio);
 
 void pso_api(const mxArray *const prhs[5], int32_T nlhs,
              const mxArray *plhs[3]);
@@ -92,6 +93,8 @@ void pso_terminate(void);
 void pso_xil_shutdown(void);
 
 void pso_xil_terminate(void);
+
+void xil_terminate(void);
 
 #ifdef __cplusplus
 }

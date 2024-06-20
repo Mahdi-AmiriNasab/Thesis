@@ -2,7 +2,7 @@
  * File: pdist2.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -20,10 +20,11 @@
  */
 void pdist2(const double Xin[9], const double Yin[9], double D[81])
 {
+  double D_tmp;
   int ii;
   int qq;
-  bool logIndX[9];
-  bool logIndY[9];
+  boolean_T logIndX[9];
+  boolean_T logIndY[9];
   for (qq = 0; qq < 81; qq++) {
     D[qq] = rtNaN;
   }
@@ -41,7 +42,6 @@ void pdist2(const double Xin[9], const double Yin[9], double D[81])
     if (logIndY[ii]) {
       for (qq = 0; qq < 9; qq++) {
         if (logIndX[qq]) {
-          double D_tmp;
           D_tmp = Xin[qq] - Yin[ii];
           D[qq + 9 * ii] = sqrt(D_tmp * D_tmp);
         }

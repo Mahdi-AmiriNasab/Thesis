@@ -2,7 +2,7 @@
  * File: pso_types.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef PSO_TYPES_H
@@ -71,7 +71,7 @@ struct emxArray_real_T {
   int *size;
   int allocatedSize;
   int numDimensions;
-  bool canFreeData;
+  boolean_T canFreeData;
 };
 #endif /* struct_emxArray_real_T */
 #ifndef typedef_emxArray_real_T
@@ -86,7 +86,7 @@ struct emxArray_int8_T {
   int *size;
   int allocatedSize;
   int numDimensions;
-  bool canFreeData;
+  boolean_T canFreeData;
 };
 #endif /* struct_emxArray_int8_T */
 #ifndef typedef_emxArray_int8_T

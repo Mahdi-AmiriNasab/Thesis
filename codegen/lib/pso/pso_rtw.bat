@@ -1,8 +1,10 @@
 @echo off
 
+set MATLAB=C:\Program Files\MATLAB\R2023b
+
 cd .
 
-if "%1"=="" ("C:\PROGRA~1\Matlab\R2023b\bin\win64\gmake"  -B -f pso_rtw.mk all) else ("C:\PROGRA~1\Matlab\R2023b\bin\win64\gmake"  -B -f pso_rtw.mk %1)
+if "%1"=="" ("C:\PROGRA~1\MATLAB\R2023b\bin\win64\gmake"  -f pso_rtw.mk all) else ("C:\PROGRA~1\MATLAB\R2023b\bin\win64\gmake"  -f pso_rtw.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit /B 0

@@ -2,7 +2,7 @@
  * File: db.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -32,25 +32,26 @@ void ExpandCluster(const d_captured_var *D, const captured_var *epsilon,
                    const captured_var *MinPts, double i,
                    emxArray_real_T *Neighbors, double C)
 {
+  static int Neighbors2_data[9];
+  double j_tmp;
   double *Neighbors_data;
-  int Neighbors2_data[9];
+  int Neighbors2_size[2];
   int b_i;
   int i1;
   unsigned int k;
+  int loop_ub;
+  boolean_T b_D[9];
   Neighbors_data = Neighbors->data;
   /* 'db:24' IDX(i)=C; */
   IDX->contents[(int)i - 1] = C;
   /* 'db:25' k = 1; */
   k = 1U;
   /* 'db:26' while true */
-  double j_tmp;
   do {
     /* 'db:27' j = Neighbors(k); */
     j_tmp = Neighbors_data[(int)k - 1];
     /* 'db:28' if ~visited(j) */
     if (!visited->contents[(int)j_tmp - 1]) {
-      int Neighbors2_size[2];
-      bool b_D[9];
       /* 'db:29' visited(j)=true; */
       visited->contents[(int)j_tmp - 1] = true;
       /* 'db:30' Neighbors2=RegionQuery(j); */
@@ -62,7 +63,6 @@ void ExpandCluster(const d_captured_var *D, const captured_var *epsilon,
       eml_find(b_D, Neighbors2_data, Neighbors2_size);
       /* 'db:31' if numel(Neighbors2)>=MinPts */
       if (Neighbors2_size[1] >= MinPts->contents) {
-        int loop_ub;
         /* 'db:32' Neighbors=[Neighbors Neighbors2]; */
         b_i = Neighbors->size[1];
         loop_ub = Neighbors2_size[1];
@@ -83,7 +83,7 @@ void ExpandCluster(const d_captured_var *D, const captured_var *epsilon,
     /* 'db:38' k = k + 1; */
     k++;
     /* 'db:39' if k > numel(Neighbors) */
-  } while (!((long)k > Neighbors->size[1]));
+  } while (!(k > (unsigned int)Neighbors->size[1]));
 }
 
 /*

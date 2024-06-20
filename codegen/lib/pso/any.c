@@ -2,7 +2,7 @@
  * File: any.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -11,38 +11,33 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const bool x_data[]
- *                const int x_size[2]
- *                bool y_data[]
+ * Arguments    : const boolean_T x_data[]
+ *                boolean_T y_data[]
  * Return Type  : int
  */
-int any(const bool x_data[], const int x_size[2], bool y_data[])
+int any(const boolean_T x_data[], boolean_T y_data[])
 {
   int i1;
   int i2;
+  int ix;
   int j;
-  int loop_ub;
-  int vstride;
   int y_size;
-  y_size = x_size[0];
-  loop_ub = x_size[0];
-  vstride = x_size[0];
-  i2 = x_size[0] << 3;
+  boolean_T exitg1;
+  y_size = 100;
   i1 = 0;
-  for (j = 0; j < loop_ub; j++) {
-    int ix;
-    bool exitg1;
+  i2 = 800;
+  for (j = 0; j < 100; j++) {
     y_data[j] = false;
     i1++;
     i2++;
     ix = i1;
     exitg1 = false;
-    while ((!exitg1) && ((vstride > 0) && (ix <= i2))) {
+    while ((!exitg1) && (ix <= i2)) {
       if (x_data[ix - 1]) {
         y_data[j] = true;
         exitg1 = true;
       } else {
-        ix += vstride;
+        ix += 100;
       }
     }
   }

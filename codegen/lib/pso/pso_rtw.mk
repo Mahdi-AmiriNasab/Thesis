@@ -2,7 +2,7 @@
 ## Makefile generated for component 'pso'. 
 ## 
 ## Makefile     : pso_rtw.mk
-## Generated on : Wed Jun 19 19:10:52 2024
+## Generated on : Thu Jun 20 18:29:54 2024
 ## Final product: ./pso.lib
 ## Product type : static-library
 ## 
@@ -15,19 +15,21 @@
 # Macro Descriptions:
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
+# CMD_FILE                Command file
 # MODELLIB                Static library target
 
 PRODUCT_NAME              = pso
 MAKEFILE                  = pso_rtw.mk
-MATLAB_ROOT               = C:/PROGRA~1/Matlab/R2023b
-MATLAB_BIN                = C:/PROGRA~1/Matlab/R2023b/bin
+MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2023b
+MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2023b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
-START_DIR                 = E:/Thesis
-TGT_FCN_LIB               = ISO_C
+START_DIR                 = D:/Thesis
+TGT_FCN_LIB               = None
 SOLVER_OBJ                = 
 CLASSIC_INTERFACE         = 0
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 
 RELATIVE_PATH_TO_ANCHOR   = ../../..
+CMD_FILE                  = pso_rtw.rsp
 C_STANDARD_OPTS           = 
 CPP_STANDARD_OPTS         = 
 MODELLIB                  = pso.lib
@@ -36,37 +38,23 @@ MODELLIB                  = pso.lib
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          Texas Instruments Code Composer Studio (ARM)
-# Supported Version(s):    
+# Toolchain Name:          LCC-win64 v2.4.1 | gmake (64-bit Windows)
+# Supported Version(s):    2.4.1
 # ToolchainInfo Version:   2023b
 # Specification Revision:  1.0
 # 
-#-------------------------------------------
-# Macros assumed to be defined elsewhere
-#-------------------------------------------
-
-# CCSARMINSTALLDIR
-# CCSSCRIPTINGDIR
-# TARGET_LOAD_CMD_ARGS
-# TIF28XXXSYSSWDIR
 
 #-----------
 # MACROS
 #-----------
 
-TARGET_SCRIPTINGTOOLS_INSTALLDIR = $(CCSSCRIPTINGDIR)
-TI_TOOLS                         = $(CCSARMINSTALLDIR)/bin
-TI_INCLUDE                       = $(CCSARMINSTALLDIR)/include
-TI_LIB                           = $(CCSARMINSTALLDIR)/lib
-F28_HEADERS                      = $(TIF28XXXSYSSWDIR)/~SupportFiles/DSP280x_headers
-CCOUTPUTFLAG                     = --output_file=
-LDOUTPUTFLAG                     = --output_file=
-EXE_FILE_EXT                     = $(PROGRAM_FILE_EXT)
-SHELL                            = %SystemRoot%/system32/cmd.exe
-DOWN_EXE_JS                      = $(MATLAB_ROOT)/toolbox/c2b/tic2000/CCS_Config/runProgram_M3.js
-CCS_CONFIG                       = $(MATLAB_ROOT)/toolbox/c2b/tic2000/CCS_Config/f28x_generic.ccxml
-PRODUCT_HEX                      = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).hex
-PRODUCT_ELF                      = $(RELATIVE_PATH_TO_ANCHOR)/$(PRODUCT_NAME).elf
+SHELL              = cmd
+LCC_ROOT           = $(MATLAB_ROOT)/sys/lcc64/lcc64
+LCC_BUILDLIB       = $(LCC_ROOT)/bin/buildlib
+LCC_LIB            = $(LCC_ROOT)/lib64
+MW_EXTERNLIB_DIR   = $(MATLAB_ROOT)/extern/lib/win64/microsoft
+MW_LIB_DIR         = $(MATLAB_ROOT)/lib/win64
+TOOLCHAIN_INCLUDES = -I$(LCC_ROOT)/include64
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
@@ -76,39 +64,24 @@ TOOLCHAIN_LIBS =
 # BUILD TOOL COMMANDS
 #------------------------
 
-# Assembler: C2000 ARM Assembler
-AS_PATH = $(TI_TOOLS)
-AS = "$(AS_PATH)/armcl"
+# C Compiler: Lcc-win64 C Compiler
+CC_PATH = $(LCC_ROOT)/bin
+CC = "$(CC_PATH)/lcc64"
 
-# C Compiler: C2000 ARM C Compiler
-CC_PATH = $(TI_TOOLS)
-CC = "$(CC_PATH)/armcl"
+# Linker: Lcc-win64 Linker
+LD_PATH = $(LCC_ROOT)/bin
+LD = "$(LD_PATH)/lcclnk64"
 
-# Linker: C2000 ARM Linker
-LD_PATH = $(TI_TOOLS)
-LD = "$(LD_PATH)/armcl"
-
-# C++ Compiler: C2000 ARM C++ Compiler
-CPP_PATH = $(TI_TOOLS)
-CPP = "$(CPP_PATH)/armcl"
-
-# C++ Linker: C2000 ARM C++ Linker
-CPP_LD_PATH = $(TI_TOOLS)
-CPP_LD = "$(CPP_LD_PATH)/armcl"
-
-# Archiver: C2000 ARM Archiver
-AR_PATH = $(TI_TOOLS)
-AR = "$(AR_PATH)/armar"
+# Archiver: Lcc-win64 Archiver
+AR_PATH = $(LCC_ROOT)/bin
+AR = "$(AR_PATH)/lcclib64"
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_ARCH_BIN)
 MEX = "$(MEX_PATH)/mex"
 
-# tiCCSArm: tiCCSArm
-
 # Download: Download
-DOWNLOAD_PATH = $(TARGET_SCRIPTINGTOOLS_INSTALLDIR)/bin
-DOWNLOAD = "$(DOWNLOAD_PATH)/dss.bat"
+DOWNLOAD =
 
 # Execute: Execute
 EXECUTE = $(PRODUCT)
@@ -122,18 +95,12 @@ MAKE = "$(MAKE_PATH)/gmake"
 # Directives/Utilities
 #-------------------------
 
-ASDEBUG             = -g
-AS_OUTPUT_FLAG      =
 CDEBUG              = -g
-C_OUTPUT_FLAG       = --output_file=
+C_OUTPUT_FLAG       = -Fo
 LDDEBUG             =
-OUTPUT_FLAG         = --output_file=
-CPPDEBUG            = -g
-CPP_OUTPUT_FLAG     = --output_file=
-CPPLDDEBUG          =
-OUTPUT_FLAG         = --output_file=
+OUTPUT_FLAG         = -o
 ARDEBUG             =
-STATICLIB_OUTPUT_FLAG =
+STATICLIB_OUTPUT_FLAG = /out:
 MEX_DEBUG           = -g
 RM                  = @del /F
 ECHO                = @echo
@@ -144,34 +111,20 @@ RUN                 =
 # "Debug" Build Configuration
 #--------------------------------
 
-ARFLAGS              = -r
-ASFLAGS              = -s \
-                       -ml \
-                       $(ASFLAGS_ADDITIONAL)
-CFLAGS               = --compile_only \
-                       --endian=little \
-                       --define="LARGE_MODEL" \
-                       -i"$(F28_HEADERS)" \
-                       -i"$(F28_HEADERS)/include" \
-                       -i"$(TI_INCLUDE)" \
-                       -Ooff \
-                       -g
-CPPFLAGS             =
-CPP_LDFLAGS          =
-CPP_SHAREDLIB_LDFLAGS  =
-DOWNLOAD_FLAGS       = $(TARGET_LOAD_CMD_ARGS) $(PRODUCT)
+ARFLAGS              = $(ARDEBUG)
+CFLAGS               = -c -w -noregistrylookup -nodeclspec -I$(LCC_ROOT)/include64 \
+                       $(CDEBUG)
+DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              = -z -I$(TI_LIB) \
-                       --stack_size=$(STACK_SIZE) --warn_sections \
-                       --heap_size=2048 \
-                       --reread_libs --rom_model \
-                       -m"$(PRODUCT_NAME).map"
+LDFLAGS              = -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL) \
+                       $(LDDEBUG)
 MEX_CPPFLAGS         =
 MEX_CPPLDFLAGS       =
 MEX_CFLAGS           =
 MEX_LDFLAGS          =
-MAKE_FLAGS           = -B -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    =
+MAKE_FLAGS           = -f $(MAKEFILE)
+SHAREDLIB_LDFLAGS    = -dll -entry LibMain -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL) $(DEF_FILE) \
+                       $(LDDEBUG)
 
 
 
@@ -246,44 +199,18 @@ CFLAGS_BASIC = $(DEFINES) $(INCLUDES)
 
 CFLAGS += $(CFLAGS_BASIC)
 
-#-----------------
-# C++ Compiler
-#-----------------
-
-CPPFLAGS_BASIC = $(DEFINES) $(INCLUDES)
-
-CPPFLAGS += $(CPPFLAGS_BASIC)
-
 ###########################################################################
 ## INLINED COMMANDS
 ###########################################################################
-
-
-all :
-
-ifeq ($(PRODUCT_TYPE),"executable")
-postbuild : $(PRODUCT)
-	@echo "### Creating ELF file from "$<"..."
-	copy $(subst /,\,$(PRODUCT)) $(subst /,\,$(PRODUCT_ELF))
-	@echo "### Done creating ELF file ..."
-
-endif
-
-
-
--include codertarget_assembly_flags.mk
--include ../codertarget_assembly_flags.mk
--include ../../codertarget_assembly_flags.mk
-
 
 ###########################################################################
 ## PHONY TARGETS
 ###########################################################################
 
-.PHONY : all build clean info prebuild postbuild download execute
+.PHONY : all build clean info prebuild download execute
 
 
-all : build postbuild
+all : build
 	@echo "### Successfully generated all binary outputs."
 
 
@@ -293,10 +220,7 @@ build : prebuild $(PRODUCT)
 prebuild : 
 
 
-postbuild : $(PRODUCT)
-
-
-download : postbuild
+download : $(PRODUCT)
 
 
 execute : download
@@ -312,7 +236,7 @@ execute : download
 
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 	@echo "### Creating static library "$(PRODUCT)" ..."
-	$(AR) $(ARFLAGS)  $(PRODUCT) $(OBJS)
+	$(AR) $(ARFLAGS) /out:$(PRODUCT) @$(CMD_FILE)
 	@echo "### Created: $(PRODUCT)"
 
 
@@ -324,184 +248,136 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.obj : %.cla
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
-
-
 %.obj : %.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
-
-
-%.obj : %.asm
-	$(AS) $(ASFLAGS) "$<"
-
-
-%.obj : %.cpp
-	$(CPP) $(CPPFLAGS) --output_file="$@" "$<"
-
-
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cla
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 %.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
-
-
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.asm
-	$(AS) $(ASFLAGS) "$<"
-
-
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
-	$(CPP) $(CPPFLAGS) --output_file="$@" "$<"
-
-
-%.obj : $(START_DIR)/codegen/lib/pso/%.cla
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 %.obj : $(START_DIR)/codegen/lib/pso/%.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
-
-
-%.obj : $(START_DIR)/codegen/lib/pso/%.asm
-	$(AS) $(ASFLAGS) "$<"
-
-
-%.obj : $(START_DIR)/codegen/lib/pso/%.cpp
-	$(CPP) $(CPPFLAGS) --output_file="$@" "$<"
-
-
-%.obj : $(START_DIR)/%.cla
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 %.obj : $(START_DIR)/%.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
-
-
-%.obj : $(START_DIR)/%.asm
-	$(AS) $(ASFLAGS) "$<"
-
-
-%.obj : $(START_DIR)/%.cpp
-	$(CPP) $(CPPFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pso_data.obj : $(START_DIR)/codegen/lib/pso/pso_data.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 rt_nonfinite.obj : $(START_DIR)/codegen/lib/pso/rt_nonfinite.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 rtGetNaN.obj : $(START_DIR)/codegen/lib/pso/rtGetNaN.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 rtGetInf.obj : $(START_DIR)/codegen/lib/pso/rtGetInf.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pso_initialize.obj : $(START_DIR)/codegen/lib/pso/pso_initialize.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pso_terminate.obj : $(START_DIR)/codegen/lib/pso/pso_terminate.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pso.obj : $(START_DIR)/codegen/lib/pso/pso.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 rand.obj : $(START_DIR)/codegen/lib/pso/rand.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pso_DBSCAN.obj : $(START_DIR)/codegen/lib/pso/pso_DBSCAN.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pdist2.obj : $(START_DIR)/codegen/lib/pso/pdist2.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 find.obj : $(START_DIR)/codegen/lib/pso/find.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 db.obj : $(START_DIR)/codegen/lib/pso/db.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 sortrowsLE.obj : $(START_DIR)/codegen/lib/pso/sortrowsLE.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 minOrMax.obj : $(START_DIR)/codegen/lib/pso/minOrMax.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 all.obj : $(START_DIR)/codegen/lib/pso/all.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 any.obj : $(START_DIR)/codegen/lib/pso/any.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 calculate_overlap.obj : $(START_DIR)/codegen/lib/pso/calculate_overlap.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 isLocalExtrema.obj : $(START_DIR)/codegen/lib/pso/isLocalExtrema.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 diff.obj : $(START_DIR)/codegen/lib/pso/diff.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 log_clustering.obj : $(START_DIR)/codegen/lib/pso/log_clustering.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 eml_rand_mt19937ar_stateful.obj : $(START_DIR)/codegen/lib/pso/eml_rand_mt19937ar_stateful.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 balance_costF.obj : $(START_DIR)/codegen/lib/pso/balance_costF.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 sortrows.obj : $(START_DIR)/codegen/lib/pso/sortrows.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 nullAssignment.obj : $(START_DIR)/codegen/lib/pso/nullAssignment.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 sort.obj : $(START_DIR)/codegen/lib/pso/sort.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 sortIdx.obj : $(START_DIR)/codegen/lib/pso/sortIdx.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 balance_soc.obj : $(START_DIR)/codegen/lib/pso/balance_soc.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pso_emxutil.obj : $(START_DIR)/codegen/lib/pso/pso_emxutil.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 pso_rtwutil.obj : $(START_DIR)/codegen/lib/pso/pso_rtwutil.c
-	$(CC) $(CFLAGS) --output_file="$@" "$<"
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
 ###########################################################################
@@ -527,19 +403,14 @@ info :
 	@echo "### MODELREF_LIBS = $(MODELREF_LIBS)"
 	@echo "### SYSTEM_LIBS = $(SYSTEM_LIBS)"
 	@echo "### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS)"
-	@echo "### ASFLAGS = $(ASFLAGS)"
 	@echo "### CFLAGS = $(CFLAGS)"
 	@echo "### LDFLAGS = $(LDFLAGS)"
 	@echo "### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS)"
-	@echo "### CPPFLAGS = $(CPPFLAGS)"
-	@echo "### CPP_LDFLAGS = $(CPP_LDFLAGS)"
-	@echo "### CPP_SHAREDLIB_LDFLAGS = $(CPP_SHAREDLIB_LDFLAGS)"
 	@echo "### ARFLAGS = $(ARFLAGS)"
 	@echo "### MEX_CFLAGS = $(MEX_CFLAGS)"
 	@echo "### MEX_CPPFLAGS = $(MEX_CPPFLAGS)"
 	@echo "### MEX_LDFLAGS = $(MEX_LDFLAGS)"
 	@echo "### MEX_CPPLDFLAGS = $(MEX_CPPLDFLAGS)"
-	@echo "###  = "
 	@echo "### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS)"
 	@echo "### EXECUTE_FLAGS = $(EXECUTE_FLAGS)"
 	@echo "### MAKE_FLAGS = $(MAKE_FLAGS)"
@@ -549,7 +420,6 @@ clean :
 	$(ECHO) "### Deleting all derived files ..."
 	$(RM) $(subst /,\,$(PRODUCT))
 	$(RM) $(subst /,\,$(ALL_OBJS))
-	$(RM) *Object
 	$(ECHO) "### Deleted all derived files."
 
 

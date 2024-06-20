@@ -2,7 +2,7 @@
  * File: _coder_pso_mex.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -35,7 +35,7 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
  */
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
-  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1L,
+  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
                            NULL, "windows-1252", true);
   return emlrtRootTLSGlobal;
 }
@@ -61,26 +61,26 @@ void unsafe_pso_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
   int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 5L) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5L, 12L, 5L,
-                        4L, 3L, "pso");
+  if (nrhs != 5) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4,
+                        3, "pso");
   }
-  if (nlhs > 3L) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3L, 4L, 3L,
+  if (nlhs > 3) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 3,
                         "pso");
   }
   /* Call the function. */
-  for (i = 0L; i < 5L; i++) {
+  for (i = 0; i < 5; i++) {
     b_prhs[i] = prhs[i];
   }
   pso_api(b_prhs, nlhs, outputs);
   /* Copy over outputs to the caller. */
-  if (nlhs < 1L) {
-    i1 = 1L;
+  if (nlhs < 1) {
+    i1 = 1;
   } else {
     i1 = nlhs;
   }
-  emlrtReturnArrays(i1, &plhs[0L], &outputs[0L]);
+  emlrtReturnArrays(i1, &plhs[0], &outputs[0]);
 }
 
 /*

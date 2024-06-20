@@ -2,7 +2,7 @@
  * File: sortrowsLE.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -16,14 +16,15 @@
  *                int col
  *                int irow1
  *                int irow2
- * Return Type  : bool
+ * Return Type  : boolean_T
  */
-bool sortrowsLE(const double v[18], int col, int irow1, int irow2)
+boolean_T sortrowsLE(const double v[18], int col, int irow1, int irow2)
 {
   double d;
   double d1;
   int abscolk;
-  bool p;
+  boolean_T b;
+  boolean_T p;
   p = true;
   if (col < 0) {
     abscolk = 0;
@@ -33,7 +34,6 @@ bool sortrowsLE(const double v[18], int col, int irow1, int irow2)
   d = v[(irow1 + 9 * abscolk) - 1];
   d1 = v[(irow2 + 9 * abscolk) - 1];
   if (!(d == d1)) {
-    bool b;
     b = rtIsNaN(d);
     if ((!b) || (!rtIsNaN(d1))) {
       if (col < 0) {

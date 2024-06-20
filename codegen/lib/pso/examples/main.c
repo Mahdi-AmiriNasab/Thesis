@@ -2,7 +2,7 @@
  * File: main.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /*************************************************************************/
@@ -92,9 +92,8 @@ You do not need to do this more than one time. */
  * Arguments    : void
  * Return Type  : void
  */
-int main(int argc, char *argv[])
+void main_pso(void)
 {
-
   static emxArray_struct1_T_1x50 eq_step;
   static struct2_T stio;
   static double dv[9];

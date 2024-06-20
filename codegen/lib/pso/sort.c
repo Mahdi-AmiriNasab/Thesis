@@ -2,7 +2,7 @@
  * File: sort.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -22,26 +22,29 @@
 int sort(double x_data[], const int *x_size, int idx_data[])
 {
   static double xwork_data[100];
+  static double x4[4];
   static int iwork_data[100];
+  static signed char idx4[4];
+  static signed char perm[4];
+  double d;
+  double d1;
+  int b_i1;
+  int i;
+  int i1;
+  int i2;
+  int i3;
+  int i4;
   int ib;
   int idx_size;
   int k;
+  int n;
+  int nNaNs;
   idx_size = *x_size;
   ib = *x_size;
   if (ib - 1 >= 0) {
     memset(&idx_data[0], 0, (unsigned int)ib * sizeof(int));
   }
   if (*x_size != 0) {
-    double x4[4];
-    int b_i1;
-    int i;
-    int i1;
-    int i2;
-    int i3;
-    int i4;
-    int n;
-    int nNaNs;
-    signed char idx4[4];
     n = *x_size;
     x4[0] = 0.0;
     idx4[0] = 0;
@@ -69,8 +72,6 @@ int sort(double x_data[], const int *x_size, int idx_data[])
         idx4[ib - 1] = (signed char)(k + 1);
         x4[ib - 1] = x_data[k];
         if (ib == 4) {
-          double d;
-          double d1;
           ib = k - nNaNs;
           if (x4[0] >= x4[1]) {
             i1 = 1;
@@ -137,7 +138,6 @@ int sort(double x_data[], const int *x_size, int idx_data[])
     }
     i4 = *x_size - nNaNs;
     if (ib > 0) {
-      signed char perm[4];
       perm[1] = 0;
       perm[2] = 0;
       perm[3] = 0;

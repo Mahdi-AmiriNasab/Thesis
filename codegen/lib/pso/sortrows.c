@@ -2,7 +2,7 @@
  * File: sortrows.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -30,9 +30,14 @@ void b_sortrows(double y_data[], const int y_size[2])
   int i2;
   int j;
   int k;
+  int kEnd;
   int n;
+  int p;
   int pEnd;
+  int q;
   int qEnd;
+  int v1_tmp_tmp_tmp;
+  int v2_tmp_tmp_tmp;
   n = y_size[0] + 1;
   i2 = y_size[0];
   if (i2 - 1 >= 0) {
@@ -60,9 +65,6 @@ void b_sortrows(double y_data[], const int y_size[2])
     i2 = b_i << 1;
     j = 1;
     for (pEnd = b_i + 1; pEnd < n; pEnd = qEnd + b_i) {
-      int kEnd;
-      int p;
-      int q;
       p = j;
       q = pEnd;
       qEnd = j + i2;
@@ -72,8 +74,6 @@ void b_sortrows(double y_data[], const int y_size[2])
       k = 0;
       kEnd = qEnd - j;
       while (k + 1 <= kEnd) {
-        int v1_tmp_tmp_tmp;
-        int v2_tmp_tmp_tmp;
         v1_tmp_tmp_tmp = idx_data[p - 1];
         v1 = y_data[(v1_tmp_tmp_tmp + y_size[0]) - 1];
         v2_tmp_tmp_tmp = idx_data[q - 1];
@@ -128,10 +128,16 @@ void c_sortrows(double y[18])
   double ycol[9];
   int idx[9];
   int iwork[9];
+  int b_i;
   int i;
+  int i1;
+  int i2;
   int j;
   int k;
+  int kEnd;
+  int p;
   int pEnd;
+  int q;
   int qEnd;
   if (sortrowsLE(y, 2, 1, 2)) {
     idx[0] = 1;
@@ -164,13 +170,9 @@ void c_sortrows(double y[18])
   idx[8] = 9;
   i = 2;
   while (i < 9) {
-    int i2;
     i2 = i << 1;
     j = 1;
     for (pEnd = i + 1; pEnd < 10; pEnd = qEnd + i) {
-      int kEnd;
-      int p;
-      int q;
       p = j;
       q = pEnd;
       qEnd = j + i2;
@@ -180,8 +182,6 @@ void c_sortrows(double y[18])
       k = 0;
       kEnd = qEnd - j;
       while (k + 1 <= kEnd) {
-        int b_i;
-        int i1;
         b_i = idx[p - 1];
         i1 = idx[q - 1];
         if (sortrowsLE(y, 2, b_i, i1)) {
@@ -229,12 +229,18 @@ void c_sortrows(double y[18])
 void sortrows(double y[18])
 {
   static double ycol[9];
-  int idx[9];
-  int iwork[9];
+  static int idx[9];
+  static int iwork[9];
+  int b_i;
   int i;
+  int i1;
+  int i2;
   int j;
   int k;
+  int kEnd;
+  int p;
   int pEnd;
+  int q;
   int qEnd;
   if (sortrowsLE(y, -1, 1, 2)) {
     idx[0] = 1;
@@ -267,13 +273,9 @@ void sortrows(double y[18])
   idx[8] = 9;
   i = 2;
   while (i < 9) {
-    int i2;
     i2 = i << 1;
     j = 1;
     for (pEnd = i + 1; pEnd < 10; pEnd = qEnd + i) {
-      int kEnd;
-      int p;
-      int q;
       p = j;
       q = pEnd;
       qEnd = j + i2;
@@ -283,8 +285,6 @@ void sortrows(double y[18])
       k = 0;
       kEnd = qEnd - j;
       while (k + 1 <= kEnd) {
-        int b_i;
-        int i1;
         b_i = idx[p - 1];
         i1 = idx[q - 1];
         if (sortrowsLE(y, -1, b_i, i1)) {

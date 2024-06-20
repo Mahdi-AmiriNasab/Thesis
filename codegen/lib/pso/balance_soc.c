@@ -2,7 +2,7 @@
  * File: balance_soc.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -54,6 +54,7 @@ double balance_soc(const double cluster_clt_res_cell[81],
   static double source_cells_data[9];
   emxArray_real_T *varargin_1;
   emxArray_real_T *y;
+  double d;
   double destination_clt_idx_1;
   double destination_neighbor_lower_cell;
   double destination_neighbor_upper_cell;
@@ -78,6 +79,7 @@ double balance_soc(const double cluster_clt_res_cell[81],
   int snuc_validity;
   int soc_mismatch;
   int source_clt_cnt;
+  signed char tmp_data[9];
   /* 'balance_soc:4' blc_time = 0; */
   /* 'balance_soc:5' blc_range = ep; */
   /* 'balance_soc:6' soc_out = soc_in; */
@@ -235,10 +237,10 @@ double balance_soc(const double cluster_clt_res_cell[81],
       }
     }
     i = varargin_1->size[0];
-    varargin_1->size[0] = y->size[1L];
+    varargin_1->size[0] = y->size[1];
     emxEnsureCapacity_real_T(varargin_1, i);
     varargin_1_data = varargin_1->data;
-    snlc_validity = y->size[1L];
+    snlc_validity = y->size[1];
     for (i = 0; i < snlc_validity; i++) {
       varargin_1_data[i] = soc_sorted_clusters_data[(int)y_data[i] - 1];
     }
@@ -366,10 +368,10 @@ double balance_soc(const double cluster_clt_res_cell[81],
       }
     }
     i = varargin_1->size[0];
-    varargin_1->size[0] = y->size[1L];
+    varargin_1->size[0] = y->size[1];
     emxEnsureCapacity_real_T(varargin_1, i);
     varargin_1_data = varargin_1->data;
-    snlc_validity = y->size[1L];
+    snlc_validity = y->size[1];
     for (i = 0; i < snlc_validity; i++) {
       varargin_1_data[i] = soc_sorted_clusters_data[(int)y_data[i] - 1];
     }
@@ -447,8 +449,6 @@ double balance_soc(const double cluster_clt_res_cell[81],
   /* 	%% equalizing */
   /* 'balance_soc:183' while soc_mismatch */
   while (soc_mismatch != 0) {
-    double d;
-    signed char tmp_data[9];
     /*  % clustering */
     /*  [cluster] = pso_DBSCAN(soc_out, mp, ep); */
     /*  % sorting cluster.clt_res_soc_av  */
@@ -541,8 +541,8 @@ double balance_soc(const double cluster_clt_res_cell[81],
     /* 'balance_soc:257' inc = step_source; */
     /* 'balance_soc:258' soc_new(1 ,source_cells) = soc_new(1 ,source_cells) -
      * inc; */
-    snuc_validity = source_cells_size[1L];
-    snlc_validity = source_cells_size[1L];
+    snuc_validity = source_cells_size[1];
+    snlc_validity = source_cells_size[1];
     for (i = 0; i < snlc_validity; i++) {
       d = source_cells_data[i];
       tmp_data[i] = (signed char)((signed char)(int)d - 1);
@@ -554,8 +554,8 @@ double balance_soc(const double cluster_clt_res_cell[81],
     /* 'balance_soc:260' dec = step_destination; */
     /* 'balance_soc:261' soc_new(1 ,destination_cells) = soc_new(1
      * ,destination_cells) + dec; */
-    snuc_validity = destination_cells_size[1L];
-    snlc_validity = destination_cells_size[1L];
+    snuc_validity = destination_cells_size[1];
+    snlc_validity = destination_cells_size[1];
     for (i = 0; i < snlc_validity; i++) {
       d = destination_cells_data[i];
       tmp_data[i] = (signed char)((signed char)(int)d - 1);
@@ -602,7 +602,7 @@ double balance_soc(const double cluster_clt_res_cell[81],
      */
     /* 'balance_soc:294' if coder.target('MATLAB') */
   }
-  /* 		%% calculate balancing time */
+  /*         %% calculate balancing time */
   /* 'balance_soc:300' source_batt_number = source_clt_cnt; */
   /* 'balance_soc:301' destination_batt_number = destination_clt_cnt; */
   /*  calculate balancing current */

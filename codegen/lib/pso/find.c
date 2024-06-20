@@ -2,7 +2,7 @@
  * File: find.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -11,15 +11,15 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const bool x[9]
+ * Arguments    : const boolean_T x[9]
  *                int i_data[]
  * Return Type  : int
  */
-int b_eml_find(const bool x[9], int i_data[])
+int b_eml_find(const boolean_T x[9], int i_data[])
 {
   int i_size;
   int ii;
-  bool exitg1;
+  boolean_T exitg1;
   i_size = 0;
   ii = 0;
   exitg1 = false;
@@ -43,19 +43,19 @@ int b_eml_find(const bool x[9], int i_data[])
 }
 
 /*
- * Arguments    : const bool x_data[]
+ * Arguments    : const boolean_T x_data[]
  *                const int x_size[2]
  *                int i_data[]
  *                int i_size[2]
  * Return Type  : void
  */
-void c_eml_find(const bool x_data[], const int x_size[2], int i_data[],
+void c_eml_find(const boolean_T x_data[], const int x_size[2], int i_data[],
                 int i_size[2])
 {
   int idx;
   int ii;
   int nx;
-  bool exitg1;
+  boolean_T exitg1;
   nx = x_size[1];
   idx = 0;
   i_size[0] = 1;
@@ -88,16 +88,16 @@ void c_eml_find(const bool x_data[], const int x_size[2], int i_data[],
 }
 
 /*
- * Arguments    : const bool x[9]
+ * Arguments    : const boolean_T x[9]
  *                int i_data[]
  *                int i_size[2]
  * Return Type  : void
  */
-void eml_find(const bool x[9], int i_data[], int i_size[2])
+void eml_find(const boolean_T x[9], int i_data[], int i_size[2])
 {
   int idx;
   int ii;
-  bool exitg1;
+  boolean_T exitg1;
   idx = 0;
   i_size[0] = 1;
   ii = 0;

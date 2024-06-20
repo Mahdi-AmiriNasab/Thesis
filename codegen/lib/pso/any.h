@@ -2,7 +2,7 @@
  * File: any.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef ANY_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-int any(const bool x_data[], const int x_size[2], bool y_data[]);
+int any(const boolean_T x_data[], boolean_T y_data[]);
 
 #ifdef __cplusplus
 }

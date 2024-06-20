@@ -2,7 +2,7 @@
  * File: pso_DBSCAN.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -56,6 +56,7 @@ b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
   static d_captured_var D;
   static double clt_noise_soc_cpy[18];
   static double Neighbors_data[9];
+  static int tmp_data[9];
   c_captured_var visited;
   captured_var MinPts;
   captured_var epsilon;
@@ -63,8 +64,8 @@ b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
   double cluster_cell_cnt;
   double mn_tmp;
   double *r1;
-  int tmp_data[9];
   int Neighbors_size[2];
+  int tmp_size[2];
   int C;
   int b_i;
   int i;
@@ -74,10 +75,10 @@ b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
   int s_index;
   signed char b_tmp_data[9];
   signed char c_tmp_data[9];
-  bool b_cluster_clt_noise_soc[18];
-  bool b_D[9];
-  bool exitg1;
-  bool y;
+  boolean_T b_cluster_clt_noise_soc[18];
+  boolean_T b_D[9];
+  boolean_T exitg1;
+  boolean_T y;
   /* 'pso_DBSCAN:6' cell_cnt = length(socs); */
   /* 'pso_DBSCAN:8' cluster = struct('cell_cnt', 0, 'average', 0, 'dbscan_res',
    * zeros(1, 9) ... */
@@ -99,7 +100,12 @@ b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
   for (k = 0; k < 8; k++) {
     mn_tmp += socs[k + 1];
   }
-  *cluster_average = trunc(mn_tmp / 9.0);
+  mn_tmp /= 9.0;
+  if (mn_tmp < 0.0) {
+    *cluster_average = ceil(mn_tmp);
+  } else {
+    *cluster_average = floor(mn_tmp);
+  }
   /* 'pso_DBSCAN:20' error = [(1:cell_cnt); socs - repmat(cluster.average, 1,
    * cell_cnt)]; */
   /* 'pso_DBSCAN:22' dbscan_res_clm = db(error(2, :)', eps, minPts); */
@@ -124,7 +130,6 @@ b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
   for (i = 0; i < 9; i++) {
     /* 'db:10' if ~visited(i) */
     if (!visited.contents[i]) {
-      int tmp_size[2];
       /* 'db:11' visited(i)=true; */
       visited.contents[i] = true;
       /* 'db:12' Neighbors=RegionQuery(i); */
@@ -246,7 +251,11 @@ b_pso_DBSCAN(const double socs[9], double minPts, double *cluster_average,
     /* 'pso_DBSCAN:54' if(~isnan(mn_tmp)) */
     if (!rtIsNaN(mn_tmp)) {
       /* 'pso_DBSCAN:55' cluster.clt_res_soc_av(s_index, 1) = fix(mn_tmp); */
-      cluster_clt_res_soc_av[s_index] = trunc(mn_tmp);
+      if (mn_tmp < 0.0) {
+        cluster_clt_res_soc_av[s_index] = ceil(mn_tmp);
+      } else {
+        cluster_clt_res_soc_av[s_index] = floor(mn_tmp);
+      }
       /* 'pso_DBSCAN:56' cluster.clt_res_soc_av(s_index, 2) = s_index; */
       cluster_clt_res_soc_av[s_index + 9] = s_index + 1;
     }
@@ -595,6 +604,7 @@ pso_DBSCAN(const double socs[9], double minPts, double eps,
   double *r1;
   int tmp_data[9];
   int Neighbors_size[2];
+  int tmp_size[2];
   int C;
   int b_i;
   int i;
@@ -604,10 +614,10 @@ pso_DBSCAN(const double socs[9], double minPts, double eps,
   int s_index;
   signed char b_tmp_data[9];
   signed char c_tmp_data[9];
-  bool b_cluster_clt_noise_soc[18];
-  bool b_D[9];
-  bool exitg1;
-  bool y;
+  boolean_T b_cluster_clt_noise_soc[18];
+  boolean_T b_D[9];
+  boolean_T exitg1;
+  boolean_T y;
   /* 'pso_DBSCAN:6' cell_cnt = length(socs); */
   /* 'pso_DBSCAN:8' cluster = struct('cell_cnt', 0, 'average', 0, 'dbscan_res',
    * zeros(1, 9) ... */
@@ -629,7 +639,12 @@ pso_DBSCAN(const double socs[9], double minPts, double eps,
   for (k = 0; k < 8; k++) {
     mn_tmp += socs[k + 1];
   }
-  *cluster_average = trunc(mn_tmp / 9.0);
+  mn_tmp /= 9.0;
+  if (mn_tmp < 0.0) {
+    *cluster_average = ceil(mn_tmp);
+  } else {
+    *cluster_average = floor(mn_tmp);
+  }
   /* 'pso_DBSCAN:20' error = [(1:cell_cnt); socs - repmat(cluster.average, 1,
    * cell_cnt)]; */
   /* 'pso_DBSCAN:22' dbscan_res_clm = db(error(2, :)', eps, minPts); */
@@ -654,7 +669,6 @@ pso_DBSCAN(const double socs[9], double minPts, double eps,
   for (i = 0; i < 9; i++) {
     /* 'db:10' if ~visited(i) */
     if (!visited.contents[i]) {
-      int tmp_size[2];
       /* 'db:11' visited(i)=true; */
       visited.contents[i] = true;
       /* 'db:12' Neighbors=RegionQuery(i); */
@@ -776,7 +790,11 @@ pso_DBSCAN(const double socs[9], double minPts, double eps,
     /* 'pso_DBSCAN:54' if(~isnan(mn_tmp)) */
     if (!rtIsNaN(mn_tmp)) {
       /* 'pso_DBSCAN:55' cluster.clt_res_soc_av(s_index, 1) = fix(mn_tmp); */
-      cluster_clt_res_soc_av[s_index] = trunc(mn_tmp);
+      if (mn_tmp < 0.0) {
+        cluster_clt_res_soc_av[s_index] = ceil(mn_tmp);
+      } else {
+        cluster_clt_res_soc_av[s_index] = floor(mn_tmp);
+      }
       /* 'pso_DBSCAN:56' cluster.clt_res_soc_av(s_index, 2) = s_index; */
       cluster_clt_res_soc_av[s_index + 9] = s_index + 1;
     }

@@ -2,7 +2,7 @@
  * File: rand.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -18,8 +18,11 @@
 double b_rand(void)
 {
   double r;
+  unsigned int u[2];
   int j;
   int kk;
+  unsigned int mti;
+  unsigned int y;
   /* ========================= COPYRIGHT NOTICE ============================ */
   /*  This is a uniform (0,1) pseudorandom number generator based on:        */
   /*                                                                         */
@@ -58,50 +61,46 @@ double b_rand(void)
   /*  OF THIS  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.  */
   /*                                                                         */
   /* =============================   END   ================================= */
-  unsigned long u[2];
   do {
     for (j = 0; j < 2; j++) {
-      unsigned long mti;
-      unsigned long y;
-      mti = state[624] + 1UL;
-      if (state[624] + 1UL >= 625UL) {
+      mti = state[624] + 1U;
+      if (state[624] + 1U >= 625U) {
         for (kk = 0; kk < 227; kk++) {
-          y = (state[kk] & 2147483648UL) | (state[kk + 1] & 2147483647UL);
-          if ((unsigned int)((int)y & 1) == 0U) {
-            y >>= 1;
+          y = (state[kk] & 2147483648U) | (state[kk + 1] & 2147483647U);
+          if ((y & 1U) == 0U) {
+            y >>= 1U;
           } else {
-            y = y >> 1 ^ 2567483615UL;
+            y = y >> 1U ^ 2567483615U;
           }
           state[kk] = state[kk + 397] ^ y;
         }
         for (kk = 0; kk < 396; kk++) {
-          y = (state[kk + 227] & 2147483648UL) |
-              (state[kk + 228] & 2147483647UL);
-          if ((unsigned int)((int)y & 1) == 0U) {
-            y >>= 1;
+          y = (state[kk + 227] & 2147483648U) | (state[kk + 228] & 2147483647U);
+          if ((y & 1U) == 0U) {
+            y >>= 1U;
           } else {
-            y = y >> 1 ^ 2567483615UL;
+            y = y >> 1U ^ 2567483615U;
           }
           state[kk + 227] = state[kk] ^ y;
         }
-        y = (state[623] & 2147483648UL) | (state[0] & 2147483647UL);
-        if ((unsigned int)((int)y & 1) == 0U) {
-          y >>= 1;
+        y = (state[623] & 2147483648U) | (state[0] & 2147483647U);
+        if ((y & 1U) == 0U) {
+          y >>= 1U;
         } else {
-          y = y >> 1 ^ 2567483615UL;
+          y = y >> 1U ^ 2567483615U;
         }
         state[623] = state[396] ^ y;
-        mti = 1UL;
+        mti = 1U;
       }
       y = state[(int)mti - 1];
       state[624] = mti;
-      y ^= y >> 11;
-      y ^= y << 7UL & 2636928640UL;
-      y ^= y << 15UL & 4022730752UL;
-      u[j] = y ^ y >> 18;
+      y ^= y >> 11U;
+      y ^= y << 7U & 2636928640U;
+      y ^= y << 15U & 4022730752U;
+      u[j] = y ^ y >> 18U;
     }
-    u[0] >>= 5;
-    u[1] >>= 6;
+    u[0] >>= 5U;
+    u[1] >>= 6U;
     r = 1.1102230246251565E-16 * ((double)u[0] * 6.7108864E+7 + (double)u[1]);
   } while (r == 0.0);
   return r;

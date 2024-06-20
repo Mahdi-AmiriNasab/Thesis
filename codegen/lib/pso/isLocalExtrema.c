@@ -2,7 +2,7 @@
  * File: isLocalExtrema.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -18,20 +18,22 @@
 
 /* Function Declarations */
 static int getAllLocalMax(const double A_data[], int A_size,
-                          bool maxVals_data[], bool inflectionPts_data[],
+                          boolean_T maxVals_data[],
+                          boolean_T inflectionPts_data[],
                           int *inflectionPts_size);
 
 /* Function Definitions */
 /*
  * Arguments    : const double A_data[]
  *                int A_size
- *                bool maxVals_data[]
- *                bool inflectionPts_data[]
+ *                boolean_T maxVals_data[]
+ *                boolean_T inflectionPts_data[]
  *                int *inflectionPts_size
  * Return Type  : int
  */
 static int getAllLocalMax(const double A_data[], int A_size,
-                          bool maxVals_data[], bool inflectionPts_data[],
+                          boolean_T maxVals_data[],
+                          boolean_T inflectionPts_data[],
                           int *inflectionPts_size)
 {
   static double Vq_data[99];
@@ -41,10 +43,12 @@ static int getAllLocalMax(const double A_data[], int A_size,
   static signed char b_tmp_data[99];
   static signed char c_tmp_data[99];
   static signed char x_data[99];
-  static bool b_uniquePts_data[100];
-  static bool uniquePts_data[100];
-  static bool tmp_data[99];
+  static boolean_T b_uniquePts_data[100];
+  static boolean_T uniquePts_data[100];
+  static boolean_T tmp_data[99];
   emxArray_int8_T *b_y;
+  double tmp;
+  int b_trueCount;
   int i;
   int k;
   int low_i;
@@ -53,9 +57,11 @@ static int getAllLocalMax(const double A_data[], int A_size,
   int mid_i;
   int nz;
   int s_size;
+  int trueCount;
+  signed char i1;
   signed char *y_data;
-  bool exitg1;
-  bool y;
+  boolean_T exitg1;
+  boolean_T y;
   s_size = diff(A_data, A_size, s_data);
   for (k = 0; k < s_size; k++) {
     if (rtIsNaN(s_data[k])) {
@@ -121,9 +127,6 @@ static int getAllLocalMax(const double A_data[], int A_size,
       }
     }
     if (nz > 1) {
-      double tmp;
-      int b_trueCount;
-      int trueCount;
       emxInit_int8_T(&b_y);
       y_data = b_y->data;
       if (s_size < 1) {
@@ -159,7 +162,6 @@ static int getAllLocalMax(const double A_data[], int A_size,
         }
       }
       for (i = 0; i < b_trueCount; i++) {
-        signed char i1;
         i1 = c_tmp_data[i];
         x_data[i] = y_data[i1];
         b_y_data[i] = s_data[i1];
@@ -251,7 +253,7 @@ static int getAllLocalMax(const double A_data[], int A_size,
   }
   maxVals_size = A_size;
   if (A_size - 1 >= 0) {
-    memset(&maxVals_data[0], 0, (unsigned int)A_size * sizeof(bool));
+    memset(&maxVals_data[0], 0, (unsigned int)A_size * sizeof(boolean_T));
   }
   diff(s_data, s_size, b_data);
   nz = A_size - 2;
@@ -282,7 +284,7 @@ static int getAllLocalMax(const double A_data[], int A_size,
     }
     if (A_size - 1 >= 0) {
       memcpy(&uniquePts_data[0], &b_uniquePts_data[0],
-             (unsigned int)A_size * sizeof(bool));
+             (unsigned int)A_size * sizeof(boolean_T));
     }
   }
   if (s_size - 1 < 1) {
@@ -305,17 +307,17 @@ static int getAllLocalMax(const double A_data[], int A_size,
  * Arguments    : double A_data[]
  *                int A_size
  *                double maxNumExt
- *                bool maxVals_data[]
+ *                boolean_T maxVals_data[]
  *                double P_data[]
  *                int *P_size
  * Return Type  : int
  */
 int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
-                     bool maxVals_data[], double P_data[], int *P_size)
+                     boolean_T maxVals_data[], double P_data[], int *P_size)
 {
+  static double leftRange_data[101];
   static double idxTemp_data[100];
   static double c_tmp_data[99];
-  static long leftRange_data[101];
   static int iidx_data[100];
   static signed char ranges_data[202];
   static signed char rightRange_data[102];
@@ -323,11 +325,18 @@ int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
   static signed char b_tmp_data[100];
   static signed char extremaList_data[100];
   static signed char tmp_data[100];
-  static bool flatRegion_data[101];
-  static bool infMaxVals_data[100];
-  static bool inflectionPts_data[100];
-  static bool locUniLeadMax_data[99];
+  static boolean_T flatRegion_data[101];
+  static boolean_T infMaxVals_data[100];
+  static boolean_T inflectionPts_data[100];
+  static boolean_T locUniLeadMax_data[99];
+  double ctr;
+  double localMaxValue_tmp;
+  double localMins_idx_0;
+  double localMins_idx_0_tmp;
+  double localMins_idx_1;
   int b_i;
+  int exitg2;
+  int exitg3;
   int i;
   int i2;
   int k;
@@ -335,6 +344,9 @@ int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
   int nz;
   int right;
   int trueCount;
+  signed char i1;
+  boolean_T colRngTF;
+  boolean_T exitg4;
   *P_size = A_size;
   if (A_size - 1 >= 0) {
     memset(&P_data[0], 0, (unsigned int)A_size * sizeof(double));
@@ -342,13 +354,9 @@ int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
   if (A_size < 3) {
     maxVals_size = A_size;
     if (A_size - 1 >= 0) {
-      memset(&maxVals_data[0], 0, (unsigned int)A_size * sizeof(bool));
+      memset(&maxVals_data[0], 0, (unsigned int)A_size * sizeof(boolean_T));
     }
   } else {
-    double ctr;
-    signed char i1;
-    bool colRngTF;
-    bool exitg4;
     for (i = 0; i < A_size; i++) {
       ctr = A_data[i];
       infMaxVals_data[i] = (rtIsInf(ctr) && (ctr > 0.0));
@@ -395,56 +403,55 @@ int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
         extremaList_data[i] = (signed char)(tmp_data[i] + 1);
       }
       memcpy(&infMaxVals_data[0], &maxVals_data[0],
-             (unsigned int)A_size * sizeof(bool));
+             (unsigned int)A_size * sizeof(boolean_T));
       for (b_i = 0; b_i < trueCount; b_i++) {
         i1 = tmp_data[b_i];
         if (infMaxVals_data[i1]) {
-          ctr = A_data[i1];
-          if (rtIsInf(ctr) || rtIsNaN(ctr)) {
+          localMaxValue_tmp = A_data[i1];
+          if (rtIsInf(localMaxValue_tmp) || rtIsNaN(localMaxValue_tmp)) {
             P_data[i1] = rtInf;
           } else {
-            double localMins_idx_0;
-            double localMins_idx_0_tmp;
-            double localMins_idx_1;
             localMins_idx_0_tmp = A_data[extremaList_data[b_i] - 1];
             localMins_idx_0 = localMins_idx_0_tmp;
             localMins_idx_1 = localMins_idx_0_tmp;
             nz = b_i - 1;
             right = b_i + 1;
-            long exitg3;
             do {
-              exitg3 = 0L;
+              exitg3 = 0;
               if (nz + 1 > 0) {
                 if (!infMaxVals_data[tmp_data[nz]]) {
-                  localMins_idx_0 =
-                      fmin(localMins_idx_0, A_data[extremaList_data[nz] - 1]);
+                  ctr = A_data[extremaList_data[nz] - 1];
+                  if ((!(localMins_idx_0 <= ctr)) && (!rtIsNaN(ctr))) {
+                    localMins_idx_0 = ctr;
+                  }
                   nz--;
-                } else if (A_data[tmp_data[nz]] > ctr) {
-                  exitg3 = 1L;
+                } else if (A_data[tmp_data[nz]] > localMaxValue_tmp) {
+                  exitg3 = 1;
                 } else {
                   nz--;
                 }
               } else {
-                exitg3 = 2L;
+                exitg3 = 2;
               }
-            } while (exitg3 == 0L);
-            long exitg2;
+            } while (exitg3 == 0);
             do {
-              exitg2 = 0L;
+              exitg2 = 0;
               if (right + 1 <= trueCount) {
                 if (!infMaxVals_data[tmp_data[right]]) {
-                  localMins_idx_1 = fmin(localMins_idx_1,
-                                         A_data[extremaList_data[right] - 1]);
+                  ctr = A_data[extremaList_data[right] - 1];
+                  if ((!(localMins_idx_1 <= ctr)) && (!rtIsNaN(ctr))) {
+                    localMins_idx_1 = ctr;
+                  }
                   right++;
-                } else if (A_data[tmp_data[right]] > ctr) {
-                  exitg2 = 1L;
+                } else if (A_data[tmp_data[right]] > localMaxValue_tmp) {
+                  exitg2 = 1;
                 } else {
                   right++;
                 }
               } else {
-                exitg2 = 1L;
+                exitg2 = 1;
               }
-            } while (exitg2 == 0L);
+            } while (exitg2 == 0);
             if ((localMins_idx_0 < localMins_idx_1) ||
                 (rtIsNaN(localMins_idx_0) && (!rtIsNaN(localMins_idx_1)))) {
               localMins_idx_0 = localMins_idx_1;
@@ -529,22 +536,21 @@ int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
       } else {
         right = (int)(ctr - 1.0);
       }
-      leftRange_data[0] = 1L;
+      leftRange_data[0] = 1.0;
       for (i2 = 0; i2 < right; i2++) {
-        leftRange_data[i2 + 1] = (unsigned int)idxTemp_data[i2] + 1U;
+        leftRange_data[i2 + 1] = idxTemp_data[i2] + 1.0;
       }
       if (right + 1 < 2) {
-        i2 = -1;
-        b_i = -1;
-      } else {
         i2 = 0;
-        b_i = right;
+        b_i = 0;
+      } else {
+        i2 = 1;
+        b_i = right + 1;
       }
       trueCount = b_i - i2;
       nz = trueCount + 1;
       for (b_i = 0; b_i < trueCount; b_i++) {
-        rightRange_data[b_i] =
-            (signed char)((int)leftRange_data[(i2 + b_i) + 1] - 1);
+        rightRange_data[b_i] = (signed char)((int)leftRange_data[i2 + b_i] - 1);
       }
       rightRange_data[trueCount] = (signed char)A_size;
       for (i2 = 0; i2 < nz; i2++) {
@@ -603,8 +609,8 @@ int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
             }
           }
           for (nz = 0; nz < trueCount; nz++) {
-            ctr = floor((double)leftRange_data[nz] / 2.0);
-            leftRange_data[nz] = (long)ctr;
+            ctr = floor(leftRange_data[nz] / 2.0);
+            leftRange_data[nz] = ctr;
             maxVals_data[(int)ctr - 1] = true;
           }
         }

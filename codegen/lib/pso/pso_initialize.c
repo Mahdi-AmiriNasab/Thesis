@@ -2,7 +2,7 @@
  * File: pso_initialize.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -19,6 +19,7 @@
  */
 void pso_initialize(void)
 {
+  rt_InitInfAndNaN();
   c_eml_rand_mt19937ar_stateful_i();
   balance_costF_init();
   isInitialized_pso = true;

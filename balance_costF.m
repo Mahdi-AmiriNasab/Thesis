@@ -139,7 +139,7 @@ end
 % calculating maximum time just once
 if isempty(max_t_res)
     ep = 0.1;
-    [max_t_res, ~, ~, ~] = log_clustering(soc_in, mp, ep);
+    [max_t_res, ~, ~] = log_clustering(soc_in, mp, ep);
 end
 
 lg_time = lg_time / max_t_res;

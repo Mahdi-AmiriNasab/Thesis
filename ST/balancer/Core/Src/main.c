@@ -45,9 +45,9 @@ float vol = 0.7, cur = 0.7;
 uint8_t current_percent = 20;
 float vout = 2.0;
 
-double w_time = 0.33;
-double w_inc = 0.33;
-double w_ovp = 0.33;
+double w_time = 0.2;
+double w_inc = 0.8;
+double w_ovp = 0;
 double soc_init[9] = {7, 88, 10, 95, 52, 50, 48, 42, 76};
 double soc[9];
 

@@ -2,7 +2,7 @@
  * File: pso_emxutil.c
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 /* Include Files */
@@ -36,8 +36,8 @@ void emxEnsureCapacity_int8_T(emxArray_int8_T *emxArray, int oldNumel)
       i = 16;
     }
     while (i < newNumel) {
-      if (i > 16383) {
-        i = MAX_int16_T;
+      if (i > 1073741823) {
+        i = MAX_int32_T;
       } else {
         i *= 2;
       }
@@ -79,8 +79,8 @@ void emxEnsureCapacity_real_T(emxArray_real_T *emxArray, int oldNumel)
       i = 16;
     }
     while (i < newNumel) {
-      if (i > 16383) {
-        i = MAX_int16_T;
+      if (i > 1073741823) {
+        i = MAX_int32_T;
       } else {
         i *= 2;
       }

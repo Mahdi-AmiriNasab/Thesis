@@ -2,7 +2,7 @@
  * File: all.h
  *
  * MATLAB Coder version            : 23.2
- * C/C++ source code generated on  : 19-Jun-2024 19:12:12
+ * C/C++ source code generated on  : 20-Jun-2024 18:29:15
  */
 
 #ifndef ALL_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void all(const bool x[18], bool y[9]);
+void all(const boolean_T x[18], boolean_T y[9]);
 
 #ifdef __cplusplus
 }
