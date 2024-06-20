@@ -51,9 +51,15 @@ for i=1:npop
     [particle(i).cost, eq_step, stio.soc, stio.time, stio.inconsistency, stio.eq_overlap] = costfunction(particle(i).position);
 
     %update the personal best
-    particle(i).best.position = round(particle(i).position, 1);
-    particle(i).best.cost = particle(i).cost;
 
+	%#codegen
+	if coder.target('MATLAB')
+    	particle(i).best.position = round(particle(i).position, 1);
+	else
+		round(particle(i).position * 10) / 10;
+	end
+
+	particle(i).best.cost = particle(i).cost;
     %update global best
     if(particle(i).best.cost < global_best.cost)
         global_best = particle(i).best;
@@ -72,10 +78,14 @@ for it=1:maxit
             + c1*rand(varsize).*(particle(i).best.position - particle(i).position)...
             + c2*rand(varsize).*(global_best.position - particle(i).position);
 
-        % update position
-        particle(i).position = particle(i).position + particle(i).velocity;
-        particle(i).position = round(particle(i).position, 1);
-        
+			% update position
+		particle(i).position = particle(i).position + particle(i).velocity;
+		
+		if coder.target('MATLAB')
+        	particle(i).position = round(particle(i).position, 1);
+        else
+        	particle(i).position = round(particle(i).position * 10) / 10;
+		end
         % limitation
         particle(i).position = max(particle(i).position, varmin);
         particle(i).position = min(particle(i).position, varmax);
@@ -87,9 +97,13 @@ for it=1:maxit
         % update personal best
         if(particle(i).cost < particle(i).best.cost)
 
-            particle(i).best.cost = particle(i).cost;
-            particle(i).best.position = round(particle(i).position, 1);
+			particle(i).best.cost = particle(i).cost;
 
+            if coder.target('MATLAB')
+            	particle(i).best.position = round(particle(i).position, 1);
+			else
+            	particle(i).best.position = round(particle(i).position * 10) / 10;
+			end
             %update global best
             if(particle(i).best.cost < global_best.cost)
                 global_best = particle(i).best;

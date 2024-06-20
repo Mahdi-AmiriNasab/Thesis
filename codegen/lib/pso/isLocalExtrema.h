@@ -1,8 +1,8 @@
 /*
  * File: isLocalExtrema.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef ISLOCALEXTREMA_H
@@ -18,9 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
-                      boolean_T maxVals_data[], int *maxVals_size,
-                      double P_data[], int *P_size);
+int doLocalMaxSearch(double A_data[], int A_size, double maxNumExt,
+                     bool maxVals_data[], double P_data[], int *P_size);
 
 #ifdef __cplusplus
 }

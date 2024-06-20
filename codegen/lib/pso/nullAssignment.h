@@ -1,8 +1,8 @@
 /*
  * File: nullAssignment.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef NULLASSIGNMENT_H
@@ -18,7 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void nullAssignment(double x_data[], int x_size[2], const boolean_T idx_data[]);
+void nullAssignment(double x_data[], int x_size[2], const bool idx_data[],
+                    int idx_size);
 
 #ifdef __cplusplus
 }

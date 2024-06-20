@@ -1,8 +1,8 @@
 /*
  * File: pdist2.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -22,8 +22,8 @@ void pdist2(const double Xin[9], const double Yin[9], double D[81])
 {
   int ii;
   int qq;
-  boolean_T logIndX[9];
-  boolean_T logIndY[9];
+  bool logIndX[9];
+  bool logIndY[9];
   for (qq = 0; qq < 81; qq++) {
     D[qq] = rtNaN;
   }

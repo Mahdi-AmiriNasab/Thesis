@@ -1,8 +1,8 @@
 /*
  * File: _coder_pso_mex.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -35,8 +35,8 @@ void mexFunction(int32_T nlhs, mxArray *plhs[], int32_T nrhs,
  */
 emlrtCTX mexFunctionCreateRootTLS(void)
 {
-  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1,
-                           NULL, (const char_T *)"windows-1252", true);
+  emlrtCreateRootTLSR2022a(&emlrtRootTLSGlobal, &emlrtContextGlobal, NULL, 1L,
+                           NULL, "windows-1252", true);
   return emlrtRootTLSGlobal;
 }
 
@@ -55,27 +55,32 @@ void unsafe_pso_mexFunction(int32_T nlhs, mxArray *plhs[3], int32_T nrhs,
       NULL, /* tls */
       NULL  /* prev */
   };
+  const mxArray *b_prhs[5];
   const mxArray *outputs[3];
-  int32_T b_nlhs;
+  int32_T i;
+  int32_T i1;
   st.tls = emlrtRootTLSGlobal;
   /* Check for proper number of arguments. */
-  if (nrhs != 5) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5, 12, 5, 4,
-                        3, "pso");
+  if (nrhs != 5L) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:WrongNumberOfInputs", 5L, 12L, 5L,
+                        4L, 3L, "pso");
   }
-  if (nlhs > 3) {
-    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3, 4, 3,
+  if (nlhs > 3L) {
+    emlrtErrMsgIdAndTxt(&st, "EMLRT:runTime:TooManyOutputArguments", 3L, 4L, 3L,
                         "pso");
   }
   /* Call the function. */
-  pso_api(prhs, nlhs, outputs);
-  /* Copy over outputs to the caller. */
-  if (nlhs < 1) {
-    b_nlhs = 1;
-  } else {
-    b_nlhs = nlhs;
+  for (i = 0L; i < 5L; i++) {
+    b_prhs[i] = prhs[i];
   }
-  emlrtReturnArrays(b_nlhs, &plhs[0], &outputs[0]);
+  pso_api(b_prhs, nlhs, outputs);
+  /* Copy over outputs to the caller. */
+  if (nlhs < 1L) {
+    i1 = 1L;
+  } else {
+    i1 = nlhs;
+  }
+  emlrtReturnArrays(i1, &plhs[0L], &outputs[0L]);
 }
 
 /*

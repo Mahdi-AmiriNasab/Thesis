@@ -1,8 +1,8 @@
 /*
  * File: calculate_overlap.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -18,7 +18,10 @@
 /*
  * function [equalization_overlap] = calculate_overlap(cell_values)
  *
- * Find local maxima (peaks) and minima (valleys)
+ * global no_ovp_plot_flag;
+ * if isempty(no_ovp_plot_flag)
+ *  no_ovp_plot_flag = 0;
+ * end
  *
  * Arguments    : const double cell_values_data[]
  *                const int cell_values_size[2]
@@ -28,6 +31,7 @@ double calculate_overlap(const double cell_values_data[],
                          const int cell_values_size[2])
 {
   static double A_data[100];
+  static double b_A_data[100];
   static double local_depths_data[100];
   static int peak_indices_data[100];
   static int valley_indices_data[100];
@@ -36,314 +40,271 @@ double calculate_overlap(const double cell_values_data[],
   static signed char d_tmp_data[100];
   static signed char e_tmp_data[100];
   static signed char f_tmp_data[100];
-  static signed char g_tmp_data[100];
-  static signed char h_tmp_data[100];
-  static signed char i_tmp_data[100];
-  static boolean_T isnanA_data[100];
-  static boolean_T outputs_f1_data[100];
-  static boolean_T tmp_data[100];
+  static signed char tmp_data[100];
+  static bool isnanA_data[100];
+  static bool tf_data[100];
   double b_y;
   double x;
-  int tf_size[2];
+  int is_peak_size[2];
   int valley_indices_size[2];
-  int A_size;
   int b_i;
+  int c_i;
   int i;
+  int i1;
   int isnanA_size;
+  int local_depths_size_idx_1_tmp;
+  int local_heights_size_idx_1_tmp;
   int loop_ub;
-  int outputs_f1_size;
   int partialTrueCount;
   int peak_indices_size_idx_1;
+  int tf_size;
   int trueCount;
-  boolean_T y;
-  /* 'calculate_overlap:4' is_peak = islocalmax(cell_values); */
-  /* 'calculate_overlap:5' is_valley = islocalmin(cell_values); */
-  /* 'calculate_overlap:7' peak_indices = find(is_peak); */
+  bool y;
+  /* 'calculate_overlap:8' no_ovp_plot_flag = 0; */
+  /*  Find local maxima (peaks) and minima (valleys) */
+  /* 'calculate_overlap:11' is_peak = islocalmax(cell_values); */
   if (cell_values_size[1] == 0) {
-    tf_size[0] = 1;
-    tf_size[1] = 0;
+    is_peak_size[0] = 1;
+    is_peak_size[1] = 0;
   } else {
-    loop_ub = cell_values_size[1];
-    memcpy(&A_data[0], &cell_values_data[0], loop_ub * sizeof(double));
-    isnanA_size = cell_values_size[1];
-    loop_ub = cell_values_size[1];
-    for (i = 0; i < loop_ub; i++) {
-      isnanA_data[i] = rtIsNaN(A_data[i]);
-    }
+    loop_ub = cell_values_size[1L];
     y = true;
-    for (b_i = 0; b_i < isnanA_size; b_i++) {
-      y = (y && (!isnanA_data[b_i]));
+    for (i = 0; i < loop_ub; i++) {
+      x = cell_values_data[i];
+      A_data[i] = x;
+      y = (y && (!rtIsNaN(x)));
     }
     if (!y) {
-      outputs_f1_size = cell_values_size[1];
+      tf_size = cell_values_size[1];
       loop_ub = cell_values_size[1];
-      memset(&outputs_f1_data[0], 0, loop_ub * sizeof(boolean_T));
-      isnanA_size = cell_values_size[1] - 1;
+      for (b_i = 0; b_i < loop_ub; b_i++) {
+        tf_data[b_i] = false;
+        isnanA_data[b_i] = !rtIsNaN(A_data[b_i]);
+      }
+      loop_ub = cell_values_size[1] - 1;
       trueCount = 0;
       partialTrueCount = 0;
-      for (b_i = 0; b_i <= isnanA_size; b_i++) {
-        y = !isnanA_data[b_i];
-        isnanA_data[b_i] = y;
-        if (y) {
+      for (i = 0; i <= loop_ub; i++) {
+        if (isnanA_data[i]) {
           trueCount++;
-          b_tmp_data[partialTrueCount] = (signed char)(b_i + 1);
+          tmp_data[partialTrueCount] = (signed char)i;
           partialTrueCount++;
         }
       }
-      for (i = 0; i < trueCount; i++) {
-        local_depths_data[i] = A_data[b_tmp_data[i] - 1];
+      for (b_i = 0; b_i < trueCount; b_i++) {
+        b_A_data[b_i] = A_data[tmp_data[b_i]];
       }
-      doLocalMaxSearch(local_depths_data, trueCount, cell_values_size[1],
-                       tmp_data, &loop_ub, A_data, &A_size);
-      partialTrueCount = 0;
-      for (b_i = 0; b_i <= isnanA_size; b_i++) {
-        if (isnanA_data[b_i]) {
-          c_tmp_data[partialTrueCount] = (signed char)(b_i + 1);
-          partialTrueCount++;
-        }
-      }
-      for (i = 0; i < loop_ub; i++) {
-        outputs_f1_data[c_tmp_data[i] - 1] = tmp_data[i];
+      doLocalMaxSearch(b_A_data, trueCount, cell_values_size[1], isnanA_data,
+                       local_depths_data, &loop_ub);
+      for (b_i = 0; b_i < trueCount; b_i++) {
+        tf_data[tmp_data[b_i]] = isnanA_data[b_i];
       }
     } else {
-      doLocalMaxSearch(A_data, cell_values_size[1], cell_values_size[1],
-                       outputs_f1_data, &outputs_f1_size, local_depths_data,
-                       &isnanA_size);
+      tf_size =
+          doLocalMaxSearch(A_data, cell_values_size[1], cell_values_size[1],
+                           tf_data, local_depths_data, &loop_ub);
     }
-    tf_size[0] = 1;
-    tf_size[1] = outputs_f1_size;
-    if (outputs_f1_size - 1 >= 0) {
-      memcpy(&isnanA_data[0], &outputs_f1_data[0],
-             outputs_f1_size * sizeof(boolean_T));
+    is_peak_size[0] = 1;
+    is_peak_size[1] = tf_size;
+    if (tf_size - 1 >= 0) {
+      memcpy(&isnanA_data[0], &tf_data[0],
+             (unsigned int)tf_size * sizeof(bool));
     }
   }
-  c_eml_find(isnanA_data, tf_size, valley_indices_data, valley_indices_size);
+  /* 'calculate_overlap:12' is_valley = islocalmin(cell_values); */
+  /* 'calculate_overlap:14' peak_indices = find(is_peak); */
+  c_eml_find(isnanA_data, is_peak_size, valley_indices_data,
+             valley_indices_size);
   peak_indices_size_idx_1 = valley_indices_size[1];
   loop_ub = valley_indices_size[1];
   if (loop_ub - 1 >= 0) {
     memcpy(&peak_indices_data[0], &valley_indices_data[0],
-           loop_ub * sizeof(int));
+           (unsigned int)loop_ub * sizeof(int));
   }
-  /* 'calculate_overlap:8' valley_indices = find(is_valley); */
+  /* 'calculate_overlap:15' valley_indices = find(is_valley); */
   if (cell_values_size[1] == 0) {
-    tf_size[0] = 1;
-    tf_size[1] = 0;
+    is_peak_size[0] = 1;
+    is_peak_size[1] = 0;
   } else {
-    A_size = cell_values_size[1];
+    isnanA_size = cell_values_size[1];
     loop_ub = cell_values_size[1];
-    for (i = 0; i < loop_ub; i++) {
-      A_data[i] = -cell_values_data[i];
-    }
-    for (i = 0; i < A_size; i++) {
-      isnanA_data[i] = rtIsNaN(A_data[i]);
-    }
     y = true;
-    for (b_i = 0; b_i < A_size; b_i++) {
-      y = (y && (!isnanA_data[b_i]));
+    for (i = 0; i < loop_ub; i++) {
+      x = -cell_values_data[i];
+      A_data[i] = x;
+      y = (y && (!rtIsNaN(x)));
     }
     if (!y) {
-      outputs_f1_size = cell_values_size[1];
-      memset(&outputs_f1_data[0], 0, A_size * sizeof(boolean_T));
-      isnanA_size = cell_values_size[1] - 1;
+      tf_size = cell_values_size[1];
+      for (b_i = 0; b_i < isnanA_size; b_i++) {
+        tf_data[b_i] = false;
+        isnanA_data[b_i] = !rtIsNaN(A_data[b_i]);
+      }
+      loop_ub = cell_values_size[1] - 1;
       trueCount = 0;
       partialTrueCount = 0;
-      for (b_i = 0; b_i <= isnanA_size; b_i++) {
-        y = !isnanA_data[b_i];
-        isnanA_data[b_i] = y;
-        if (y) {
+      for (i = 0; i <= loop_ub; i++) {
+        if (isnanA_data[i]) {
           trueCount++;
-          d_tmp_data[partialTrueCount] = (signed char)(b_i + 1);
+          b_tmp_data[partialTrueCount] = (signed char)i;
           partialTrueCount++;
         }
       }
-      for (i = 0; i < trueCount; i++) {
-        local_depths_data[i] = A_data[d_tmp_data[i] - 1];
+      for (b_i = 0; b_i < trueCount; b_i++) {
+        b_A_data[b_i] = A_data[b_tmp_data[b_i]];
       }
-      doLocalMaxSearch(local_depths_data, trueCount, cell_values_size[1],
-                       tmp_data, &loop_ub, A_data, &A_size);
-      partialTrueCount = 0;
-      for (b_i = 0; b_i <= isnanA_size; b_i++) {
-        if (isnanA_data[b_i]) {
-          e_tmp_data[partialTrueCount] = (signed char)(b_i + 1);
-          partialTrueCount++;
-        }
-      }
-      for (i = 0; i < loop_ub; i++) {
-        outputs_f1_data[e_tmp_data[i] - 1] = tmp_data[i];
+      doLocalMaxSearch(b_A_data, trueCount, cell_values_size[1], isnanA_data,
+                       A_data, &loop_ub);
+      for (b_i = 0; b_i < trueCount; b_i++) {
+        tf_data[b_tmp_data[b_i]] = isnanA_data[b_i];
       }
     } else {
-      doLocalMaxSearch(A_data, cell_values_size[1], cell_values_size[1],
-                       outputs_f1_data, &outputs_f1_size, local_depths_data,
-                       &isnanA_size);
+      tf_size =
+          doLocalMaxSearch(A_data, cell_values_size[1], cell_values_size[1],
+                           tf_data, local_depths_data, &loop_ub);
     }
-    tf_size[0] = 1;
-    tf_size[1] = outputs_f1_size;
-    if (outputs_f1_size - 1 >= 0) {
-      memcpy(&isnanA_data[0], &outputs_f1_data[0],
-             outputs_f1_size * sizeof(boolean_T));
+    is_peak_size[0] = 1;
+    is_peak_size[1] = tf_size;
+    if (tf_size - 1 >= 0) {
+      memcpy(&isnanA_data[0], &tf_data[0],
+             (unsigned int)tf_size * sizeof(bool));
     }
   }
-  c_eml_find(isnanA_data, tf_size, valley_indices_data, valley_indices_size);
+  c_eml_find(isnanA_data, is_peak_size, valley_indices_data,
+             valley_indices_size);
   /*  Calculate local heights of peaks */
-  /* 'calculate_overlap:11' local_heights = zeros(size(peak_indices)); */
-  loop_ub = (signed char)peak_indices_size_idx_1;
-  if (loop_ub - 1 >= 0) {
-    memset(&A_data[0], 0, loop_ub * sizeof(double));
+  /* 'calculate_overlap:18' local_heights = zeros(size(peak_indices)); */
+  local_heights_size_idx_1_tmp = (signed char)peak_indices_size_idx_1;
+  if (local_heights_size_idx_1_tmp - 1 >= 0) {
+    memset(&A_data[0], 0,
+           (unsigned int)local_heights_size_idx_1_tmp * sizeof(double));
   }
-  /* 'calculate_overlap:12' for i = 1:length(peak_indices) */
-  for (b_i = 0; b_i < peak_indices_size_idx_1; b_i++) {
-    /* 'calculate_overlap:13' left_valleys = valley_indices(valley_indices <
+  /* 'calculate_overlap:19' for i = 1:length(peak_indices) */
+  for (i = 0; i < peak_indices_size_idx_1; i++) {
+    /* 'calculate_overlap:20' left_valleys = valley_indices(valley_indices <
      * peak_indices(i)); */
-    /* 'calculate_overlap:14' right_valleys = valley_indices(valley_indices >
-     * peak_indices(i)); */
-    /* 'calculate_overlap:15' if isempty(left_valleys) */
-    isnanA_size = valley_indices_size[1];
+    loop_ub = valley_indices_size[1] - 1;
     trueCount = 0;
-    for (A_size = 0; A_size < isnanA_size; A_size++) {
-      if (valley_indices_data[A_size] < peak_indices_data[b_i]) {
+    partialTrueCount = 0;
+    /* 'calculate_overlap:21' right_valleys = valley_indices(valley_indices >
+     * peak_indices(i)); */
+    isnanA_size = 0;
+    tf_size = 0;
+    for (c_i = 0; c_i <= loop_ub; c_i++) {
+      b_i = valley_indices_data[c_i];
+      i1 = peak_indices_data[i];
+      if (b_i < i1) {
         trueCount++;
+        c_tmp_data[partialTrueCount] = (signed char)c_i;
+        partialTrueCount++;
+      }
+      if (b_i > i1) {
+        isnanA_size++;
+        d_tmp_data[tf_size] = (signed char)c_i;
+        tf_size++;
       }
     }
+    /* 'calculate_overlap:22' if isempty(left_valleys) */
     if (trueCount == 0) {
-      /* 'calculate_overlap:16' left_min = cell_values(1); */
+      /* 'calculate_overlap:23' left_min = cell_values(1); */
       x = cell_values_data[0];
     } else {
-      /* 'calculate_overlap:17' else */
-      /* 'calculate_overlap:18' left_min = cell_values(left_valleys(end)); */
-      isnanA_size = valley_indices_size[1] - 1;
-      trueCount = 0;
-      partialTrueCount = 0;
-      for (A_size = 0; A_size <= isnanA_size; A_size++) {
-        if (valley_indices_data[A_size] < peak_indices_data[b_i]) {
-          trueCount++;
-          f_tmp_data[partialTrueCount] = (signed char)(A_size + 1);
-          partialTrueCount++;
-        }
-      }
-      x = cell_values_data[valley_indices_data[f_tmp_data[trueCount - 1] - 1] -
-                           1];
+      /* 'calculate_overlap:24' else */
+      /* 'calculate_overlap:25' left_min = cell_values(left_valleys(end)); */
+      x = cell_values_data[valley_indices_data[c_tmp_data[trueCount - 1]] - 1];
     }
-    /* 'calculate_overlap:20' if isempty(right_valleys) */
-    isnanA_size = valley_indices_size[1];
-    trueCount = 0;
-    for (A_size = 0; A_size < isnanA_size; A_size++) {
-      if (valley_indices_data[A_size] > peak_indices_data[b_i]) {
-        trueCount++;
-      }
-    }
-    if (trueCount == 0) {
-      /* 'calculate_overlap:21' right_min = cell_values(end); */
+    /* 'calculate_overlap:27' if isempty(right_valleys) */
+    if (isnanA_size == 0) {
+      /* 'calculate_overlap:28' right_min = cell_values(end); */
       b_y = cell_values_data[cell_values_size[1] - 1];
     } else {
-      /* 'calculate_overlap:22' else */
-      /* 'calculate_overlap:23' right_min = cell_values(right_valleys(1)); */
-      isnanA_size = valley_indices_size[1] - 1;
-      partialTrueCount = 0;
-      for (A_size = 0; A_size <= isnanA_size; A_size++) {
-        if (valley_indices_data[A_size] > peak_indices_data[b_i]) {
-          g_tmp_data[partialTrueCount] = (signed char)(A_size + 1);
-          partialTrueCount++;
-        }
-      }
-      b_y = cell_values_data[valley_indices_data[g_tmp_data[0] - 1] - 1];
+      /* 'calculate_overlap:29' else */
+      /* 'calculate_overlap:30' right_min = cell_values(right_valleys(1)); */
+      b_y = cell_values_data[valley_indices_data[d_tmp_data[0]] - 1];
     }
-    /* 'calculate_overlap:25' local_heights(i) = cell_values(peak_indices(i)) -
+    /* 'calculate_overlap:32' local_heights(i) = cell_values(peak_indices(i)) -
      * max(left_min, right_min); */
-    A_data[b_i] = cell_values_data[peak_indices_data[b_i] - 1] - fmax(x, b_y);
+    A_data[i] = cell_values_data[peak_indices_data[i] - 1] - fmax(x, b_y);
   }
   /*  Calculate local depths of valleys */
-  /* 'calculate_overlap:29' local_depths = zeros(size(valley_indices)); */
-  outputs_f1_size = (signed char)valley_indices_size[1];
-  if (outputs_f1_size - 1 >= 0) {
-    memset(&local_depths_data[0], 0, outputs_f1_size * sizeof(double));
+  /* 'calculate_overlap:36' local_depths = zeros(size(valley_indices)); */
+  local_depths_size_idx_1_tmp = (signed char)valley_indices_size[1];
+  if (local_depths_size_idx_1_tmp - 1 >= 0) {
+    memset(&local_depths_data[0], 0,
+           (unsigned int)local_depths_size_idx_1_tmp * sizeof(double));
   }
-  /* 'calculate_overlap:30' for i = 1:length(valley_indices) */
-  i = valley_indices_size[1];
-  for (b_i = 0; b_i < i; b_i++) {
-    /* 'calculate_overlap:31' left_peaks = peak_indices(peak_indices <
+  /* 'calculate_overlap:37' for i = 1:length(valley_indices) */
+  b_i = valley_indices_size[1];
+  for (i = 0; i < b_i; i++) {
+    /* 'calculate_overlap:38' left_peaks = peak_indices(peak_indices <
      * valley_indices(i)); */
-    /* 'calculate_overlap:32' right_peaks = peak_indices(peak_indices >
-     * valley_indices(i)); */
-    /* 'calculate_overlap:33' if isempty(left_peaks) */
+    loop_ub = peak_indices_size_idx_1 - 1;
     trueCount = 0;
-    for (A_size = 0; A_size < peak_indices_size_idx_1; A_size++) {
-      if (peak_indices_data[A_size] < valley_indices_data[b_i]) {
+    partialTrueCount = 0;
+    /* 'calculate_overlap:39' right_peaks = peak_indices(peak_indices >
+     * valley_indices(i)); */
+    isnanA_size = 0;
+    tf_size = 0;
+    for (c_i = 0; c_i <= loop_ub; c_i++) {
+      int i2;
+      i1 = peak_indices_data[c_i];
+      i2 = valley_indices_data[i];
+      if (i1 < i2) {
         trueCount++;
+        e_tmp_data[partialTrueCount] = (signed char)c_i;
+        partialTrueCount++;
+      }
+      if (i1 > i2) {
+        isnanA_size++;
+        f_tmp_data[tf_size] = (signed char)c_i;
+        tf_size++;
       }
     }
+    /* 'calculate_overlap:40' if isempty(left_peaks) */
     if (trueCount == 0) {
-      /* 'calculate_overlap:34' left_max = cell_values(1); */
+      /* 'calculate_overlap:41' left_max = cell_values(1); */
       x = cell_values_data[0];
     } else {
-      /* 'calculate_overlap:35' else */
-      /* 'calculate_overlap:36' left_max = cell_values(left_peaks(end)); */
-      isnanA_size = peak_indices_size_idx_1 - 1;
-      trueCount = 0;
-      partialTrueCount = 0;
-      for (A_size = 0; A_size <= isnanA_size; A_size++) {
-        if (peak_indices_data[A_size] < valley_indices_data[b_i]) {
-          trueCount++;
-          h_tmp_data[partialTrueCount] = (signed char)(A_size + 1);
-          partialTrueCount++;
-        }
-      }
-      x = cell_values_data[peak_indices_data[h_tmp_data[trueCount - 1] - 1] -
-                           1];
+      /* 'calculate_overlap:42' else */
+      /* 'calculate_overlap:43' left_max = cell_values(left_peaks(end)); */
+      x = cell_values_data[peak_indices_data[e_tmp_data[trueCount - 1]] - 1];
     }
-    /* 'calculate_overlap:38' if isempty(right_peaks) */
-    trueCount = 0;
-    for (A_size = 0; A_size < peak_indices_size_idx_1; A_size++) {
-      if (peak_indices_data[A_size] > valley_indices_data[b_i]) {
-        trueCount++;
-      }
-    }
-    if (trueCount == 0) {
-      /* 'calculate_overlap:39' right_max = cell_values(end); */
+    /* 'calculate_overlap:45' if isempty(right_peaks) */
+    if (isnanA_size == 0) {
+      /* 'calculate_overlap:46' right_max = cell_values(end); */
       b_y = cell_values_data[cell_values_size[1] - 1];
     } else {
-      /* 'calculate_overlap:40' else */
-      /* 'calculate_overlap:41' right_max = cell_values(right_peaks(1)); */
-      isnanA_size = peak_indices_size_idx_1 - 1;
-      partialTrueCount = 0;
-      for (A_size = 0; A_size <= isnanA_size; A_size++) {
-        if (peak_indices_data[A_size] > valley_indices_data[b_i]) {
-          i_tmp_data[partialTrueCount] = (signed char)(A_size + 1);
-          partialTrueCount++;
-        }
-      }
-      b_y = cell_values_data[peak_indices_data[i_tmp_data[0] - 1] - 1];
+      /* 'calculate_overlap:47' else */
+      /* 'calculate_overlap:48' right_max = cell_values(right_peaks(1)); */
+      b_y = cell_values_data[peak_indices_data[f_tmp_data[0]] - 1];
     }
-    /* 'calculate_overlap:43' local_depths(i) = min(left_max, right_max) -
+    /* 'calculate_overlap:50' local_depths(i) = min(left_max, right_max) -
      * cell_values(valley_indices(i)); */
-    local_depths_data[b_i] =
-        fmin(x, b_y) - cell_values_data[valley_indices_data[b_i] - 1];
+    local_depths_data[i] =
+        fmin(x, b_y) - cell_values_data[valley_indices_data[i] - 1];
   }
   /*  Calculate equalization overlap */
-  /* 'calculate_overlap:47' equalization_overlap = sum(local_heights) +
+  /* 'calculate_overlap:54' equalization_overlap = sum(local_heights) +
    * sum(local_depths); */
   if ((signed char)peak_indices_size_idx_1 == 0) {
     b_y = 0.0;
   } else {
     b_y = A_data[0];
-    for (isnanA_size = 2; isnanA_size <= loop_ub; isnanA_size++) {
-      b_y += A_data[isnanA_size - 1];
+    for (loop_ub = 2; loop_ub <= local_heights_size_idx_1_tmp; loop_ub++) {
+      b_y += A_data[loop_ub - 1];
     }
   }
   if ((signed char)valley_indices_size[1] == 0) {
     x = 0.0;
   } else {
     x = local_depths_data[0];
-    for (isnanA_size = 2; isnanA_size <= outputs_f1_size; isnanA_size++) {
-      x += local_depths_data[isnanA_size - 1];
+    for (loop_ub = 2; loop_ub <= local_depths_size_idx_1_tmp; loop_ub++) {
+      x += local_depths_data[loop_ub - 1];
     }
   }
   return b_y + x;
   /*  Plot cell_values with peaks and valleys highlighted */
-  /*  plot(cell_values) */
-  /*  hold on */
-  /*  plot(peak_indices, cell_values(peak_indices), 'ro') */
-  /*  plot(valley_indices, cell_values(valley_indices), 'bo') */
-  /*  hold off */
+  /* 'calculate_overlap:57' if coder.target('MATLAB') */
 }
 
 /*

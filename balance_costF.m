@@ -1,5 +1,11 @@
 function [cost, eq_step, soc, time, inconsistency, eq_overlap] = balance_costF(soc_in, mp, ep, w_time, w_inconsistency, w_eq_overlap)
 
+    %no_ovp_plot_flag = 0;
+    %global no_ovp_plot_flag;
+	%if isempty(no_ovp_plot_flag)
+	%	no_ovp_plot_flag = 0;
+	%end
+	
 	cell_count = length(soc_in);
     
 	if coder.target('MATLAB')
@@ -108,15 +114,14 @@ soc_profile(any(isnan(soc_profile), 2), :) = [];  % Remove any row with NaN
 
 lg_time = blc_time_total;
 lg_inconsistency = max(soc) - min(soc);
-global no_ovp_plot_flag;
 
-no_ovp_plot_flag = 0;
+%no_ovp_plot_flag = 0;
 % summing equalization overlap value of each cell after balancing 
 for n = 1:cluster.cell_cnt
     OE = calculate_overlap(soc_profile(:, n)');
     lg_eq_overlap = lg_eq_overlap + OE;
 end
-no_ovp_plot_flag = 0;
+%no_ovp_plot_flag = 0;
 
 % results
 time = lg_time;

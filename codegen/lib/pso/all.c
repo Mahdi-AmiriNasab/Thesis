@@ -1,8 +1,8 @@
 /*
  * File: all.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -11,11 +11,11 @@
 
 /* Function Definitions */
 /*
- * Arguments    : const boolean_T x[18]
- *                boolean_T y[9]
+ * Arguments    : const bool x[18]
+ *                bool y[9]
  * Return Type  : void
  */
-void all(const boolean_T x[18], boolean_T y[9])
+void all(const bool x[18], bool y[9])
 {
   int i;
   int i2;
@@ -23,7 +23,7 @@ void all(const boolean_T x[18], boolean_T y[9])
   for (i = 0; i < 9; i++) {
     int a;
     int ix;
-    boolean_T exitg1;
+    bool exitg1;
     y[i] = true;
     a = i2;
     ix = i2 - 1;

@@ -1,8 +1,8 @@
 /*
  * File: sortrowsLE.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef SORTROWSLE_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-boolean_T sortrowsLE(const double v[18], int col, int irow1, int irow2);
+bool sortrowsLE(const double v[18], int col, int irow1, int irow2);
 
 #ifdef __cplusplus
 }

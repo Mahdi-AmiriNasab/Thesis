@@ -1,8 +1,8 @@
 /*
  * File: all.h
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 #ifndef ALL_H
@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-void all(const boolean_T x[18], boolean_T y[9]);
+void all(const bool x[18], bool y[9]);
 
 #ifdef __cplusplus
 }

@@ -1,8 +1,8 @@
 /*
  * File: pso_data.c
  *
- * MATLAB Coder version            : 5.4
- * C/C++ source code generated on  : 11-Dec-2023 16:05:35
+ * MATLAB Coder version            : 23.2
+ * C/C++ source code generated on  : 19-Jun-2024 19:12:12
  */
 
 /* Include Files */
@@ -10,11 +10,11 @@
 #include "rt_nonfinite.h"
 
 /* Variable Definitions */
-unsigned int state[625];
+unsigned long state[625];
 
-boolean_T max_t_res_not_empty;
+bool max_t_res_not_empty;
 
-boolean_T isInitialized_pso = false;
+bool isInitialized_pso = false;
 
 /*
  * File trailer for pso_data.c
