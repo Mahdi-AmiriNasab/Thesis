@@ -16,6 +16,16 @@
 #include <math.h>
 #include <string.h>
 
+  static double Vq_data[99];
+  static double b_data[99];
+  static double b_y_data[99];
+  static double s_data[99];
+  static signed char b_tmp_data[99];
+  static signed char c_tmp_data[99];
+  static signed char x_data[99];
+  static boolean_T b_uniquePts_data[100];
+  static boolean_T uniquePts_data[100];
+  static boolean_T tmp_data[99];
 /* Function Declarations */
 static int getAllLocalMax(const double A_data[], int A_size,
                           boolean_T maxVals_data[],
@@ -36,16 +46,6 @@ static int getAllLocalMax(const double A_data[], int A_size,
                           boolean_T inflectionPts_data[],
                           int *inflectionPts_size)
 {
-  static double Vq_data[99];
-  static double b_data[99];
-  static double b_y_data[99];
-  static double s_data[99];
-  static signed char b_tmp_data[99];
-  static signed char c_tmp_data[99];
-  static signed char x_data[99];
-  static boolean_T b_uniquePts_data[100];
-  static boolean_T uniquePts_data[100];
-  static boolean_T tmp_data[99];
   emxArray_int8_T *b_y;
   double tmp;
   int b_trueCount;

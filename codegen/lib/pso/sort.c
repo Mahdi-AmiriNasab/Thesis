@@ -12,6 +12,9 @@
 #include "rt_nonfinite.h"
 #include <string.h>
 
+  static double xwork_data[100];
+  static int iwork_data[100];
+  
 /* Function Definitions */
 /*
  * Arguments    : double x_data[]
@@ -21,9 +24,7 @@
  */
 int sort(double x_data[], const int *x_size, int idx_data[])
 {
-  static double xwork_data[100];
   static double x4[4];
-  static int iwork_data[100];
   static signed char idx4[4];
   static signed char perm[4];
   double d;

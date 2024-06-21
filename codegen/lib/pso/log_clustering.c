@@ -21,6 +21,11 @@
 #include "rt_nonfinite.h"
 #include <math.h>
 
+  static double soc_profile_data[900];
+  static double b_soc_profile_data[100];
+  static boolean_T tmp_data[900];
+  static boolean_T b_tmp_data[100];
+  
 /* Function Definitions */
 /*
  * function [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc_in,
@@ -32,11 +37,10 @@
  *                double *lg_eq_overlap
  * Return Type  : double
  */
+
 double log_clustering(const double soc_in[9], double mp,
                       double *lg_inconsistency, double *lg_eq_overlap)
 {
-  static double soc_profile_data[900];
-  static double b_soc_profile_data[100];
   static double cluster_clt_res_cell[81];
   static double expl_temp[81];
   static double V[18];
@@ -57,8 +61,6 @@ double log_clustering(const double soc_in[9], double mp,
   static signed char c_tmp_data[9];
   static signed char d_tmp_data[9];
   static signed char e_tmp_data[9];
-  static boolean_T tmp_data[900];
-  static boolean_T b_tmp_data[100];
   static e_noise_stat d_expl_temp;
   emxArray_real_T *soc_sorted_clusters;
   double OE;

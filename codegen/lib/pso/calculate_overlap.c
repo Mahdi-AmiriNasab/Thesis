@@ -12,6 +12,19 @@
 #include "rt_nonfinite.h"
 #include "rt_nonfinite.h"
 #include <string.h>
+  static double A_data[100];
+  static double b_A_data[100];
+  static double local_depths_data[100];
+  static int peak_indices_data[100];
+  static int valley_indices_data[100];
+  static signed char b_tmp_data[100];
+  static signed char c_tmp_data[100];
+  static signed char d_tmp_data[100];
+  static signed char e_tmp_data[100];
+  static signed char f_tmp_data[100];
+  static signed char tmp_data[100];
+  static boolean_T isnanA_data[100];
+  static boolean_T tf_data[100];
 
 /* Function Definitions */
 /*
@@ -26,23 +39,15 @@
 double calculate_overlap(const double cell_values_data[],
                          const int cell_values_size[2])
 {
-  static double A_data[100];
-  static double b_A_data[100];
-  static double local_depths_data[100];
-  static int peak_indices_data[100];
-  static int valley_indices_data[100];
-  static int is_peak_size[2];
-  static int valley_indices_size[2];
-  static signed char b_tmp_data[100];
-  static signed char c_tmp_data[100];
-  static signed char d_tmp_data[100];
-  static signed char e_tmp_data[100];
-  static signed char f_tmp_data[100];
-  static signed char tmp_data[100];
-  static boolean_T isnanA_data[100];
-  static boolean_T tf_data[100];
+  double A_data[100];
+  double b_A_data[100];
+  double local_depths_data[100];
   double u0;
   double u1;
+  int peak_indices_data[100];
+  int valley_indices_data[100];
+  int is_peak_size[2];
+  int valley_indices_size[2];
   int b_i;
   int c_i;
   int i;
@@ -56,6 +61,14 @@ double calculate_overlap(const double cell_values_data[],
   int peak_indices_size_idx_1;
   int tf_size;
   int trueCount;
+  signed char b_tmp_data[100];
+  signed char c_tmp_data[100];
+  signed char d_tmp_data[100];
+  signed char e_tmp_data[100];
+  signed char f_tmp_data[100];
+  signed char tmp_data[100];
+  boolean_T isnanA_data[100];
+  boolean_T tf_data[100];
   boolean_T y;
   /* 'calculate_overlap:4' is_peak = islocalmax(cell_values); */
   if (cell_values_size[1] == 0) {

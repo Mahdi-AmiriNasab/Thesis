@@ -62,7 +62,6 @@ typedef enum
 }DCDCState;
 
   emxArray_struct1_T_1x100 eq_step;
-  struct0_T global_best;
   struct2_T stio;
 
 GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
@@ -99,6 +98,7 @@ UART_HandleTypeDef huart5;
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+  struct0_T global_best;
 static void MX_GPIO_Init(void);
 static void MX_ADC1_Init(void);
 static void MX_DAC1_Init(void);
@@ -208,11 +208,6 @@ int main(void)
         set_reset_trig_neg(num_neg, pinstate_neg);
         set_reset_trig_pos(num_pos, pinstate_pos);
 
-        memcpy(soc, soc_init, sizeof(soc));
-        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
-		pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
-        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
-		HAL_Delay(500);
         
 		if(e_DCDC_status == DCDC_Off)
 		{
@@ -249,6 +244,11 @@ int main(void)
         Set_DAC_Voltage(cur, DAC_CHANNEL_2);
 		
 
+        memcpy(soc, soc_init, sizeof(soc));
+        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
+		pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
+        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
+		HAL_Delay(500);
 	}
 
 

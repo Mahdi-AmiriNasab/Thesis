@@ -98,6 +98,27 @@ static int cast(const double t2_source_queue_cells[2],
   return t0_source_target_soc_av_size;
 }
 
+  static double soc_profile_data[900];
+  static double b_soc_profile_data[100];
+  static boolean_T tmp_data[900];
+  static boolean_T b_tmp_data[100];
+  static struct1_T rv[50];
+  static emxArray_struct1_T_1x50 varargout_2;
+  static double b_expl_temp[81];
+  static double cluster_clt_res_cell[81];
+  static double V[18];
+  static double c_expl_temp[18];
+  static double d_expl_temp[18];
+  static double expl_temp[9];
+  static double cluster_noise_max[2];
+  static double cluster_noise_min[2];
+  static double e_expl_temp[2];
+  static double t3_destination_queue_cells[2];
+  static double max_t_res;
+  static int b_soc_profile_size[2];
+  static int soc_profile_size[2];
+  static signed char c_tmp_data[9];
+  static signed char d_tmp_data[9];
 /*
  * @(ep)
  *
@@ -122,27 +143,6 @@ static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
                            double *varargout_4, double *varargout_5,
                            double *varargout_6)
 {
-  static emxArray_struct1_T_1x50 varargout_2;
-  static struct1_T rv[50];
-  static double soc_profile_data[900];
-  static double b_soc_profile_data[100];
-  static double b_expl_temp[81];
-  static double cluster_clt_res_cell[81];
-  static double V[18];
-  static double c_expl_temp[18];
-  static double d_expl_temp[18];
-  static double expl_temp[9];
-  static double cluster_noise_max[2];
-  static double cluster_noise_min[2];
-  static double e_expl_temp[2];
-  static double t3_destination_queue_cells[2];
-  static double max_t_res;
-  static int b_soc_profile_size[2];
-  static int soc_profile_size[2];
-  static signed char c_tmp_data[9];
-  static signed char d_tmp_data[9];
-  static boolean_T tmp_data[900];
-  static boolean_T b_tmp_data[100];
   static e_noise_stat g_expl_temp;
   double OE;
   double blc_time;
@@ -156,6 +156,8 @@ static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
   int trueCount;
   boolean_T b;
   boolean_T exitg1;
+  static volatile double result = 10; 
+
   /* 'pso:5' @(ep) balance_costF(soc_in, mp, ep, w_time, w_inconsistency,
    * w_eq_overlap) */
   /* 'balance_costF:3' cell_count = length(soc_in); */
@@ -659,10 +661,13 @@ static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
   varargout_2_size[0] = 1;
   varargout_2_size[1] = 50;
   memcpy(&varargout_2_data[0], &varargout_2.data[0], 50U * sizeof(struct1_T));
-  return (w_time * (*varargout_4 / max_t_res) +
-          w_inconsistency * lg_inconsistency) +
-         w_eq_overlap * lg_eq_overlap;
-}
+  
+  result =  (w_time * (*varargout_4 / max_t_res));
+  result += w_inconsistency * lg_inconsistency;
+  //result += w_eq_overlap * lg_eq_overlap;
+ 
+  return result;
+  }
 
 /*
  * function [global_best, eq_step, stio] = pso(soc_in, mp, w_time,

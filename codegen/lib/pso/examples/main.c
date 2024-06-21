@@ -81,7 +81,8 @@ int main(int argc, char **argv)
    * function. So, a call to initialize is not included here. */
   /* Invoke the entry-point functions.
 You can call entry-point functions multiple times. */
-  main_pso();
+  printf("fuck you");
+//  main_pso();
   /* Terminate the application.
 You do not need to do this more than one time. */
   pso_terminate();
