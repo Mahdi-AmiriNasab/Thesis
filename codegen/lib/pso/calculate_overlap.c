@@ -2,6 +2,9 @@
 #include <stdbool.h>
 #include <math.h>
 
+// Define maximum size for arrays
+#define MAX_SIZE 100
+
 // Helper function to find local maxima
 void find_local_max(const double data[], int size, bool is_peak[]) {
     for (int i = 1; i < size - 1; ++i) {
@@ -28,14 +31,28 @@ void find_local_min(const double data[], int size, bool is_valley[]) {
     is_valley[size - 1] = false;
 }
 
+// Function to calculate the valid size of the input array
+int calculate_valid_size(const double data[], int max_size) {
+    int valid_size = 0;
+    for (int i = 0; i < max_size; ++i) {
+        if (data[i] >= 0.1 && data[i] <= 100.1) {
+            valid_size++;
+        } else {
+            break;
+        }
+    }
+    return valid_size;
+}
+
 // Function to calculate overlap
-double calculate_overlap(const double cell_values[], int size) {
-    bool is_peak[100] = {false};
-    bool is_valley[100] = {false};
-    int peak_indices[100] = {0};
-    int valley_indices[100] = {0};
-    double local_heights[100] = {0.0};
-    double local_depths[100] = {0.0};
+double calculate_overlap(const double cell_values[], int max_size[]) {
+    int size = calculate_valid_size(cell_values, *(max_size + 1));
+    bool is_peak[MAX_SIZE] = {false};
+    bool is_valley[MAX_SIZE] = {false};
+    int peak_indices[MAX_SIZE] = {0};
+    int valley_indices[MAX_SIZE] = {0};
+    double local_heights[MAX_SIZE] = {0.0};
+    double local_depths[MAX_SIZE] = {0.0};
     int peak_count = 0;
     int valley_count = 0;
 
