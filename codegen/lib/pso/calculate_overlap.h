@@ -18,8 +18,8 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double calculate_overlap(const double cell_values_data[],
-                         const int cell_values_size[2]);
+double calculate_overlap(const double cell_values[], int size);
+
 
 #ifdef __cplusplus
 }

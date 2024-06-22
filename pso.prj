@@ -1,7 +1,7 @@
 <deployment-project plugin="plugin.coder" plugin-version="R2023a">
-  <configuration build-checksum="892596646" file="D:\Thesis\pso.prj" location="D:\Thesis" name="pso" target="target.unifiedcoder" target-name="MATLAB Coder">
+  <configuration build-checksum="1837809898" file="E:\Thesis\pso.prj" location="E:\Thesis" name="pso" target="target.unifiedcoder" target-name="MATLAB Coder">
     <profile key="profile.mex">
-      <param.BuiltInstrumentedMex>false</param.BuiltInstrumentedMex>
+      <param.BuiltInstrumentedMex />
       <param.RanInstrumentedMex>false</param.RanInstrumentedMex>
       <param.WorkingFolder>option.WorkingFolder.Project</param.WorkingFolder>
       <param.SpecifiedWorkingFolder />
@@ -10,16 +10,16 @@
       <param.SearchPaths />
       <var.SimdQueryHardwareVendor>Generic</var.SimdQueryHardwareVendor>
       <var.SimdQueryHardwareType>MATLAB Host Computer</var.SimdQueryHardwareType>
-      <param.InstructionSetExtensionsAvailableInUI>true</param.InstructionSetExtensionsAvailableInUI>
-      <param.ResponsivenessChecks>true</param.ResponsivenessChecks>
-      <param.ExtrinsicCalls>true</param.ExtrinsicCalls>
-      <param.IntegrityChecks>true</param.IntegrityChecks>
+      <param.InstructionSetExtensionsAvailableInUI>false</param.InstructionSetExtensionsAvailableInUI>
+      <param.ResponsivenessChecks />
+      <param.ExtrinsicCalls />
+      <param.IntegrityChecks />
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
       <param.EnableAutoParallelization>false</param.EnableAutoParallelization>
       <param.NumberOfCpuThreads>0</param.NumberOfCpuThreads>
       <param.OptimizeReductions>false</param.OptimizeReductions>
-      <param.SIMDAcceleration>option.SIMDAcceleration.Portable</param.SIMDAcceleration>
-      <param.GlobalDataSyncMethod>option.GlobalDataSyncMethod.SyncAlways</param.GlobalDataSyncMethod>
+      <param.SIMDAcceleration />
+      <param.GlobalDataSyncMethod />
       <param.EnableVariableSizing>true</param.EnableVariableSizing>
       <param.EnableDynamicMemoryAllocation>true</param.EnableDynamicMemoryAllocation>
       <param.DynamicMemoryAllocation>option.DynamicMemoryAllocation.Threshold</param.DynamicMemoryAllocation>
@@ -38,7 +38,7 @@
       <param.CodeFormattingTool>option.CodeFormattingTool.Auto</param.CodeFormattingTool>
       <param.ReservedNameArray />
       <param.CppStyleConst>true</param.CppStyleConst>
-      <param.EnableDebugging>false</param.EnableDebugging>
+      <param.EnableDebugging />
       <param.Verbosity>option.Verbosity.Info</param.Verbosity>
       <param.ReportPotentialDifferences>false</param.ReportPotentialDifferences>
       <param.GenerateReport>true</param.GenerateReport>
@@ -60,12 +60,12 @@
       <param.CustomSource />
       <param.CustomLibrary />
       <param.PostCodeGenCommand />
-      <param.mex.GenCodeOnly>false</param.mex.GenCodeOnly>
+      <param.mex.GenCodeOnly />
       <param.ConstantFoldingTimeout>40000</param.ConstantFoldingTimeout>
       <param.CompileTimeRecursionLimit>50</param.CompileTimeRecursionLimit>
       <param.EnableRuntimeRecursion>true</param.EnableRuntimeRecursion>
       <param.PreserveVariableNames>option.PreserveVariableNames.None</param.PreserveVariableNames>
-      <param.EchoExpressions>true</param.EchoExpressions>
+      <param.EchoExpressions />
       <param.InlineThreshold>10</param.InlineThreshold>
       <param.InlineThresholdMax>200</param.InlineThresholdMax>
       <param.InlineStackLimit>1000000</param.InlineStackLimit>
@@ -77,13 +77,13 @@
       <param.EnableOpenMP>true</param.EnableOpenMP>
       <param.InitFltsAndDblsToZero>true</param.InitFltsAndDblsToZero>
       <param.DefaultVariableInitialization>option.DefaultVariableInitialization.None</param.DefaultVariableInitialization>
-      <param.ConstantInputs>option.ConstantInputs.CheckValues</param.ConstantInputs>
+      <param.ConstantInputs />
       <param.EnableCRICodeCoverage>true</param.EnableCRICodeCoverage>
       <param.EnableAutoParallelizationReporting>true</param.EnableAutoParallelizationReporting>
       <param.CacheDynamicArrayDataPointer>true</param.CacheDynamicArrayDataPointer>
       <param.EnableJIT>false</param.EnableJIT>
-      <param.EnableJITSilentBailOut>false</param.EnableJITSilentBailOut>
-      <param.CheckForIssuesJIT>true</param.CheckForIssuesJIT>
+      <param.EnableJITSilentBailOut />
+      <param.CheckForIssuesJIT />
       <param.EnableGitSupport>false</param.EnableGitSupport>
       <param.EnableAutoCommit>true</param.EnableAutoCommit>
       <param.RepositoryStyle>option.RepositoryStyle.Auto</param.RepositoryStyle>
@@ -108,7 +108,6 @@
         <param.SIMDAcceleration />
         <param.GlobalDataSyncMethod />
         <param.EnableVariableSizing />
-        <param.EnableDynamicMemoryAllocation />
         <param.DynamicMemoryAllocation />
         <param.DynamicMemoryAllocationThreshold />
         <param.DynamicMemoryAllocationForFixedSizeArrays />
@@ -181,9 +180,9 @@
       <param.BuildFolder>option.BuildFolder.Project</param.BuildFolder>
       <param.SpecifiedBuildFolder />
       <param.SearchPaths />
-      <var.SimdQueryHardwareVendor>Generic</var.SimdQueryHardwareVendor>
-      <var.SimdQueryHardwareType>MATLAB Host Computer</var.SimdQueryHardwareType>
-      <param.InstructionSetExtensionsAvailableInUI>true</param.InstructionSetExtensionsAvailableInUI>
+      <var.SimdQueryHardwareVendor>STMicroelectronics</var.SimdQueryHardwareVendor>
+      <var.SimdQueryHardwareType>ST10/Super10</var.SimdQueryHardwareType>
+      <param.InstructionSetExtensionsAvailableInUI>false</param.InstructionSetExtensionsAvailableInUI>
       <param.InstructionSetExtensions>None</param.InstructionSetExtensions>
       <param.SaturateOnIntegerOverflow>true</param.SaturateOnIntegerOverflow>
       <param.PurelyIntegerCode>false</param.PurelyIntegerCode>
@@ -288,53 +287,53 @@
       <param.CodeReplacementLibrary>None</param.CodeReplacementLibrary>
       <param.DeprecatedCRLFlag>false</param.DeprecatedCRLFlag>
       <param.SameHardware>true</param.SameHardware>
-      <param.Toolchain>Automatically locate an installed toolchain</param.Toolchain>
+      <param.Toolchain>Texas Instruments Code Composer Studio (ARM)</param.Toolchain>
       <param.BuildConfiguration>Debug</param.BuildConfiguration>
       <param.CustomToolchainOptions />
       <var.ToolchainSettingsVisible>true</var.ToolchainSettingsVisible>
       <var.ToolchainSupportsBuildConfigurations>true</var.ToolchainSupportsBuildConfigurations>
       <param.target.Data>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;ctdata&gt;&lt;configuredHardware/&gt;&lt;/ctdata&gt;</param.target.Data>
-      <param.target.ActiveType>option.target.TargetType.MatlabHost</param.target.ActiveType>
+      <param.target.ActiveType>option.target.TargetType.Custom</param.target.ActiveType>
       <param.target.ActiveTarget />
-      <param.HardwareVendor.Production>Generic</param.HardwareVendor.Production>
-      <param.HardwareType.Production>MATLAB Host Computer</param.HardwareType.Production>
-      <param.HWDeviceType.Production>Generic-&gt;MATLAB Host Computer</param.HWDeviceType.Production>
+      <param.HardwareVendor.Production>STMicroelectronics</param.HardwareVendor.Production>
+      <param.HardwareType.Production>ST10/Super10</param.HardwareType.Production>
+      <param.HWDeviceType.Production>STMicroelectronics-&gt;ST10/Super10</param.HWDeviceType.Production>
       <var.instance.enabled.Production>true</var.instance.enabled.Production>
       <param.HardwareSizeChar.Production>8</param.HardwareSizeChar.Production>
       <param.HardwareSizeShort.Production>16</param.HardwareSizeShort.Production>
-      <param.HardwareSizeInt.Production>32</param.HardwareSizeInt.Production>
+      <param.HardwareSizeInt.Production>16</param.HardwareSizeInt.Production>
       <param.HardwareSizeLong.Production>32</param.HardwareSizeLong.Production>
       <param.HardwareSizeLongLong.Production>64</param.HardwareSizeLongLong.Production>
       <param.HardwareSizeFloat.Production>32</param.HardwareSizeFloat.Production>
       <param.HardwareSizeDouble.Production>64</param.HardwareSizeDouble.Production>
-      <param.HardwareSizeWord.Production>64</param.HardwareSizeWord.Production>
-      <param.HardwareSizePointer.Production>64</param.HardwareSizePointer.Production>
-      <param.HardwareSizeSizeT.Production>64</param.HardwareSizeSizeT.Production>
-      <param.HardwareSizePtrDiffT.Production>64</param.HardwareSizePtrDiffT.Production>
+      <param.HardwareSizeWord.Production>16</param.HardwareSizeWord.Production>
+      <param.HardwareSizePointer.Production>16</param.HardwareSizePointer.Production>
+      <param.HardwareSizeSizeT.Production>16</param.HardwareSizeSizeT.Production>
+      <param.HardwareSizePtrDiffT.Production>16</param.HardwareSizePtrDiffT.Production>
       <param.HardwareEndianness.Production>option.HardwareEndianness.Little</param.HardwareEndianness.Production>
       <param.HardwareArithmeticRightShift.Production>true</param.HardwareArithmeticRightShift.Production>
-      <param.HardwareLongLongMode.Production>true</param.HardwareLongLongMode.Production>
+      <param.HardwareLongLongMode.Production>false</param.HardwareLongLongMode.Production>
       <param.HardwareAtomicIntegerSize.Production>option.HardwareAtomicIntegerSize.Char</param.HardwareAtomicIntegerSize.Production>
       <param.HardwareAtomicFloatSize.Production>option.HardwareAtomicFloatSize.None</param.HardwareAtomicFloatSize.Production>
       <param.HardwareDivisionRounding.Production>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Production>
-      <param.HardwareVendor.Target>Generic</param.HardwareVendor.Target>
-      <param.HardwareType.Target>MATLAB Host Computer</param.HardwareType.Target>
-      <param.HWDeviceType.Target>Generic-&gt;MATLAB Host Computer</param.HWDeviceType.Target>
+      <param.HardwareVendor.Target>STMicroelectronics</param.HardwareVendor.Target>
+      <param.HardwareType.Target>ST10/Super10</param.HardwareType.Target>
+      <param.HWDeviceType.Target>STMicroelectronics-&gt;ST10/Super10</param.HWDeviceType.Target>
       <var.instance.enabled.Target>false</var.instance.enabled.Target>
       <param.HardwareSizeChar.Target>8</param.HardwareSizeChar.Target>
       <param.HardwareSizeShort.Target>16</param.HardwareSizeShort.Target>
-      <param.HardwareSizeInt.Target>32</param.HardwareSizeInt.Target>
+      <param.HardwareSizeInt.Target>16</param.HardwareSizeInt.Target>
       <param.HardwareSizeLong.Target>32</param.HardwareSizeLong.Target>
       <param.HardwareSizeLongLong.Target>64</param.HardwareSizeLongLong.Target>
       <param.HardwareSizeFloat.Target>32</param.HardwareSizeFloat.Target>
       <param.HardwareSizeDouble.Target>64</param.HardwareSizeDouble.Target>
-      <param.HardwareSizeWord.Target>64</param.HardwareSizeWord.Target>
-      <param.HardwareSizePointer.Target>64</param.HardwareSizePointer.Target>
-      <param.HardwareSizeSizeT.Target>64</param.HardwareSizeSizeT.Target>
-      <param.HardwareSizePtrDiffT.Target>64</param.HardwareSizePtrDiffT.Target>
+      <param.HardwareSizeWord.Target>16</param.HardwareSizeWord.Target>
+      <param.HardwareSizePointer.Target>16</param.HardwareSizePointer.Target>
+      <param.HardwareSizeSizeT.Target>16</param.HardwareSizeSizeT.Target>
+      <param.HardwareSizePtrDiffT.Target>16</param.HardwareSizePtrDiffT.Target>
       <param.HardwareEndianness.Target>option.HardwareEndianness.Little</param.HardwareEndianness.Target>
       <param.HardwareArithmeticRightShift.Target>true</param.HardwareArithmeticRightShift.Target>
-      <param.HardwareLongLongMode.Target>true</param.HardwareLongLongMode.Target>
+      <param.HardwareLongLongMode.Target>false</param.HardwareLongLongMode.Target>
       <param.HardwareAtomicIntegerSize.Target>option.HardwareAtomicIntegerSize.Char</param.HardwareAtomicIntegerSize.Target>
       <param.HardwareAtomicFloatSize.Target>option.HardwareAtomicFloatSize.None</param.HardwareAtomicFloatSize.Target>
       <param.HardwareDivisionRounding.Target>option.HardwareDivisionRounding.Zero</param.HardwareDivisionRounding.Target>
@@ -397,8 +396,6 @@
         <param.BuildFolder />
         <param.SpecifiedBuildFolder />
         <param.SearchPaths />
-        <var.SimdQueryHardwareVendor />
-        <var.SimdQueryHardwareType />
         <param.InstructionSetExtensionsAvailableInUI />
         <param.InstructionSetExtensions />
         <param.SaturateOnIntegerOverflow />
@@ -497,38 +494,33 @@
         <param.CodeReplacementLibrary />
         <param.DeprecatedCRLFlag />
         <param.SameHardware />
-        <param.Toolchain />
         <param.CustomToolchainOptions />
         <var.ToolchainSettingsVisible />
         <var.ToolchainSupportsBuildConfigurations />
-        <param.target.ActiveType />
         <param.target.ActiveTarget />
-        <param.HardwareVendor.Production />
-        <param.HardwareType.Production />
         <param.HWDeviceType.Production />
         <var.instance.enabled.Production />
         <param.HardwareSizeChar.Production />
         <param.HardwareSizeShort.Production />
-        <param.HardwareSizeInt.Production />
         <param.HardwareSizeLong.Production />
         <param.HardwareSizeLongLong.Production />
         <param.HardwareSizeFloat.Production />
         <param.HardwareSizeDouble.Production />
         <param.HardwareEndianness.Production />
+        <param.HardwareLongLongMode.Production />
         <param.HardwareAtomicIntegerSize.Production />
         <param.HardwareAtomicFloatSize.Production />
-        <param.HardwareVendor.Target />
         <param.HardwareType.Target />
         <param.HWDeviceType.Target />
         <var.instance.enabled.Target />
         <param.HardwareSizeChar.Target />
         <param.HardwareSizeShort.Target />
-        <param.HardwareSizeInt.Target />
         <param.HardwareSizeLong.Target />
         <param.HardwareSizeLongLong.Target />
         <param.HardwareSizeFloat.Target />
         <param.HardwareSizeDouble.Target />
         <param.HardwareEndianness.Target />
+        <param.HardwareLongLongMode.Target />
         <param.HardwareAtomicIntegerSize.Target />
         <param.HardwareAtomicFloatSize.Target />
         <var.SuppressHardwareChange />
@@ -593,7 +585,7 @@
     </param.TestSnippets>
     <param.ExternalFcnMajority>column</param.ExternalFcnMajority>
     <param.UseGlobals>option.UseGlobals.No</param.UseGlobals>
-    <param.outputfile>${PROJECT_ROOT}\pso_mex.mexw64</param.outputfile>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\pso\pso.lib</param.outputfile>
     <param.version>R2012a</param.version>
     <param.HasECoderFeatures>true</param.HasECoderFeatures>
     <param.HasGpuCoder>false</param.HasGpuCoder>
@@ -616,15 +608,15 @@
     <var.DismissScreener>true</var.DismissScreener>
     <param.unifiedParamStorage />
     <param.hdlParamStorage />
-    <var.gc.lastOutputRoot>codegen\mex\pso</var.gc.lastOutputRoot>
-    <var.gc.lastOutputType>MEX_FILE</var.gc.lastOutputType>
-    <var.gc.preBuildChecksum>892596646</var.gc.preBuildChecksum>
+    <var.gc.lastOutputRoot>codegen\lib\pso</var.gc.lastOutputRoot>
+    <var.gc.lastOutputType>C_CODE</var.gc.lastOutputType>
+    <var.gc.preBuildChecksum>1837809898</var.gc.preBuildChecksum>
     <var.cfi.lastOutputRoot>codegen\mex\pso</var.cfi.lastOutputRoot>
     <var.cfi.preBuildChecksum>1806382794</var.cfi.preBuildChecksum>
     <var.lastCfiTestSnippet>[global_best, eq_step, stio] = pso(soc, 2, 0.2, 0.8, 0);</var.lastCfiTestSnippet>
     <var.outdatedOnRestore>false</var.outdatedOnRestore>
-    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;D:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;D:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;D:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;D:\Thesis\db.m&lt;/file&gt;&lt;file&gt;D:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;1935857194&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
-    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;D:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;D:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;D:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;D:\Thesis\db.m&lt;/file&gt;&lt;file&gt;D:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;D:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
+    <var.lastUserSourceChecksum>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;checksum&gt;&lt;includedFiles&gt;&lt;file&gt;E:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;E:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;E:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;E:\Thesis\db.m&lt;/file&gt;&lt;file&gt;E:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/includedFiles&gt;&lt;value&gt;3366037353&lt;/value&gt;&lt;/checksum&gt;</var.lastUserSourceChecksum>
+    <var.sourceSetState>&lt;?xml version="1.0" encoding="UTF-8" standalone="yes"?&gt;&lt;sourceModel&gt;&lt;primarySourceFiles&gt;&lt;file&gt;E:\Thesis\balance_costF.m&lt;/file&gt;&lt;file&gt;E:\Thesis\balance_soc.m&lt;/file&gt;&lt;file&gt;E:\Thesis\calculate_overlap.m&lt;/file&gt;&lt;file&gt;E:\Thesis\db.m&lt;/file&gt;&lt;file&gt;E:\Thesis\log_clustering.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso.m&lt;/file&gt;&lt;file&gt;E:\Thesis\pso_DBSCAN.m&lt;/file&gt;&lt;/primarySourceFiles&gt;&lt;fixedPointSourceFiles/&gt;&lt;fixedPointSourceRegistered&gt;false&lt;/fixedPointSourceRegistered&gt;&lt;fixedPointSourceSelected&gt;false&lt;/fixedPointSourceSelected&gt;&lt;/sourceModel&gt;</var.sourceSetState>
     <param.forceMexBuild>false</param.forceMexBuild>
     <param.NoDefaultJIT>false</param.NoDefaultJIT>
     <param.configImportActive>false</param.configImportActive>
@@ -640,8 +632,8 @@
     <param.NumCompileJobs>1</param.NumCompileJobs>
     <param.mex.outputfile>pso_mex</param.mex.outputfile>
     <param.grt.outputfile>pso</param.grt.outputfile>
-    <param.artifact>option.target.artifact.mex</param.artifact>
-    <param.outputfile>${PROJECT_ROOT}\pso_mex.mexw64</param.outputfile>
+    <param.artifact>option.target.artifact.lib</param.artifact>
+    <param.outputfile>${PROJECT_ROOT}\codegen\lib\pso\pso.lib</param.outputfile>
     <param.CppNamespace />
     <param.CppPackagesToNamespaces>true</param.CppPackagesToNamespaces>
     <param.CppNamespaceForMathworksCode>coder</param.CppNamespaceForMathworksCode>
@@ -674,8 +666,8 @@
     <param.deeplearning.DeepLearningCustomCallback />
     <param.deeplearning.TargetLib>option.deeplearning.targetlibrary.none</param.deeplearning.TargetLib>
     <var.cfiTargetLibSuppression>false</var.cfiTargetLibSuppression>
-    <var.hasMatlabDeepLearningSupportPackage>false</var.hasMatlabDeepLearningSupportPackage>
-    <var.hasGpuDeepLearningSupportPackage>false</var.hasGpuDeepLearningSupportPackage>
+    <var.hasMatlabDeepLearningSupportPackage>true</var.hasMatlabDeepLearningSupportPackage>
+    <var.hasGpuDeepLearningSupportPackage>true</var.hasGpuDeepLearningSupportPackage>
     <param.tensorrt.DataType>option.tensorrt.datatype.fp32</param.tensorrt.DataType>
     <param.tensorrt.DataPath />
     <param.tensorrt.NumCalibrationBatches>0</param.tensorrt.NumCalibrationBatches>
@@ -784,7 +776,6 @@
       <param.NumCompileJobs />
       <param.mex.outputfile />
       <param.grt.outputfile />
-      <param.artifact />
       <param.CppNamespace />
       <param.CppPackagesToNamespaces />
       <param.CppNamespaceForMathworksCode />
@@ -817,6 +808,8 @@
       <param.deeplearning.DeepLearningCustomCallback />
       <param.deeplearning.TargetLib />
       <var.cfiTargetLibSuppression />
+      <var.hasMatlabDeepLearningSupportPackage />
+      <var.hasGpuDeepLearningSupportPackage />
       <param.tensorrt.DataType />
       <param.tensorrt.DataPath />
       <param.tensorrt.NumCalibrationBatches />
@@ -914,11 +907,11 @@
       </file>
     </fileset.inputtypes>
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="pso_mex.mexw64" optional="false">D:\Thesis\pso_mex.mexw64</file>
+      <file location="${PROJECT_ROOT}\codegen\lib\pso" name="pso.lib" optional="false">E:\Thesis\codegen\lib\pso\pso.lib</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>C:\Program Files\MATLAB\R2023b</root>
+      <root>C:\Program Files\Matlab\R2023b</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />

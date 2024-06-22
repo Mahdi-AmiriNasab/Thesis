@@ -100,6 +100,11 @@
 			<locationURI>PARENT-2-PROJECT_LOC/codegen/lib/pso/pso.c</locationURI>
 		</link>
 		<link>
+			<name>pso_1.c</name>
+			<type>1</type>
+			<locationURI>PARENT-1-PROJECT_LOC/pso_1/src/pso_1.c</locationURI>
+		</link>
+		<link>
 			<name>pso_DBSCAN.c</name>
 			<type>1</type>
 			<locationURI>PARENT-2-PROJECT_LOC/codegen/lib/pso/pso_DBSCAN.c</locationURI>
