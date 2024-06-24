@@ -10,21 +10,29 @@
 #include <windows.h>
 #include <wincrypt.h>
 #endif
+
+#ifdef USE_HAL_DRIVER
+#include "main.h" // Include the appropriate header for STM32H750
+extern RNG_HandleTypeDef hrng;
+#endif
+
 #include <stdio.h>
 #include "rand.h"
 #include "pso_data.h"
 #include "rt_nonfinite.h"
 
+#ifdef _WIN32
+
 /* Function Declarations */
 void seed_from_cryptgen(void);
 void init_genrand(unsigned long s);  // Ensure this is declared if not already present
+void seed_from_time(unsigned long current_time); // Function to seed from provided time
 
 /* Static Variable to Track Initialization */
 static int initialized = 0;
 
 /* Function Definitions */
 
-#ifdef _WIN32
 /*
  * Seed the random number generator using CryptGenRandom
  */
@@ -58,16 +66,6 @@ void seed_from_cryptgen() {
     init_genrand(seed);
     initialized = 1;  // Mark as initialized
 }
-#else
-/*
- * Placeholder for other platforms
- */
-void seed_from_cryptgen() {
-    // Implementation for other platforms will go here
-    printf("Seeding not implemented for this platform.\n");
-    exit(1);
-}
-#endif
 
 /*
  * Initialize the Mersenne Twister with a seed
@@ -79,6 +77,14 @@ void init_genrand(unsigned long s) {
         state[mti] &= 0xffffffffUL;
     }
     state[624] = 624;
+}
+
+/*
+ * Seed the random number generator using provided current time
+ */
+void seed_from_time(unsigned long current_time) {
+    init_genrand(current_time);
+    initialized = 1;  // Mark as initialized
 }
 
 /*
@@ -142,8 +148,32 @@ double b_rand(void) {
     return r;
 }
 
+#elif defined(USE_HAL_DRIVER)
+
 /*
- * File trailer for rand.c
- *
- * [EOF]
+ * Arguments    : void
+ * Return Type  : double
  */
+double b_rand(void)
+{
+    uint32_t random_number;
+    
+
+    // Generate a random number
+    if (HAL_RNG_GenerateRandomNumber(&hrng, &random_number) != HAL_OK) {
+        // printf("HAL_RNG_GenerateRandomNumber failed\n");
+        // HAL_RNG_DeInit(&hrng);
+        return 0.0;
+    }
+
+    // Deinitialize the RNG peripheral
+    // HAL_RNG_DeInit(&hrng);
+
+    // Convert to a value between 0 and 1
+    static volatile double r = 0;
+		r = (double)random_number / (double)UINT32_MAX;
+    return r;
+}
+
+#endif
+
