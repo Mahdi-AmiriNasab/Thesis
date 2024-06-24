@@ -33,8 +33,8 @@ static struct2_T stio;
 static double dv[9];
 struct0_T global_best;
 double w_time = 0.5;
-double w_inc = 0.5;
-double w_ovp = 0.0;
+double w_inc = 0.0;
+double w_ovp = 0.5;
 
 
 

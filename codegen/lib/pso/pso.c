@@ -664,7 +664,7 @@ static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
   
   result =  (w_time * (*varargout_4 / max_t_res));
   result += w_inconsistency * lg_inconsistency;
-  //result += w_eq_overlap * lg_eq_overlap;
+  result += w_eq_overlap * lg_eq_overlap;
  
   return result;
   }
