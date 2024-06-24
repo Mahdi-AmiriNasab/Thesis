@@ -21,7 +21,7 @@ ep_domain = 0.1:0.1:20;
 
 
 [lg_time, lg_inconsistency, lg_eq_overlap] = log_clustering(soc, mp, ep_domain);
-[global_best, eq_step, stio] = pso(soc, 2, 0.6, 0.4, 0);
+[global_best, eq_step, stio] = pso(soc, 2, 0.5, 0.5, 0.0);
 
 src_q_cls = zeros(50, 2);
 dst_q_cls = zeros(50, 2);

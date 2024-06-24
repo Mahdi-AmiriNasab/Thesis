@@ -152,18 +152,50 @@
         <Bp>
           <Number>0</Number>
           <Type>0</Type>
-          <LineNumber>521</LineNumber>
+          <LineNumber>288</LineNumber>
           <EnabledFlag>1</EnabledFlag>
-          <Address>134264662</Address>
+          <Address>134248706</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
           <SizeOfObject>0</SizeOfObject>
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\..\..\codegen\lib\pso\pso.c</Filename>
+          <Filename>..\..\..\codegen\lib\pso\calculate_overlap.c</Filename>
           <ExecCommand></ExecCommand>
-          <Expression>\\balancer\../../../codegen/lib/pso/pso.c\521</Expression>
+          <Expression>\\balancer\../../../codegen/lib/pso/calculate_overlap.c\288</Expression>
+        </Bp>
+        <Bp>
+          <Number>1</Number>
+          <Type>0</Type>
+          <LineNumber>209</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134248246</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\codegen\lib\pso\calculate_overlap.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\balancer\../../../codegen/lib/pso/calculate_overlap.c\209</Expression>
+        </Bp>
+        <Bp>
+          <Number>2</Number>
+          <Type>0</Type>
+          <LineNumber>178</LineNumber>
+          <EnabledFlag>1</EnabledFlag>
+          <Address>134248372</Address>
+          <ByteObject>0</ByteObject>
+          <HtxType>0</HtxType>
+          <ManyObjects>0</ManyObjects>
+          <SizeOfObject>0</SizeOfObject>
+          <BreakByAccess>0</BreakByAccess>
+          <BreakIfRCount>1</BreakIfRCount>
+          <Filename>..\..\..\codegen\lib\pso\calculate_overlap.c</Filename>
+          <ExecCommand></ExecCommand>
+          <Expression>\\balancer\../../../codegen/lib/pso/calculate_overlap.c\178</Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -256,6 +288,26 @@
           <count>17</count>
           <WinNumber>1</WinNumber>
           <ItemText>max_t_res</ItemText>
+        </Ww>
+        <Ww>
+          <count>18</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>b_soc_profile_data</ItemText>
+        </Ww>
+        <Ww>
+          <count>19</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>u0</ItemText>
+        </Ww>
+        <Ww>
+          <count>20</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>u1</ItemText>
+        </Ww>
+        <Ww>
+          <count>21</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>A_data</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

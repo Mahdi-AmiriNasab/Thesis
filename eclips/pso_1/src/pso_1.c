@@ -32,14 +32,15 @@ static emxArray_struct1_T_1x50 eq_step;
 static struct2_T stio;
 static double dv[9];
 struct0_T global_best;
-double w_time = 0.2;
-double w_inc = 0.8;
-double w_ovp = 0;
+double w_time = 0.5;
+double w_inc = 0.5;
+double w_ovp = 0.0;
 
 
 
 
 int main(void) {
+	setbuf(stdout, NULL);
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 
 	for(int i = 0;i < 10;i++)
@@ -53,6 +54,8 @@ int main(void) {
 				  stio.time,
 				  stio.inconsistency,
 				  stio.eq_overlap);
+			setbuf(stdout, NULL);
+
 
 
 //		    // Test cases as specified
