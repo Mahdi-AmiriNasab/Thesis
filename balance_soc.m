@@ -1,8 +1,8 @@
 function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc_in, mp, ep, capacity, blc_current)
 
 	%% init
-    blc_time = 0;
-    blc_range = ep;
+	blc_time = 0;
+	blc_range = ep;
 	soc_out = soc_in;
     soc_transfered_s = 0; soc_transfered_d = 0;
 	soc_transfered = 0;
@@ -281,11 +281,11 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
         if(soc_transfered_s ~= soc_transfered_d)
             error("soc transfer mismatch");
         else
-            soc_transfered =  soc_transfered_s;
-            soc_diff_s = soc_transfered_s / source_clt_cnt; % single cell soc transfer
+			soc_transfered =  soc_transfered_s;
+			soc_diff_s = soc_transfered_s / source_clt_cnt; % single cell soc transfer
 			soc_diff_d = soc_transfered_d / destination_clt_cnt; % single cell  soc transfer
-        end
-
+		end
+				
         if sweep_destination > 100 || sweep_destination < 0 ...
             || sweep_source > 100 || sweep_source < 0
            error("soc sweep limit exceed");
@@ -294,9 +294,9 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
         if coder.target('MATLAB')
             clear dec inc
         end
-    end
-    
-        %% calculate balancing time
+	end
+
+		%% calculate balancing time
 		source_batt_number = source_clt_cnt;
 		destination_batt_number = destination_clt_cnt;
         
