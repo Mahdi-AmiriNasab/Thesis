@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'coloumb_counting'.
  *
- * Model version                  : 1.12
- * Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
- * C/C++ source code generated on : Fri Feb 23 17:02:28 2024
+ * Model version                  : 2.0
+ * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+ * C/C++ source code generated on : Wed Jun 26 23:33:35 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10

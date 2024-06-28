@@ -1,11 +1,11 @@
 /*
  * File: ert_main.c
  *
- * Code generated for Simulink model 'mcu'.
+ * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 3.20
- * Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
- * C/C++ source code generated on : Fri Feb 23 17:51:20 2024
+ * Model version                  : 4.14
+ * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
+ * C/C++ source code generated on : Thu Jun 27 00:22:50 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -15,7 +15,7 @@
 
 #include <stddef.h>
 #include <stdio.h>            /* This example main program uses printf/fflush */
-#include "mcu.h"                       /* Model header file */
+#include "equalizer.h"                 /* Model header file */
 
 /*
  * Associating rt_OneStep with a real-time clock or interrupt service routine
@@ -37,7 +37,7 @@ void rt_OneStep(void)
 
   /* Check for overrun */
   if (OverrunFlag) {
-    rtmSetErrorStatus(mcu_M, "Overrun");
+    rtmSetErrorStatus(equalizer_M, "Overrun");
     return;
   }
 
@@ -48,7 +48,7 @@ void rt_OneStep(void)
   /* Set model inputs here */
 
   /* Step the model */
-  mcu_step();
+  equalizer_step();
 
   /* Get model outputs here */
 
@@ -73,17 +73,18 @@ int_T main(int_T argc, const char *argv[])
   (void)(argv);
 
   /* Initialize model */
-  mcu_initialize();
+  equalizer_initialize();
 
   /* Simulating the model step behavior (in non real-time) to
    *  simulate model behavior at stop time.
    */
-  while ((rtmGetErrorStatus(mcu_M) == (NULL)) && !rtmGetStopRequested(mcu_M)) {
+  while ((rtmGetErrorStatus(equalizer_M) == (NULL)) && !rtmGetStopRequested
+         (equalizer_M)) {
     rt_OneStep();
   }
 
   /* Terminate model */
-  mcu_terminate();
+  equalizer_terminate();
   return 0;
 }
 

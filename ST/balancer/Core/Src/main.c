@@ -22,12 +22,14 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
+#include <string.h>
 #include "rtwtypes.h"
 #include "pso.h"
 #include "pso_internal_types.h"
 #include "pso_terminate.h"
 #include "pso_types.h"
 #include "rt_nonfinite.h"
+#include "equalizer.h"
 
 /* USER CODE END Includes */
 
@@ -50,6 +52,7 @@ double w_inc = 0.8;
 double w_ovp = 0;
 double soc_init[9] = {7, 88, 10, 95, 52, 50, 48, 42, 76};
 double soc[9];
+uint16_t adc_current [1];
 
 GPIO_PinState dcdc_rst1 = 0, dcdc_rst2 = 0;
 GPIO_PinState main_relay = 0;
@@ -68,6 +71,107 @@ GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
 GPIO_PinState pinstate_neg = GPIO_PIN_RESET;
 uint8_t num_neg = 2, num_pos = 1;
 DCDCState e_DCDC_status = DCDC_Off;
+
+
+typedef struct {
+    uint32_t DMA_LISR;
+    uint32_t DMA_HISR;
+    uint32_t DMA_SxCR;
+    uint32_t DMA_SxNDTR;
+    uint32_t DMA_SxPAR;
+    uint32_t DMA_SxM0AR;
+    uint32_t DMA_SxM1AR;
+    uint32_t DMA_SxFCR;
+    uint32_t ADC_ISR;
+    uint32_t ADC_IER;
+    uint32_t ADC_CR;
+    uint32_t ADC_CFGR;
+    uint32_t ADC_CFGR2;
+    uint32_t ADC_SMPR1;
+    uint32_t ADC_SMPR2;
+    uint32_t ADC_PCSEL;
+    uint32_t ADC_LTR1;
+    uint32_t ADC_HTR1;
+    uint32_t ADC_SQR1;
+    uint32_t ADC_SQR2;
+    uint32_t ADC_SQR3;
+    uint32_t ADC_SQR4;
+    uint32_t ADC_DR;
+    uint32_t ADC_JSQR;
+    uint32_t ADC_OFR1;
+    uint32_t ADC_OFR2;
+    uint32_t ADC_OFR3;
+    uint32_t ADC_OFR4;
+    uint32_t ADC_JDR1;
+    uint32_t ADC_JDR2;
+    uint32_t ADC_JDR3;
+    uint32_t ADC_JDR4;
+    uint32_t ADC_AWD2CR;
+    uint32_t ADC_AWD3CR;
+    uint32_t ADC_LTR2;
+    uint32_t ADC_HTR2;
+    uint32_t ADC_LTR3;
+    uint32_t ADC_HTR3;
+    uint32_t ADC_DIFSEL;
+    uint32_t ADC_CALFACT;
+    uint32_t ADC_CALFACT2;
+} DebugInfo;
+
+
+
+
+void GetDebugInfo(DebugInfo *info)
+{
+    // Read DMA registers
+    info->DMA_LISR = DMA2->LISR;
+    info->DMA_HISR = DMA2->HISR;
+    info->DMA_SxCR = DMA2_Stream0->CR;
+    info->DMA_SxNDTR = DMA2_Stream0->NDTR;
+    info->DMA_SxPAR = DMA2_Stream0->PAR;
+    info->DMA_SxM0AR = DMA2_Stream0->M0AR;
+    info->DMA_SxM1AR = DMA2_Stream0->M1AR;
+    info->DMA_SxFCR = DMA2_Stream0->FCR;
+
+    // Read ADC registers
+    info->ADC_ISR = ADC1->ISR;
+    info->ADC_IER = ADC1->IER;
+    info->ADC_CR = ADC1->CR;
+    info->ADC_CFGR = ADC1->CFGR;
+    info->ADC_CFGR2 = ADC1->CFGR2;
+    info->ADC_SMPR1 = ADC1->SMPR1;
+    info->ADC_SMPR2 = ADC1->SMPR2;
+    info->ADC_PCSEL = ADC1->PCSEL;
+    info->ADC_LTR1 = ADC1->LTR1;
+    info->ADC_HTR1 = ADC1->HTR1;
+    info->ADC_SQR1 = ADC1->SQR1;
+    info->ADC_SQR2 = ADC1->SQR2;
+    info->ADC_SQR3 = ADC1->SQR3;
+    info->ADC_SQR4 = ADC1->SQR4;
+    info->ADC_DR = ADC1->DR;
+    info->ADC_JSQR = ADC1->JSQR;
+    info->ADC_OFR1 = ADC1->OFR1;
+    info->ADC_OFR2 = ADC1->OFR2;
+    info->ADC_OFR3 = ADC1->OFR3;
+    info->ADC_OFR4 = ADC1->OFR4;
+    info->ADC_JDR1 = ADC1->JDR1;
+    info->ADC_JDR2 = ADC1->JDR2;
+    info->ADC_JDR3 = ADC1->JDR3;
+    info->ADC_JDR4 = ADC1->JDR4;
+    info->ADC_AWD2CR = ADC1->AWD2CR;
+    info->ADC_AWD3CR = ADC1->AWD3CR;
+    info->ADC_LTR2 = ADC1->LTR2;
+    info->ADC_HTR2 = ADC1->HTR2;
+    info->ADC_LTR3 = ADC1->LTR3;
+    info->ADC_HTR3 = ADC1->HTR3;
+    info->ADC_DIFSEL = ADC1->DIFSEL;
+    info->ADC_CALFACT = ADC1->CALFACT;
+    info->ADC_CALFACT2 = ADC1->CALFACT2;
+}
+
+
+
+DebugInfo debugInfo;
+
 
 /* USER CODE END PTD */
 
@@ -91,6 +195,7 @@ RNG_HandleTypeDef hrng;
 
 TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim4;
+TIM_HandleTypeDef htim6;
 
 UART_HandleTypeDef huart5;
 
@@ -108,6 +213,7 @@ static void MX_FDCAN1_Init(void);
 static void MX_UART5_Init(void);
 static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
+static void MX_TIM6_Init(void);
 static void MX_RNG_Init(void);
 /* USER CODE BEGIN PFP */
 void Set_DAC_Voltage(float voltage, uint32_t dac_channel);
@@ -131,6 +237,12 @@ int main(void)
   /* USER CODE BEGIN 1 */
 
   /* USER CODE END 1 */
+
+  /* Enable I-Cache---------------------------------------------------------*/
+  SCB_EnableICache();
+
+  /* Enable D-Cache---------------------------------------------------------*/
+  SCB_EnableDCache();
 
   /* MCU Configuration--------------------------------------------------------*/
 
@@ -156,6 +268,7 @@ int main(void)
   MX_UART5_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
+  MX_TIM6_Init();
   MX_RNG_Init();
   /* USER CODE BEGIN 2 */
 
@@ -170,6 +283,15 @@ int main(void)
     
     HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
     HAL_DAC_Start(&hdac1, DAC_CHANNEL_2);
+
+    HAL_TIM_Base_Start(&htim6);
+    HAL_ADC_Start_IT(&hadc1);
+
+    
+    equalizer_initialize();
+
+
+    
 
 
 
@@ -211,6 +333,7 @@ int main(void)
         set_reset_trig_DCDC(e_DCDC_status);
         set_reset_trig_neg(num_neg, pinstate_neg);
         set_reset_trig_pos(num_pos, pinstate_pos);
+        GetDebugInfo(&debugInfo);
 
         
 		if(e_DCDC_status == DCDC_Off)
@@ -357,10 +480,10 @@ static void MX_ADC1_Init(void)
   hadc1.Init.ContinuousConvMode = DISABLE;
   hadc1.Init.NbrOfConversion = 1;
   hadc1.Init.DiscontinuousConvMode = DISABLE;
-  hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
-  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_NONE;
+  hadc1.Init.ExternalTrigConv = ADC_EXTERNALTRIG_T6_TRGO;
+  hadc1.Init.ExternalTrigConvEdge = ADC_EXTERNALTRIGCONVEDGE_RISING;
   hadc1.Init.ConversionDataManagement = ADC_CONVERSIONDATA_DR;
-  hadc1.Init.Overrun = ADC_OVR_DATA_PRESERVED;
+  hadc1.Init.Overrun = ADC_OVR_DATA_OVERWRITTEN;
   hadc1.Init.LeftBitShift = ADC_LEFTBITSHIFT_NONE;
   hadc1.Init.OversamplingMode = DISABLE;
   if (HAL_ADC_Init(&hadc1) != HAL_OK)
@@ -376,7 +499,7 @@ static void MX_ADC1_Init(void)
   }
   /** Configure Regular Channel
   */
-  sConfig.Channel = ADC_CHANNEL_11;
+  sConfig.Channel = ADC_CHANNEL_14;
   sConfig.Rank = ADC_REGULAR_RANK_1;
   sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
@@ -659,6 +782,44 @@ static void MX_TIM4_Init(void)
 
   /* USER CODE END TIM4_Init 2 */
   HAL_TIM_MspPostInit(&htim4);
+
+}
+
+/**
+  * @brief TIM6 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_TIM6_Init(void)
+{
+
+  /* USER CODE BEGIN TIM6_Init 0 */
+
+  /* USER CODE END TIM6_Init 0 */
+
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+
+  /* USER CODE BEGIN TIM6_Init 1 */
+
+  /* USER CODE END TIM6_Init 1 */
+  htim6.Instance = TIM6;
+  htim6.Init.Prescaler = 12-1;
+  htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim6.Init.Period = 500-1;
+  htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_UPDATE;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim6, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM6_Init 2 */
+
+  /* USER CODE END TIM6_Init 2 */
 
 }
 
@@ -1165,6 +1326,18 @@ void set_reset_trig_DCDC(DCDCState state)
     }
 }
 
+void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
+{
+    static uint16_t cnt = 0;
+    if(cnt > sizeof(adc_current)/sizeof(uint16_t))
+        cnt = 0;
+    
+    adc_current[cnt] = HAL_ADC_GetValue(&hadc1);
+    cnt++;
+    HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
+
+
+}
 /* USER CODE END 4 */
 
 /**

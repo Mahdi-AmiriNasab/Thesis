@@ -11,7 +11,8 @@
                 "${workspaceFolder}/ST/balancer/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
                 "${workspaceFolder}/ST/balancer/MDK-ARM/../Drivers/CMSIS/Include",
                 "${workspaceFolder}/ST/balancer/MDK-ARM/../../../codegen/lib/pso",
-                "C:/Keil_v5/ARM/ARMCC/include"
+                "C:\\Keil_v5\\ARM\\ARMCLANG\\include",
+                "${workspaceFolder}/codegen/includes"
             ],
             "defines": [
                 "_DEBUG",
@@ -20,7 +21,7 @@
                 "USE_HAL_DRIVER",
                 "STM32H750xx"
             ],
-            "compilerPath": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
+            "compilerPath": "C:\\Program Files (x86)\\x86_64-8.1.0-win32-seh-rt_v6-rev0\\mingw64\\bin\\x86_64-w64-mingw32-gcc.exe",
             "cStandard": "c99",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "windows-gcc-x64"

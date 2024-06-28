@@ -1,9 +1,9 @@
 ###########################################################################
-## Makefile generated for component 'mcu'. 
+## Makefile generated for component 'equalizer'. 
 ## 
-## Makefile     : mcu.mk
-## Generated on : Fri Feb 23 17:51:52 2024
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)/mcu.exe
+## Makefile     : equalizer.mk
+## Generated on : Thu Jun 27 00:23:13 2024
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)/equalizer.exe
 ## Product type : executable
 ## 
 ###########################################################################
@@ -18,10 +18,10 @@
 # MODELREF_LINK_RSPFILE   Linker command listing model reference link objects
 # CMD_FILE                Command file
 
-PRODUCT_NAME              = mcu
-MAKEFILE                  = mcu.mk
-MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2023a
-MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2023a/bin
+PRODUCT_NAME              = equalizer
+MAKEFILE                  = equalizer.mk
+MATLAB_ROOT               = C:/PROGRA~1/MATLAB/R2023b
+MATLAB_BIN                = C:/PROGRA~1/MATLAB/R2023b/bin
 MATLAB_ARCH_BIN           = $(MATLAB_BIN)/win64
 START_DIR                 = D:/Thesis
 SOLVER                    = 
@@ -30,8 +30,8 @@ CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = ISO_C
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
 RELATIVE_PATH_TO_ANCHOR   = ..
-MODELREF_LINK_RSPFILE     = mcu_ref.rsp
-CMD_FILE                  = mcu.rsp
+MODELREF_LINK_RSPFILE     = equalizer_ref.rsp
+CMD_FILE                  = equalizer.rsp
 C_STANDARD_OPTS           = 
 CPP_STANDARD_OPTS         = 
 
@@ -41,7 +41,7 @@ CPP_STANDARD_OPTS         =
 
 # Toolchain Name:          LCC-win64 v2.4.1 | gmake (64-bit Windows)
 # Supported Version(s):    2.4.1
-# ToolchainInfo Version:   2023a
+# ToolchainInfo Version:   2023b
 # Specification Revision:  1.0
 # 
 
@@ -133,7 +133,7 @@ SHAREDLIB_LDFLAGS    = -dll -entry LibMain -s -L$(LCC_LIB) $(LDFLAGS_ADDITIONAL)
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/mcu.exe
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/equalizer.exe
 PRODUCT_TYPE = "executable"
 BUILD_TYPE = "Top-Level Standalone Executable"
 
@@ -141,7 +141,7 @@ BUILD_TYPE = "Top-Level Standalone Executable"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR)/mcu_ert_rtw/referenced_model_includes -I$(START_DIR) -I$(START_DIR)/mcu_ert_rtw -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert -I$(START_DIR)/slprj/ert/_sharedutils
+INCLUDES_BUILDINFO = -I$(START_DIR)/equalizer_ert_rtw/referenced_model_includes -I$(START_DIR) -I$(START_DIR)/equalizer_ert_rtw -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert -I$(START_DIR)/slprj/ert/_sharedutils
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -151,8 +151,8 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTERMFCN=1 -DONESTEPFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
 DEFINES_CUSTOM = 
-DEFINES_OPTS = -DTID01EQ=0
-DEFINES_STANDARD = -DMODEL=mcu -DNUMST=2 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_OPTS = -DTID01EQ=1
+DEFINES_STANDARD = -DMODEL=equalizer -DNUMST=3 -DNCSTATES=1 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
 DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STANDARD)
 
@@ -160,9 +160,9 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STAN
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/mcu_ert_rtw/mcu.c
+SRCS = $(START_DIR)/equalizer_ert_rtw/equalizer.c
 
-MAIN_SRC = $(START_DIR)/mcu_ert_rtw/ert_main.c
+MAIN_SRC = $(START_DIR)/equalizer_ert_rtw/ert_main.c
 
 ALL_SRCS = $(SRCS) $(MAIN_SRC)
 
@@ -170,7 +170,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = mcu.obj
+OBJS = equalizer.obj
 
 MAIN_OBJ = ert_main.obj
 
@@ -276,7 +276,7 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MODELREF_LIBS) $(LIBS) $(MAIN_OBJ)
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-%.obj : $(START_DIR)/mcu_ert_rtw/%.c
+%.obj : $(START_DIR)/equalizer_ert_rtw/%.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
@@ -288,11 +288,15 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MODELREF_LIBS) $(LIBS) $(MAIN_OBJ)
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-ert_main.obj : $(START_DIR)/mcu_ert_rtw/ert_main.c
+%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
-mcu.obj : $(START_DIR)/mcu_ert_rtw/mcu.c
+equalizer.obj : $(START_DIR)/equalizer_ert_rtw/equalizer.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+ert_main.obj : $(START_DIR)/equalizer_ert_rtw/ert_main.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 

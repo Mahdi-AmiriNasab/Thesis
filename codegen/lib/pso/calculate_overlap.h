@@ -18,8 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double calculate_overlap(const double cell_values[], int size);
-
+double calculate_overlap(const double cell_values[], int max_size[]);
 
 #ifdef __cplusplus
 }
