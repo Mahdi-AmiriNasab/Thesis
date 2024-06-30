@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 4.14
+ * Model version                  : 4.42
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Thu Jun 27 00:22:50 2024
+ * C/C++ source code generated on : Fri Jun 28 19:12:26 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10

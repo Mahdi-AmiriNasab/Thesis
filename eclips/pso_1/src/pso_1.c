@@ -17,6 +17,8 @@
 #include "pso_types.h"
 #include "rt_nonfinite.h"
 #include "calculate_overlap.h"
+#include "equalizer.h"
+
 
 real_T rtNaN;
 
@@ -36,10 +38,20 @@ double w_time = 0.5;
 double w_inc = 0.0;
 double w_ovp = 0.5;
 
+/* External inputs (root inport signals with default storage) */
+extern ExtU_equalizer_T equalizer_U;
+
+/* External outputs (root outports fed by signals with default storage) */
+extern ExtY_equalizer_T equalizer_Y;
+
+
 
 
 
 int main(void) {
+
+	equalizer_initialize();
+
 	setbuf(stdout, NULL);
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
 

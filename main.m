@@ -9,7 +9,7 @@ soc = [39    39    20    72    81    92    51    11    60]; % good one
 
 %soc = [1    10    20    30    40    50    50    50    50]; % test
 
-soc = [10    10    10   10     10     7    9   9    11]; % test
+%soc = [10    10    10   10     10     7    9   9    11]; % test
 
 %soc = fix(rand (1, cell_count) * 100);
 
@@ -32,7 +32,7 @@ global no_ovp_plot_flag;
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
 
-run_number = 8; % select the run number you want to execute
+run_number = 1; % select the run number you want to execute
 [global_best, eq_step, stio] = run_selected_pso(soc, run_number);
 
 src_q_cls = zeros(50, 2);

@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 4.14
+ * Model version                  : 4.42
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Thu Jun 27 00:22:50 2024
+ * C/C++ source code generated on : Fri Jun 28 19:12:26 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -14,11 +14,10 @@
  */
 
 #include "equalizer.h"
-#include "rtwtypes.h"
 #include "equalizer_private.h"
 #include <math.h>
+#include "rtwtypes.h"
 #include "zero_crossing_types.h"
-#include "coloumb_counting.h"
 
 /* Block signals (default storage) */
 B_equalizer_T equalizer_B;
@@ -44,24 +43,6 @@ ExtY_equalizer_T equalizer_Y;
 /* Real-time model */
 static RT_MODEL_equalizer_T equalizer_M_;
 RT_MODEL_equalizer_T *const equalizer_M = &equalizer_M_;
-static void rate_scheduler(void);
-
-/*
- *         This function updates active task flag for each subrate.
- *         The function is called at model base rate, hence the
- *         generated code self-manages all its subrates.
- */
-static void rate_scheduler(void)
-{
-  /* Compute which subrates run during the next base time step.  Subrates
-   * are an integer multiple of the base rate counter.  Therefore, the subtask
-   * counter is reset when it reaches its limit (zero means run).
-   */
-  (equalizer_M->Timing.TaskCounters.TID[2])++;
-  if ((equalizer_M->Timing.TaskCounters.TID[2]) > 9) {/* Sample time: [0.01s, 0.0s] */
-    equalizer_M->Timing.TaskCounters.TID[2] = 0;
-  }
-}
 
 /*
  * This function updates continuous states using the ODE3 fixed-step
@@ -144,136 +125,22 @@ static void rt_ertODEUpdateContinuousStates(RTWSolverInfo *si )
   rtsiSetSimTimeStep(si,MAJOR_TIME_STEP);
 }
 
-/*
- * Output and update for atomic system:
- *    '<S1>/demux n'
- *    '<S1>/demux p'
- */
-void equalizer_demuxn(real_T rtu_u, real_T *rty_s1, real_T *rty_s2, real_T
-                      *rty_s3, real_T *rty_s4, real_T *rty_s5, real_T *rty_s6,
-                      real_T *rty_s7, real_T *rty_s8, real_T *rty_s9)
+static real_T rt_roundd_snf(real_T u)
 {
-  switch ((int16_T)rtu_u) {
-   case 1:
-    *rty_s1 = 1.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 2:
-    *rty_s1 = 0.0;
-    *rty_s2 = 1.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 3:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 1.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 4:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 1.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 5:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 1.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 6:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 1.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 7:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 1.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 8:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 1.0;
-    *rty_s9 = 0.0;
-    break;
-
-   case 9:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 1.0;
-    break;
-
-   default:
-    *rty_s1 = 0.0;
-    *rty_s2 = 0.0;
-    *rty_s3 = 0.0;
-    *rty_s4 = 0.0;
-    *rty_s5 = 0.0;
-    *rty_s6 = 0.0;
-    *rty_s7 = 0.0;
-    *rty_s8 = 0.0;
-    *rty_s9 = 0.0;
-    break;
+  real_T y;
+  if (fabs(u) < 4.503599627370496E+15) {
+    if (u >= 0.5) {
+      y = floor(u + 0.5);
+    } else if (u > -0.5) {
+      y = u * 0.0;
+    } else {
+      y = ceil(u - 0.5);
+    }
+  } else {
+    y = u;
   }
+
+  return y;
 }
 
 /* Model step function */
@@ -299,22 +166,11 @@ void equalizer_step(void)
     int16_T eq_current_tmp;
     int16_T i;
     int16_T vlen;
+    uint8_T tmp;
     boolean_T exitg1;
     boolean_T y;
     ZCEventType zcEvent;
-    if (rtmIsMajorTimeStep(equalizer_M) &&
-        equalizer_M->Timing.TaskCounters.TID[1] == 0) {
-      /* Memory: '<S1>/Memory' */
-      equalizer_B.Memory[0] = equalizer_DW.Memory_PreviousInput[0];
-
-      /* Memory: '<S1>/Memory1' */
-      equalizer_B.Memory1[0] = equalizer_DW.Memory1_PreviousInput[0];
-
-      /* Memory: '<S1>/Memory' */
-      equalizer_B.Memory[1] = equalizer_DW.Memory_PreviousInput[1];
-
-      /* Memory: '<S1>/Memory1' */
-      equalizer_B.Memory1[1] = equalizer_DW.Memory1_PreviousInput[1];
+    if (rtmIsMajorTimeStep(equalizer_M)) {
       for (i = 0; i < 9; i++) {
         /* Memory: '<S1>/Memory3' */
         equalizer_B.Memory3[i] = equalizer_DW.Memory3_PreviousInput[i];
@@ -323,6 +179,14 @@ void equalizer_step(void)
       /* Memory: '<S1>/Memory4' */
       equalizer_B.Memory4 = equalizer_DW.Memory4_PreviousInput;
 
+      /* MATLAB Function: '<S1>/equalizer' */
+      equalizer_B.I_tranfer = 0.0;
+
+      /* Outport: '<Root>/stop_transfer' incorporates:
+       *  MATLAB Function: '<S1>/equalizer'
+       */
+      equalizer_Y.stop_transfer = 0.0;
+
       /* MATLAB Function: '<S1>/equalizer' incorporates:
        *  Inport: '<Root>/SOC'
        *  Inport: '<Root>/dst_q_cls'
@@ -330,8 +194,6 @@ void equalizer_step(void)
        *  Inport: '<Root>/src_trg_soc_av'
        *  Memory: '<S1>/Memory3'
        */
-      equalizer_B.I_tranfer = 0.0;
-      equalizer_B.transfer_over = 0.0;
       equalizer_B.source_batts[0] = 0.0;
       equalizer_B.destinations_batts[0] = 0.0;
       equalizer_B.source_batts[1] = 0.0;
@@ -353,44 +215,43 @@ void equalizer_step(void)
         equalizer_B.destinations_batts[0] = equalizer_U.dst_q_cls[0];
         equalizer_B.source_batts[1] = equalizer_U.src_q_cls[1];
         equalizer_B.destinations_batts[1] = equalizer_U.dst_q_cls[1];
-        if ((equalizer_DW.dir == -1.0) && (!equalizer_B.Memory4)) {
+        y = !equalizer_B.Memory4;
+        if ((equalizer_DW.dir == -1) && y) {
           equalizer_B.I_tranfer = equalizer_B.Memory3[(int16_T)
             equalizer_U.src_q_cls[0] - 1];
           equalizer_DW.enable = 1.0;
-          equalizer_DW.dir = 0.0;
+          equalizer_DW.dir = 0;
         }
 
-        if (equalizer_DW.dir == 0.0) {
+        if (equalizer_DW.dir == 0) {
           equalizer_B.I_tranfer = equalizer_B.Memory3[(int16_T)
             equalizer_U.src_q_cls[0] - 1];
         }
 
-        if ((equalizer_DW.dir == 0.0) && equalizer_B.Memory4 &&
+        if ((equalizer_DW.dir == 0) && equalizer_B.Memory4 &&
             (equalizer_DW.enable == 1.0)) {
           equalizer_DW.enable = 0.0;
         }
 
-        if ((equalizer_DW.dir == 0.0) && (!equalizer_B.Memory4) &&
-            (equalizer_DW.enable == 0.0)) {
+        if ((equalizer_DW.dir == 0) && y && (equalizer_DW.enable == 0.0)) {
           equalizer_B.I_tranfer = equalizer_B.Memory3[(int16_T)
             equalizer_U.dst_q_cls[0] - 1];
           equalizer_DW.enable = 1.0;
-          equalizer_DW.dir = 1.0;
+          equalizer_DW.dir = 1;
         }
 
-        if (equalizer_DW.dir == 1.0) {
+        if (equalizer_DW.dir == 1) {
           equalizer_B.I_tranfer = equalizer_B.Memory3[(int16_T)
             equalizer_U.dst_q_cls[0] - 1];
         }
 
-        if ((equalizer_DW.dir == 1.0) && equalizer_B.Memory4 &&
+        if ((equalizer_DW.dir == 1) && equalizer_B.Memory4 &&
             (equalizer_DW.enable == 1.0)) {
           equalizer_DW.enable = 0.0;
         }
 
-        if ((equalizer_DW.dir == 1.0) && (!equalizer_B.Memory4) &&
-            (equalizer_DW.enable == 0.0)) {
-          equalizer_DW.dir = -1.0;
+        if ((equalizer_DW.dir == 1) && y && (equalizer_DW.enable == 0.0)) {
+          equalizer_DW.dir = -1;
         }
 
         if (equalizer_U.src_q_cls[0] > equalizer_U.src_q_cls[1]) {
@@ -408,7 +269,7 @@ void equalizer_step(void)
         } else {
           AH_coeff = equalizer_U.SOC[eq_current_tmp];
           for (b_k = 2; b_k <= vlen; b_k++) {
-            AH_coeff += equalizer_U.SOC[eq_current_tmp + 1];
+            AH_coeff += equalizer_U.SOC[(eq_current_tmp + b_k) - 1];
           }
         }
 
@@ -426,18 +287,21 @@ void equalizer_step(void)
         } else {
           source_batt_number = equalizer_U.SOC[vlen];
           for (b_k = 2; b_k <= eq_current_tmp; b_k++) {
-            source_batt_number += equalizer_U.SOC[vlen + 1];
+            source_batt_number += equalizer_U.SOC[(vlen + b_k) - 1];
           }
         }
 
         if (((AH_coeff / (real_T)i <= equalizer_U.src_trg_soc_av) ||
              (source_batt_number / (real_T)eq_current_tmp >=
-              equalizer_U.dst_trg_soc_av)) && (equalizer_DW.dir == -1.0)) {
-          equalizer_B.transfer_over = 1.0;
+              equalizer_U.dst_trg_soc_av)) && (equalizer_DW.dir == -1)) {
+          /* Outport: '<Root>/stop_transfer' */
+          equalizer_Y.stop_transfer = 1.0;
         }
       } else {
-        equalizer_DW.dir = -1.0;
-        equalizer_B.transfer_over = 1.0;
+        equalizer_DW.dir = -1;
+
+        /* Outport: '<Root>/stop_transfer' */
+        equalizer_Y.stop_transfer = 1.0;
         equalizer_DW.enable = 0.0;
       }
 
@@ -448,10 +312,29 @@ void equalizer_step(void)
 
       /* MATLAB Function: '<S1>/equalizer' */
       equalizer_B.enable_I_trs = equalizer_DW.enable;
+      equalizer_B.step_cnt_out = 1.0;
 
-      /* MATLAB Function: '<S1>/battery_selector' */
-      equalizer_B.sw_pos = 0.0;
-      equalizer_B.sw_neg = 0.0;
+      /* Memory: '<S1>/Memory' */
+      equalizer_B.Memory[0] = equalizer_DW.Memory_PreviousInput[0];
+
+      /* Memory: '<S1>/Memory1' */
+      equalizer_B.Memory1[0] = equalizer_DW.Memory1_PreviousInput[0];
+
+      /* Memory: '<S1>/Memory' */
+      equalizer_B.Memory[1] = equalizer_DW.Memory_PreviousInput[1];
+
+      /* Memory: '<S1>/Memory1' */
+      equalizer_B.Memory1[1] = equalizer_DW.Memory1_PreviousInput[1];
+
+      /* Outport: '<Root>/sw_pos' incorporates:
+       *  MATLAB Function: '<S1>/battery_selector'
+       */
+      equalizer_Y.sw_pos = 0U;
+
+      /* Outport: '<Root>/sw_neg' incorporates:
+       *  MATLAB Function: '<S1>/battery_selector'
+       */
+      equalizer_Y.sw_neg = 0U;
 
       /* Outport: '<Root>/eq_current' incorporates:
        *  MATLAB Function: '<S1>/battery_selector'
@@ -466,14 +349,66 @@ void equalizer_step(void)
       eq_current_tmp = 0;
       if ((equalizer_B.Memory[0] <= equalizer_B.Memory[1]) &&
           (equalizer_B.Memory1[0] <= equalizer_B.Memory1[1])) {
-        if (equalizer_Y.dir == 0.0) {
-          equalizer_B.sw_pos = equalizer_B.Memory1[0];
-          equalizer_B.sw_neg = equalizer_B.Memory1[1];
+        switch (equalizer_Y.dir) {
+         case 0:
+          AH_coeff = rt_roundd_snf(equalizer_B.Memory1[0]);
+          if (AH_coeff < 256.0) {
+            if (AH_coeff >= 0.0) {
+              tmp = (uint8_T)AH_coeff;
+            } else {
+              tmp = 0U;
+            }
+          } else {
+            tmp = MAX_uint8_T;
+          }
+
+          /* Outport: '<Root>/sw_pos' */
+          equalizer_Y.sw_pos = tmp;
+          AH_coeff = rt_roundd_snf(equalizer_B.Memory1[1]);
+          if (AH_coeff < 256.0) {
+            if (AH_coeff >= 0.0) {
+              tmp = (uint8_T)AH_coeff;
+            } else {
+              tmp = 0U;
+            }
+          } else {
+            tmp = MAX_uint8_T;
+          }
+
+          /* Outport: '<Root>/sw_neg' */
+          equalizer_Y.sw_neg = tmp;
           eq_current_tmp = 2;
-        } else if (equalizer_Y.dir == 1.0) {
-          equalizer_B.sw_pos = equalizer_B.Memory[0];
-          equalizer_B.sw_neg = equalizer_B.Memory[1];
+          break;
+
+         case 1:
+          AH_coeff = rt_roundd_snf(equalizer_B.Memory[0]);
+          if (AH_coeff < 256.0) {
+            if (AH_coeff >= 0.0) {
+              tmp = (uint8_T)AH_coeff;
+            } else {
+              tmp = 0U;
+            }
+          } else {
+            tmp = MAX_uint8_T;
+          }
+
+          /* Outport: '<Root>/sw_pos' */
+          equalizer_Y.sw_pos = tmp;
+          AH_coeff = rt_roundd_snf(equalizer_B.Memory[1]);
+          if (AH_coeff < 256.0) {
+            if (AH_coeff >= 0.0) {
+              tmp = (uint8_T)AH_coeff;
+            } else {
+              tmp = 0U;
+            }
+          } else {
+            tmp = MAX_uint8_T;
+          }
+
+          /* Outport: '<Root>/sw_neg' */
+          equalizer_Y.sw_neg = tmp;
           eq_current_tmp = 2;
+          break;
         }
 
         /* Outport: '<Root>/eq_current' incorporates:
@@ -482,67 +417,6 @@ void equalizer_step(void)
         equalizer_Y.eq_current = eq_current_tmp;
       }
 
-      /* MATLAB Function: '<S1>/demux p' incorporates:
-       *  Outport: '<Root>/g1p'
-       *  Outport: '<Root>/g2p'
-       *  Outport: '<Root>/g3p'
-       *  Outport: '<Root>/g4p'
-       *  Outport: '<Root>/g5p'
-       *  Outport: '<Root>/g6p'
-       *  Outport: '<Root>/g7p'
-       *  Outport: '<Root>/g8p'
-       *  Outport: '<Root>/g9p'
-       */
-      equalizer_demuxn(equalizer_B.sw_pos, &equalizer_Y.g1p, &equalizer_Y.g2p,
-                       &equalizer_Y.g3p, &equalizer_Y.g4p, &equalizer_Y.g5p,
-                       &equalizer_Y.g6p, &equalizer_Y.g7p, &equalizer_Y.g8p,
-                       &equalizer_Y.g9p);
-
-      /* MATLAB Function: '<S1>/demux n' incorporates:
-       *  Outport: '<Root>/g1n'
-       *  Outport: '<Root>/g2n'
-       *  Outport: '<Root>/g3n'
-       *  Outport: '<Root>/g4n'
-       *  Outport: '<Root>/g5n'
-       *  Outport: '<Root>/g6n'
-       *  Outport: '<Root>/g7n'
-       *  Outport: '<Root>/g8n'
-       *  Outport: '<Root>/g9n'
-       */
-      equalizer_demuxn(equalizer_B.sw_neg, &equalizer_Y.g1n, &equalizer_Y.g2n,
-                       &equalizer_Y.g3n, &equalizer_Y.g4n, &equalizer_Y.g5n,
-                       &equalizer_Y.g6n, &equalizer_Y.g7n, &equalizer_Y.g8n,
-                       &equalizer_Y.g9n);
-    }
-
-    if (rtmIsMajorTimeStep(equalizer_M) &&
-        equalizer_M->Timing.TaskCounters.TID[2] == 0) {
-      /* Gain: '<Root>/Gain' incorporates:
-       *  Inport: '<Root>/CAP_mAh'
-       */
-      equalizer_B.Gain = 0.001 * equalizer_U.CAP_mAh;
-
-      /* ModelReference: '<S1>/Ah_estimator' incorporates:
-       *  Inport: '<Root>/I_meas'
-       *  Inport: '<Root>/SOC_init'
-       */
-      coloumb_counting(&equalizer_U.I_meas[0], &equalizer_B.Gain,
-                       &equalizer_U.SOC_init[0], &equalizer_B.Ah_estimator[0],
-                       &(equalizer_DW.Ah_estimator_InstanceData.rtb),
-                       &(equalizer_DW.Ah_estimator_InstanceData.rtdw));
-
-      /* Outport: '<Root>/soc_est' incorporates:
-       *  ModelReference: '<S1>/Ah_estimator'
-       */
-      for (i = 0; i < 9; i++) {
-        equalizer_Y.soc_est[i] = equalizer_B.Ah_estimator[i];
-      }
-
-      /* End of Outport: '<Root>/soc_est' */
-    }
-
-    if (rtmIsMajorTimeStep(equalizer_M) &&
-        equalizer_M->Timing.TaskCounters.TID[1] == 0) {
       /* Outputs for Enabled SubSystem: '<S1>/AH_calculation' incorporates:
        *  EnablePort: '<S2>/Enable'
        */
@@ -558,11 +432,11 @@ void equalizer_step(void)
         destination_batt_number = (equalizer_B.Memory[1] - equalizer_B.Memory[0])
           + 1.0;
         if (source_batt_number > destination_batt_number) {
-          if (equalizer_Y.dir == 0.0) {
+          if (equalizer_Y.dir == 0) {
             AH_coeff = destination_batt_number / source_batt_number;
           }
         } else if ((source_batt_number < destination_batt_number) &&
-                   (equalizer_Y.dir == 1.0)) {
+                   (equalizer_Y.dir == 1)) {
           AH_coeff = source_batt_number / destination_batt_number;
         }
 
@@ -601,7 +475,7 @@ void equalizer_step(void)
       equalizer_B.Product = equalizer_B.Abs * equalizer_B.Saturation;
 
       /* Gain: '<S4>/Gain' */
-      equalizer_B.Gain_h = 0.00027777777777777778 * equalizer_B.Product;
+      equalizer_B.Gain = 0.00027777777777777778 * equalizer_B.Product;
     }
 
     /* Integrator: '<S4>/Integrator' */
@@ -626,20 +500,7 @@ void equalizer_step(void)
 
   if (rtmIsMajorTimeStep(equalizer_M)) {
     int16_T i;
-    if (rtmIsMajorTimeStep(equalizer_M) &&
-        equalizer_M->Timing.TaskCounters.TID[1] == 0) {
-      /* Update for Memory: '<S1>/Memory' */
-      equalizer_DW.Memory_PreviousInput[0] = equalizer_B.destinations_batts[0];
-
-      /* Update for Memory: '<S1>/Memory1' */
-      equalizer_DW.Memory1_PreviousInput[0] = equalizer_B.source_batts[0];
-
-      /* Update for Memory: '<S1>/Memory' */
-      equalizer_DW.Memory_PreviousInput[1] = equalizer_B.destinations_batts[1];
-
-      /* Update for Memory: '<S1>/Memory1' */
-      equalizer_DW.Memory1_PreviousInput[1] = equalizer_B.source_batts[1];
-
+    if (rtmIsMajorTimeStep(equalizer_M)) {
       /* Update for Memory: '<S1>/Memory3' incorporates:
        *  Inport: '<Root>/I_meas'
        */
@@ -651,6 +512,18 @@ void equalizer_step(void)
 
       /* Update for Memory: '<S1>/Memory4' */
       equalizer_DW.Memory4_PreviousInput = equalizer_B.comparator;
+
+      /* Update for Memory: '<S1>/Memory' */
+      equalizer_DW.Memory_PreviousInput[0] = equalizer_B.destinations_batts[0];
+
+      /* Update for Memory: '<S1>/Memory1' */
+      equalizer_DW.Memory1_PreviousInput[0] = equalizer_B.source_batts[0];
+
+      /* Update for Memory: '<S1>/Memory' */
+      equalizer_DW.Memory_PreviousInput[1] = equalizer_B.destinations_batts[1];
+
+      /* Update for Memory: '<S1>/Memory1' */
+      equalizer_DW.Memory1_PreviousInput[1] = equalizer_B.source_batts[1];
 
       /* Update for Memory: '<S1>/Memory2' */
       equalizer_DW.Memory2_PreviousInput = equalizer_B.I_tranfer;
@@ -678,8 +551,6 @@ void equalizer_step(void)
        */
       equalizer_M->Timing.clockTick1++;
     }
-
-    rate_scheduler();
   }                                    /* end MajorTimeStep */
 }
 
@@ -690,7 +561,7 @@ void equalizer_derivatives(void)
   _rtXdot = ((XDot_equalizer_T *) equalizer_M->derivs);
 
   /* Derivatives for Integrator: '<S4>/Integrator' */
-  _rtXdot->Integrator_CSTATE = equalizer_B.Gain_h;
+  _rtXdot->Integrator_CSTATE = equalizer_B.Gain;
 }
 
 /* Model initialize function */
@@ -734,20 +605,13 @@ void equalizer_initialize(void)
   rtsiSetSolverName(&equalizer_M->solverInfo,"ode3");
   rtmSetTPtr(equalizer_M, &equalizer_M->Timing.tArray[0]);
   equalizer_M->Timing.stepSize0 = 0.001;
-
-  /* Model Initialize function for ModelReference Block: '<S1>/Ah_estimator' */
-  coloumb_counting_initialize(rtmGetErrorStatusPointer(equalizer_M),
-    &(equalizer_DW.Ah_estimator_InstanceData.rtm));
   equalizer_PrevZCX.Integrator_Reset_ZCE = UNINITIALIZED_ZCSIG;
 
   /* InitializeConditions for Integrator: '<S4>/Integrator' */
   equalizer_X.Integrator_CSTATE = 0.0;
 
   /* SystemInitialize for MATLAB Function: '<S1>/equalizer' */
-  equalizer_DW.dir = -1.0;
-
-  /* SystemInitialize for ModelReference: '<S1>/Ah_estimator' */
-  coloumb_counting_Init(&(equalizer_DW.Ah_estimator_InstanceData.rtdw));
+  equalizer_DW.dir = -1;
 }
 
 /* Model terminate function */

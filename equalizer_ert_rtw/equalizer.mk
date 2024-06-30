@@ -2,7 +2,7 @@
 ## Makefile generated for component 'equalizer'. 
 ## 
 ## Makefile     : equalizer.mk
-## Generated on : Thu Jun 27 00:23:13 2024
+## Generated on : Fri Jun 28 16:43:03 2024
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/equalizer.exe
 ## Product type : executable
 ## 
@@ -15,7 +15,6 @@
 # Macro Descriptions:
 # PRODUCT_NAME            Name of the system to build
 # MAKEFILE                Name of this makefile
-# MODELREF_LINK_RSPFILE   Linker command listing model reference link objects
 # CMD_FILE                Command file
 
 PRODUCT_NAME              = equalizer
@@ -30,7 +29,6 @@ CLASSIC_INTERFACE         = 0
 TGT_FCN_LIB               = ISO_C
 MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
 RELATIVE_PATH_TO_ANCHOR   = ..
-MODELREF_LINK_RSPFILE     = equalizer_ref.rsp
 CMD_FILE                  = equalizer.rsp
 C_STANDARD_OPTS           = 
 CPP_STANDARD_OPTS         = 
@@ -141,7 +139,7 @@ BUILD_TYPE = "Top-Level Standalone Executable"
 ## INCLUDE PATHS
 ###########################################################################
 
-INCLUDES_BUILDINFO = -I$(START_DIR)/equalizer_ert_rtw/referenced_model_includes -I$(START_DIR) -I$(START_DIR)/equalizer_ert_rtw -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert -I$(START_DIR)/slprj/ert/_sharedutils
+INCLUDES_BUILDINFO = -I$(START_DIR) -I$(START_DIR)/equalizer_ert_rtw -I$(MATLAB_ROOT)/extern/include -I$(MATLAB_ROOT)/simulink/include -I$(MATLAB_ROOT)/rtw/c/src -I$(MATLAB_ROOT)/rtw/c/src/ext_mode/common -I$(MATLAB_ROOT)/rtw/c/ert
 
 INCLUDES = $(INCLUDES_BUILDINFO)
 
@@ -152,7 +150,7 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTERMFCN=1 -DONESTEPFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
 DEFINES_CUSTOM = 
 DEFINES_OPTS = -DTID01EQ=1
-DEFINES_STANDARD = -DMODEL=equalizer -DNUMST=3 -DNCSTATES=1 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_STANDARD = -DMODEL=equalizer -DNUMST=2 -DNCSTATES=1 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
 DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STANDARD)
 
@@ -160,7 +158,7 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STAN
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/equalizer_ert_rtw/equalizer.c
+SRCS = $(START_DIR)/equalizer_ert_rtw/equalizer.c $(START_DIR)/equalizer_ert_rtw/rt_zcfcn.c
 
 MAIN_SRC = $(START_DIR)/equalizer_ert_rtw/ert_main.c
 
@@ -170,7 +168,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = equalizer.obj
+OBJS = equalizer.obj rt_zcfcn.obj
 
 MAIN_OBJ = ert_main.obj
 
@@ -186,9 +184,7 @@ PREBUILT_OBJS =
 ## LIBRARIES
 ###########################################################################
 
-MODELREF_LIBS = D:/Thesis/slprj/ert/coloumb_counting/coloumb_counting_rtwlib.lib
-
-LIBS = $(START_DIR)/slprj/ert/_sharedutils/rtwshared.lib
+LIBS = 
 
 ###########################################################################
 ## SYSTEM LIBRARIES
@@ -226,7 +222,7 @@ all : build
 build : prebuild $(PRODUCT)
 
 
-buildobj : prebuild $(OBJS) $(PREBUILT_OBJS) $(LIBS)
+buildobj : prebuild $(OBJS) $(PREBUILT_OBJS)
 	@echo "### Successfully generated all binary outputs."
 
 
@@ -250,9 +246,9 @@ execute : download
 # Create a standalone executable            
 #-------------------------------------------
 
-$(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MODELREF_LIBS) $(LIBS) $(MAIN_OBJ)
+$(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 	@echo "### Creating standalone executable "$(PRODUCT)" ..."
-	$(LD) $(LDFLAGS) -o $(PRODUCT) @$(CMD_FILE) @$(MODELREF_LINK_RSPFILE) $(subst /,\,$(LIBS)) $(subst /,\,$(SYSTEM_LIBS)) $(subst /,\,$(TOOLCHAIN_LIBS))
+	$(LD) $(LDFLAGS) -o $(PRODUCT) @$(CMD_FILE) $(subst /,\,$(SYSTEM_LIBS)) $(subst /,\,$(TOOLCHAIN_LIBS))
 	@echo "### Created: $(PRODUCT)"
 
 
@@ -297,6 +293,10 @@ equalizer.obj : $(START_DIR)/equalizer_ert_rtw/equalizer.c
 
 
 ert_main.obj : $(START_DIR)/equalizer_ert_rtw/ert_main.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+rt_zcfcn.obj : $(START_DIR)/equalizer_ert_rtw/rt_zcfcn.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 

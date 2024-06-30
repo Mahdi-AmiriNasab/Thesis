@@ -47,15 +47,16 @@ float vol = 0.7, cur = 0.7;
 uint8_t current_percent = 20;
 float vout = 2.0;
 
-double w_time = 0.2;
-double w_inc = 0.8;
-double w_ovp = 0;
-double soc_init[9] = {7, 88, 10, 95, 52, 50, 48, 42, 76};
+double w_time = 0.4;
+double w_inc = 0.4;
+double w_ovp = 0.2;
+double soc_init[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
 double soc[9];
 uint16_t adc_current [1];
 
 GPIO_PinState dcdc_rst1 = 0, dcdc_rst2 = 0;
 GPIO_PinState main_relay = 0;
+uint8_t flag_equalizer_step = 0;
 
 typedef enum 
 {
@@ -69,8 +70,17 @@ typedef enum
 
 GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
 GPIO_PinState pinstate_neg = GPIO_PIN_RESET;
-uint8_t num_neg = 2, num_pos = 1;
+uint8_t num_neg = 1, num_pos = 1;
 DCDCState e_DCDC_status = DCDC_Off;
+real_T I_cells [9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+
+/* External inputs (root inport signals with default storage) */
+extern ExtU_equalizer_T equalizer_U;
+
+/* External outputs (root outports fed by signals with default storage) */
+extern ExtY_equalizer_T equalizer_Y;
+
+uint8_t step_cnt = 0;
 
 
 typedef struct {
@@ -287,7 +297,8 @@ int main(void)
     HAL_TIM_Base_Start(&htim6);
     HAL_ADC_Start_IT(&hadc1);
 
-    
+
+    memcpy(soc, soc_init, sizeof(soc));
     equalizer_initialize();
 
 
@@ -327,13 +338,32 @@ int main(void)
         // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_p (6)
         // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_p (7)
         // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4); // pwm_ax2pack_DCDC_o_p (8)
+
+        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
+		pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
+        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
+        
+        // initialize soc
+        memcpy(soc, soc_init, sizeof(soc));
+
+        // step size determination
+        volatile uint8_t step_cnt_max = 0;
+        for(uint8_t i= 0; i < eq_step.size[1]; i++)
+        {
+            if(eq_step.data[i].source_queue_cells.data[0] > 0)
+                step_cnt_max++;
+            else
+                break;
+        }
   
 	while(1)
 	{
+
+ 
         set_reset_trig_DCDC(e_DCDC_status);
         set_reset_trig_neg(num_neg, pinstate_neg);
         set_reset_trig_pos(num_pos, pinstate_pos);
-        GetDebugInfo(&debugInfo);
+        // GetDebugInfo(&debugInfo);
 
         
 		if(e_DCDC_status == DCDC_Off)
@@ -371,11 +401,39 @@ int main(void)
         Set_DAC_Voltage(cur, DAC_CHANNEL_2);
 		
 
-        memcpy(soc, soc_init, sizeof(soc));
-        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
-		pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
-        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
-		HAL_Delay(500);
+        
+        if(step_cnt < step_cnt_max) // if have any step to go
+        {
+            if(flag_equalizer_step)
+            {
+                flag_equalizer_step = 0;
+                equalizer_U.CAP_mAh = 2200;
+                equalizer_U.src_q_cls[0] = eq_step.data[step_cnt].source_queue_cells.data[0];
+                equalizer_U.src_q_cls[1] = eq_step.data[step_cnt].source_queue_cells.data[1];
+                equalizer_U.dst_q_cls[0] = eq_step.data[step_cnt].destination_queue_cells.data[0];
+                equalizer_U.dst_q_cls[1] = eq_step.data[step_cnt].destination_queue_cells.data[1];
+                equalizer_U.src_trg_soc_av = eq_step.data[step_cnt].source_target_soc_av.data[0];
+                equalizer_U.dst_trg_soc_av = eq_step.data[step_cnt].destination_target_soc_av.data[0] ? eq_step.data[step_cnt].destination_target_soc_av.data[0] : 255;
+                memcpy(equalizer_U.SOC_init, soc_init, sizeof(equalizer_U.SOC_init));
+                memcpy(equalizer_U.SOC, soc, sizeof(equalizer_U.SOC));
+                memcpy(equalizer_U.I_meas, I_cells, sizeof(equalizer_U.I_meas));
+                
+                equalizer_step();
+                
+								if(equalizer_Y.dir == -1)
+								{
+										static uint32_t dir_float_cnt = 0;
+										dir_float_cnt++;
+								}
+
+								if(equalizer_Y.stop_transfer)
+								{
+										static uint32_t stop_transfer_cnt = 0;
+										stop_transfer_cnt++;
+										step_cnt++;
+								}   
+            }     
+        }
 	}
 
 
@@ -983,7 +1041,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
 {
     switch(trig_num)
     {
-        case 2:
+        case 1:
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_5_GPIO_Port, trig_neg_5_Pin, GPIO_PIN_RESET);
@@ -995,7 +1053,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, action);
     break;
         
-        case 3:
+        case 2:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_5_GPIO_Port, trig_neg_5_Pin, GPIO_PIN_RESET);
@@ -1007,7 +1065,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, action);
     break;
 
-        case 4:
+        case 3:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_5_GPIO_Port, trig_neg_5_Pin, GPIO_PIN_RESET);
@@ -1019,7 +1077,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, action);
     break;
 
-        case 5:
+        case 4:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
@@ -1031,7 +1089,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_5_GPIO_Port, trig_neg_5_Pin, action);
     break;
 
-        case 6:
+        case 5:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
@@ -1043,7 +1101,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_6_GPIO_Port, trig_neg_6_Pin, action);
     break;
 
-        case 7:
+        case 6:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
@@ -1055,7 +1113,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_7_GPIO_Port, trig_neg_7_Pin, action);
     break;
 
-        case 8:
+        case 7:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
@@ -1067,7 +1125,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_8_GPIO_Port, trig_neg_8_Pin, action);
         break;
 
-        case 9:
+        case 8:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
@@ -1079,7 +1137,7 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
             HAL_GPIO_WritePin(trig_neg_9_GPIO_Port, trig_neg_9_Pin, action);
         break;
 
-        case 10:
+        case 9:
             HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
@@ -1328,6 +1386,7 @@ void set_reset_trig_DCDC(DCDCState state)
 
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
+    flag_equalizer_step = 1;
     static uint16_t cnt = 0;
     if(cnt > sizeof(adc_current)/sizeof(uint16_t))
         cnt = 0;

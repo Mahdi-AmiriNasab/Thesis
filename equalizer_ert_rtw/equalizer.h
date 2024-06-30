@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 4.14
+ * Model version                  : 4.42
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Thu Jun 27 00:22:50 2024
+ * C/C++ source code generated on : Fri Jun 28 19:12:26 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -23,7 +23,6 @@
 #endif                                 /* equalizer_COMMON_INCLUDES_ */
 
 #include "equalizer_types.h"
-#include "coloumb_counting.h"
 #include "rt_zcfcn.h"
 #include <string.h>
 #include "zero_crossing_types.h"
@@ -35,10 +34,6 @@
 
 #ifndef rtmSetErrorStatus
 #define rtmSetErrorStatus(rtm, val)    ((rtm)->errorStatus = (val))
-#endif
-
-#ifndef rtmGetErrorStatusPointer
-#define rtmGetErrorStatusPointer(rtm)  ((const char_T **)(&((rtm)->errorStatus)))
 #endif
 
 #ifndef rtmGetStopRequested
@@ -67,25 +62,21 @@
 
 /* Block signals (default storage) */
 typedef struct {
+  real_T Memory3[9];                   /* '<S1>/Memory3' */
   real_T Memory[2];                    /* '<S1>/Memory' */
   real_T Memory1[2];                   /* '<S1>/Memory1' */
-  real_T Memory3[9];                   /* '<S1>/Memory3' */
-  real_T Gain;                         /* '<Root>/Gain' */
-  real_T Ah_estimator[9];              /* '<S1>/Ah_estimator' */
   real_T Memory2;                      /* '<S1>/Memory2' */
   real_T Abs;                          /* '<S4>/Abs' */
   real_T Abs1;                         /* '<S4>/Abs1' */
   real_T Saturation;                   /* '<S4>/Saturation' */
   real_T Product;                      /* '<S4>/Product' */
-  real_T Gain_h;                       /* '<S4>/Gain' */
+  real_T Gain;                         /* '<S4>/Gain' */
   real_T Integrator;                   /* '<S4>/Integrator' */
   real_T destinations_batts[2];        /* '<S1>/equalizer' */
   real_T source_batts[2];              /* '<S1>/equalizer' */
-  real_T transfer_over;                /* '<S1>/equalizer' */
+  real_T step_cnt_out;                 /* '<S1>/equalizer' */
   real_T I_tranfer;                    /* '<S1>/equalizer' */
   real_T enable_I_trs;                 /* '<S1>/equalizer' */
-  real_T sw_pos;                       /* '<S1>/battery_selector' */
-  real_T sw_neg;                       /* '<S1>/battery_selector' */
   real_T AH_out;                       /* '<S2>/MATLAB Function' */
   boolean_T Memory4;                   /* '<S1>/Memory4' */
   boolean_T comparator;                /* '<S4>/comparator' */
@@ -93,14 +84,13 @@ typedef struct {
 
 /* Block states (default storage) for system '<Root>' */
 typedef struct {
+  real_T Memory3_PreviousInput[9];     /* '<S1>/Memory3' */
   real_T Memory_PreviousInput[2];      /* '<S1>/Memory' */
   real_T Memory1_PreviousInput[2];     /* '<S1>/Memory1' */
-  real_T Memory3_PreviousInput[9];     /* '<S1>/Memory3' */
   real_T Memory2_PreviousInput;        /* '<S1>/Memory2' */
-  real_T dir;                          /* '<S1>/equalizer' */
   real_T enable;                       /* '<S1>/equalizer' */
+  int8_T dir;                          /* '<S1>/equalizer' */
   boolean_T Memory4_PreviousInput;     /* '<S1>/Memory4' */
-  MdlrefDW_coloumb_counting_T Ah_estimator_InstanceData;/* '<S1>/Ah_estimator' */
 } DW_equalizer_T;
 
 /* Continuous states (default storage) */
@@ -140,7 +130,7 @@ typedef struct {
   real_T dst_q_cls[2];                 /* '<Root>/dst_q_cls' */
   real_T src_trg_soc_av;               /* '<Root>/src_trg_soc_av' */
   real_T dst_trg_soc_av;               /* '<Root>/dst_trg_soc_av' */
-  real_T SOC[2];                       /* '<Root>/SOC' */
+  real_T SOC[9];                       /* '<Root>/SOC' */
   real_T SOC_init[9];                  /* '<Root>/SOC_init' */
   real_T I_meas[9];                    /* '<Root>/I_meas' */
   real_T CAP_mAh;                      /* '<Root>/CAP_mAh' */
@@ -148,27 +138,12 @@ typedef struct {
 
 /* External outputs (root outports fed by signals with default storage) */
 typedef struct {
-  real_T g1p;                          /* '<Root>/g1p' */
-  real_T g2p;                          /* '<Root>/g2p' */
-  real_T g3p;                          /* '<Root>/g3p' */
-  real_T g4p;                          /* '<Root>/g4p' */
-  real_T g5p;                          /* '<Root>/g5p' */
-  real_T g6p;                          /* '<Root>/g6p' */
-  real_T g7p;                          /* '<Root>/g7p' */
-  real_T g8p;                          /* '<Root>/g8p' */
-  real_T g9p;                          /* '<Root>/g9p' */
-  real_T g1n;                          /* '<Root>/g1n' */
-  real_T g2n;                          /* '<Root>/g2n' */
-  real_T g3n;                          /* '<Root>/g3n' */
-  real_T g4n;                          /* '<Root>/g4n' */
-  real_T g5n;                          /* '<Root>/g5n' */
-  real_T g6n;                          /* '<Root>/g6n' */
-  real_T g7n;                          /* '<Root>/g7n' */
-  real_T g8n;                          /* '<Root>/g8n' */
-  real_T g9n;                          /* '<Root>/g9n' */
+  int8_T dir;                          /* '<Root>/dir' */
   real_T eq_current;                   /* '<Root>/eq_current' */
-  real_T dir;                          /* '<Root>/dir' */
   real_T soc_est[9];                   /* '<Root>/soc_est' */
+  real_T stop_transfer;                /* '<Root>/stop_transfer' */
+  uint8_T sw_pos;                      /* '<Root>/sw_pos' */
+  uint8_T sw_neg;                      /* '<Root>/sw_neg' */
 } ExtY_equalizer_T;
 
 /* Real-time Model Data Structure */
@@ -208,15 +183,11 @@ struct tag_RTM_equalizer_T {
     uint32_T clockTick0;
     time_T stepSize0;
     uint32_T clockTick1;
-    struct {
-      uint32_T TID[3];
-    } TaskCounters;
-
     time_T tStart;
     SimTimeStep simTimeStep;
     boolean_T stopRequestedFlag;
     time_T *t;
-    time_T tArray[3];
+    time_T tArray[2];
   } Timing;
 };
 
@@ -252,6 +223,7 @@ extern RT_MODEL_equalizer_T *const equalizer_M;
 /*-
  * These blocks were eliminated from the model due to optimizations:
  *
+ * Block '<Root>/Gain' : Unused code path elimination
  * Block '<S1>/Display' : Unused code path elimination
  */
 
@@ -274,10 +246,8 @@ extern RT_MODEL_equalizer_T *const equalizer_M;
  * '<S2>'   : 'equalizer/mcu/AH_calculation'
  * '<S3>'   : 'equalizer/mcu/battery_selector'
  * '<S4>'   : 'equalizer/mcu/charge_trasfer_controller'
- * '<S5>'   : 'equalizer/mcu/demux n'
- * '<S6>'   : 'equalizer/mcu/demux p'
- * '<S7>'   : 'equalizer/mcu/equalizer'
- * '<S8>'   : 'equalizer/mcu/AH_calculation/MATLAB Function'
+ * '<S5>'   : 'equalizer/mcu/equalizer'
+ * '<S6>'   : 'equalizer/mcu/AH_calculation/MATLAB Function'
  */
 #endif                                 /* RTW_HEADER_equalizer_h_ */
 

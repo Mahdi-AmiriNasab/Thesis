@@ -65,6 +65,11 @@
 			<locationURI>PARENT-1-WORKSPACE_LOC/codegen/lib/pso/eml_rand_mt19937ar_stateful.c</locationURI>
 		</link>
 		<link>
+			<name>src/equalizer.c</name>
+			<type>1</type>
+			<location>D:/Thesis/equalizer_ert_rtw/equalizer.c</location>
+		</link>
+		<link>
 			<name>src/find.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-WORKSPACE_LOC/codegen/lib/pso/find.c</locationURI>
@@ -148,6 +153,11 @@
 			<name>src/rt_nonfinite.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-WORKSPACE_LOC/codegen/lib/pso/rt_nonfinite.c</locationURI>
+		</link>
+		<link>
+			<name>src/rt_zcfcn.c</name>
+			<type>1</type>
+			<location>D:/Thesis/equalizer_ert_rtw/rt_zcfcn.c</location>
 		</link>
 		<link>
 			<name>src/sort.c</name>

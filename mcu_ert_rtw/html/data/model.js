@@ -1,1 +1,0 @@
-var modelInfo = {model:"mcu"};var modelHierarchy=[{model:"mcu",relativePath:"_internal.html",parent:"null"},{model:"coloumb_counting",relativePath:"../../slprj/ert/coloumb_counting/html/_internal.html",parent:"mcu"},];

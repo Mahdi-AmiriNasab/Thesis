@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;          ../Drivers/STM32H7xx_HAL_Driver/Inc;          ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;          ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;          ../Drivers/CMSIS/Include;          ..\..\..\codegen\lib\pso</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;..\..\..\codegen\lib\pso;..\..\..\codegen\includes;..\..\..\equalizer_ert_rtw</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -811,6 +811,21 @@
               <FileName>system_stm32h7xx.c</FileName>
               <FileType>1</FileType>
               <FilePath>../Core/Src/system_stm32h7xx.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>equalizer</GroupName>
+          <Files>
+            <File>
+              <FileName>equalizer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\equalizer_ert_rtw\equalizer.c</FilePath>
+            </File>
+            <File>
+              <FileName>rt_zcfcn.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\equalizer_ert_rtw\rt_zcfcn.c</FilePath>
             </File>
           </Files>
         </Group>
