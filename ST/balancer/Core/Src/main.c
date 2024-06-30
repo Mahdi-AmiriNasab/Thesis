@@ -173,6 +173,45 @@ void GetDebugInfo(DebugInfo *info)
 DebugInfo debugInfo;
 
 
+
+// FDCAN filters
+
+FDCAN_FilterTypeDef filter_3 =
+{
+	.FilterID1 = 0x003,
+	.IdType = FDCAN_STANDARD_ID,
+	.FilterIndex = 0,
+	.FilterConfig = FDCAN_FILTER_TO_RXBUFFER,
+	.RxBufferIndex = 0,
+	.IsCalibrationMsg = 0
+};
+
+FDCAN_FilterTypeDef filter_4 =
+{
+	.FilterID1 = 0x004,
+	.IdType = FDCAN_STANDARD_ID,
+	.FilterIndex = 1,
+	.FilterConfig = FDCAN_FILTER_TO_RXBUFFER,
+	.RxBufferIndex = 1,
+	.IsCalibrationMsg = 0
+};
+
+FDCAN_FilterTypeDef filter_5 =
+{
+	.FilterID1 = 0x005,
+	.IdType = FDCAN_STANDARD_ID,
+	.FilterIndex = 2,
+	.FilterConfig = FDCAN_FILTER_TO_RXBUFFER,
+	.RxBufferIndex = 2,
+	.IsCalibrationMsg = 0
+};
+
+	FDCAN_RxHeaderTypeDef filter_3_header, filter_4_header, filter_5_header;
+	uint8_t filter_3_payload[10], filter_4_payload[10], filter_5_payload[10];
+
+
+
+
 /* USER CODE END PTD */
 
 /* Private define ------------------------------------------------------------*/
@@ -201,6 +240,7 @@ UART_HandleTypeDef huart5;
 
 /* USER CODE BEGIN PV */
   struct0_T global_best;
+  uint8_t can_restart_flag = 0;
 
 /* USER CODE END PV */
 
@@ -291,45 +331,83 @@ int main(void)
     equalizer_initialize();
 
 
+	// CAN start
+	HAL_FDCAN_Start(&hfdcan1);
     
-
-
-
-
-
-		// set_reset_trig_pos(1, GPIO_PIN_SET);
-		// set_reset_trig_pos(2, GPIO_PIN_SET);
-		// set_reset_trig_pos(3, GPIO_PIN_SET);
-		// set_reset_trig_pos(4, GPIO_PIN_SET);
-		// set_reset_trig_pos(5, GPIO_PIN_SET);
-		// set_reset_trig_pos(6, GPIO_PIN_SET);
-		// set_reset_trig_pos(7, GPIO_PIN_SET);
-		// set_reset_trig_pos(8, GPIO_PIN_SET);
-		// set_reset_trig_pos(9, GPIO_PIN_SET);
+    // reception filters
+	HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_3);	        
+	HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_4);	
+    HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_5);
 	
-		// set_reset_trig_neg(2,   GPIO_PIN_SET);
-		// set_reset_trig_neg(3,   GPIO_PIN_SET);
-		// set_reset_trig_neg(4,   GPIO_PIN_SET);
-		// set_reset_trig_neg(5,   GPIO_PIN_SET);
-		// set_reset_trig_neg(6,   GPIO_PIN_SET);
-		// set_reset_trig_neg(7,   GPIO_PIN_SET);
-		// set_reset_trig_neg(8,   GPIO_PIN_SET);
-		// set_reset_trig_neg(9,   GPIO_PIN_SET);
-    	// set_reset_trig_neg(10,  GPIO_PIN_SET);
+	hfdcan1.Instance->ILE = FDCAN_INTERRUPT_LINE0;
+	
+	// interrrupt enable on receive
+    // HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_BUFFER_NEW_MESSAGE, 0);
+    
+	// interrrupt in error cases 
+	HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_BUS_OFF, 0);
+	HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_PASSIVE, 0);
+    HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_WARNING, 0);
+	HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_LOGGING_OVERFLOW, 0);
 
-        
-        // // test timers
-        // HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_4); // pwm_ax2pack_AXBATT_i_n (1)
-        // HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_n (2)
-        // HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_n (3)
-        // HAL_TIM_PWM_Start(&htim4, TIM_CHANNEL_1); // pwm_ax2pack_DCDC_o_n (4)
-        // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_1); // pwm_ax2pack_AXBATT_i_p (5)
-        // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_p (6)
-        // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_p (7)
-        // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4); // pwm_ax2pack_DCDC_o_p (8)
+
   
 	while(1)
 	{
+
+		if(can_restart_flag)
+		{
+			HAL_StatusTypeDef fdcan_hal_status = HAL_OK;
+			HAL_FDCAN_RxBufferNewMessageCallback(&hfdcan1); // call this to clear any remained data in buffer
+			fdcan_hal_status = HAL_FDCAN_Stop(&hfdcan1);
+			fdcan_hal_status = HAL_FDCAN_DeInit(&hfdcan1);
+			fdcan_hal_status = HAL_FDCAN_Init(&hfdcan1);
+			fdcan_hal_status = HAL_FDCAN_Start(&hfdcan1);
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &HIBfilterConfig);	// HIB reception filter configuration
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &HeaterXNfilterConfig);	// HIB reception filter configuration
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &CompressorfilterConfig);	// compressor reception filter configuration
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &HeaterKUSfilterConfig);	// compressor reception filter configuration
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &VCU_Info1filterConfig);// VCU reception filter configuration
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &VCU_Info2filterConfig);	// compressor reception filter configuration
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &BMSfilterConfig);	// BMS reception filter configuration
+			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &VCU_Info3filterConfig);	// VCU reception filter configuration
+			
+			hfdcan1.Instance->ILE = FDCAN_INTERRUPT_LINE0;
+			
+			// interrrupt enable on receive
+			// fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_BUFFER_NEW_MESSAGE, 0);
+			
+			// interrrupt in error cases 
+			fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_BUS_OFF, 0);
+			fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_PASSIVE, 0);
+			fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_WARNING, 0);
+			fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_LOGGING_OVERFLOW, 0);
+			
+			can_restart_flag = 0; // clear the flag
+		}
+
+		if(hib_header.Identifier == 0x003)
+		{
+			// hvacdata->blower				= 	(hib_payload[FAN_SPEED_Index]				&	(FAN_SPEED_COR_BITS << FAN_SPEED_POS)) >> FAN_SPEED_POS;
+			
+			// hvacdata->ventilator			=	(hib_payload[VENT_SELECT_Index]				&	(VENT_SELECT_COR_BITS << VENT_SELECT_POS)) >> VENT_SELECT_POS;
+			
+			// hvacdata->Air_circulation		=	(hib_payload[AIR_DISTRIBUTION_Index]		&	(1 << AIR_DISTRIBUTION_POS)) >> AIR_DISTRIBUTION_POS;
+			
+			// hvacdata->temp 					=	(hib_payload[TEMP_LEVEL_Index]				&	(TEMP_LEVEL_COR_BITS <<	TEMP_LEVEL_POS)) >> TEMP_LEVEL_POS;
+
+			// hvacdata->Air_Conditioning		=	(hib_payload[AC_STAT_Index]					&	(1 << AC_STAT_POS)) >> AC_STAT_POS;
+			// hvacdata->Air_Conditioning_Fast	=	(hib_payload[AC_MAX_STAT_Index]				&	(1 << AC_MAX_STAT_POS)) >>AC_MAX_STAT_POS;
+
+			// if(hvacdata->Air_Conditioning_Fast == State_ON)
+			// 	hvacdata->Air_Conditioning = State_OFF;
+
+			// hib_header.Identifier = 0; // clear the identifire 
+
+			// hvacdata->timeout = 0;
+		}
+
+
         set_reset_trig_DCDC(e_DCDC_status);
         set_reset_trig_neg(num_neg, pinstate_neg);
         set_reset_trig_pos(num_pos, pinstate_pos);
@@ -584,16 +662,16 @@ static void MX_FDCAN1_Init(void)
   hfdcan1.Init.AutoRetransmission = DISABLE;
   hfdcan1.Init.TransmitPause = DISABLE;
   hfdcan1.Init.ProtocolException = DISABLE;
-  hfdcan1.Init.NominalPrescaler = 1;
+  hfdcan1.Init.NominalPrescaler = 16;
   hfdcan1.Init.NominalSyncJumpWidth = 1;
-  hfdcan1.Init.NominalTimeSeg1 = 2;
+  hfdcan1.Init.NominalTimeSeg1 = 13;
   hfdcan1.Init.NominalTimeSeg2 = 2;
-  hfdcan1.Init.DataPrescaler = 1;
+  hfdcan1.Init.DataPrescaler = 16;
   hfdcan1.Init.DataSyncJumpWidth = 1;
-  hfdcan1.Init.DataTimeSeg1 = 1;
-  hfdcan1.Init.DataTimeSeg2 = 1;
+  hfdcan1.Init.DataTimeSeg1 = 13;
+  hfdcan1.Init.DataTimeSeg2 = 2;
   hfdcan1.Init.MessageRAMOffset = 0;
-  hfdcan1.Init.StdFiltersNbr = 0;
+  hfdcan1.Init.StdFiltersNbr = 3;
   hfdcan1.Init.ExtFiltersNbr = 0;
   hfdcan1.Init.RxFifo0ElmtsNbr = 0;
   hfdcan1.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8;
@@ -1338,6 +1416,37 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 
 
 }
+
+uint32_t can_error = 0;
+
+void HAL_FDCAN_ErrorStatusCallback(FDCAN_HandleTypeDef *hfdcan, uint32_t ErrorStatusITs)
+{
+	can_error = ErrorStatusITs;
+    //  HAL_GPIO_TogglePin(LED_1_GPIO_Port, LED_1_Pin);
+    can_restart_flag = 1; // restart the can
+
+}
+
+void HAL_FDCAN_RxBufferNewMessageCallback(FDCAN_HandleTypeDef *hfdcan)
+{
+	if(HAL_FDCAN_IsRxBufferMessageAvailable(hfdcan, FDCAN_RX_BUFFER0))
+	{
+		HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_BUFFER0, &filter_3_header, filter_3_payload);
+		// HAL_GPIO_TogglePin(LED_4_GPIO_Port, LED_4_Pin);
+	}
+	if(HAL_FDCAN_IsRxBufferMessageAvailable(hfdcan, FDCAN_RX_BUFFER1))
+	{
+		HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_BUFFER1, &filter_4_header, filter_4_payload);
+		// HAL_GPIO_TogglePin(LED_3_GPIO_Port, LED_3_Pin);
+	}
+    if(HAL_FDCAN_IsRxBufferMessageAvailable(hfdcan, FDCAN_RX_BUFFER2))
+	{
+		HAL_FDCAN_GetRxMessage(hfdcan, FDCAN_RX_BUFFER2, &filter_5_header, filter_5_payload);
+		// HAL_GPIO_TogglePin(LED_3_GPIO_Port, LED_3_Pin);
+	}
+
+}
+
 /* USER CODE END 4 */
 
 /**

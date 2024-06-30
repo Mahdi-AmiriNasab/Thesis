@@ -18,7 +18,6 @@
 #include "rt_nonfinite.h"
 #include "calculate_overlap.h"
 
-real_T rtNaN;
 
 #ifndef typedef_emxArray_struct1_T_1x100
 #define typedef_emxArray_struct1_T_1x100
@@ -42,8 +41,10 @@ double w_ovp = 0.5;
 int main(void) {
 	setbuf(stdout, NULL);
 	puts("!!!Hello World!!!"); /* prints !!!Hello World!!! */
+    setvbuf(stdout, NULL, _IONBF, 0);
 
-	for(int i = 0;i < 10;i++)
+
+	for(int i = 0;i < 1;i++)
 	{
 
 		  double soc[9] = {7, 88, 10, 95, 52, 50, 48, 42, 76};
@@ -59,23 +60,32 @@ int main(void) {
 
 
 //		    // Test cases as specified
-//		    double test_case1[100] = {3.0, 2.0, 10.0, 0.0, 0.0, 5.0, 0.0};
-//		    double test_case2[100] = {100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0};
-//		    double test_case3[100] = {5.0, 2.0, 1.0, 1.0, 20.0, 60.0, 7.0};
-//		    double test_case4[100] = {10.0, 80.0, 50.0, 30.0, 10.0, 1.0, 5.0};
-//		    double test_case5[100] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
-//		    double test_case6[100] = {1.0, 2.0, 3.0, 4.0, 5.0, 4.0, 3.0};
+//		    double test_case1[] = {3.0, 2.0, 10.0, 0.0, 0.0, 5.0, 0.0};
+//		    double test_case2[] = {100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0};
+//		    double test_case3[] = {5.0, 2.0, 1.0, 1.0, 20.0, 60.0, 7.0};
+//		    double test_case4[] = {10.0, 80.0, 50.0, 30.0, 10.0, 1.0, 5.0};
+//		    double test_case5[] = {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+//		    double test_case6[] = {1.0, 2.0, 3.0, 4.0, 5.0, 4.0, 3.0};
+//
+//		    int size_case1[2]; size_case1 [1] = (int)(sizeof(test_case1)/sizeof(double));
+//		    int size_case2[2]; size_case2 [1] = (int)(sizeof(test_case2)/sizeof(double));
+//		    int size_case3[2]; size_case3 [1] = (int)(sizeof(test_case3)/sizeof(double));
+//		    int size_case4[2]; size_case4 [1] = (int)(sizeof(test_case4)/sizeof(double));
+//		    int size_case5[2]; size_case5 [1] = (int)(sizeof(test_case5)/sizeof(double));
+//		    int size_case6[2]; size_case6 [1] = (int)(sizeof(test_case6)/sizeof(double));
 //
 //
 //		    // Print the test cases and call the function
-//		    printf("Overlap for Test Case 1: %.2f\n", calculate_overlap(test_case1, 100));
-//		    printf("Overlap for Test Case 2: %.2f\n", calculate_overlap(test_case2, 100));
-//		    printf("Overlap for Test Case 3: %.2f\n", calculate_overlap(test_case3, 100));
-//		    printf("Overlap for Test Case 4: %.2f\n", calculate_overlap(test_case4, 100));
-//		    printf("Overlap for Test Case 5: %.2f\n", calculate_overlap(test_case5, 100));
-//		    printf("Overlap for Test Case 6: %.2f\n", calculate_overlap(test_case6, 100));
-//
+//		    printf("Overlap for Test Case 1: %.2f\n", calculate_overlap(test_case1, size_case1));
+//		    printf("Overlap for Test Case 2: %.2f\n", calculate_overlap(test_case2, size_case2));
+//		    printf("Overlap for Test Case 3: %.2f\n", calculate_overlap(test_case3, size_case3));
+//		    printf("Overlap for Test Case 4: %.2f\n", calculate_overlap(test_case4, size_case4));
+//		    printf("Overlap for Test Case 5: %.2f\n", calculate_overlap(test_case5, size_case5));
+//		    printf("Overlap for Test Case 6: %.2f\n", calculate_overlap(test_case6, size_case6));
+
+////
 	}
+    setvbuf(stdout, NULL, _IONBF, 0);
 
 	puts("program terminated");/* prints !!!Hello World!!! */
 
