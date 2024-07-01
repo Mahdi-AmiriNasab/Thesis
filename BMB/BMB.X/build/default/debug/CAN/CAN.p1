@@ -1,0 +1,1868 @@
+Version 4.0 HI-TECH Software Intermediate Code
+"37 CAN/CAN.h
+[; ;CAN/CAN.h: 37: typedef struct {
+[s S14 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S14 . Divide Divide1 Divide2 Divide3 Divide12 Divide4 Divide5 Divide6 Divide7 Divide13 Divide8 Divide9 Divide10 Divide11 ]
+"55
+[; ;CAN/CAN.h: 55: typedef struct {
+[s S15 `i 1 `i 1 `i 1 `i 1 `i 1 `i 1 `i 1 ]
+[n S15 . CANPack_ModeSignalID CANPack1_ModeSignalID CANPack2_ModeSignalID CANUnpack_ModeSignalID CANUnpack_StatusPortID CANUnpack1_ModeSignalID CANUnpack1_StatusPortID ]
+"24 CAN/CAN_types.h
+[; ;CAN/CAN_types.h: 24: typedef struct {
+[s S11 `uc 1 `uc 1 `uc 1 `uc 1 `ul 1 `d 1 `uc -> 8 `i ]
+[n S11 . Extended Length Remote Error ID Timestamp Data ]
+"66 CAN/CAN.h
+[; ;CAN/CAN.h: 66: typedef struct {
+[s S16 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `S11 1 `S11 1 ]
+[n S16 . v1 v2 v3 v4 v5 v6 v7 v8 v9 v10 v11 v12 t1 t2 counter balance2 balance1 ]
+"87
+[; ;CAN/CAN.h: 87: typedef struct {
+[s S17 `S11 1 `S11 1 `S11 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 `ui 1 ]
+[n S17 . Voltage1 Voltage2 Voltage3 b1 b2 b3 b4 b5 b6 b7 b8 ]
+[v F544 `*Cuc ~T0 @X0 1 t ]
+"102
+[; ;CAN/CAN.h: 102: struct tag_RTM_CAN_T {
+[s S13 `V*Cuc 1 ]
+[n S13 tag_RTM_CAN_T errorStatus ]
+"20 CAN/CAN.c
+[; ;CAN/CAN.c: 20: B_CAN_T CAN_B;
+[v _CAN_B `S14 ~T0 @X0 1 e ]
+"23
+[; ;CAN/CAN.c: 23: DW_CAN_T CAN_DW;
+[v _CAN_DW `S15 ~T0 @X0 1 e ]
+"26
+[; ;CAN/CAN.c: 26: ExtU_CAN_T CAN_U;
+[v _CAN_U `S16 ~T0 @X0 1 e ]
+"29
+[; ;CAN/CAN.c: 29: ExtY_CAN_T CAN_Y;
+[v _CAN_Y `S17 ~T0 @X0 1 e ]
+"32
+[; ;CAN/CAN.c: 32: RT_MODEL_CAN_T CAN_M_;
+[v _CAN_M_ `S13 ~T0 @X0 1 e ]
+[v F620 `*S13 ~T0 @X0 1 t ]
+"33
+[; ;CAN/CAN.c: 33: RT_MODEL_CAN_T *const CAN_M = &CAN_M_;
+[v _CAN_M `C*S13 ~T0 @X0 1 e ]
+[i _CAN_M
+&U _CAN_M_
+]
+"36
+[; ;CAN/CAN.c: 36: void CAN_step(void)
+[v _CAN_step `(v ~T0 @X0 1 ef ]
+"37
+[; ;CAN/CAN.c: 37: {
+{
+[e :U _CAN_step ]
+[f ]
+"42
+[; ;CAN/CAN.c: 42:   CAN_B.Divide = CAN_U.v1 / 10U;
+[e = . _CAN_B 0 / . _CAN_U 0 -> 10 `ui ]
+"48
+[; ;CAN/CAN.c: 48:   CAN_B.Divide1 = CAN_U.v2 / 10U;
+[e = . _CAN_B 1 / . _CAN_U 1 -> 10 `ui ]
+"54
+[; ;CAN/CAN.c: 54:   CAN_B.Divide2 = CAN_U.v3 / 10U;
+[e = . _CAN_B 2 / . _CAN_U 2 -> 10 `ui ]
+"60
+[; ;CAN/CAN.c: 60:   CAN_B.Divide3 = CAN_U.v4 / 10U;
+[e = . _CAN_B 3 / . _CAN_U 3 -> 10 `ui ]
+"66
+[; ;CAN/CAN.c: 66:   CAN_B.Divide12 = CAN_U.t1 / 20U;
+[e = . _CAN_B 4 / . _CAN_U 12 -> 20 `ui ]
+"72
+[; ;CAN/CAN.c: 72:   CAN_Y.Voltage1.ID = 0U;
+[e = . . _CAN_Y 0 4 -> -> 0 `ui `ul ]
+"73
+[; ;CAN/CAN.c: 73:   CAN_Y.Voltage1.Length = 8U;
+[e = . . _CAN_Y 0 1 -> -> 8 `ui `uc ]
+"74
+[; ;CAN/CAN.c: 74:   CAN_Y.Voltage1.Extended = 0U;
+[e = . . _CAN_Y 0 0 -> -> 0 `ui `uc ]
+"75
+[; ;CAN/CAN.c: 75:   CAN_Y.Voltage1.Remote = 0;
+[e = . . _CAN_Y 0 2 -> -> 0 `i `uc ]
+"76
+[; ;CAN/CAN.c: 76:   CAN_Y.Voltage1.Data[0] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"77
+[; ;CAN/CAN.c: 77:   CAN_Y.Voltage1.Data[1] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"78
+[; ;CAN/CAN.c: 78:   CAN_Y.Voltage1.Data[2] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"79
+[; ;CAN/CAN.c: 79:   CAN_Y.Voltage1.Data[3] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"80
+[; ;CAN/CAN.c: 80:   CAN_Y.Voltage1.Data[4] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"81
+[; ;CAN/CAN.c: 81:   CAN_Y.Voltage1.Data[5] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"82
+[; ;CAN/CAN.c: 82:   CAN_Y.Voltage1.Data[6] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"83
+[; ;CAN/CAN.c: 83:   CAN_Y.Voltage1.Data[7] = 0;
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> -> 0 `i `uc ]
+"85
+[; ;CAN/CAN.c: 85:   {
+{
+"96
+[; ;CAN/CAN.c: 96:     {
+{
+"97
+[; ;CAN/CAN.c: 97:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"99
+[; ;CAN/CAN.c: 99:       {
+{
+"100
+[; ;CAN/CAN.c: 100:         uint32_T result = (uint32_T) (CAN_B.Divide);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 0 `ul ]
+"103
+[; ;CAN/CAN.c: 103:         packingValue = result;
+[e = _packingValue _result ]
+"104
+[; ;CAN/CAN.c: 104:       }
+}
+"106
+[; ;CAN/CAN.c: 106:       {
+{
+"107
+[; ;CAN/CAN.c: 107:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"108
+[; ;CAN/CAN.c: 108:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 20  ]
+{
+"109
+[; ;CAN/CAN.c: 109:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"110
+[; ;CAN/CAN.c: 110:         } else {
+}
+[e $U 21  ]
+[e :U 20 ]
+{
+"111
+[; ;CAN/CAN.c: 111:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"112
+[; ;CAN/CAN.c: 112:         }
+}
+[e :U 21 ]
+"114
+[; ;CAN/CAN.c: 114:         {
+{
+"115
+[; ;CAN/CAN.c: 115:           {
+{
+"116
+[; ;CAN/CAN.c: 116:             CAN_Y.Voltage1.Data[0] = CAN_Y.Voltage1.Data[0] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> & _packedValue -> 255 `ui `uc `i `uc ]
+"118
+[; ;CAN/CAN.c: 118:             CAN_Y.Voltage1.Data[1] = CAN_Y.Voltage1.Data[1] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> >> & _packedValue -> 7936 `ui -> 8 `i `uc `i `uc ]
+"120
+[; ;CAN/CAN.c: 120:           }
+}
+"121
+[; ;CAN/CAN.c: 121:         }
+}
+"122
+[; ;CAN/CAN.c: 122:       }
+}
+"123
+[; ;CAN/CAN.c: 123:     }
+}
+"135
+[; ;CAN/CAN.c: 135:     {
+{
+"136
+[; ;CAN/CAN.c: 136:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"138
+[; ;CAN/CAN.c: 138:       {
+{
+"139
+[; ;CAN/CAN.c: 139:         uint32_T result = (uint32_T) (CAN_B.Divide1);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 1 `ul ]
+"142
+[; ;CAN/CAN.c: 142:         packingValue = result;
+[e = _packingValue _result ]
+"143
+[; ;CAN/CAN.c: 143:       }
+}
+"145
+[; ;CAN/CAN.c: 145:       {
+{
+"146
+[; ;CAN/CAN.c: 146:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"147
+[; ;CAN/CAN.c: 147:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 22  ]
+{
+"148
+[; ;CAN/CAN.c: 148:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"149
+[; ;CAN/CAN.c: 149:         } else {
+}
+[e $U 23  ]
+[e :U 22 ]
+{
+"150
+[; ;CAN/CAN.c: 150:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"151
+[; ;CAN/CAN.c: 151:         }
+}
+[e :U 23 ]
+"153
+[; ;CAN/CAN.c: 153:         {
+{
+"154
+[; ;CAN/CAN.c: 154:           {
+{
+"155
+[; ;CAN/CAN.c: 155:             CAN_Y.Voltage1.Data[1] = CAN_Y.Voltage1.Data[1] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> << & _packedValue -> 7 `ui -> 5 `i `uc `i `uc ]
+"157
+[; ;CAN/CAN.c: 157:             CAN_Y.Voltage1.Data[2] = CAN_Y.Voltage1.Data[2] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> >> & _packedValue -> 2040 `ui -> 3 `i `uc `i `uc ]
+"159
+[; ;CAN/CAN.c: 159:             CAN_Y.Voltage1.Data[3] = CAN_Y.Voltage1.Data[3] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> >> & _packedValue -> 6144 `ui -> 11 `i `uc `i `uc ]
+"161
+[; ;CAN/CAN.c: 161:           }
+}
+"162
+[; ;CAN/CAN.c: 162:         }
+}
+"163
+[; ;CAN/CAN.c: 163:       }
+}
+"164
+[; ;CAN/CAN.c: 164:     }
+}
+"176
+[; ;CAN/CAN.c: 176:     {
+{
+"177
+[; ;CAN/CAN.c: 177:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"179
+[; ;CAN/CAN.c: 179:       {
+{
+"180
+[; ;CAN/CAN.c: 180:         uint32_T result = (uint32_T) (CAN_B.Divide2);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 2 `ul ]
+"183
+[; ;CAN/CAN.c: 183:         packingValue = result;
+[e = _packingValue _result ]
+"184
+[; ;CAN/CAN.c: 184:       }
+}
+"186
+[; ;CAN/CAN.c: 186:       {
+{
+"187
+[; ;CAN/CAN.c: 187:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"188
+[; ;CAN/CAN.c: 188:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 24  ]
+{
+"189
+[; ;CAN/CAN.c: 189:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"190
+[; ;CAN/CAN.c: 190:         } else {
+}
+[e $U 25  ]
+[e :U 24 ]
+{
+"191
+[; ;CAN/CAN.c: 191:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"192
+[; ;CAN/CAN.c: 192:         }
+}
+[e :U 25 ]
+"194
+[; ;CAN/CAN.c: 194:         {
+{
+"195
+[; ;CAN/CAN.c: 195:           {
+{
+"196
+[; ;CAN/CAN.c: 196:             CAN_Y.Voltage1.Data[3] = CAN_Y.Voltage1.Data[3] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> << & _packedValue -> 63 `ui -> 2 `i `uc `i `uc ]
+"198
+[; ;CAN/CAN.c: 198:             CAN_Y.Voltage1.Data[4] = CAN_Y.Voltage1.Data[4] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> >> & _packedValue -> 8128 `ui -> 6 `i `uc `i `uc ]
+"200
+[; ;CAN/CAN.c: 200:           }
+}
+"201
+[; ;CAN/CAN.c: 201:         }
+}
+"202
+[; ;CAN/CAN.c: 202:       }
+}
+"203
+[; ;CAN/CAN.c: 203:     }
+}
+"215
+[; ;CAN/CAN.c: 215:     {
+{
+"216
+[; ;CAN/CAN.c: 216:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"218
+[; ;CAN/CAN.c: 218:       {
+{
+"219
+[; ;CAN/CAN.c: 219:         uint32_T result = (uint32_T) (CAN_B.Divide3);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 3 `ul ]
+"222
+[; ;CAN/CAN.c: 222:         packingValue = result;
+[e = _packingValue _result ]
+"223
+[; ;CAN/CAN.c: 223:       }
+}
+"225
+[; ;CAN/CAN.c: 225:       {
+{
+"226
+[; ;CAN/CAN.c: 226:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"227
+[; ;CAN/CAN.c: 227:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 26  ]
+{
+"228
+[; ;CAN/CAN.c: 228:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"229
+[; ;CAN/CAN.c: 229:         } else {
+}
+[e $U 27  ]
+[e :U 26 ]
+{
+"230
+[; ;CAN/CAN.c: 230:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"231
+[; ;CAN/CAN.c: 231:         }
+}
+[e :U 27 ]
+"233
+[; ;CAN/CAN.c: 233:         {
+{
+"234
+[; ;CAN/CAN.c: 234:           {
+{
+"235
+[; ;CAN/CAN.c: 235:             CAN_Y.Voltage1.Data[4] = CAN_Y.Voltage1.Data[4] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> << & _packedValue -> 1 `ui -> 7 `i `uc `i `uc ]
+"237
+[; ;CAN/CAN.c: 237:             CAN_Y.Voltage1.Data[5] = CAN_Y.Voltage1.Data[5] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> >> & _packedValue -> 510 `ui -> 1 `i `uc `i `uc ]
+"239
+[; ;CAN/CAN.c: 239:             CAN_Y.Voltage1.Data[6] = CAN_Y.Voltage1.Data[6] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> >> & _packedValue -> 7680 `ui -> 9 `i `uc `i `uc ]
+"241
+[; ;CAN/CAN.c: 241:           }
+}
+"242
+[; ;CAN/CAN.c: 242:         }
+}
+"243
+[; ;CAN/CAN.c: 243:       }
+}
+"244
+[; ;CAN/CAN.c: 244:     }
+}
+"256
+[; ;CAN/CAN.c: 256:     {
+{
+"257
+[; ;CAN/CAN.c: 257:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"259
+[; ;CAN/CAN.c: 259:       {
+{
+"260
+[; ;CAN/CAN.c: 260:         uint32_T result = (uint32_T) (CAN_B.Divide12);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 4 `ul ]
+"263
+[; ;CAN/CAN.c: 263:         packingValue = result;
+[e = _packingValue _result ]
+"264
+[; ;CAN/CAN.c: 264:       }
+}
+"266
+[; ;CAN/CAN.c: 266:       {
+{
+"267
+[; ;CAN/CAN.c: 267:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"268
+[; ;CAN/CAN.c: 268:         if (packingValue > (uint16_T)(4095)) {
+[e $ ! > _packingValue -> -> -> 4095 `i `ui `ul 28  ]
+{
+"269
+[; ;CAN/CAN.c: 269:           packedValue = (uint16_T) 4095;
+[e = _packedValue -> -> 4095 `i `ui ]
+"270
+[; ;CAN/CAN.c: 270:         } else {
+}
+[e $U 29  ]
+[e :U 28 ]
+{
+"271
+[; ;CAN/CAN.c: 271:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"272
+[; ;CAN/CAN.c: 272:         }
+}
+[e :U 29 ]
+"274
+[; ;CAN/CAN.c: 274:         {
+{
+"275
+[; ;CAN/CAN.c: 275:           {
+{
+"276
+[; ;CAN/CAN.c: 276:             CAN_Y.Voltage1.Data[6] = CAN_Y.Voltage1.Data[6] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> << & _packedValue -> 15 `ui -> 4 `i `uc `i `uc ]
+"278
+[; ;CAN/CAN.c: 278:             CAN_Y.Voltage1.Data[7] = CAN_Y.Voltage1.Data[7] | (uint8_T)
+[e = *U + &U . . _CAN_Y 0 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux -> | -> *U + &U . . _CAN_Y 0 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 0 6 `ui `ux `i -> -> >> & _packedValue -> 4080 `ui -> 4 `i `uc `i `uc ]
+"280
+[; ;CAN/CAN.c: 280:           }
+}
+"281
+[; ;CAN/CAN.c: 281:         }
+}
+"282
+[; ;CAN/CAN.c: 282:       }
+}
+"283
+[; ;CAN/CAN.c: 283:     }
+}
+"284
+[; ;CAN/CAN.c: 284:   }
+}
+"290
+[; ;CAN/CAN.c: 290:   CAN_B.Divide4 = CAN_U.v5 / 10U;
+[e = . _CAN_B 5 / . _CAN_U 4 -> 10 `ui ]
+"296
+[; ;CAN/CAN.c: 296:   CAN_B.Divide5 = CAN_U.v6 / 10U;
+[e = . _CAN_B 6 / . _CAN_U 5 -> 10 `ui ]
+"302
+[; ;CAN/CAN.c: 302:   CAN_B.Divide6 = CAN_U.v7 / 10U;
+[e = . _CAN_B 7 / . _CAN_U 6 -> 10 `ui ]
+"308
+[; ;CAN/CAN.c: 308:   CAN_B.Divide7 = CAN_U.v8 / 10U;
+[e = . _CAN_B 8 / . _CAN_U 7 -> 10 `ui ]
+"314
+[; ;CAN/CAN.c: 314:   CAN_B.Divide13 = CAN_U.t2 / 20U;
+[e = . _CAN_B 9 / . _CAN_U 13 -> 20 `ui ]
+"320
+[; ;CAN/CAN.c: 320:   CAN_Y.Voltage2.ID = 0U;
+[e = . . _CAN_Y 1 4 -> -> 0 `ui `ul ]
+"321
+[; ;CAN/CAN.c: 321:   CAN_Y.Voltage2.Length = 8U;
+[e = . . _CAN_Y 1 1 -> -> 8 `ui `uc ]
+"322
+[; ;CAN/CAN.c: 322:   CAN_Y.Voltage2.Extended = 0U;
+[e = . . _CAN_Y 1 0 -> -> 0 `ui `uc ]
+"323
+[; ;CAN/CAN.c: 323:   CAN_Y.Voltage2.Remote = 0;
+[e = . . _CAN_Y 1 2 -> -> 0 `i `uc ]
+"324
+[; ;CAN/CAN.c: 324:   CAN_Y.Voltage2.Data[0] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"325
+[; ;CAN/CAN.c: 325:   CAN_Y.Voltage2.Data[1] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"326
+[; ;CAN/CAN.c: 326:   CAN_Y.Voltage2.Data[2] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"327
+[; ;CAN/CAN.c: 327:   CAN_Y.Voltage2.Data[3] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"328
+[; ;CAN/CAN.c: 328:   CAN_Y.Voltage2.Data[4] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"329
+[; ;CAN/CAN.c: 329:   CAN_Y.Voltage2.Data[5] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"330
+[; ;CAN/CAN.c: 330:   CAN_Y.Voltage2.Data[6] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"331
+[; ;CAN/CAN.c: 331:   CAN_Y.Voltage2.Data[7] = 0;
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> -> 0 `i `uc ]
+"333
+[; ;CAN/CAN.c: 333:   {
+{
+"344
+[; ;CAN/CAN.c: 344:     {
+{
+"345
+[; ;CAN/CAN.c: 345:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"347
+[; ;CAN/CAN.c: 347:       {
+{
+"348
+[; ;CAN/CAN.c: 348:         uint32_T result = (uint32_T) (CAN_B.Divide4);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 5 `ul ]
+"351
+[; ;CAN/CAN.c: 351:         packingValue = result;
+[e = _packingValue _result ]
+"352
+[; ;CAN/CAN.c: 352:       }
+}
+"354
+[; ;CAN/CAN.c: 354:       {
+{
+"355
+[; ;CAN/CAN.c: 355:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"356
+[; ;CAN/CAN.c: 356:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 30  ]
+{
+"357
+[; ;CAN/CAN.c: 357:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"358
+[; ;CAN/CAN.c: 358:         } else {
+}
+[e $U 31  ]
+[e :U 30 ]
+{
+"359
+[; ;CAN/CAN.c: 359:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"360
+[; ;CAN/CAN.c: 360:         }
+}
+[e :U 31 ]
+"362
+[; ;CAN/CAN.c: 362:         {
+{
+"363
+[; ;CAN/CAN.c: 363:           {
+{
+"364
+[; ;CAN/CAN.c: 364:             CAN_Y.Voltage2.Data[0] = CAN_Y.Voltage2.Data[0] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> & _packedValue -> 255 `ui `uc `i `uc ]
+"366
+[; ;CAN/CAN.c: 366:             CAN_Y.Voltage2.Data[1] = CAN_Y.Voltage2.Data[1] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> >> & _packedValue -> 7936 `ui -> 8 `i `uc `i `uc ]
+"368
+[; ;CAN/CAN.c: 368:           }
+}
+"369
+[; ;CAN/CAN.c: 369:         }
+}
+"370
+[; ;CAN/CAN.c: 370:       }
+}
+"371
+[; ;CAN/CAN.c: 371:     }
+}
+"383
+[; ;CAN/CAN.c: 383:     {
+{
+"384
+[; ;CAN/CAN.c: 384:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"386
+[; ;CAN/CAN.c: 386:       {
+{
+"387
+[; ;CAN/CAN.c: 387:         uint32_T result = (uint32_T) (CAN_B.Divide5);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 6 `ul ]
+"390
+[; ;CAN/CAN.c: 390:         packingValue = result;
+[e = _packingValue _result ]
+"391
+[; ;CAN/CAN.c: 391:       }
+}
+"393
+[; ;CAN/CAN.c: 393:       {
+{
+"394
+[; ;CAN/CAN.c: 394:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"395
+[; ;CAN/CAN.c: 395:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 32  ]
+{
+"396
+[; ;CAN/CAN.c: 396:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"397
+[; ;CAN/CAN.c: 397:         } else {
+}
+[e $U 33  ]
+[e :U 32 ]
+{
+"398
+[; ;CAN/CAN.c: 398:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"399
+[; ;CAN/CAN.c: 399:         }
+}
+[e :U 33 ]
+"401
+[; ;CAN/CAN.c: 401:         {
+{
+"402
+[; ;CAN/CAN.c: 402:           {
+{
+"403
+[; ;CAN/CAN.c: 403:             CAN_Y.Voltage2.Data[1] = CAN_Y.Voltage2.Data[1] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> << & _packedValue -> 7 `ui -> 5 `i `uc `i `uc ]
+"405
+[; ;CAN/CAN.c: 405:             CAN_Y.Voltage2.Data[2] = CAN_Y.Voltage2.Data[2] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> >> & _packedValue -> 2040 `ui -> 3 `i `uc `i `uc ]
+"407
+[; ;CAN/CAN.c: 407:             CAN_Y.Voltage2.Data[3] = CAN_Y.Voltage2.Data[3] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> >> & _packedValue -> 6144 `ui -> 11 `i `uc `i `uc ]
+"409
+[; ;CAN/CAN.c: 409:           }
+}
+"410
+[; ;CAN/CAN.c: 410:         }
+}
+"411
+[; ;CAN/CAN.c: 411:       }
+}
+"412
+[; ;CAN/CAN.c: 412:     }
+}
+"424
+[; ;CAN/CAN.c: 424:     {
+{
+"425
+[; ;CAN/CAN.c: 425:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"427
+[; ;CAN/CAN.c: 427:       {
+{
+"428
+[; ;CAN/CAN.c: 428:         uint32_T result = (uint32_T) (CAN_B.Divide6);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 7 `ul ]
+"431
+[; ;CAN/CAN.c: 431:         packingValue = result;
+[e = _packingValue _result ]
+"432
+[; ;CAN/CAN.c: 432:       }
+}
+"434
+[; ;CAN/CAN.c: 434:       {
+{
+"435
+[; ;CAN/CAN.c: 435:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"436
+[; ;CAN/CAN.c: 436:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 34  ]
+{
+"437
+[; ;CAN/CAN.c: 437:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"438
+[; ;CAN/CAN.c: 438:         } else {
+}
+[e $U 35  ]
+[e :U 34 ]
+{
+"439
+[; ;CAN/CAN.c: 439:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"440
+[; ;CAN/CAN.c: 440:         }
+}
+[e :U 35 ]
+"442
+[; ;CAN/CAN.c: 442:         {
+{
+"443
+[; ;CAN/CAN.c: 443:           {
+{
+"444
+[; ;CAN/CAN.c: 444:             CAN_Y.Voltage2.Data[3] = CAN_Y.Voltage2.Data[3] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> << & _packedValue -> 63 `ui -> 2 `i `uc `i `uc ]
+"446
+[; ;CAN/CAN.c: 446:             CAN_Y.Voltage2.Data[4] = CAN_Y.Voltage2.Data[4] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> >> & _packedValue -> 8128 `ui -> 6 `i `uc `i `uc ]
+"448
+[; ;CAN/CAN.c: 448:           }
+}
+"449
+[; ;CAN/CAN.c: 449:         }
+}
+"450
+[; ;CAN/CAN.c: 450:       }
+}
+"451
+[; ;CAN/CAN.c: 451:     }
+}
+"463
+[; ;CAN/CAN.c: 463:     {
+{
+"464
+[; ;CAN/CAN.c: 464:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"466
+[; ;CAN/CAN.c: 466:       {
+{
+"467
+[; ;CAN/CAN.c: 467:         uint32_T result = (uint32_T) (CAN_B.Divide7);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 8 `ul ]
+"470
+[; ;CAN/CAN.c: 470:         packingValue = result;
+[e = _packingValue _result ]
+"471
+[; ;CAN/CAN.c: 471:       }
+}
+"473
+[; ;CAN/CAN.c: 473:       {
+{
+"474
+[; ;CAN/CAN.c: 474:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"475
+[; ;CAN/CAN.c: 475:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 36  ]
+{
+"476
+[; ;CAN/CAN.c: 476:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"477
+[; ;CAN/CAN.c: 477:         } else {
+}
+[e $U 37  ]
+[e :U 36 ]
+{
+"478
+[; ;CAN/CAN.c: 478:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"479
+[; ;CAN/CAN.c: 479:         }
+}
+[e :U 37 ]
+"481
+[; ;CAN/CAN.c: 481:         {
+{
+"482
+[; ;CAN/CAN.c: 482:           {
+{
+"483
+[; ;CAN/CAN.c: 483:             CAN_Y.Voltage2.Data[4] = CAN_Y.Voltage2.Data[4] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> << & _packedValue -> 1 `ui -> 7 `i `uc `i `uc ]
+"485
+[; ;CAN/CAN.c: 485:             CAN_Y.Voltage2.Data[5] = CAN_Y.Voltage2.Data[5] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> >> & _packedValue -> 510 `ui -> 1 `i `uc `i `uc ]
+"487
+[; ;CAN/CAN.c: 487:             CAN_Y.Voltage2.Data[6] = CAN_Y.Voltage2.Data[6] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> >> & _packedValue -> 7680 `ui -> 9 `i `uc `i `uc ]
+"489
+[; ;CAN/CAN.c: 489:           }
+}
+"490
+[; ;CAN/CAN.c: 490:         }
+}
+"491
+[; ;CAN/CAN.c: 491:       }
+}
+"492
+[; ;CAN/CAN.c: 492:     }
+}
+"504
+[; ;CAN/CAN.c: 504:     {
+{
+"505
+[; ;CAN/CAN.c: 505:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"507
+[; ;CAN/CAN.c: 507:       {
+{
+"508
+[; ;CAN/CAN.c: 508:         uint32_T result = (uint32_T) (CAN_B.Divide13);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 9 `ul ]
+"511
+[; ;CAN/CAN.c: 511:         packingValue = result;
+[e = _packingValue _result ]
+"512
+[; ;CAN/CAN.c: 512:       }
+}
+"514
+[; ;CAN/CAN.c: 514:       {
+{
+"515
+[; ;CAN/CAN.c: 515:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"516
+[; ;CAN/CAN.c: 516:         if (packingValue > (uint16_T)(4095)) {
+[e $ ! > _packingValue -> -> -> 4095 `i `ui `ul 38  ]
+{
+"517
+[; ;CAN/CAN.c: 517:           packedValue = (uint16_T) 4095;
+[e = _packedValue -> -> 4095 `i `ui ]
+"518
+[; ;CAN/CAN.c: 518:         } else {
+}
+[e $U 39  ]
+[e :U 38 ]
+{
+"519
+[; ;CAN/CAN.c: 519:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"520
+[; ;CAN/CAN.c: 520:         }
+}
+[e :U 39 ]
+"522
+[; ;CAN/CAN.c: 522:         {
+{
+"523
+[; ;CAN/CAN.c: 523:           {
+{
+"524
+[; ;CAN/CAN.c: 524:             CAN_Y.Voltage2.Data[6] = CAN_Y.Voltage2.Data[6] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> << & _packedValue -> 15 `ui -> 4 `i `uc `i `uc ]
+"526
+[; ;CAN/CAN.c: 526:             CAN_Y.Voltage2.Data[7] = CAN_Y.Voltage2.Data[7] | (uint8_T)
+[e = *U + &U . . _CAN_Y 1 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux -> | -> *U + &U . . _CAN_Y 1 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 1 6 `ui `ux `i -> -> >> & _packedValue -> 4080 `ui -> 4 `i `uc `i `uc ]
+"528
+[; ;CAN/CAN.c: 528:           }
+}
+"529
+[; ;CAN/CAN.c: 529:         }
+}
+"530
+[; ;CAN/CAN.c: 530:       }
+}
+"531
+[; ;CAN/CAN.c: 531:     }
+}
+"532
+[; ;CAN/CAN.c: 532:   }
+}
+"538
+[; ;CAN/CAN.c: 538:   CAN_B.Divide8 = CAN_U.v9 / 10U;
+[e = . _CAN_B 10 / . _CAN_U 8 -> 10 `ui ]
+"544
+[; ;CAN/CAN.c: 544:   CAN_B.Divide9 = CAN_U.v10 / 10U;
+[e = . _CAN_B 11 / . _CAN_U 9 -> 10 `ui ]
+"550
+[; ;CAN/CAN.c: 550:   CAN_B.Divide10 = CAN_U.v11 / 10U;
+[e = . _CAN_B 12 / . _CAN_U 10 -> 10 `ui ]
+"556
+[; ;CAN/CAN.c: 556:   CAN_B.Divide11 = CAN_U.v12 / 10U;
+[e = . _CAN_B 13 / . _CAN_U 11 -> 10 `ui ]
+"563
+[; ;CAN/CAN.c: 563:   CAN_Y.Voltage3.ID = 0U;
+[e = . . _CAN_Y 2 4 -> -> 0 `ui `ul ]
+"564
+[; ;CAN/CAN.c: 564:   CAN_Y.Voltage3.Length = 8U;
+[e = . . _CAN_Y 2 1 -> -> 8 `ui `uc ]
+"565
+[; ;CAN/CAN.c: 565:   CAN_Y.Voltage3.Extended = 0U;
+[e = . . _CAN_Y 2 0 -> -> 0 `ui `uc ]
+"566
+[; ;CAN/CAN.c: 566:   CAN_Y.Voltage3.Remote = 0;
+[e = . . _CAN_Y 2 2 -> -> 0 `i `uc ]
+"567
+[; ;CAN/CAN.c: 567:   CAN_Y.Voltage3.Data[0] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"568
+[; ;CAN/CAN.c: 568:   CAN_Y.Voltage3.Data[1] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"569
+[; ;CAN/CAN.c: 569:   CAN_Y.Voltage3.Data[2] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"570
+[; ;CAN/CAN.c: 570:   CAN_Y.Voltage3.Data[3] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"571
+[; ;CAN/CAN.c: 571:   CAN_Y.Voltage3.Data[4] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"572
+[; ;CAN/CAN.c: 572:   CAN_Y.Voltage3.Data[5] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"573
+[; ;CAN/CAN.c: 573:   CAN_Y.Voltage3.Data[6] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"574
+[; ;CAN/CAN.c: 574:   CAN_Y.Voltage3.Data[7] = 0;
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> -> 0 `i `uc ]
+"576
+[; ;CAN/CAN.c: 576:   {
+{
+"587
+[; ;CAN/CAN.c: 587:     {
+{
+"588
+[; ;CAN/CAN.c: 588:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"590
+[; ;CAN/CAN.c: 590:       {
+{
+"591
+[; ;CAN/CAN.c: 591:         uint32_T result = (uint32_T) (CAN_B.Divide8);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 10 `ul ]
+"594
+[; ;CAN/CAN.c: 594:         packingValue = result;
+[e = _packingValue _result ]
+"595
+[; ;CAN/CAN.c: 595:       }
+}
+"597
+[; ;CAN/CAN.c: 597:       {
+{
+"598
+[; ;CAN/CAN.c: 598:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"599
+[; ;CAN/CAN.c: 599:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 40  ]
+{
+"600
+[; ;CAN/CAN.c: 600:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"601
+[; ;CAN/CAN.c: 601:         } else {
+}
+[e $U 41  ]
+[e :U 40 ]
+{
+"602
+[; ;CAN/CAN.c: 602:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"603
+[; ;CAN/CAN.c: 603:         }
+}
+[e :U 41 ]
+"605
+[; ;CAN/CAN.c: 605:         {
+{
+"606
+[; ;CAN/CAN.c: 606:           {
+{
+"607
+[; ;CAN/CAN.c: 607:             CAN_Y.Voltage3.Data[0] = CAN_Y.Voltage3.Data[0] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> & _packedValue -> 255 `ui `uc `i `uc ]
+"609
+[; ;CAN/CAN.c: 609:             CAN_Y.Voltage3.Data[1] = CAN_Y.Voltage3.Data[1] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> >> & _packedValue -> 7936 `ui -> 8 `i `uc `i `uc ]
+"611
+[; ;CAN/CAN.c: 611:           }
+}
+"612
+[; ;CAN/CAN.c: 612:         }
+}
+"613
+[; ;CAN/CAN.c: 613:       }
+}
+"614
+[; ;CAN/CAN.c: 614:     }
+}
+"626
+[; ;CAN/CAN.c: 626:     {
+{
+"627
+[; ;CAN/CAN.c: 627:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"629
+[; ;CAN/CAN.c: 629:       {
+{
+"630
+[; ;CAN/CAN.c: 630:         uint32_T result = (uint32_T) (CAN_B.Divide9);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 11 `ul ]
+"633
+[; ;CAN/CAN.c: 633:         packingValue = result;
+[e = _packingValue _result ]
+"634
+[; ;CAN/CAN.c: 634:       }
+}
+"636
+[; ;CAN/CAN.c: 636:       {
+{
+"637
+[; ;CAN/CAN.c: 637:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"638
+[; ;CAN/CAN.c: 638:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 42  ]
+{
+"639
+[; ;CAN/CAN.c: 639:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"640
+[; ;CAN/CAN.c: 640:         } else {
+}
+[e $U 43  ]
+[e :U 42 ]
+{
+"641
+[; ;CAN/CAN.c: 641:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"642
+[; ;CAN/CAN.c: 642:         }
+}
+[e :U 43 ]
+"644
+[; ;CAN/CAN.c: 644:         {
+{
+"645
+[; ;CAN/CAN.c: 645:           {
+{
+"646
+[; ;CAN/CAN.c: 646:             CAN_Y.Voltage3.Data[1] = CAN_Y.Voltage3.Data[1] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> << & _packedValue -> 7 `ui -> 5 `i `uc `i `uc ]
+"648
+[; ;CAN/CAN.c: 648:             CAN_Y.Voltage3.Data[2] = CAN_Y.Voltage3.Data[2] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> >> & _packedValue -> 2040 `ui -> 3 `i `uc `i `uc ]
+"650
+[; ;CAN/CAN.c: 650:             CAN_Y.Voltage3.Data[3] = CAN_Y.Voltage3.Data[3] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> >> & _packedValue -> 6144 `ui -> 11 `i `uc `i `uc ]
+"652
+[; ;CAN/CAN.c: 652:           }
+}
+"653
+[; ;CAN/CAN.c: 653:         }
+}
+"654
+[; ;CAN/CAN.c: 654:       }
+}
+"655
+[; ;CAN/CAN.c: 655:     }
+}
+"667
+[; ;CAN/CAN.c: 667:     {
+{
+"668
+[; ;CAN/CAN.c: 668:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"670
+[; ;CAN/CAN.c: 670:       {
+{
+"671
+[; ;CAN/CAN.c: 671:         uint32_T result = (uint32_T) (CAN_B.Divide10);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 12 `ul ]
+"674
+[; ;CAN/CAN.c: 674:         packingValue = result;
+[e = _packingValue _result ]
+"675
+[; ;CAN/CAN.c: 675:       }
+}
+"677
+[; ;CAN/CAN.c: 677:       {
+{
+"678
+[; ;CAN/CAN.c: 678:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"679
+[; ;CAN/CAN.c: 679:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 44  ]
+{
+"680
+[; ;CAN/CAN.c: 680:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"681
+[; ;CAN/CAN.c: 681:         } else {
+}
+[e $U 45  ]
+[e :U 44 ]
+{
+"682
+[; ;CAN/CAN.c: 682:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"683
+[; ;CAN/CAN.c: 683:         }
+}
+[e :U 45 ]
+"685
+[; ;CAN/CAN.c: 685:         {
+{
+"686
+[; ;CAN/CAN.c: 686:           {
+{
+"687
+[; ;CAN/CAN.c: 687:             CAN_Y.Voltage3.Data[3] = CAN_Y.Voltage3.Data[3] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> << & _packedValue -> 63 `ui -> 2 `i `uc `i `uc ]
+"689
+[; ;CAN/CAN.c: 689:             CAN_Y.Voltage3.Data[4] = CAN_Y.Voltage3.Data[4] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> >> & _packedValue -> 8128 `ui -> 6 `i `uc `i `uc ]
+"691
+[; ;CAN/CAN.c: 691:           }
+}
+"692
+[; ;CAN/CAN.c: 692:         }
+}
+"693
+[; ;CAN/CAN.c: 693:       }
+}
+"694
+[; ;CAN/CAN.c: 694:     }
+}
+"706
+[; ;CAN/CAN.c: 706:     {
+{
+"707
+[; ;CAN/CAN.c: 707:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"709
+[; ;CAN/CAN.c: 709:       {
+{
+"710
+[; ;CAN/CAN.c: 710:         uint32_T result = (uint32_T) (CAN_B.Divide11);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_B 13 `ul ]
+"713
+[; ;CAN/CAN.c: 713:         packingValue = result;
+[e = _packingValue _result ]
+"714
+[; ;CAN/CAN.c: 714:       }
+}
+"716
+[; ;CAN/CAN.c: 716:       {
+{
+"717
+[; ;CAN/CAN.c: 717:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"718
+[; ;CAN/CAN.c: 718:         if (packingValue > (uint16_T)(8191)) {
+[e $ ! > _packingValue -> -> -> 8191 `i `ui `ul 46  ]
+{
+"719
+[; ;CAN/CAN.c: 719:           packedValue = (uint16_T) 8191;
+[e = _packedValue -> -> 8191 `i `ui ]
+"720
+[; ;CAN/CAN.c: 720:         } else {
+}
+[e $U 47  ]
+[e :U 46 ]
+{
+"721
+[; ;CAN/CAN.c: 721:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"722
+[; ;CAN/CAN.c: 722:         }
+}
+[e :U 47 ]
+"724
+[; ;CAN/CAN.c: 724:         {
+{
+"725
+[; ;CAN/CAN.c: 725:           {
+{
+"726
+[; ;CAN/CAN.c: 726:             CAN_Y.Voltage3.Data[4] = CAN_Y.Voltage3.Data[4] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> << & _packedValue -> 1 `ui -> 7 `i `uc `i `uc ]
+"728
+[; ;CAN/CAN.c: 728:             CAN_Y.Voltage3.Data[5] = CAN_Y.Voltage3.Data[5] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> >> & _packedValue -> 510 `ui -> 1 `i `uc `i `uc ]
+"730
+[; ;CAN/CAN.c: 730:             CAN_Y.Voltage3.Data[6] = CAN_Y.Voltage3.Data[6] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> >> & _packedValue -> 7680 `ui -> 9 `i `uc `i `uc ]
+"732
+[; ;CAN/CAN.c: 732:           }
+}
+"733
+[; ;CAN/CAN.c: 733:         }
+}
+"734
+[; ;CAN/CAN.c: 734:       }
+}
+"735
+[; ;CAN/CAN.c: 735:     }
+}
+"747
+[; ;CAN/CAN.c: 747:     {
+{
+"748
+[; ;CAN/CAN.c: 748:       uint32_T packingValue = 0;
+[v _packingValue `ul ~T0 @X0 1 a ]
+[e = _packingValue -> -> -> 0 `i `l `ul ]
+"750
+[; ;CAN/CAN.c: 750:       {
+{
+"751
+[; ;CAN/CAN.c: 751:         uint32_T result = (uint32_T) (CAN_U.counter);
+[v _result `ul ~T0 @X0 1 a ]
+[e = _result -> . _CAN_U 14 `ul ]
+"754
+[; ;CAN/CAN.c: 754:         packingValue = result;
+[e = _packingValue _result ]
+"755
+[; ;CAN/CAN.c: 755:       }
+}
+"757
+[; ;CAN/CAN.c: 757:       {
+{
+"758
+[; ;CAN/CAN.c: 758:         uint16_T packedValue;
+[v _packedValue `ui ~T0 @X0 1 a ]
+"759
+[; ;CAN/CAN.c: 759:         if (packingValue > (uint16_T)(4095)) {
+[e $ ! > _packingValue -> -> -> 4095 `i `ui `ul 48  ]
+{
+"760
+[; ;CAN/CAN.c: 760:           packedValue = (uint16_T) 4095;
+[e = _packedValue -> -> 4095 `i `ui ]
+"761
+[; ;CAN/CAN.c: 761:         } else {
+}
+[e $U 49  ]
+[e :U 48 ]
+{
+"762
+[; ;CAN/CAN.c: 762:           packedValue = (uint16_T) (packingValue);
+[e = _packedValue -> _packingValue `ui ]
+"763
+[; ;CAN/CAN.c: 763:         }
+}
+[e :U 49 ]
+"765
+[; ;CAN/CAN.c: 765:         {
+{
+"766
+[; ;CAN/CAN.c: 766:           {
+{
+"767
+[; ;CAN/CAN.c: 767:             CAN_Y.Voltage3.Data[6] = CAN_Y.Voltage3.Data[6] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> << & _packedValue -> 15 `ui -> 4 `i `uc `i `uc ]
+"769
+[; ;CAN/CAN.c: 769:             CAN_Y.Voltage3.Data[7] = CAN_Y.Voltage3.Data[7] | (uint8_T)
+[e = *U + &U . . _CAN_Y 2 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux -> | -> *U + &U . . _CAN_Y 2 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_Y 2 6 `ui `ux `i -> -> >> & _packedValue -> 4080 `ui -> 4 `i `uc `i `uc ]
+"771
+[; ;CAN/CAN.c: 771:           }
+}
+"772
+[; ;CAN/CAN.c: 772:         }
+}
+"773
+[; ;CAN/CAN.c: 773:       }
+}
+"774
+[; ;CAN/CAN.c: 774:     }
+}
+"775
+[; ;CAN/CAN.c: 775:   }
+}
+"785
+[; ;CAN/CAN.c: 785:   {
+{
+"787
+[; ;CAN/CAN.c: 787:     if ((8 == CAN_U.balance1.Length) && (CAN_U.balance1.ID != 0xFFFFFFFFU) )
+[e $ ! && == -> 8 `i -> . . _CAN_U 16 1 `i != . . _CAN_U 16 4 -> 4294967295 `ul 50  ]
+"788
+[; ;CAN/CAN.c: 788:     {
+{
+"789
+[; ;CAN/CAN.c: 789:       if ((0 == CAN_U.balance1.ID) && (0U == CAN_U.balance1.Extended) ) {
+[e $ ! && == -> -> -> 0 `i `l `ul . . _CAN_U 16 4 == -> 0 `ui -> . . _CAN_U 16 0 `ui 51  ]
+{
+"790
+[; ;CAN/CAN.c: 790:         {
+{
+"799
+[; ;CAN/CAN.c: 799:           {
+{
+"800
+[; ;CAN/CAN.c: 800:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"802
+[; ;CAN/CAN.c: 802:             {
+{
+"803
+[; ;CAN/CAN.c: 803:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"805
+[; ;CAN/CAN.c: 805:               {
+{
+"806
+[; ;CAN/CAN.c: 806:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"808
+[; ;CAN/CAN.c: 808:                 {
+{
+"809
+[; ;CAN/CAN.c: 809:                   tempValue = tempValue | (uint16_T)(CAN_U.balance1.Data[0]);
+[e = _tempValue | _tempValue -> *U + &U . . _CAN_U 16 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui ]
+"810
+[; ;CAN/CAN.c: 810:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << & -> *U + &U . . _CAN_U 16 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui -> 15 `ui -> 8 `i ]
+"812
+[; ;CAN/CAN.c: 812:                 }
+}
+"814
+[; ;CAN/CAN.c: 814:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"815
+[; ;CAN/CAN.c: 815:               }
+}
+"817
+[; ;CAN/CAN.c: 817:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"818
+[; ;CAN/CAN.c: 818:             }
+}
+"820
+[; ;CAN/CAN.c: 820:             {
+{
+"821
+[; ;CAN/CAN.c: 821:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"822
+[; ;CAN/CAN.c: 822:               CAN_Y.b1 = result;
+[e = . _CAN_Y 3 _result ]
+"823
+[; ;CAN/CAN.c: 823:             }
+}
+"824
+[; ;CAN/CAN.c: 824:           }
+}
+"834
+[; ;CAN/CAN.c: 834:           {
+{
+"835
+[; ;CAN/CAN.c: 835:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"837
+[; ;CAN/CAN.c: 837:             {
+{
+"838
+[; ;CAN/CAN.c: 838:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"840
+[; ;CAN/CAN.c: 840:               {
+{
+"841
+[; ;CAN/CAN.c: 841:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"843
+[; ;CAN/CAN.c: 843:                 {
+{
+"844
+[; ;CAN/CAN.c: 844:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue >> & -> *U + &U . . _CAN_U 16 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui -> 240 `ui -> 4 `i ]
+"846
+[; ;CAN/CAN.c: 846:                   tempValue = tempValue | (uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << -> *U + &U . . _CAN_U 16 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui -> 4 `i ]
+"848
+[; ;CAN/CAN.c: 848:                 }
+}
+"850
+[; ;CAN/CAN.c: 850:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"851
+[; ;CAN/CAN.c: 851:               }
+}
+"853
+[; ;CAN/CAN.c: 853:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"854
+[; ;CAN/CAN.c: 854:             }
+}
+"856
+[; ;CAN/CAN.c: 856:             {
+{
+"857
+[; ;CAN/CAN.c: 857:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"858
+[; ;CAN/CAN.c: 858:               CAN_Y.b2 = result;
+[e = . _CAN_Y 4 _result ]
+"859
+[; ;CAN/CAN.c: 859:             }
+}
+"860
+[; ;CAN/CAN.c: 860:           }
+}
+"870
+[; ;CAN/CAN.c: 870:           {
+{
+"871
+[; ;CAN/CAN.c: 871:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"873
+[; ;CAN/CAN.c: 873:             {
+{
+"874
+[; ;CAN/CAN.c: 874:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"876
+[; ;CAN/CAN.c: 876:               {
+{
+"877
+[; ;CAN/CAN.c: 877:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"879
+[; ;CAN/CAN.c: 879:                 {
+{
+"880
+[; ;CAN/CAN.c: 880:                   tempValue = tempValue | (uint16_T)(CAN_U.balance1.Data[3]);
+[e = _tempValue | _tempValue -> *U + &U . . _CAN_U 16 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui ]
+"881
+[; ;CAN/CAN.c: 881:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << & -> *U + &U . . _CAN_U 16 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui -> 15 `ui -> 8 `i ]
+"883
+[; ;CAN/CAN.c: 883:                 }
+}
+"885
+[; ;CAN/CAN.c: 885:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"886
+[; ;CAN/CAN.c: 886:               }
+}
+"888
+[; ;CAN/CAN.c: 888:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"889
+[; ;CAN/CAN.c: 889:             }
+}
+"891
+[; ;CAN/CAN.c: 891:             {
+{
+"892
+[; ;CAN/CAN.c: 892:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"893
+[; ;CAN/CAN.c: 893:               CAN_Y.b3 = result;
+[e = . _CAN_Y 5 _result ]
+"894
+[; ;CAN/CAN.c: 894:             }
+}
+"895
+[; ;CAN/CAN.c: 895:           }
+}
+"905
+[; ;CAN/CAN.c: 905:           {
+{
+"906
+[; ;CAN/CAN.c: 906:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"908
+[; ;CAN/CAN.c: 908:             {
+{
+"909
+[; ;CAN/CAN.c: 909:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"911
+[; ;CAN/CAN.c: 911:               {
+{
+"912
+[; ;CAN/CAN.c: 912:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"914
+[; ;CAN/CAN.c: 914:                 {
+{
+"915
+[; ;CAN/CAN.c: 915:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue >> & -> *U + &U . . _CAN_U 16 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui -> 240 `ui -> 4 `i ]
+"917
+[; ;CAN/CAN.c: 917:                   tempValue = tempValue | (uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << -> *U + &U . . _CAN_U 16 6 * -> -> -> 5 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui -> 4 `i ]
+"919
+[; ;CAN/CAN.c: 919:                 }
+}
+"921
+[; ;CAN/CAN.c: 921:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"922
+[; ;CAN/CAN.c: 922:               }
+}
+"924
+[; ;CAN/CAN.c: 924:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"925
+[; ;CAN/CAN.c: 925:             }
+}
+"927
+[; ;CAN/CAN.c: 927:             {
+{
+"928
+[; ;CAN/CAN.c: 928:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"929
+[; ;CAN/CAN.c: 929:               CAN_Y.b4 = result;
+[e = . _CAN_Y 6 _result ]
+"930
+[; ;CAN/CAN.c: 930:             }
+}
+"931
+[; ;CAN/CAN.c: 931:           }
+}
+"941
+[; ;CAN/CAN.c: 941:           {
+{
+"942
+[; ;CAN/CAN.c: 942:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"944
+[; ;CAN/CAN.c: 944:             {
+{
+"945
+[; ;CAN/CAN.c: 945:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"947
+[; ;CAN/CAN.c: 947:               {
+{
+"948
+[; ;CAN/CAN.c: 948:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"950
+[; ;CAN/CAN.c: 950:                 {
+{
+"951
+[; ;CAN/CAN.c: 951:                   tempValue = tempValue | (uint16_T)(CAN_U.balance1.Data[6]);
+[e = _tempValue | _tempValue -> *U + &U . . _CAN_U 16 6 * -> -> -> 6 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui ]
+"952
+[; ;CAN/CAN.c: 952:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << & -> *U + &U . . _CAN_U 16 6 * -> -> -> 7 `i `ui `ux -> -> # *U &U . . _CAN_U 16 6 `ui `ux `ui -> 15 `ui -> 8 `i ]
+"954
+[; ;CAN/CAN.c: 954:                 }
+}
+"956
+[; ;CAN/CAN.c: 956:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"957
+[; ;CAN/CAN.c: 957:               }
+}
+"959
+[; ;CAN/CAN.c: 959:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"960
+[; ;CAN/CAN.c: 960:             }
+}
+"962
+[; ;CAN/CAN.c: 962:             {
+{
+"963
+[; ;CAN/CAN.c: 963:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"964
+[; ;CAN/CAN.c: 964:               CAN_Y.b5 = result;
+[e = . _CAN_Y 7 _result ]
+"965
+[; ;CAN/CAN.c: 965:             }
+}
+"966
+[; ;CAN/CAN.c: 966:           }
+}
+"967
+[; ;CAN/CAN.c: 967:         }
+}
+"968
+[; ;CAN/CAN.c: 968:       }
+}
+[e :U 51 ]
+"969
+[; ;CAN/CAN.c: 969:     }
+}
+[e :U 50 ]
+"970
+[; ;CAN/CAN.c: 970:   }
+}
+"978
+[; ;CAN/CAN.c: 978:   {
+{
+"980
+[; ;CAN/CAN.c: 980:     if ((8 == CAN_U.balance2.Length) && (CAN_U.balance2.ID != 0xFFFFFFFFU) )
+[e $ ! && == -> 8 `i -> . . _CAN_U 15 1 `i != . . _CAN_U 15 4 -> 4294967295 `ul 52  ]
+"981
+[; ;CAN/CAN.c: 981:     {
+{
+"982
+[; ;CAN/CAN.c: 982:       if ((1 == CAN_U.balance2.ID) && (0U == CAN_U.balance2.Extended) ) {
+[e $ ! && == -> -> -> 1 `i `l `ul . . _CAN_U 15 4 == -> 0 `ui -> . . _CAN_U 15 0 `ui 53  ]
+{
+"983
+[; ;CAN/CAN.c: 983:         {
+{
+"992
+[; ;CAN/CAN.c: 992:           {
+{
+"993
+[; ;CAN/CAN.c: 993:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"995
+[; ;CAN/CAN.c: 995:             {
+{
+"996
+[; ;CAN/CAN.c: 996:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"998
+[; ;CAN/CAN.c: 998:               {
+{
+"999
+[; ;CAN/CAN.c: 999:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"1001
+[; ;CAN/CAN.c: 1001:                 {
+{
+"1002
+[; ;CAN/CAN.c: 1002:                   tempValue = tempValue | (uint16_T)(CAN_U.balance2.Data[0]);
+[e = _tempValue | _tempValue -> *U + &U . . _CAN_U 15 6 * -> -> -> 0 `i `ui `ux -> -> # *U &U . . _CAN_U 15 6 `ui `ux `ui ]
+"1003
+[; ;CAN/CAN.c: 1003:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << & -> *U + &U . . _CAN_U 15 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_U 15 6 `ui `ux `ui -> 15 `ui -> 8 `i ]
+"1005
+[; ;CAN/CAN.c: 1005:                 }
+}
+"1007
+[; ;CAN/CAN.c: 1007:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"1008
+[; ;CAN/CAN.c: 1008:               }
+}
+"1010
+[; ;CAN/CAN.c: 1010:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"1011
+[; ;CAN/CAN.c: 1011:             }
+}
+"1013
+[; ;CAN/CAN.c: 1013:             {
+{
+"1014
+[; ;CAN/CAN.c: 1014:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"1015
+[; ;CAN/CAN.c: 1015:               CAN_Y.b6 = result;
+[e = . _CAN_Y 8 _result ]
+"1016
+[; ;CAN/CAN.c: 1016:             }
+}
+"1017
+[; ;CAN/CAN.c: 1017:           }
+}
+"1027
+[; ;CAN/CAN.c: 1027:           {
+{
+"1028
+[; ;CAN/CAN.c: 1028:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"1030
+[; ;CAN/CAN.c: 1030:             {
+{
+"1031
+[; ;CAN/CAN.c: 1031:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"1033
+[; ;CAN/CAN.c: 1033:               {
+{
+"1034
+[; ;CAN/CAN.c: 1034:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"1036
+[; ;CAN/CAN.c: 1036:                 {
+{
+"1037
+[; ;CAN/CAN.c: 1037:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue >> & -> *U + &U . . _CAN_U 15 6 * -> -> -> 1 `i `ui `ux -> -> # *U &U . . _CAN_U 15 6 `ui `ux `ui -> 240 `ui -> 4 `i ]
+"1039
+[; ;CAN/CAN.c: 1039:                   tempValue = tempValue | (uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << -> *U + &U . . _CAN_U 15 6 * -> -> -> 2 `i `ui `ux -> -> # *U &U . . _CAN_U 15 6 `ui `ux `ui -> 4 `i ]
+"1041
+[; ;CAN/CAN.c: 1041:                 }
+}
+"1043
+[; ;CAN/CAN.c: 1043:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"1044
+[; ;CAN/CAN.c: 1044:               }
+}
+"1046
+[; ;CAN/CAN.c: 1046:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"1047
+[; ;CAN/CAN.c: 1047:             }
+}
+"1049
+[; ;CAN/CAN.c: 1049:             {
+{
+"1050
+[; ;CAN/CAN.c: 1050:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"1051
+[; ;CAN/CAN.c: 1051:               CAN_Y.b7 = result;
+[e = . _CAN_Y 9 _result ]
+"1052
+[; ;CAN/CAN.c: 1052:             }
+}
+"1053
+[; ;CAN/CAN.c: 1053:           }
+}
+"1063
+[; ;CAN/CAN.c: 1063:           {
+{
+"1064
+[; ;CAN/CAN.c: 1064:             uint16_T outValue = 0;
+[v _outValue `ui ~T0 @X0 1 a ]
+[e = _outValue -> -> 0 `i `ui ]
+"1066
+[; ;CAN/CAN.c: 1066:             {
+{
+"1067
+[; ;CAN/CAN.c: 1067:               uint16_T unpackedValue = 0;
+[v _unpackedValue `ui ~T0 @X0 1 a ]
+[e = _unpackedValue -> -> 0 `i `ui ]
+"1069
+[; ;CAN/CAN.c: 1069:               {
+{
+"1070
+[; ;CAN/CAN.c: 1070:                 uint16_T tempValue = (uint16_T) (0);
+[v _tempValue `ui ~T0 @X0 1 a ]
+[e = _tempValue -> -> 0 `i `ui ]
+"1072
+[; ;CAN/CAN.c: 1072:                 {
+{
+"1073
+[; ;CAN/CAN.c: 1073:                   tempValue = tempValue | (uint16_T)(CAN_U.balance2.Data[3]);
+[e = _tempValue | _tempValue -> *U + &U . . _CAN_U 15 6 * -> -> -> 3 `i `ui `ux -> -> # *U &U . . _CAN_U 15 6 `ui `ux `ui ]
+"1074
+[; ;CAN/CAN.c: 1074:                   tempValue = tempValue | (uint16_T)((uint16_T)((uint16_T)
+[e = _tempValue | _tempValue << & -> *U + &U . . _CAN_U 15 6 * -> -> -> 4 `i `ui `ux -> -> # *U &U . . _CAN_U 15 6 `ui `ux `ui -> 15 `ui -> 8 `i ]
+"1076
+[; ;CAN/CAN.c: 1076:                 }
+}
+"1078
+[; ;CAN/CAN.c: 1078:                 unpackedValue = tempValue;
+[e = _unpackedValue _tempValue ]
+"1079
+[; ;CAN/CAN.c: 1079:               }
+}
+"1081
+[; ;CAN/CAN.c: 1081:               outValue = (uint16_T) (unpackedValue);
+[e = _outValue _unpackedValue ]
+"1082
+[; ;CAN/CAN.c: 1082:             }
+}
+"1084
+[; ;CAN/CAN.c: 1084:             {
+{
+"1085
+[; ;CAN/CAN.c: 1085:               uint16_T result = (uint16_T) outValue;
+[v _result `ui ~T0 @X0 1 a ]
+[e = _result _outValue ]
+"1086
+[; ;CAN/CAN.c: 1086:               CAN_Y.b8 = result;
+[e = . _CAN_Y 10 _result ]
+"1087
+[; ;CAN/CAN.c: 1087:             }
+}
+"1088
+[; ;CAN/CAN.c: 1088:           }
+}
+"1089
+[; ;CAN/CAN.c: 1089:         }
+}
+"1090
+[; ;CAN/CAN.c: 1090:       }
+}
+[e :U 53 ]
+"1091
+[; ;CAN/CAN.c: 1091:     }
+}
+[e :U 52 ]
+"1092
+[; ;CAN/CAN.c: 1092:   }
+}
+"1093
+[; ;CAN/CAN.c: 1093: }
+[e :UE 19 ]
+}
+"1096
+[; ;CAN/CAN.c: 1096: void CAN_initialize(void)
+[v _CAN_initialize `(v ~T0 @X0 1 ef ]
+"1097
+[; ;CAN/CAN.c: 1097: {
+{
+[e :U _CAN_initialize ]
+[f ]
+"1117
+[; ;CAN/CAN.c: 1117: }
+[e :UE 54 ]
+}
+"1120
+[; ;CAN/CAN.c: 1120: void CAN_terminate(void)
+[v _CAN_terminate `(v ~T0 @X0 1 ef ]
+"1121
+[; ;CAN/CAN.c: 1121: {
+{
+[e :U _CAN_terminate ]
+[f ]
+"1123
+[; ;CAN/CAN.c: 1123: }
+[e :UE 55 ]
+}

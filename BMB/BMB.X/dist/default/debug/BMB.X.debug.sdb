@@ -1,0 +1,2288 @@
+[p GLOBOPT AUTOSTATIC IEEE_FLT IEEE_DBL LFSROK EMI_WORD ]
+[d version 1.1 ]
+[d edition pro ]
+[d chip 18F45K80 ]
+[d frameptr 4065 ]
+"271 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[e E12720 . `uc
+SPI_DEFAULT 0
+]
+"50 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\bms_hardware.c
+[v _cs_low cs_low `(v  1 e 1 0 ]
+"55
+[v _cs_high cs_high `(v  1 e 1 0 ]
+"63
+[v _spi_write_array spi_write_array `(uc  1 e 1 0 ]
+"95
+[v _spi_write_read spi_write_read `(v  1 e 1 0 ]
+"141
+[v _spi_read_byte spi_read_byte `(uc  1 e 1 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\fleq.c
+[v ___fleq __fleq `(b  1 e 0 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\float.c
+[v ___ftpack __ftpack `(f  1 e 4 0 ]
+"86 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftadd.c
+[v ___ftadd __ftadd `(f  1 e 4 0 ]
+"54 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftdiv.c
+[v ___ftdiv __ftdiv `(f  1 e 4 0 ]
+"62 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftmul.c
+[v ___ftmul __ftmul `(f  1 e 4 0 ]
+"19 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\ftsub.c
+[v ___ftsub __ftsub `(f  1 e 4 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"245
+[v ___flsub __flsub `(d  1 e 4 0 ]
+"11 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcdiv.c
+[v ___fldiv __fldiv `(d  1 e 4 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\sprcmul.c
+[v ___flmul __flmul `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul32.c
+[v ___lmul __lmul `(ul  1 e 4 0 ]
+"91 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul64.c
+[v ___omul __omul `(uo  1 e 8 0 ]
+"36 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\CAN/CAN.c
+[v _CAN_step CAN_step `(v  1 e 1 0 ]
+"53 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\LTC681xRev2.c
+[v _wakeup_idle wakeup_idle `(v  1 e 1 0 ]
+"64
+[v _wakeup_sleep wakeup_sleep `(v  1 e 1 0 ]
+"77
+[v _cmd_68 cmd_68 `(v  1 e 1 0 ]
+"96
+[v _write_68 write_68 `(v  1 e 1 0 ]
+"138
+[v _read_68 read_68 `(c  1 e 1 0 ]
+"182
+[v _pec15_calc pec15_calc `(us  1 e 2 0 ]
+"208
+[v _LTC681x_wrcfg LTC681x_wrcfg `(v  1 e 1 0 ]
+"269
+[v _LTC681x_rdcfg LTC681x_rdcfg `(c  1 e 1 0 ]
+"354
+[v _LTC681x_adcv LTC681x_adcv `(v  1 e 1 0 ]
+"371
+[v _LTC681x_adax LTC681x_adax `(v  1 e 1 0 ]
+"439
+[v _LTC681x_rdcv LTC681x_rdcv `(uc  1 e 1 0 ]
+"500
+[v _LTC681x_rdaux LTC681x_rdaux `(c  1 e 1 0 ]
+"563
+[v _LTC681x_rdstat LTC681x_rdstat `(c  1 e 1 0 ]
+"697
+[v _LTC681x_rdcv_reg LTC681x_rdcv_reg `(v  1 e 1 0 ]
+"750
+[v _LTC681x_rdaux_reg LTC681x_rdaux_reg `(v  1 e 1 0 ]
+"798
+[v _LTC681x_rdstat_reg LTC681x_rdstat_reg `(v  1 e 1 0 ]
+"833
+[v _parse_cells parse_cells `(c  1 e 1 0 ]
+"897
+[v _LTC681x_pollAdc LTC681x_pollAdc `(ul  1 e 4 0 ]
+"934
+[v _LTC681x_clrcell LTC681x_clrcell `(v  1 e 1 0 ]
+"944
+[v _LTC681x_clraux LTC681x_clraux `(v  1 e 1 0 ]
+"955
+[v _LTC681x_clrstat LTC681x_clrstat `(v  1 e 1 0 ]
+"968
+[v _LTC681x_cvst LTC681x_cvst `(v  1 e 1 0 ]
+"983
+[v _LTC681x_axst LTC681x_axst `(v  1 e 1 0 ]
+"999
+[v _LTC681x_statst LTC681x_statst `(v  1 e 1 0 ]
+"1015
+[v _LTC681x_adol LTC681x_adol `(v  1 e 1 0 ]
+"1030
+[v _LTC681x_adaxd LTC681x_adaxd `(v  1 e 1 0 ]
+"1045
+[v _LTC681x_adstatd LTC681x_adstatd `(v  1 e 1 0 ]
+"1150
+[v _LTC681x_st_lookup LTC681x_st_lookup `(us  1 e 2 0 ]
+"1789
+[v _LTC681x_wrsctrl LTC681x_wrsctrl `(v  1 e 1 0 ]
+"1826
+[v _LTC681x_rdsctrl LTC681x_rdsctrl `(c  1 e 1 0 ]
+"1879
+[v _LTC681x_stsctrl LTC681x_stsctrl `(v  1 e 1 0 ]
+"2004
+[v _LTC681x_check_pec LTC681x_check_pec `(v  1 e 1 0 ]
+"2064
+[v _LTC681x_reset_crc_count LTC681x_reset_crc_count `(v  1 e 1 0 ]
+"2089
+[v _LTC681x_init_cfg LTC681x_init_cfg `(v  1 e 1 0 ]
+"2102
+[v _LTC681x_set_cfgr LTC681x_set_cfgr `(v  1 e 1 0 ]
+"2124
+[v _LTC681x_set_cfgr_refon LTC681x_set_cfgr_refon `(v  1 e 1 0 ]
+"2131
+[v _LTC681x_set_cfgr_adcopt LTC681x_set_cfgr_adcopt `(v  1 e 1 0 ]
+"2138
+[v _LTC681x_set_cfgr_gpio LTC681x_set_cfgr_gpio `(v  1 e 1 0 ]
+"2148
+[v _LTC681x_set_cfgr_dis LTC681x_set_cfgr_dis `(v  1 e 1 0 ]
+"2164
+[v _LTC681x_set_cfgr_dcto LTC681x_set_cfgr_dcto `(v  1 e 1 0 ]
+"2174
+[v _LTC681x_set_cfgr_uv LTC681x_set_cfgr_uv `(v  1 e 1 0 ]
+"2183
+[v _LTC681x_set_cfgr_ov LTC681x_set_cfgr_ov `(v  1 e 1 0 ]
+"2191
+[v _LTC681x_set_balance LTC681x_set_balance `(v  1 e 1 0 ]
+"119 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _timer0_ISR timer0_ISR `(v  1 e 1 0 ]
+"179
+[v _timer1_ISR timer1_ISR `(v  1 e 1 0 ]
+"273
+[v _main main `(v  1 e 1 0 ]
+"356
+[v _LTC_Init LTC_Init `(v  1 e 1 0 ]
+"377
+[v _getGpioVoltage getGpioVoltage `(uc  1 e 1 0 ]
+"395
+[v _getCellVoltage getCellVoltage `(uc  1 e 1 0 ]
+"402
+[v _checkPEC checkPEC `(v  1 e 1 0 ]
+"409
+[v _updateCellVoltage updateCellVoltage `(v  1 e 1 0 ]
+"437
+[v _updateCANData updateCANData `(v  1 e 1 0 ]
+"485
+[v _CANParser CANParser `(v  1 e 1 0 ]
+"510
+[v _BalancerCommand BalancerCommand `(v  1 e 1 0 ]
+"541
+[v _CANTransmit CANTransmit `(v  1 e 1 0 ]
+"63 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/ecan.c
+[v _ECAN_Initialize ECAN_Initialize `(v  1 e 1 0 ]
+"231
+[v _CAN_transmit CAN_transmit `(uc  1 e 1 0 ]
+"308
+[v _CAN_receive CAN_receive `(uc  1 e 1 0 ]
+"491
+[v _convertReg2ExtendedCANid convertReg2ExtendedCANid `(ul  1 s 4 convertReg2ExtendedCANid ]
+"511
+[v _convertReg2StandardCANid convertReg2StandardCANid `(ul  1 s 4 convertReg2StandardCANid ]
+"523
+[v _convertCANid2Reg convertCANid2Reg `(v  1 s 1 convertCANid2Reg ]
+"52 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
+"58
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `IIH(v  1 e 1 0 ]
+"50 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+"62
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+"55 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"62 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/spi.c
+[v _SPI_Initialize SPI_Initialize `(v  1 e 1 0 ]
+"73
+[v _SPI_Open SPI_Open `(a  1 e 1 0 ]
+"93
+[v _SPI_ExchangeByte SPI_ExchangeByte `(uc  1 e 1 0 ]
+"67 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr0.c
+[v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
+"122
+[v _TMR0_Reload TMR0_Reload `(v  1 e 1 0 ]
+"129
+[v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
+"145
+[v _TMR0_CallBack TMR0_CallBack `(v  1 e 1 0 ]
+"155
+[v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
+"159
+[v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
+"64 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr1.c
+[v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
+"120
+[v _TMR1_WriteTimer TMR1_WriteTimer `(v  1 e 1 0 ]
+"157
+[v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
+"169
+[v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
+"178
+[v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
+"182
+[v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
+"810 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X/LTC681xRev2.h
+[v _crc15Table crc15Table `C[256]us  1 e 512 0 ]
+"192 C:/Program Files/Microchip/MPLABX/v5.50/packs/Microchip/PIC18F-K_DFP/1.4.87/xc8\pic\include\proc\pic18f45k80.h
+[v _BRGCON1 BRGCON1 `VEuc  1 e 1 @3651 ]
+"268
+[v _BRGCON2 BRGCON2 `VEuc  1 e 1 @3652 ]
+"353
+[v _BRGCON3 BRGCON3 `VEuc  1 e 1 @3653 ]
+"406
+[v _RXFCON0 RXFCON0 `VEuc  1 e 1 @3654 ]
+"468
+[v _RXFCON1 RXFCON1 `VEuc  1 e 1 @3655 ]
+"530
+[v _RXF6SIDH RXF6SIDH `VEuc  1 e 1 @3656 ]
+"650
+[v _RXF6SIDL RXF6SIDL `VEuc  1 e 1 @3657 ]
+"757
+[v _RXF6EIDH RXF6EIDH `VEuc  1 e 1 @3658 ]
+"877
+[v _RXF6EIDL RXF6EIDL `VEuc  1 e 1 @3659 ]
+"997
+[v _RXF7SIDH RXF7SIDH `VEuc  1 e 1 @3660 ]
+"1117
+[v _RXF7SIDL RXF7SIDL `VEuc  1 e 1 @3661 ]
+"1224
+[v _RXF7EIDH RXF7EIDH `VEuc  1 e 1 @3662 ]
+"1344
+[v _RXF7EIDL RXF7EIDL `VEuc  1 e 1 @3663 ]
+"1464
+[v _RXF8SIDH RXF8SIDH `VEuc  1 e 1 @3664 ]
+"1584
+[v _RXF8SIDL RXF8SIDL `VEuc  1 e 1 @3665 ]
+"1691
+[v _RXF8EIDH RXF8EIDH `VEuc  1 e 1 @3666 ]
+"1811
+[v _RXF8EIDL RXF8EIDL `VEuc  1 e 1 @3667 ]
+"1931
+[v _RXF9SIDH RXF9SIDH `VEuc  1 e 1 @3668 ]
+"2051
+[v _RXF9SIDL RXF9SIDL `VEuc  1 e 1 @3669 ]
+"2158
+[v _RXF9EIDH RXF9EIDH `VEuc  1 e 1 @3670 ]
+"2278
+[v _RXF9EIDL RXF9EIDL `VEuc  1 e 1 @3671 ]
+"2398
+[v _RXF10SIDH RXF10SIDH `VEuc  1 e 1 @3672 ]
+"2518
+[v _RXF10SIDL RXF10SIDL `VEuc  1 e 1 @3673 ]
+"2625
+[v _RXF10EIDH RXF10EIDH `VEuc  1 e 1 @3674 ]
+"2745
+[v _RXF10EIDL RXF10EIDL `VEuc  1 e 1 @3675 ]
+"2865
+[v _RXF11SIDH RXF11SIDH `VEuc  1 e 1 @3676 ]
+"2985
+[v _RXF11SIDL RXF11SIDL `VEuc  1 e 1 @3677 ]
+"3092
+[v _RXF11EIDH RXF11EIDH `VEuc  1 e 1 @3678 ]
+"3212
+[v _RXF11EIDL RXF11EIDL `VEuc  1 e 1 @3679 ]
+"3332
+[v _RXF12SIDH RXF12SIDH `VEuc  1 e 1 @3680 ]
+"3452
+[v _RXF12SIDL RXF12SIDL `VEuc  1 e 1 @3681 ]
+"3559
+[v _RXF12EIDH RXF12EIDH `VEuc  1 e 1 @3682 ]
+"3679
+[v _RXF12EIDL RXF12EIDL `VEuc  1 e 1 @3683 ]
+"3799
+[v _RXF13SIDH RXF13SIDH `VEuc  1 e 1 @3684 ]
+"3919
+[v _RXF13SIDL RXF13SIDL `VEuc  1 e 1 @3685 ]
+"4026
+[v _RXF13EIDH RXF13EIDH `VEuc  1 e 1 @3686 ]
+"4146
+[v _RXF13EIDL RXF13EIDL `VEuc  1 e 1 @3687 ]
+"4266
+[v _RXF14SIDH RXF14SIDH `VEuc  1 e 1 @3688 ]
+"4386
+[v _RXF14SIDL RXF14SIDL `VEuc  1 e 1 @3689 ]
+"4493
+[v _RXF14EIDH RXF14EIDH `VEuc  1 e 1 @3690 ]
+"4613
+[v _RXF14EIDL RXF14EIDL `VEuc  1 e 1 @3691 ]
+"4733
+[v _RXF15SIDH RXF15SIDH `VEuc  1 e 1 @3692 ]
+"4853
+[v _RXF15SIDL RXF15SIDL `VEuc  1 e 1 @3693 ]
+"4960
+[v _RXF15EIDH RXF15EIDH `VEuc  1 e 1 @3694 ]
+"5080
+[v _RXF15EIDL RXF15EIDL `VEuc  1 e 1 @3695 ]
+"5252
+[v _RXFBCON0 RXFBCON0 `VEuc  1 e 1 @3697 ]
+"5336
+[v _RXFBCON1 RXFBCON1 `VEuc  1 e 1 @3698 ]
+"5420
+[v _RXFBCON2 RXFBCON2 `VEuc  1 e 1 @3699 ]
+"5504
+[v _RXFBCON3 RXFBCON3 `VEuc  1 e 1 @3700 ]
+"5588
+[v _RXFBCON4 RXFBCON4 `VEuc  1 e 1 @3701 ]
+"5672
+[v _RXFBCON5 RXFBCON5 `VEuc  1 e 1 @3702 ]
+"5756
+[v _RXFBCON6 RXFBCON6 `VEuc  1 e 1 @3703 ]
+"5840
+[v _RXFBCON7 RXFBCON7 `VEuc  1 e 1 @3704 ]
+"5924
+[v _MSEL0 MSEL0 `VEuc  1 e 1 @3705 ]
+"6012
+[v _MSEL1 MSEL1 `VEuc  1 e 1 @3706 ]
+"6100
+[v _MSEL2 MSEL2 `VEuc  1 e 1 @3707 ]
+"6188
+[v _MSEL3 MSEL3 `VEuc  1 e 1 @3708 ]
+"6276
+[v _BSEL0 BSEL0 `VEuc  1 e 1 @3709 ]
+"16279
+[v _RXF0SIDH RXF0SIDH `VEuc  1 e 1 @3808 ]
+"16399
+[v _RXF0SIDL RXF0SIDL `VEuc  1 e 1 @3809 ]
+"16506
+[v _RXF0EIDH RXF0EIDH `VEuc  1 e 1 @3810 ]
+"16626
+[v _RXF0EIDL RXF0EIDL `VEuc  1 e 1 @3811 ]
+"16746
+[v _RXF1SIDH RXF1SIDH `VEuc  1 e 1 @3812 ]
+"16866
+[v _RXF1SIDL RXF1SIDL `VEuc  1 e 1 @3813 ]
+"16973
+[v _RXF1EIDH RXF1EIDH `VEuc  1 e 1 @3814 ]
+"17093
+[v _RXF1EIDL RXF1EIDL `VEuc  1 e 1 @3815 ]
+"17213
+[v _RXF2SIDH RXF2SIDH `VEuc  1 e 1 @3816 ]
+"17333
+[v _RXF2SIDL RXF2SIDL `VEuc  1 e 1 @3817 ]
+"17440
+[v _RXF2EIDH RXF2EIDH `VEuc  1 e 1 @3818 ]
+"17560
+[v _RXF2EIDL RXF2EIDL `VEuc  1 e 1 @3819 ]
+"17680
+[v _RXF3SIDH RXF3SIDH `VEuc  1 e 1 @3820 ]
+"17800
+[v _RXF3SIDL RXF3SIDL `VEuc  1 e 1 @3821 ]
+"17907
+[v _RXF3EIDH RXF3EIDH `VEuc  1 e 1 @3822 ]
+"18027
+[v _RXF3EIDL RXF3EIDL `VEuc  1 e 1 @3823 ]
+"18147
+[v _RXF4SIDH RXF4SIDH `VEuc  1 e 1 @3824 ]
+"18267
+[v _RXF4SIDL RXF4SIDL `VEuc  1 e 1 @3825 ]
+"18374
+[v _RXF4EIDH RXF4EIDH `VEuc  1 e 1 @3826 ]
+"18494
+[v _RXF4EIDL RXF4EIDL `VEuc  1 e 1 @3827 ]
+"18614
+[v _RXF5SIDH RXF5SIDH `VEuc  1 e 1 @3828 ]
+"18734
+[v _RXF5SIDL RXF5SIDL `VEuc  1 e 1 @3829 ]
+"18841
+[v _RXF5EIDH RXF5EIDH `VEuc  1 e 1 @3830 ]
+"18961
+[v _RXF5EIDL RXF5EIDL `VEuc  1 e 1 @3831 ]
+"19081
+[v _RXM0SIDH RXM0SIDH `VEuc  1 e 1 @3832 ]
+"19201
+[v _RXM0SIDL RXM0SIDL `VEuc  1 e 1 @3833 ]
+"19308
+[v _RXM0EIDH RXM0EIDH `VEuc  1 e 1 @3834 ]
+"19428
+[v _RXM0EIDL RXM0EIDL `VEuc  1 e 1 @3835 ]
+"19548
+[v _RXM1SIDH RXM1SIDH `VEuc  1 e 1 @3836 ]
+"19668
+[v _RXM1SIDL RXM1SIDL `VEuc  1 e 1 @3837 ]
+"19775
+[v _RXM1EIDH RXM1EIDH `VEuc  1 e 1 @3838 ]
+"19895
+[v _RXM1EIDL RXM1EIDL `VEuc  1 e 1 @3839 ]
+[s S944 . 1 `uc 1 TXPRI 1 0 :2:0 
+`uc 1 . 1 0 :1:2 
+`uc 1 TXREQ 1 0 :1:3 
+`uc 1 TXERR 1 0 :1:4 
+`uc 1 TXLARB 1 0 :1:5 
+`uc 1 TXABT 1 0 :1:6 
+`uc 1 TXBIF 1 0 :1:7 
+]
+"20045
+[s S952 . 1 `uc 1 TXPRI0 1 0 :1:0 
+`uc 1 TXPRI1 1 0 :1:1 
+]
+[s S1081 . 1 `uc 1 TXB2PRI0 1 0 :1:0 
+`uc 1 TXB2PRI1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 TXB2REQ 1 0 :1:3 
+`uc 1 TXB2ERR 1 0 :1:4 
+`uc 1 TXB2LARB 1 0 :1:5 
+`uc 1 TXB2ABT 1 0 :1:6 
+`uc 1 TX2IF 1 0 :1:7 
+]
+[u S1090 . 1 `S944 1 . 1 0 `S952 1 . 1 0 `S1081 1 . 1 0 ]
+[v _TXB2CONbits TXB2CONbits `VES1090  1 e 1 @3840 ]
+"20125
+[v _TXB2SIDH TXB2SIDH `VEuc  1 e 1 @3841 ]
+"20245
+[v _TXB2SIDL TXB2SIDL `VEuc  1 e 1 @3842 ]
+"20357
+[v _TXB2EIDH TXB2EIDH `VEuc  1 e 1 @3843 ]
+"20477
+[v _TXB2EIDL TXB2EIDL `VEuc  1 e 1 @3844 ]
+"20597
+[v _TXB2DLC TXB2DLC `VEuc  1 e 1 @3845 ]
+"20683
+[v _TXB2D0 TXB2D0 `VEuc  1 e 1 @3846 ]
+"20753
+[v _TXB2D1 TXB2D1 `VEuc  1 e 1 @3847 ]
+"20823
+[v _TXB2D2 TXB2D2 `VEuc  1 e 1 @3848 ]
+"20893
+[v _TXB2D3 TXB2D3 `VEuc  1 e 1 @3849 ]
+"20963
+[v _TXB2D4 TXB2D4 `VEuc  1 e 1 @3850 ]
+"21033
+[v _TXB2D5 TXB2D5 `VEuc  1 e 1 @3851 ]
+"21103
+[v _TXB2D6 TXB2D6 `VEuc  1 e 1 @3852 ]
+"21173
+[v _TXB2D7 TXB2D7 `VEuc  1 e 1 @3853 ]
+"21476
+[s S1023 . 1 `uc 1 TXB1PRI0 1 0 :1:0 
+`uc 1 TXB1PRI1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 TXB1REQ 1 0 :1:3 
+`uc 1 TXB1ERR 1 0 :1:4 
+`uc 1 TXB1LARB 1 0 :1:5 
+`uc 1 TXB1ABT 1 0 :1:6 
+`uc 1 TX1IF 1 0 :1:7 
+]
+[u S1032 . 1 `S944 1 . 1 0 `S952 1 . 1 0 `S1023 1 . 1 0 ]
+[v _TXB1CONbits TXB1CONbits `VES1032  1 e 1 @3856 ]
+"21556
+[v _TXB1SIDH TXB1SIDH `VEuc  1 e 1 @3857 ]
+"21676
+[v _TXB1SIDL TXB1SIDL `VEuc  1 e 1 @3858 ]
+"21788
+[v _TXB1EIDH TXB1EIDH `VEuc  1 e 1 @3859 ]
+"21908
+[v _TXB1EIDL TXB1EIDL `VEuc  1 e 1 @3860 ]
+"22028
+[v _TXB1DLC TXB1DLC `VEuc  1 e 1 @3861 ]
+"22114
+[v _TXB1D0 TXB1D0 `VEuc  1 e 1 @3862 ]
+"22184
+[v _TXB1D1 TXB1D1 `VEuc  1 e 1 @3863 ]
+"22254
+[v _TXB1D2 TXB1D2 `VEuc  1 e 1 @3864 ]
+"22324
+[v _TXB1D3 TXB1D3 `VEuc  1 e 1 @3865 ]
+"22394
+[v _TXB1D4 TXB1D4 `VEuc  1 e 1 @3866 ]
+"22464
+[v _TXB1D5 TXB1D5 `VEuc  1 e 1 @3867 ]
+"22534
+[v _TXB1D6 TXB1D6 `VEuc  1 e 1 @3868 ]
+"22604
+[v _TXB1D7 TXB1D7 `VEuc  1 e 1 @3869 ]
+"22907
+[s S955 . 1 `uc 1 TXB0PRI0 1 0 :1:0 
+`uc 1 TXB0PRI1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 TXB0REQ 1 0 :1:3 
+`uc 1 TXB0ERR 1 0 :1:4 
+`uc 1 TXB0LARB 1 0 :1:5 
+`uc 1 TXB0ABT 1 0 :1:6 
+`uc 1 TX0IF 1 0 :1:7 
+]
+[u S964 . 1 `S944 1 . 1 0 `S952 1 . 1 0 `S955 1 . 1 0 ]
+[v _TXB0CONbits TXB0CONbits `VES964  1 e 1 @3872 ]
+"22987
+[v _TXB0SIDH TXB0SIDH `VEuc  1 e 1 @3873 ]
+"23107
+[v _TXB0SIDL TXB0SIDL `VEuc  1 e 1 @3874 ]
+"23219
+[v _TXB0EIDH TXB0EIDH `VEuc  1 e 1 @3875 ]
+"23339
+[v _TXB0EIDL TXB0EIDL `VEuc  1 e 1 @3876 ]
+"23459
+[v _TXB0DLC TXB0DLC `VEuc  1 e 1 @3877 ]
+"23545
+[v _TXB0D0 TXB0D0 `VEuc  1 e 1 @3878 ]
+"23615
+[v _TXB0D1 TXB0D1 `VEuc  1 e 1 @3879 ]
+"23685
+[v _TXB0D2 TXB0D2 `VEuc  1 e 1 @3880 ]
+"23755
+[v _TXB0D3 TXB0D3 `VEuc  1 e 1 @3881 ]
+"23825
+[v _TXB0D4 TXB0D4 `VEuc  1 e 1 @3882 ]
+"23895
+[v _TXB0D5 TXB0D5 `VEuc  1 e 1 @3883 ]
+"23965
+[v _TXB0D6 TXB0D6 `VEuc  1 e 1 @3884 ]
+"24035
+[v _TXB0D7 TXB0D7 `VEuc  1 e 1 @3885 ]
+[s S1209 . 1 `uc 1 FILHIT0 1 0 :1:0 
+`uc 1 FILHIT1 1 0 :1:1 
+`uc 1 FILHIT2 1 0 :1:2 
+`uc 1 RXRTRRO_FILHIT3 1 0 :1:3 
+`uc 1 FILHIT4 1 0 :1:4 
+`uc 1 RXM0_RTRRO 1 0 :1:5 
+`uc 1 RXM1 1 0 :1:6 
+`uc 1 RXFUL 1 0 :1:7 
+]
+"24353
+[s S1218 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 RXRTRRO 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 RXM0 1 0 :1:5 
+]
+[s S1223 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 FILHIT3 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 RTRRO 1 0 :1:5 
+]
+[s S1228 . 1 `uc 1 RXB1FILHIT0 1 0 :1:0 
+`uc 1 RXB1FILHIT1 1 0 :1:1 
+`uc 1 RXB1FILHIT2 1 0 :1:2 
+`uc 1 RXB1FILHIT3 1 0 :1:3 
+`uc 1 RXB1FILHIT4 1 0 :1:4 
+`uc 1 RXB1M0 1 0 :1:5 
+`uc 1 RXB1M1 1 0 :1:6 
+`uc 1 RXB1FUL 1 0 :1:7 
+]
+[s S1237 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 RXB1RTRR0 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 RXB1RTRRO 1 0 :1:5 
+]
+[u S1242 . 1 `S1209 1 . 1 0 `S1218 1 . 1 0 `S1223 1 . 1 0 `S1228 1 . 1 0 `S1237 1 . 1 0 ]
+[v _RXB1CONbits RXB1CONbits `VES1242  1 e 1 @3888 ]
+"24468
+[v _RXB1SIDH RXB1SIDH `VEuc  1 e 1 @3889 ]
+"24588
+[v _RXB1SIDL RXB1SIDL `VEuc  1 e 1 @3890 ]
+"24705
+[v _RXB1EIDH RXB1EIDH `VEuc  1 e 1 @3891 ]
+"24825
+[v _RXB1EIDL RXB1EIDL `VEuc  1 e 1 @3892 ]
+"24945
+[v _RXB1DLC RXB1DLC `VEuc  1 e 1 @3893 ]
+"25059
+[v _RXB1D0 RXB1D0 `VEuc  1 e 1 @3894 ]
+"25129
+[v _RXB1D1 RXB1D1 `VEuc  1 e 1 @3895 ]
+"25199
+[v _RXB1D2 RXB1D2 `VEuc  1 e 1 @3896 ]
+"25269
+[v _RXB1D3 RXB1D3 `VEuc  1 e 1 @3897 ]
+"25339
+[v _RXB1D4 RXB1D4 `VEuc  1 e 1 @3898 ]
+"25409
+[v _RXB1D5 RXB1D5 `VEuc  1 e 1 @3899 ]
+"25479
+[v _RXB1D6 RXB1D6 `VEuc  1 e 1 @3900 ]
+"25549
+[v _RXB1D7 RXB1D7 `VEuc  1 e 1 @3901 ]
+"26912
+[v _WPUB WPUB `VEuc  1 e 1 @3931 ]
+"26974
+[v _ANCON1 ANCON1 `VEuc  1 e 1 @3932 ]
+"27074
+[v _ANCON0 ANCON0 `VEuc  1 e 1 @3933 ]
+[s S1128 . 1 `uc 1 FILHIT0 1 0 :1:0 
+`uc 1 JTOFF_FILHIT1 1 0 :1:1 
+`uc 1 RB0DBEN_FILHIT2 1 0 :1:2 
+`uc 1 RXRTRRO_FILHIT3 1 0 :1:3 
+`uc 1 FILHIT4 1 0 :1:4 
+`uc 1 RXM0_RTRRO 1 0 :1:5 
+`uc 1 RXM1 1 0 :1:6 
+`uc 1 RXFUL 1 0 :1:7 
+]
+"27767
+[s S1137 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 JTOFF 1 0 :1:1 
+`uc 1 RB0DBEN 1 0 :1:2 
+`uc 1 RXRTRRO 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 RTRRO 1 0 :1:5 
+]
+[s S1144 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 FILHIT1 1 0 :1:1 
+`uc 1 FILHIT2 1 0 :1:2 
+`uc 1 FILHIT3 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 RXM0 1 0 :1:5 
+]
+[s S1151 . 1 `uc 1 RXB0FILHIT0 1 0 :1:0 
+`uc 1 RXB0FILHIT1 1 0 :1:1 
+`uc 1 RXB0FILHIT2 1 0 :1:2 
+`uc 1 RXB0FILHIT3 1 0 :1:3 
+`uc 1 RXB0FILHIT4 1 0 :1:4 
+`uc 1 RXB0M0 1 0 :1:5 
+`uc 1 RXB0M1 1 0 :1:6 
+`uc 1 RXB0FUL 1 0 :1:7 
+]
+[s S1160 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 RXB0RTRR0 1 0 :1:3 
+`uc 1 . 1 0 :1:4 
+`uc 1 RXB0RTRRO 1 0 :1:5 
+]
+[u S1165 . 1 `S1128 1 . 1 0 `S1137 1 . 1 0 `S1144 1 . 1 0 `S1151 1 . 1 0 `S1160 1 . 1 0 ]
+[v _RXB0CONbits RXB0CONbits `VES1165  1 e 1 @3936 ]
+"27902
+[v _RXB0SIDH RXB0SIDH `VEuc  1 e 1 @3937 ]
+"28022
+[v _RXB0SIDL RXB0SIDL `VEuc  1 e 1 @3938 ]
+"28139
+[v _RXB0EIDH RXB0EIDH `VEuc  1 e 1 @3939 ]
+"28259
+[v _RXB0EIDL RXB0EIDL `VEuc  1 e 1 @3940 ]
+"28379
+[v _RXB0DLC RXB0DLC `VEuc  1 e 1 @3941 ]
+"28493
+[v _RXB0D0 RXB0D0 `VEuc  1 e 1 @3942 ]
+"28563
+[v _RXB0D1 RXB0D1 `VEuc  1 e 1 @3943 ]
+"28633
+[v _RXB0D2 RXB0D2 `VEuc  1 e 1 @3944 ]
+"28703
+[v _RXB0D3 RXB0D3 `VEuc  1 e 1 @3945 ]
+"28773
+[v _RXB0D4 RXB0D4 `VEuc  1 e 1 @3946 ]
+"28843
+[v _RXB0D5 RXB0D5 `VEuc  1 e 1 @3947 ]
+"28913
+[v _RXB0D6 RXB0D6 `VEuc  1 e 1 @3948 ]
+"28983
+[v _RXB0D7 RXB0D7 `VEuc  1 e 1 @3949 ]
+"29053
+[v _CANSTAT CANSTAT `VEuc  1 e 1 @3950 ]
+"29164
+[v _CANCON CANCON `VEuc  1 e 1 @3951 ]
+"29256
+[v _CIOCON CIOCON `VEuc  1 e 1 @3952 ]
+[s S1322 . 1 `uc 1 EWARN 1 0 :1:0 
+`uc 1 RXWARN 1 0 :1:1 
+`uc 1 TXWARN 1 0 :1:2 
+`uc 1 RXBP 1 0 :1:3 
+`uc 1 TXBP 1 0 :1:4 
+`uc 1 TXBO 1 0 :1:5 
+`uc 1 RXB1OVFL 1 0 :1:6 
+`uc 1 RXB0OVFL 1 0 :1:7 
+]
+"29331
+[s S1331 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 NOT_FIFOEMPTY 1 0 :1:7 
+]
+[s S1334 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 nFIFOEMPTY 1 0 :1:7 
+]
+[s S1337 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 RXBNOVFL 1 0 :1:6 
+`uc 1 FIFOEMPTY 1 0 :1:7 
+]
+[u S1341 . 1 `S1322 1 . 1 0 `S1331 1 . 1 0 `S1334 1 . 1 0 `S1337 1 . 1 0 ]
+[v _COMSTATbits COMSTATbits `VES1341  1 e 1 @3953 ]
+"29396
+[v _ECANCON ECANCON `VEuc  1 e 1 @3954 ]
+[s S1959 . 1 `uc 1 RXB0IF 1 0 :1:0 
+`uc 1 RXB1IF 1 0 :1:1 
+`uc 1 TXB0IF 1 0 :1:2 
+`uc 1 TXB1IF 1 0 :1:3 
+`uc 1 TXB2IF 1 0 :1:4 
+`uc 1 ERRIF 1 0 :1:5 
+`uc 1 WAKIF 1 0 :1:6 
+`uc 1 IRXIF 1 0 :1:7 
+]
+"29639
+[s S1968 . 1 `uc 1 FIFOWMIF 1 0 :1:0 
+`uc 1 RXBnIF 1 0 :1:1 
+`uc 1 . 1 0 :2:2 
+`uc 1 TXBnIF 1 0 :1:4 
+]
+[u S1973 . 1 `S1959 1 . 1 0 `S1968 1 . 1 0 ]
+[v _PIR5bits PIR5bits `VES1973  1 e 1 @3959 ]
+"30492
+[v _LATA LATA `VEuc  1 e 1 @3977 ]
+"30594
+[v _LATB LATB `VEuc  1 e 1 @3978 ]
+[s S1784 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"30621
+[s S1793 . 1 `uc 1 LB0 1 0 :1:0 
+`uc 1 LB1 1 0 :1:1 
+`uc 1 LB2 1 0 :1:2 
+`uc 1 LB3 1 0 :1:3 
+`uc 1 LB4 1 0 :1:4 
+`uc 1 LB5 1 0 :1:5 
+`uc 1 LB6 1 0 :1:6 
+`uc 1 LB7 1 0 :1:7 
+]
+[u S1802 . 1 `S1784 1 . 1 0 `S1793 1 . 1 0 ]
+[v _LATBbits LATBbits `VES1802  1 e 1 @3978 ]
+"30706
+[v _LATC LATC `VEuc  1 e 1 @3979 ]
+"30818
+[v _LATD LATD `VEuc  1 e 1 @3980 ]
+[s S4486 . 1 `uc 1 LATD0 1 0 :1:0 
+`uc 1 LATD1 1 0 :1:1 
+`uc 1 LATD2 1 0 :1:2 
+`uc 1 LATD3 1 0 :1:3 
+`uc 1 LATD4 1 0 :1:4 
+`uc 1 LATD5 1 0 :1:5 
+`uc 1 LATD6 1 0 :1:6 
+`uc 1 LATD7 1 0 :1:7 
+]
+"30845
+[s S4495 . 1 `uc 1 LD0 1 0 :1:0 
+`uc 1 LD1 1 0 :1:1 
+`uc 1 LD2 1 0 :1:2 
+`uc 1 LD3 1 0 :1:3 
+`uc 1 LD4 1 0 :1:4 
+`uc 1 LD5 1 0 :1:5 
+`uc 1 LD6 1 0 :1:6 
+`uc 1 LD7 1 0 :1:7 
+]
+[u S4504 . 1 `S4486 1 . 1 0 `S4495 1 . 1 0 ]
+[v _LATDbits LATDbits `VES4504  1 e 1 @3980 ]
+"30930
+[v _LATE LATE `VEuc  1 e 1 @3981 ]
+"31088
+[v _TRISA TRISA `VEuc  1 e 1 @3986 ]
+"31145
+[v _TRISB TRISB `VEuc  1 e 1 @3987 ]
+"31207
+[v _TRISC TRISC `VEuc  1 e 1 @3988 ]
+[s S730 . 1 `uc 1 TRISC0 1 0 :1:0 
+`uc 1 TRISC1 1 0 :1:1 
+`uc 1 TRISC2 1 0 :1:2 
+`uc 1 TRISC3 1 0 :1:3 
+`uc 1 TRISC4 1 0 :1:4 
+`uc 1 TRISC5 1 0 :1:5 
+`uc 1 TRISC6 1 0 :1:6 
+`uc 1 TRISC7 1 0 :1:7 
+]
+"31224
+[u S739 . 1 `S730 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES739  1 e 1 @3988 ]
+"31269
+[v _TRISD TRISD `VEuc  1 e 1 @3989 ]
+"31331
+[v _TRISE TRISE `VEuc  1 e 1 @3990 ]
+"31407
+[v _REFOCON REFOCON `VEuc  1 e 1 @3994 ]
+"31472
+[v _OSCTUNE OSCTUNE `VEuc  1 e 1 @3995 ]
+[s S619 . 1 `uc 1 TMR1IE 1 0 :1:0 
+`uc 1 TMR2IE 1 0 :1:1 
+`uc 1 TMR1GIE 1 0 :1:2 
+`uc 1 SSPIE 1 0 :1:3 
+`uc 1 TX1IE 1 0 :1:4 
+`uc 1 RC1IE 1 0 :1:5 
+`uc 1 ADIE 1 0 :1:6 
+`uc 1 PSPIE 1 0 :1:7 
+]
+"31630
+[s S628 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TXIE 1 0 :1:4 
+`uc 1 RCIE 1 0 :1:5 
+]
+[u S632 . 1 `S619 1 . 1 0 `S628 1 . 1 0 ]
+[v _PIE1bits PIE1bits `VES632  1 e 1 @3997 ]
+[s S649 . 1 `uc 1 TMR1IF 1 0 :1:0 
+`uc 1 TMR2IF 1 0 :1:1 
+`uc 1 TMR1GIF 1 0 :1:2 
+`uc 1 SSPIF 1 0 :1:3 
+`uc 1 TX1IF 1 0 :1:4 
+`uc 1 RC1IF 1 0 :1:5 
+`uc 1 ADIF 1 0 :1:6 
+`uc 1 PSPIF 1 0 :1:7 
+]
+"31707
+[s S658 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 TXIF 1 0 :1:4 
+`uc 1 RCIF 1 0 :1:5 
+]
+[u S662 . 1 `S649 1 . 1 0 `S658 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES662  1 e 1 @3998 ]
+"32593
+[v _T1GCON T1GCON `VEuc  1 e 1 @4010 ]
+[s S1584 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1GGO_NOT_T1DONE 1 0 :1:3 
+]
+"32627
+[s S1587 . 1 `uc 1 T1GSS 1 0 :2:0 
+`uc 1 T1GVAL 1 0 :1:2 
+`uc 1 T1GGO_nT1DONE 1 0 :1:3 
+`uc 1 T1GSPM 1 0 :1:4 
+`uc 1 T1GTM 1 0 :1:5 
+`uc 1 T1GPOL 1 0 :1:6 
+`uc 1 TMR1GE 1 0 :1:7 
+]
+[s S1595 . 1 `uc 1 T1GSS0 1 0 :1:0 
+`uc 1 T1GSS1 1 0 :1:1 
+`uc 1 . 1 0 :1:2 
+`uc 1 T1GGO 1 0 :1:3 
+]
+[s S1600 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_T1DONE 1 0 :1:3 
+]
+[s S1603 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 nT1DONE 1 0 :1:3 
+]
+[u S1606 . 1 `S1584 1 . 1 0 `S1587 1 . 1 0 `S1595 1 . 1 0 `S1600 1 . 1 0 `S1603 1 . 1 0 ]
+[v _T1GCONbits T1GCONbits `VES1606  1 e 1 @4010 ]
+"35110
+[v _SSPCON2 SSPCON2 `VEuc  1 e 1 @4037 ]
+"35205
+[v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
+[s S751 . 1 `uc 1 SSPM 1 0 :4:0 
+`uc 1 CKP 1 0 :1:4 
+`uc 1 SSPEN 1 0 :1:5 
+`uc 1 SSPOV 1 0 :1:6 
+`uc 1 WCOL 1 0 :1:7 
+]
+"35225
+[s S757 . 1 `uc 1 SSPM0 1 0 :1:0 
+`uc 1 SSPM1 1 0 :1:1 
+`uc 1 SSPM2 1 0 :1:2 
+`uc 1 SSPM3 1 0 :1:3 
+]
+"35225
+[u S762 . 1 `S751 1 . 1 0 `S757 1 . 1 0 ]
+"35225
+"35225
+[v _SSPCON1bits SSPCON1bits `VES762  1 e 1 @4038 ]
+"35275
+[v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
+"35507
+[v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
+"35577
+[v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
+"35814
+[v _T1CON T1CON `VEuc  1 e 1 @4045 ]
+[s S1536 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_T1SYNC 1 0 :1:2 
+]
+"35846
+[s S1539 . 1 `uc 1 TMR1ON 1 0 :1:0 
+`uc 1 RD16 1 0 :1:1 
+`uc 1 nT1SYNC 1 0 :1:2 
+`uc 1 SOSCEN 1 0 :1:3 
+`uc 1 T1CKPS 1 0 :2:4 
+`uc 1 TMR1CS 1 0 :2:6 
+]
+"35846
+[s S1546 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 T1CKPS0 1 0 :1:4 
+`uc 1 T1CKPS1 1 0 :1:5 
+`uc 1 TMR1CS0 1 0 :1:6 
+`uc 1 TMR1CS1 1 0 :1:7 
+]
+"35846
+[s S1552 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 T1OSCEN 1 0 :1:3 
+`uc 1 . 1 0 :3:4 
+`uc 1 T1RD16 1 0 :1:7 
+]
+"35846
+[u S1557 . 1 `S1536 1 . 1 0 `S1539 1 . 1 0 `S1546 1 . 1 0 `S1552 1 . 1 0 ]
+"35846
+"35846
+[v _T1CONbits T1CONbits `VES1557  1 e 1 @4045 ]
+"35923
+[v _TMR1L TMR1L `VEuc  1 e 1 @4046 ]
+"35943
+[v _TMR1H TMR1H `VEuc  1 e 1 @4047 ]
+[s S515 . 1 `uc 1 NOT_BOR 1 0 :1:0 
+]
+"36011
+[s S517 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 NOT_POR 1 0 :1:1 
+]
+"36011
+[s S520 . 1 `uc 1 . 1 0 :2:0 
+`uc 1 NOT_PD 1 0 :1:2 
+]
+"36011
+[s S523 . 1 `uc 1 . 1 0 :3:0 
+`uc 1 NOT_TO 1 0 :1:3 
+]
+"36011
+[s S526 . 1 `uc 1 . 1 0 :4:0 
+`uc 1 NOT_RI 1 0 :1:4 
+]
+"36011
+[s S529 . 1 `uc 1 . 1 0 :5:0 
+`uc 1 NOT_CM 1 0 :1:5 
+]
+"36011
+[s S532 . 1 `uc 1 nBOR 1 0 :1:0 
+`uc 1 nPOR 1 0 :1:1 
+`uc 1 nPD 1 0 :1:2 
+`uc 1 nTO 1 0 :1:3 
+`uc 1 nRI 1 0 :1:4 
+`uc 1 nCM 1 0 :1:5 
+`uc 1 SBOREN 1 0 :1:6 
+`uc 1 IPEN 1 0 :1:7 
+]
+"36011
+[s S541 . 1 `uc 1 BOR 1 0 :1:0 
+`uc 1 POR 1 0 :1:1 
+`uc 1 PD 1 0 :1:2 
+`uc 1 TO 1 0 :1:3 
+`uc 1 RI 1 0 :1:4 
+`uc 1 CM 1 0 :1:5 
+]
+"36011
+[u S548 . 1 `S515 1 . 1 0 `S517 1 . 1 0 `S520 1 . 1 0 `S523 1 . 1 0 `S526 1 . 1 0 `S529 1 . 1 0 `S532 1 . 1 0 `S541 1 . 1 0 ]
+"36011
+"36011
+[v _RCONbits RCONbits `VES548  1 e 1 @4048 ]
+[s S1871 . 1 `uc 1 SWDTEN 1 0 :1:0 
+`uc 1 ULPSINK 1 0 :1:1 
+`uc 1 ULPEN 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 SRETEN 1 0 :1:4 
+`uc 1 ULPLVL 1 0 :1:5 
+`uc 1 . 1 0 :1:6 
+`uc 1 REGSLP 1 0 :1:7 
+]
+"36136
+[s S1880 . 1 `uc 1 SWDTE 1 0 :1:0 
+]
+"36136
+[u S1882 . 1 `S1871 1 . 1 0 `S1880 1 . 1 0 ]
+"36136
+"36136
+[v _WDTCONbits WDTCONbits `VES1882  1 e 1 @4049 ]
+"36176
+[v _OSCCON2 OSCCON2 `VEuc  1 e 1 @4050 ]
+"36248
+[v _OSCCON OSCCON `VEuc  1 e 1 @4051 ]
+"36325
+[v _T0CON T0CON `VEuc  1 e 1 @4053 ]
+[s S456 . 1 `uc 1 T0PS 1 0 :3:0 
+`uc 1 PSA 1 0 :1:3 
+`uc 1 T0SE 1 0 :1:4 
+`uc 1 T0CS 1 0 :1:5 
+`uc 1 T08BIT 1 0 :1:6 
+`uc 1 TMR0ON 1 0 :1:7 
+]
+"36345
+[s S463 . 1 `uc 1 T0PS0 1 0 :1:0 
+`uc 1 T0PS1 1 0 :1:1 
+`uc 1 T0PS2 1 0 :1:2 
+]
+"36345
+[u S467 . 1 `S456 1 . 1 0 `S463 1 . 1 0 ]
+"36345
+"36345
+[v _T0CONbits T0CONbits `VES467  1 e 1 @4053 ]
+"36402
+[v _TMR0L TMR0L `VEuc  1 e 1 @4054 ]
+"36422
+[v _TMR0H TMR0H `VEuc  1 e 1 @4055 ]
+[s S307 . 1 `uc 1 . 1 0 :7:0 
+`uc 1 NOT_RBPU 1 0 :1:7 
+]
+"37134
+[s S310 . 1 `uc 1 RBIP 1 0 :1:0 
+`uc 1 INT3IP 1 0 :1:1 
+`uc 1 TMR0IP 1 0 :1:2 
+`uc 1 INTEDG3 1 0 :1:3 
+`uc 1 INTEDG2 1 0 :1:4 
+`uc 1 INTEDG1 1 0 :1:5 
+`uc 1 INTEDG0 1 0 :1:6 
+`uc 1 nRBPU 1 0 :1:7 
+]
+"37134
+[s S319 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT3P 1 0 :1:1 
+`uc 1 T0IP 1 0 :1:2 
+`uc 1 . 1 0 :4:3 
+`uc 1 RBPU 1 0 :1:7 
+]
+"37134
+[u S325 . 1 `S307 1 . 1 0 `S310 1 . 1 0 `S319 1 . 1 0 ]
+"37134
+"37134
+[v _INTCON2bits INTCON2bits `VES325  1 e 1 @4081 ]
+[s S348 . 1 `uc 1 RBIF 1 0 :1:0 
+`uc 1 INT0IF 1 0 :1:1 
+`uc 1 TMR0IF 1 0 :1:2 
+`uc 1 RBIE 1 0 :1:3 
+`uc 1 INT0IE 1 0 :1:4 
+`uc 1 TMR0IE 1 0 :1:5 
+`uc 1 PEIE_GIEL 1 0 :1:6 
+`uc 1 GIE_GIEH 1 0 :1:7 
+]
+"37236
+[s S357 . 1 `uc 1 . 1 0 :1:0 
+`uc 1 INT0F 1 0 :1:1 
+`uc 1 T0IF 1 0 :1:2 
+`uc 1 . 1 0 :1:3 
+`uc 1 INT0E 1 0 :1:4 
+`uc 1 T0IE 1 0 :1:5 
+`uc 1 PEIE 1 0 :1:6 
+`uc 1 GIE 1 0 :1:7 
+]
+"37236
+[s S366 . 1 `uc 1 . 1 0 :6:0 
+`uc 1 GIEL 1 0 :1:6 
+`uc 1 GIEH 1 0 :1:7 
+]
+"37236
+[u S370 . 1 `S348 1 . 1 0 `S357 1 . 1 0 `S366 1 . 1 0 ]
+"37236
+"37236
+[v _INTCONbits INTCONbits `VES370  1 e 1 @4082 ]
+[s S24 . 28 `ui 1 Divide 2 0 `ui 1 Divide1 2 2 `ui 1 Divide2 2 4 `ui 1 Divide3 2 6 `ui 1 Divide12 2 8 `ui 1 Divide4 2 10 `ui 1 Divide5 2 12 `ui 1 Divide6 2 14 `ui 1 Divide7 2 16 `ui 1 Divide13 2 18 `ui 1 Divide8 2 20 `ui 1 Divide9 2 22 `ui 1 Divide10 2 24 `ui 1 Divide11 2 26 ]
+"20 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\CAN/CAN.c
+[v _CAN_B CAN_B `S24  1 e 28 0 ]
+[s S86 tag_RTM_CAN_T 2 `VE*.2Cuc 1 errorStatus 2 0 ]
+"32
+[v _CAN_M_ CAN_M_ `VES86  1 e 2 0 ]
+"84 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _LTCBusyFlag LTCBusyFlag `a  1 e 1 0 ]
+[v _LTCPermit LTCPermit `a  1 e 1 0 ]
+[v _CANPermit CANPermit `a  1 e 1 0 ]
+[v _CANRecError CANRecError `a  1 e 1 0 ]
+"85
+[v _balancerIndex balancerIndex `us  1 e 2 0 ]
+"86
+[v _mainCounter mainCounter `uc  1 e 1 0 ]
+"88
+[v _SPIerrorCounter SPIerrorCounter `us  1 e 2 0 ]
+[v _CANRecCounter CANRecCounter `us  1 e 2 0 ]
+[v _LTCerrorCounter LTCerrorCounter `us  1 e 2 0 ]
+"90
+[v _voltageBuffer voltageBuffer `[24]us  1 e 48 0 ]
+"91
+[v _tempBuffer tempBuffer `[4]us  1 e 8 0 ]
+"93
+[v _counter counter `us  1 e 2 0 ]
+[v _preCounter preCounter `us  1 e 2 0 ]
+[v _deltaCounter deltaCounter `us  1 e 2 0 ]
+"94
+[v _CAN_Tx_flag CAN_Tx_flag `uc  1 e 1 0 ]
+[v _CAN_Rx_flag CAN_Rx_flag `uc  1 e 1 0 ]
+[s S47 . 20 `uc 1 Extended 1 0 `uc 1 Length 1 1 `uc 1 Remote 1 2 `uc 1 Error 1 3 `ul 1 ID 4 4 `d 1 Timestamp 4 8 `[8]uc 1 Data 8 12 ]
+"96
+[s S55 . 70 `ui 1 v1 2 0 `ui 1 v2 2 2 `ui 1 v3 2 4 `ui 1 v4 2 6 `ui 1 v5 2 8 `ui 1 v6 2 10 `ui 1 v7 2 12 `ui 1 v8 2 14 `ui 1 v9 2 16 `ui 1 v10 2 18 `ui 1 v11 2 20 `ui 1 v12 2 22 `ui 1 t1 2 24 `ui 1 t2 2 26 `ui 1 counter 2 28 `S47 1 balance2 20 30 `S47 1 balance1 20 50 ]
+[v _CAN_U CAN_U `S55  1 e 70 0 ]
+"97
+[s S73 . 76 `S47 1 Voltage1 20 0 `S47 1 Voltage2 20 20 `S47 1 Voltage3 20 40 `ui 1 b1 2 60 `ui 1 b2 2 62 `ui 1 b3 2 64 `ui 1 b4 2 66 `ui 1 b5 2 68 `ui 1 b6 2 70 `ui 1 b7 2 72 `ui 1 b8 2 74 ]
+[v _CAN_Y CAN_Y `S73  1 e 76 0 ]
+[s S929 . 14 `uc 1 idType 1 0 `ul 1 id 4 1 `uc 1 dlc 1 5 `uc 1 data0 1 6 `uc 1 data1 1 7 `uc 1 data2 1 8 `uc 1 data3 1 9 `uc 1 data4 1 10 `uc 1 data5 1 11 `uc 1 data6 1 12 `uc 1 data7 1 13 ]
+"99
+[u S941 . 14 `S929 1 frame 14 0 `[14]uc 1 array 14 0 ]
+[v _CAN_Tx CAN_Tx `S941  1 e 14 0 ]
+"100
+[v _CAN_Rx1 CAN_Rx1 `S941  1 e 14 0 ]
+[v _CAN_Rx2 CAN_Rx2 `S941  1 e 14 0 ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"103
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v _bmb_ic bmb_ic `[1]S1762  1 e 230 0 ]
+"104
+[v _gpio gpio `[5]uc  1 e 5 0 ]
+"105
+[v _dcc dcc `[12]uc  1 e 12 0 ]
+"106
+[v _dcto dcto `[4]uc  1 e 4 0 ]
+"58 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr0.c
+[v _TMR0_InterruptHandler TMR0_InterruptHandler `*.37(v  1 e 2 0 ]
+"60
+[v _timer0ReloadVal timer0ReloadVal `VEuc  1 e 1 0 ]
+"57 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr1.c
+[v _timer1ReloadVal timer1ReloadVal `VEus  1 e 2 0 ]
+"58
+[v _TMR1_InterruptHandler TMR1_InterruptHandler `*.37(v  1 e 2 0 ]
+"273 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"296
+[v main@i i `i  1 a 2 10 ]
+"355
+} 0
+"409
+[v _updateCellVoltage updateCellVoltage `(v  1 e 1 0 ]
+{
+"411
+[v updateCellVoltage@i i `i  1 a 2 34 ]
+"422
+} 0
+"437
+[v _updateCANData updateCANData `(v  1 e 1 0 ]
+{
+"483
+} 0
+"377
+[v _getGpioVoltage getGpioVoltage `(uc  1 e 1 0 ]
+{
+"393
+} 0
+"500 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\LTC681xRev2.c
+[v _LTC681x_rdaux LTC681x_rdaux `(c  1 e 1 0 ]
+{
+[v LTC681x_rdaux@reg reg `uc  1 a 1 wreg ]
+"515
+[v LTC681x_rdaux@current_ic current_ic `i  1 a 2 5 ]
+"535
+[v LTC681x_rdaux@current_ic_2921 current_ic `i  1 a 2 7 ]
+"512
+[v LTC681x_rdaux@gpio_reg gpio_reg `uc  1 a 1 2 ]
+"505
+[v LTC681x_rdaux@data data `*.2uc  1 a 2 3 ]
+"507
+[v LTC681x_rdaux@c_ic c_ic `uc  1 a 1 9 ]
+"506
+[v LTC681x_rdaux@pec_error pec_error `c  1 a 1 0 ]
+"500
+[v LTC681x_rdaux@reg reg `uc  1 a 1 wreg ]
+"501
+[v LTC681x_rdaux@total_ic total_ic `uc  1 p 1 31 ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"502
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_rdaux@ic ic `*.39S1762  1 p 2 32 ]
+"506
+[v LTC681x_rdaux@reg reg `uc  1 a 1 1 ]
+"554
+} 0
+"750
+[v _LTC681x_rdaux_reg LTC681x_rdaux_reg `(v  1 e 1 0 ]
+{
+[v LTC681x_rdaux_reg@reg reg `uc  1 a 1 wreg ]
+"756
+[v LTC681x_rdaux_reg@cmd cmd `[4]uc  1 a 4 8 ]
+"757
+[v LTC681x_rdaux_reg@cmd_pec cmd_pec `us  1 a 2 6 ]
+"750
+[v LTC681x_rdaux_reg@reg reg `uc  1 a 1 wreg ]
+"751
+[v LTC681x_rdaux_reg@total_ic total_ic `uc  1 p 1 34 ]
+"752
+[v LTC681x_rdaux_reg@data data `*.2uc  1 p 2 35 ]
+"750
+[v LTC681x_rdaux_reg@reg reg `uc  1 a 1 12 ]
+"792
+} 0
+"371
+[v _LTC681x_adax LTC681x_adax `(v  1 e 1 0 ]
+{
+[v LTC681x_adax@MD MD `uc  1 a 1 wreg ]
+"375
+[v LTC681x_adax@cmd cmd `[4]uc  1 a 4 12 ]
+"376
+[v LTC681x_adax@md_bits md_bits `uc  1 a 1 17 ]
+"371
+[v LTC681x_adax@MD MD `uc  1 a 1 wreg ]
+"372
+[v LTC681x_adax@CHG CHG `uc  1 p 1 36 ]
+"378
+[v LTC681x_adax@MD MD `uc  1 a 1 16 ]
+"384
+} 0
+"395 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _getCellVoltage getCellVoltage `(uc  1 e 1 0 ]
+{
+"401
+} 0
+"439 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\LTC681xRev2.c
+[v _LTC681x_rdcv LTC681x_rdcv `(uc  1 e 1 0 ]
+{
+[v LTC681x_rdcv@reg reg `uc  1 a 1 wreg ]
+"454
+[v LTC681x_rdcv@current_ic current_ic `i  1 a 2 5 ]
+"475
+[v LTC681x_rdcv@current_ic_2855 current_ic `i  1 a 2 7 ]
+"451
+[v LTC681x_rdcv@cell_reg cell_reg `uc  1 a 1 1 ]
+"445
+[v LTC681x_rdcv@cell_data cell_data `*.2uc  1 a 2 2 ]
+"446
+[v LTC681x_rdcv@c_ic c_ic `uc  1 a 1 9 ]
+"444
+[v LTC681x_rdcv@pec_error pec_error `c  1 a 1 4 ]
+"439
+[v LTC681x_rdcv@reg reg `uc  1 a 1 wreg ]
+"440
+[v LTC681x_rdcv@total_ic total_ic `uc  1 p 1 31 ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"441
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_rdcv@ic ic `*.39S1762  1 p 2 32 ]
+"444
+[v LTC681x_rdcv@reg reg `uc  1 a 1 0 ]
+"494
+} 0
+"833
+[v _parse_cells parse_cells `(c  1 e 1 0 ]
+{
+[v parse_cells@current_ic current_ic `uc  1 a 1 wreg ]
+"849
+[v parse_cells@current_cell current_cell `uc  1 a 1 29 ]
+"845
+[v parse_cells@data_pec data_pec `us  1 a 2 23 ]
+"844
+[v parse_cells@received_pec received_pec `us  1 a 2 21 ]
+"843
+[v parse_cells@parsed_cell parsed_cell `us  1 a 2 19 ]
+"846
+[v parse_cells@data_counter data_counter `uc  1 a 1 30 ]
+"841
+[v parse_cells@CELL_IN_REG CELL_IN_REG `Cuc  1 a 1 28 ]
+"842
+[v parse_cells@pec_error pec_error `c  1 a 1 26 ]
+"840
+[v parse_cells@BYT_IN_REG BYT_IN_REG `Cuc  1 a 1 25 ]
+"833
+[v parse_cells@current_ic current_ic `uc  1 a 1 wreg ]
+"834
+[v parse_cells@cell_reg cell_reg `uc  1 p 1 6 ]
+"835
+[v parse_cells@cell_data cell_data `*.2uc  1 p 2 7 ]
+"836
+[v parse_cells@cell_codes cell_codes `*.39us  1 p 2 9 ]
+"837
+[v parse_cells@ic_pec ic_pec `*.39uc  1 p 2 11 ]
+"840
+[v parse_cells@current_ic current_ic `uc  1 a 1 27 ]
+"875
+} 0
+"697
+[v _LTC681x_rdcv_reg LTC681x_rdcv_reg `(v  1 e 1 0 ]
+{
+[v LTC681x_rdcv_reg@reg reg `uc  1 a 1 wreg ]
+"703
+[v LTC681x_rdcv_reg@cmd cmd `[4]uc  1 a 4 8 ]
+"704
+[v LTC681x_rdcv_reg@cmd_pec cmd_pec `us  1 a 2 6 ]
+"697
+[v LTC681x_rdcv_reg@reg reg `uc  1 a 1 wreg ]
+"698
+[v LTC681x_rdcv_reg@total_ic total_ic `uc  1 p 1 34 ]
+"699
+[v LTC681x_rdcv_reg@data data `*.2uc  1 p 2 35 ]
+"697
+[v LTC681x_rdcv_reg@reg reg `uc  1 a 1 12 ]
+"744
+} 0
+"354
+[v _LTC681x_adcv LTC681x_adcv `(v  1 e 1 0 ]
+{
+[v LTC681x_adcv@MD MD `uc  1 a 1 wreg ]
+"359
+[v LTC681x_adcv@cmd cmd `[2]uc  1 a 2 12 ]
+"360
+[v LTC681x_adcv@md_bits md_bits `uc  1 a 1 15 ]
+"354
+[v LTC681x_adcv@MD MD `uc  1 a 1 wreg ]
+"355
+[v LTC681x_adcv@DCP DCP `uc  1 p 1 36 ]
+"356
+[v LTC681x_adcv@CH CH `uc  1 p 1 37 ]
+"362
+[v LTC681x_adcv@MD MD `uc  1 a 1 14 ]
+"368
+} 0
+"77
+[v _cmd_68 cmd_68 `(v  1 e 1 0 ]
+{
+"79
+[v cmd_68@cmd cmd `[4]uc  1 a 4 6 ]
+"80
+[v cmd_68@cmd_pec cmd_pec `us  1 a 2 10 ]
+"77
+[v cmd_68@tx_cmd tx_cmd `*.39uc  1 p 2 34 ]
+"90
+} 0
+"402 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _checkPEC checkPEC `(v  1 e 1 0 ]
+{
+"406
+} 0
+"50 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/mcc.c
+[v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
+{
+"60
+} 0
+"64 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr1.c
+[v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
+{
+"91
+} 0
+"178
+[v _TMR1_SetInterruptHandler TMR1_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v TMR1_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 28 ]
+"180
+} 0
+"67 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr0.c
+[v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
+{
+"92
+} 0
+"155
+[v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
+{
+[v TMR0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 28 ]
+"157
+} 0
+"62 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/spi.c
+[v _SPI_Initialize SPI_Initialize `(v  1 e 1 0 ]
+{
+"71
+} 0
+"55 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+{
+"94
+} 0
+"62 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/mcc.c
+[v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
+{
+"72
+} 0
+"52 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_Initialize INTERRUPT_Initialize `(v  1 e 1 0 ]
+{
+"56
+} 0
+"63 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/ecan.c
+[v _ECAN_Initialize ECAN_Initialize `(v  1 e 1 0 ]
+{
+"219
+} 0
+"73 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/spi.c
+[v _SPI_Open SPI_Open `(a  1 e 1 0 ]
+{
+"86
+} 0
+"356 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _LTC_Init LTC_Init `(v  1 e 1 0 ]
+{
+"368
+[v LTC_Init@current_ic current_ic `uc  1 a 1 0 ]
+"375
+} 0
+"64 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\LTC681xRev2.c
+[v _wakeup_sleep wakeup_sleep `(v  1 e 1 0 ]
+{
+[v wakeup_sleep@total_ic total_ic `uc  1 a 1 wreg ]
+"67
+[v wakeup_sleep@i i `i  1 a 2 32 ]
+"64
+[v wakeup_sleep@total_ic total_ic `uc  1 a 1 wreg ]
+"67
+[v wakeup_sleep@total_ic total_ic `uc  1 a 1 31 ]
+"74
+} 0
+"208
+[v _LTC681x_wrcfg LTC681x_wrcfg `(v  1 e 1 0 ]
+{
+[v LTC681x_wrcfg@total_ic total_ic `uc  1 a 1 wreg ]
+"228
+[v LTC681x_wrcfg@data data `uc  1 a 1 39 ]
+"217
+[v LTC681x_wrcfg@current_ic current_ic `uc  1 a 1 38 ]
+"213
+[v LTC681x_wrcfg@write_buffer write_buffer `[256]uc  1 a 256 0 ]
+"212
+[v LTC681x_wrcfg@cmd cmd `[2]uc  1 a 2 34 ]
+"215
+[v LTC681x_wrcfg@c_ic c_ic `uc  1 a 1 36 ]
+"214
+[v LTC681x_wrcfg@write_count write_count `uc  1 a 1 38 ]
+"208
+[v LTC681x_wrcfg@total_ic total_ic `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"209
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_wrcfg@ic ic `*.39S1762  1 p 2 30 ]
+"211
+[v LTC681x_wrcfg@F12713 F12713 `[2]uc  1 s 2 F12713 ]
+[v LTC681x_wrcfg@total_ic total_ic `uc  1 a 1 37 ]
+"237
+} 0
+"2102
+[v _LTC681x_set_cfgr LTC681x_set_cfgr `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr@nIC nIC `uc  1 a 1 wreg ]
+[v LTC681x_set_cfgr@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"2103
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr@ic ic `*.39S1762  1 p 2 5 ]
+"2104
+[v LTC681x_set_cfgr@refon refon `uc  1 p 1 7 ]
+"2105
+[v LTC681x_set_cfgr@adcopt adcopt `uc  1 p 1 8 ]
+"2106
+[v LTC681x_set_cfgr@gpio gpio `*.39uc  1 p 2 9 ]
+"2107
+[v LTC681x_set_cfgr@dcc dcc `*.39uc  1 p 2 11 ]
+"2108
+[v LTC681x_set_cfgr@dcto dcto `*.39uc  1 p 2 13 ]
+"2109
+[v LTC681x_set_cfgr@uv uv `us  1 p 2 15 ]
+"2110
+[v LTC681x_set_cfgr@ov ov `us  1 p 2 17 ]
+"2113
+[v LTC681x_set_cfgr@nIC nIC `uc  1 a 1 19 ]
+"2120
+} 0
+"2174
+[v _LTC681x_set_cfgr_uv LTC681x_set_cfgr_uv `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr_uv@nIC nIC `uc  1 a 1 wreg ]
+"2176
+[v LTC681x_set_cfgr_uv@tmp tmp `us  1 a 2 0 ]
+"2174
+[v LTC681x_set_cfgr_uv@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr_uv@ic ic `*.39S1762  1 p 2 28 ]
+[v LTC681x_set_cfgr_uv@uv uv `us  1 p 2 30 ]
+"2176
+[v LTC681x_set_cfgr_uv@nIC nIC `uc  1 a 1 2 ]
+"2180
+} 0
+"2124
+[v _LTC681x_set_cfgr_refon LTC681x_set_cfgr_refon `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr_refon@nIC nIC `uc  1 a 1 wreg ]
+[v LTC681x_set_cfgr_refon@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr_refon@ic ic `*.39S1762  1 p 2 28 ]
+[v LTC681x_set_cfgr_refon@refon refon `uc  1 p 1 30 ]
+"2126
+[v LTC681x_set_cfgr_refon@nIC nIC `uc  1 a 1 35 ]
+"2128
+} 0
+"2183
+[v _LTC681x_set_cfgr_ov LTC681x_set_cfgr_ov `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr_ov@nIC nIC `uc  1 a 1 wreg ]
+"2185
+[v LTC681x_set_cfgr_ov@tmp tmp `us  1 a 2 0 ]
+"2183
+[v LTC681x_set_cfgr_ov@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr_ov@ic ic `*.39S1762  1 p 2 28 ]
+[v LTC681x_set_cfgr_ov@ov ov `us  1 p 2 30 ]
+"2185
+[v LTC681x_set_cfgr_ov@nIC nIC `uc  1 a 1 2 ]
+"2189
+} 0
+"2138
+[v _LTC681x_set_cfgr_gpio LTC681x_set_cfgr_gpio `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr_gpio@nIC nIC `uc  1 a 1 wreg ]
+"2140
+[v LTC681x_set_cfgr_gpio@i i `i  1 a 2 1 ]
+"2138
+[v LTC681x_set_cfgr_gpio@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr_gpio@ic ic `*.39S1762  1 p 2 28 ]
+[v LTC681x_set_cfgr_gpio@gpio gpio `*.39uc  1 p 2 30 ]
+"2140
+[v LTC681x_set_cfgr_gpio@nIC nIC `uc  1 a 1 0 ]
+"2145
+} 0
+"2148
+[v _LTC681x_set_cfgr_dis LTC681x_set_cfgr_dis `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr_dis@nIC nIC `uc  1 a 1 wreg ]
+"2155
+[v LTC681x_set_cfgr_dis@i_4243 i `i  1 a 2 2 ]
+"2150
+[v LTC681x_set_cfgr_dis@i i `i  1 a 2 0 ]
+"2148
+[v LTC681x_set_cfgr_dis@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr_dis@ic ic `*.39S1762  1 p 2 28 ]
+[v LTC681x_set_cfgr_dis@dcc dcc `*.39uc  1 p 2 30 ]
+"2150
+[v LTC681x_set_cfgr_dis@nIC nIC `uc  1 a 1 4 ]
+"2160
+} 0
+"2164
+[v _LTC681x_set_cfgr_dcto LTC681x_set_cfgr_dcto `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr_dcto@nIC nIC `uc  1 a 1 wreg ]
+"2166
+[v LTC681x_set_cfgr_dcto@i i `i  1 a 2 1 ]
+"2164
+[v LTC681x_set_cfgr_dcto@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr_dcto@ic ic `*.39S1762  1 p 2 28 ]
+[v LTC681x_set_cfgr_dcto@dcto dcto `*.39uc  1 p 2 30 ]
+"2166
+[v LTC681x_set_cfgr_dcto@nIC nIC `uc  1 a 1 0 ]
+"2171
+} 0
+"2131
+[v _LTC681x_set_cfgr_adcopt LTC681x_set_cfgr_adcopt `(v  1 e 1 0 ]
+{
+[v LTC681x_set_cfgr_adcopt@nIC nIC `uc  1 a 1 wreg ]
+[v LTC681x_set_cfgr_adcopt@nIC nIC `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_cfgr_adcopt@ic ic `*.39S1762  1 p 2 28 ]
+[v LTC681x_set_cfgr_adcopt@adcopt adcopt `uc  1 p 1 30 ]
+"2133
+[v LTC681x_set_cfgr_adcopt@nIC nIC `uc  1 a 1 35 ]
+"2135
+} 0
+"2064
+[v _LTC681x_reset_crc_count LTC681x_reset_crc_count `(v  1 e 1 0 ]
+{
+[v LTC681x_reset_crc_count@total_ic total_ic `uc  1 a 1 wreg ]
+"2081
+[v LTC681x_reset_crc_count@i_3929 i `i  1 a 2 9 ]
+"2077
+[v LTC681x_reset_crc_count@i_3928 i `i  1 a 2 7 ]
+"2072
+[v LTC681x_reset_crc_count@i i `i  1 a 2 5 ]
+"2068
+[v LTC681x_reset_crc_count@current_ic current_ic `i  1 a 2 11 ]
+"2064
+[v LTC681x_reset_crc_count@total_ic total_ic `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"2065
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_reset_crc_count@ic ic `*.39S1762  1 p 2 34 ]
+"2068
+[v LTC681x_reset_crc_count@total_ic total_ic `uc  1 a 1 4 ]
+"2086
+} 0
+"2089
+[v _LTC681x_init_cfg LTC681x_init_cfg `(v  1 e 1 0 ]
+{
+[v LTC681x_init_cfg@total_ic total_ic `uc  1 a 1 wreg ]
+"2095
+[v LTC681x_init_cfg@j j `i  1 a 2 34 ]
+"2093
+[v LTC681x_init_cfg@current_ic current_ic `uc  1 a 1 33 ]
+"2089
+[v LTC681x_init_cfg@total_ic total_ic `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"2090
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_init_cfg@ic ic `*.39S1762  1 p 2 28 ]
+"2093
+[v LTC681x_init_cfg@total_ic total_ic `uc  1 a 1 32 ]
+"2100
+} 0
+"1789
+[v _LTC681x_wrsctrl LTC681x_wrsctrl `(v  1 e 1 0 ]
+{
+[v LTC681x_wrsctrl@total_ic total_ic `uc  1 a 1 wreg ]
+"1815
+[v LTC681x_wrsctrl@data data `uc  1 a 1 0 ]
+"1809
+[v LTC681x_wrsctrl@current_ic current_ic `uc  1 a 1 39 ]
+"1795
+[v LTC681x_wrsctrl@write_buffer write_buffer `[256]uc  1 a 256 0 ]
+"1794
+[v LTC681x_wrsctrl@cmd cmd `[2]uc  1 a 2 36 ]
+"1797
+[v LTC681x_wrsctrl@c_ic c_ic `uc  1 a 1 35 ]
+"1796
+[v LTC681x_wrsctrl@write_count write_count `uc  1 a 1 38 ]
+"1789
+[v LTC681x_wrsctrl@total_ic total_ic `uc  1 a 1 wreg ]
+"1790
+[v LTC681x_wrsctrl@sctrl_reg sctrl_reg `uc  1 p 1 30 ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"1791
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_wrsctrl@ic ic `*.39S1762  1 p 2 31 ]
+"1796
+[v LTC681x_wrsctrl@total_ic total_ic `uc  1 a 1 38 ]
+"1822
+} 0
+"96
+[v _write_68 write_68 `(v  1 e 1 0 ]
+{
+[v write_68@total_ic total_ic `uc  1 a 1 wreg ]
+"120
+[v write_68@current_byte current_byte `uc  1 a 1 27 ]
+"118
+[v write_68@current_ic current_ic `uc  1 a 1 28 ]
+"103
+[v write_68@cmd cmd `[12]uc  1 a 12 8 ]
+"105
+[v write_68@cmd_pec cmd_pec `us  1 a 2 24 ]
+"104
+[v write_68@data_pec data_pec `us  1 a 2 22 ]
+"106
+[v write_68@cmd_index cmd_index `uc  1 a 1 29 ]
+"101
+[v write_68@BYTES_IN_REG BYTES_IN_REG `Cuc  1 a 1 26 ]
+"102
+[v write_68@CMD_LEN CMD_LEN `Cuc  1 a 1 20 ]
+"96
+[v write_68@total_ic total_ic `uc  1 a 1 wreg ]
+"97
+[v write_68@tx_cmd tx_cmd `*.39uc  1 p 2 34 ]
+"98
+[v write_68@data data `*.39uc  1 p 2 36 ]
+"101
+[v write_68@total_ic total_ic `uc  1 a 1 21 ]
+"135
+} 0
+"1879
+[v _LTC681x_stsctrl LTC681x_stsctrl `(v  1 e 1 0 ]
+{
+"1881
+[v LTC681x_stsctrl@cmd cmd `[4]uc  1 a 4 6 ]
+"1882
+[v LTC681x_stsctrl@cmd_pec cmd_pec `us  1 a 2 10 ]
+"1893
+} 0
+"63 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\bms_hardware.c
+[v _spi_write_array spi_write_array `(uc  1 e 1 0 ]
+{
+[v spi_write_array@len len `uc  1 a 1 wreg ]
+"76
+[v spi_write_array@counter counter `us  1 a 2 31 ]
+"70
+[v spi_write_array@i i `uc  1 a 1 33 ]
+"63
+[v spi_write_array@len len `uc  1 a 1 wreg ]
+"64
+[v spi_write_array@data data `*.39uc  1 p 2 28 ]
+"69
+[v spi_write_array@len len `uc  1 a 1 30 ]
+"88
+} 0
+"2191 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\LTC681xRev2.c
+[v _LTC681x_set_balance LTC681x_set_balance `(v  1 e 1 0 ]
+{
+[v LTC681x_set_balance@balanceMask balanceMask `us  1 p 2 28 ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_set_balance@ic ic `*.39S1762  1 p 2 30 ]
+"2269
+} 0
+"1826
+[v _LTC681x_rdsctrl LTC681x_rdsctrl `(c  1 e 1 0 ]
+{
+[v LTC681x_rdsctrl@total_ic total_ic `uc  1 a 1 wreg ]
+"1857
+[v LTC681x_rdsctrl@byte byte `i  1 a 2 6 ]
+"1851
+[v LTC681x_rdsctrl@current_ic current_ic `uc  1 a 1 8 ]
+"1832
+[v LTC681x_rdsctrl@read_buffer read_buffer `[256]uc  1 a 256 0 ]
+"1831
+[v LTC681x_rdsctrl@cmd cmd `[4]uc  1 a 4 36 ]
+"1835
+[v LTC681x_rdsctrl@calc_pec calc_pec `us  1 a 2 2 ]
+"1834
+[v LTC681x_rdsctrl@data_pec data_pec `us  1 a 2 0 ]
+"1836
+[v LTC681x_rdsctrl@c_ic c_ic `uc  1 a 1 5 ]
+"1826
+[v LTC681x_rdsctrl@total_ic total_ic `uc  1 a 1 wreg ]
+"1827
+[v LTC681x_rdsctrl@sctrl_reg sctrl_reg `uc  1 p 1 28 ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"1828
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_rdsctrl@ic ic `*.39S1762  1 p 2 29 ]
+"1836
+[v LTC681x_rdsctrl@total_ic total_ic `uc  1 a 1 4 ]
+"1872
+} 0
+"269
+[v _LTC681x_rdcfg LTC681x_rdcfg `(c  1 e 1 0 ]
+{
+[v LTC681x_rdcfg@total_ic total_ic `uc  1 a 1 wreg ]
+"293
+[v LTC681x_rdcfg@byte byte `i  1 a 2 6 ]
+"282
+[v LTC681x_rdcfg@current_ic current_ic `uc  1 a 1 8 ]
+"274
+[v LTC681x_rdcfg@read_buffer read_buffer `[256]uc  1 a 256 0 ]
+"273
+[v LTC681x_rdcfg@cmd cmd `[2]uc  1 a 2 38 ]
+"277
+[v LTC681x_rdcfg@calc_pec calc_pec `us  1 a 2 2 ]
+"276
+[v LTC681x_rdcfg@data_pec data_pec `us  1 a 2 0 ]
+"278
+[v LTC681x_rdcfg@c_ic c_ic `uc  1 a 1 4 ]
+"269
+[v LTC681x_rdcfg@total_ic total_ic `uc  1 a 1 wreg ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"270
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_rdcfg@ic ic `*.39S1762  1 p 2 31 ]
+"272
+[v LTC681x_rdcfg@F12733 F12733 `[2]uc  1 s 2 F12733 ]
+[v LTC681x_rdcfg@total_ic total_ic `uc  1 a 1 5 ]
+"309
+} 0
+"138
+[v _read_68 read_68 `(c  1 e 1 0 ]
+{
+[v read_68@total_ic total_ic `uc  1 a 1 wreg ]
+"164
+[v read_68@current_byte current_byte `uc  1 a 1 26 ]
+"162
+[v read_68@current_ic current_ic `uc  1 a 1 27 ]
+"145
+[v read_68@data data `[256]uc  1 a 256 0 ]
+"144
+[v read_68@cmd cmd `[4]uc  1 a 4 18 ]
+"147
+[v read_68@cmd_pec cmd_pec `us  1 a 2 23 ]
+"149
+[v read_68@received_pec received_pec `us  1 a 2 16 ]
+"148
+[v read_68@data_pec data_pec `us  1 a 2 14 ]
+"143
+[v read_68@BYTES_IN_REG BYTES_IN_REG `Cuc  1 a 1 25 ]
+"146
+[v read_68@pec_error pec_error `c  1 a 1 38 ]
+"138
+[v read_68@total_ic total_ic `uc  1 a 1 wreg ]
+"139
+[v read_68@tx_cmd tx_cmd `*.39uc  1 p 2 34 ]
+"140
+[v read_68@rx_data rx_data `*.39uc  1 p 2 36 ]
+"143
+[v read_68@total_ic total_ic `uc  1 a 1 22 ]
+"179
+} 0
+"95 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\bms_hardware.c
+[v _spi_write_read spi_write_read `(v  1 e 1 0 ]
+{
+"126
+[v spi_write_read@counter_4585 counter `us  1 a 2 2 ]
+"109
+[v spi_write_read@counter counter `us  1 a 2 0 ]
+"120
+[v spi_write_read@i_4584 i `uc  1 a 1 5 ]
+"103
+[v spi_write_read@i i `uc  1 a 1 4 ]
+"95
+[v spi_write_read@tx_Data tx_Data `*.39uc  1 p 2 28 ]
+"96
+[v spi_write_read@tx_len tx_len `uc  1 p 1 30 ]
+"97
+[v spi_write_read@rx_data rx_data `*.39uc  1 p 2 31 ]
+"98
+[v spi_write_read@rx_len rx_len `uc  1 p 1 33 ]
+"138
+} 0
+"50
+[v _cs_low cs_low `(v  1 e 1 0 ]
+{
+"53
+} 0
+"55
+[v _cs_high cs_high `(v  1 e 1 0 ]
+{
+"58
+} 0
+"182 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\LTC681xRev2.c
+[v _pec15_calc pec15_calc `(us  1 e 2 0 ]
+{
+[v pec15_calc@len len `uc  1 a 1 wreg ]
+"189
+[v pec15_calc@i i `uc  1 a 1 3 ]
+"186
+[v pec15_calc@remainder remainder `us  1 a 2 4 ]
+[v pec15_calc@addr addr `us  1 a 2 1 ]
+"182
+[v pec15_calc@len len `uc  1 a 1 wreg ]
+"183
+[v pec15_calc@data data `*.39uc  1 p 2 28 ]
+"187
+[v pec15_calc@len len `uc  1 a 1 0 ]
+"205
+} 0
+"2004
+[v _LTC681x_check_pec LTC681x_check_pec `(v  1 e 1 0 ]
+{
+[v LTC681x_check_pec@total_ic total_ic `uc  1 a 1 wreg ]
+"2051
+[v LTC681x_check_pec@i_3866 i `i  1 a 2 19 ]
+"2039
+[v LTC681x_check_pec@i_3864 i `i  1 a 2 17 ]
+"2029
+[v LTC681x_check_pec@i i `i  1 a 2 15 ]
+"2048
+[v LTC681x_check_pec@current_ic_3865 current_ic `i  1 a 2 29 ]
+"2037
+[v LTC681x_check_pec@current_ic_3863 current_ic `i  1 a 2 27 ]
+"2027
+[v LTC681x_check_pec@current_ic_3861 current_ic `i  1 a 2 25 ]
+"2020
+[v LTC681x_check_pec@current_ic_3860 current_ic `i  1 a 2 23 ]
+"2012
+[v LTC681x_check_pec@current_ic current_ic `i  1 a 2 21 ]
+"2004
+[v LTC681x_check_pec@total_ic total_ic `uc  1 a 1 wreg ]
+"2005
+[v LTC681x_check_pec@reg reg `uc  1 p 1 34 ]
+[s S1733 . 15 `[6]uc 1 tx_data 6 0 `[8]uc 1 rx_data 8 6 `uc 1 rx_pec_match 1 14 ]
+"2006
+[s S1737 . 42 `[18]us 1 c_codes 36 0 `[6]uc 1 pec_match 6 36 ]
+[s S1740 . 22 `[9]us 1 a_codes 18 0 `[4]uc 1 pec_match 4 18 ]
+[s S1743 . 15 `[4]us 1 stat_codes 8 0 `[3]uc 1 flags 3 8 `[1]uc 1 mux_fail 1 11 `[1]uc 1 thsd 1 12 `[2]uc 1 pec_match 2 13 ]
+[s S1749 . 28 `us 1 pec_count 2 0 `us 1 cfgr_pec 2 2 `[6]us 1 cell_pec 12 4 `[4]us 1 aux_pec 8 16 `[2]us 1 stat_pec 4 24 ]
+[s S1755 . 6 `uc 1 cell_channels 1 0 `uc 1 stat_channels 1 1 `uc 1 aux_channels 1 2 `uc 1 num_cv_reg 1 3 `uc 1 num_gpio_reg 1 4 `uc 1 num_stat_reg 1 5 ]
+[s S1762 . 230 `S1733 1 config 15 0 `S1733 1 configb 15 15 `S1737 1 cells 42 30 `S1740 1 aux 22 72 `S1743 1 stat 15 94 `S1733 1 com 15 109 `S1733 1 pwm 15 124 `S1733 1 pwmb 15 139 `S1733 1 sctrl 15 154 `S1733 1 sctrlb 15 169 `[6]uc 1 sid 6 184 `i 1 isospi_reverse 2 190 `S1749 1 crc_count 28 192 `S1755 1 ic_reg 6 220 `l 1 system_open_wire 4 226 ]
+[v LTC681x_check_pec@ic ic `*.39S1762  1 p 2 35 ]
+"2004
+[v LTC681x_check_pec@total_ic total_ic `uc  1 a 1 14 ]
+"2061
+} 0
+"15 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+{
+"17
+[v ___wmul@product product `ui  1 a 2 32 ]
+"15
+[v ___wmul@multiplier multiplier `ui  1 p 2 28 ]
+[v ___wmul@multiplicand multiplicand `ui  1 p 2 30 ]
+"53
+} 0
+"36 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\CAN/CAN.c
+[v _CAN_step CAN_step `(v  1 e 1 0 ]
+{
+"1070
+[v CAN_step@tempValue_256 tempValue `ui  1 a 2 212 ]
+"1034
+[v CAN_step@tempValue_252 tempValue `ui  1 a 2 210 ]
+"999
+[v CAN_step@tempValue_248 tempValue `ui  1 a 2 208 ]
+"948
+[v CAN_step@tempValue_244 tempValue `ui  1 a 2 206 ]
+"912
+[v CAN_step@tempValue_240 tempValue `ui  1 a 2 204 ]
+"877
+[v CAN_step@tempValue_236 tempValue `ui  1 a 2 202 ]
+"841
+[v CAN_step@tempValue_232 tempValue `ui  1 a 2 200 ]
+"806
+[v CAN_step@tempValue tempValue `ui  1 a 2 198 ]
+"1085
+[v CAN_step@result_257 result `ui  1 a 2 74 ]
+"1067
+[v CAN_step@unpackedValue_255 unpackedValue `ui  1 a 2 106 ]
+"1050
+[v CAN_step@result_253 result `ui  1 a 2 72 ]
+"1031
+[v CAN_step@unpackedValue_251 unpackedValue `ui  1 a 2 102 ]
+"1014
+[v CAN_step@result_249 result `ui  1 a 2 70 ]
+"996
+[v CAN_step@unpackedValue_247 unpackedValue `ui  1 a 2 98 ]
+"963
+[v CAN_step@result_245 result `ui  1 a 2 68 ]
+"945
+[v CAN_step@unpackedValue_243 unpackedValue `ui  1 a 2 94 ]
+"928
+[v CAN_step@result_241 result `ui  1 a 2 66 ]
+"909
+[v CAN_step@unpackedValue_239 unpackedValue `ui  1 a 2 90 ]
+"892
+[v CAN_step@result_237 result `ui  1 a 2 64 ]
+"874
+[v CAN_step@unpackedValue_235 unpackedValue `ui  1 a 2 86 ]
+"857
+[v CAN_step@result_233 result `ui  1 a 2 62 ]
+"838
+[v CAN_step@unpackedValue_231 unpackedValue `ui  1 a 2 82 ]
+"821
+[v CAN_step@result_229 result `ui  1 a 2 60 ]
+"803
+[v CAN_step@unpackedValue unpackedValue `ui  1 a 2 78 ]
+"1064
+[v CAN_step@outValue_254 outValue `ui  1 a 2 104 ]
+"1028
+[v CAN_step@outValue_250 outValue `ui  1 a 2 100 ]
+"993
+[v CAN_step@outValue_246 outValue `ui  1 a 2 96 ]
+"942
+[v CAN_step@outValue_242 outValue `ui  1 a 2 92 ]
+"906
+[v CAN_step@outValue_238 outValue `ui  1 a 2 88 ]
+"871
+[v CAN_step@outValue_234 outValue `ui  1 a 2 84 ]
+"835
+[v CAN_step@outValue_230 outValue `ui  1 a 2 80 ]
+"800
+[v CAN_step@outValue outValue `ui  1 a 2 76 ]
+"758
+[v CAN_step@packedValue_225 packedValue `ui  1 a 2 184 ]
+"751
+[v CAN_step@result_224 result `ul  1 a 4 56 ]
+"717
+[v CAN_step@packedValue_222 packedValue `ui  1 a 2 196 ]
+"710
+[v CAN_step@result_221 result `ul  1 a 4 52 ]
+"678
+[v CAN_step@packedValue_219 packedValue `ui  1 a 2 182 ]
+"671
+[v CAN_step@result_218 result `ul  1 a 4 48 ]
+"637
+[v CAN_step@packedValue_216 packedValue `ui  1 a 2 194 ]
+"630
+[v CAN_step@result_215 result `ul  1 a 4 44 ]
+"598
+[v CAN_step@packedValue_213 packedValue `ui  1 a 2 180 ]
+"591
+[v CAN_step@result_212 result `ul  1 a 4 40 ]
+"515
+[v CAN_step@packedValue_210 packedValue `ui  1 a 2 178 ]
+"508
+[v CAN_step@result_209 result `ul  1 a 4 36 ]
+"474
+[v CAN_step@packedValue_207 packedValue `ui  1 a 2 192 ]
+"467
+[v CAN_step@result_206 result `ul  1 a 4 32 ]
+"435
+[v CAN_step@packedValue_204 packedValue `ui  1 a 2 176 ]
+"428
+[v CAN_step@result_203 result `ul  1 a 4 28 ]
+"394
+[v CAN_step@packedValue_201 packedValue `ui  1 a 2 190 ]
+"387
+[v CAN_step@result_200 result `ul  1 a 4 24 ]
+"355
+[v CAN_step@packedValue_198 packedValue `ui  1 a 2 174 ]
+"348
+[v CAN_step@result_197 result `ul  1 a 4 20 ]
+"267
+[v CAN_step@packedValue_195 packedValue `ui  1 a 2 172 ]
+"260
+[v CAN_step@result_194 result `ul  1 a 4 16 ]
+"226
+[v CAN_step@packedValue_192 packedValue `ui  1 a 2 188 ]
+"219
+[v CAN_step@result_191 result `ul  1 a 4 12 ]
+"187
+[v CAN_step@packedValue_189 packedValue `ui  1 a 2 170 ]
+"180
+[v CAN_step@result_188 result `ul  1 a 4 8 ]
+"146
+[v CAN_step@packedValue_186 packedValue `ui  1 a 2 186 ]
+"139
+[v CAN_step@result_185 result `ul  1 a 4 4 ]
+"107
+[v CAN_step@packedValue packedValue `ui  1 a 2 168 ]
+"100
+[v CAN_step@result result `ul  1 a 4 0 ]
+"748
+[v CAN_step@packingValue_223 packingValue `ul  1 a 4 164 ]
+"707
+[v CAN_step@packingValue_220 packingValue `ul  1 a 4 160 ]
+"668
+[v CAN_step@packingValue_217 packingValue `ul  1 a 4 156 ]
+"627
+[v CAN_step@packingValue_214 packingValue `ul  1 a 4 152 ]
+"588
+[v CAN_step@packingValue_211 packingValue `ul  1 a 4 148 ]
+"505
+[v CAN_step@packingValue_208 packingValue `ul  1 a 4 144 ]
+"464
+[v CAN_step@packingValue_205 packingValue `ul  1 a 4 140 ]
+"425
+[v CAN_step@packingValue_202 packingValue `ul  1 a 4 136 ]
+"384
+[v CAN_step@packingValue_199 packingValue `ul  1 a 4 132 ]
+"345
+[v CAN_step@packingValue_196 packingValue `ul  1 a 4 128 ]
+"257
+[v CAN_step@packingValue_193 packingValue `ul  1 a 4 124 ]
+"216
+[v CAN_step@packingValue_190 packingValue `ul  1 a 4 120 ]
+"177
+[v CAN_step@packingValue_187 packingValue `ul  1 a 4 116 ]
+"136
+[v CAN_step@packingValue_184 packingValue `ul  1 a 4 112 ]
+"97
+[v CAN_step@packingValue packingValue `ul  1 a 4 108 ]
+"1093
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwdiv@quotient quotient `ui  1 a 2 33 ]
+"11
+[v ___lwdiv@counter counter `uc  1 a 1 32 ]
+"7
+[v ___lwdiv@dividend dividend `ui  1 p 2 28 ]
+[v ___lwdiv@divisor divisor `ui  1 p 2 30 ]
+"30
+} 0
+"541 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _CANTransmit CANTransmit `(v  1 e 1 0 ]
+{
+"572
+} 0
+"231 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/ecan.c
+[v _CAN_transmit CAN_transmit `(uc  1 e 1 0 ]
+{
+"236
+[v CAN_transmit@tempSIDL tempSIDL `uc  1 a 1 17 ]
+"235
+[v CAN_transmit@tempSIDH tempSIDH `uc  1 a 1 16 ]
+"234
+[v CAN_transmit@tempEIDL tempEIDL `uc  1 a 1 15 ]
+"233
+[v CAN_transmit@tempEIDH tempEIDH `uc  1 a 1 14 ]
+"237
+[v CAN_transmit@returnValue returnValue `uc  1 a 1 13 ]
+[s S929 . 14 `uc 1 idType 1 0 `ul 1 id 4 1 `uc 1 dlc 1 5 `uc 1 data0 1 6 `uc 1 data1 1 7 `uc 1 data2 1 8 `uc 1 data3 1 9 `uc 1 data4 1 10 `uc 1 data5 1 11 `uc 1 data6 1 12 `uc 1 data7 1 13 ]
+"231
+[u S941 . 14 `S929 1 frame 14 0 `[14]uc 1 array 14 0 ]
+[v CAN_transmit@tempCanMsg tempCanMsg `*.39S941  1 p 2 33 ]
+"306
+} 0
+"523
+[v _convertCANid2Reg convertCANid2Reg `(v  1 s 1 convertCANid2Reg ]
+{
+"524
+[v convertCANid2Reg@wipSIDL wipSIDL `uc  1 a 1 32 ]
+"523
+[v convertCANid2Reg@tempPassedInID tempPassedInID `ul  1 p 4 0 ]
+[v convertCANid2Reg@canIdType canIdType `uc  1 p 1 4 ]
+[v convertCANid2Reg@passedInEIDH passedInEIDH `*.39uc  1 p 2 5 ]
+[v convertCANid2Reg@passedInEIDL passedInEIDL `*.39uc  1 p 2 7 ]
+[v convertCANid2Reg@passedInSIDH passedInSIDH `*.39uc  1 p 2 9 ]
+[v convertCANid2Reg@passedInSIDL passedInSIDL `*.39uc  1 p 2 11 ]
+"556
+} 0
+"510 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _BalancerCommand BalancerCommand `(v  1 e 1 0 ]
+{
+"539
+} 0
+"58 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `IIH(v  1 e 1 0 ]
+{
+"72
+} 0
+"157 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr1.c
+[v _TMR1_ISR TMR1_ISR `(v  1 e 1 0 ]
+{
+"167
+} 0
+"120
+[v _TMR1_WriteTimer TMR1_WriteTimer `(v  1 e 1 0 ]
+{
+[v TMR1_WriteTimer@timerVal timerVal `us  1 p 2 0 ]
+"140
+} 0
+"169
+[v _TMR1_CallBack TMR1_CallBack `(v  1 e 1 0 ]
+{
+"176
+} 0
+"182
+[v _TMR1_DefaultInterruptHandler TMR1_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"185
+} 0
+"179 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _timer1_ISR timer1_ISR `(v  1 e 1 0 ]
+{
+"270
+} 0
+"7 C:\Program Files\Microchip\xc8\v2.32\pic\sources\c99\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+{
+"10
+[v ___lwmod@counter counter `uc  1 a 1 4 ]
+"7
+[v ___lwmod@dividend dividend `ui  1 p 2 0 ]
+[v ___lwmod@divisor divisor `ui  1 p 2 2 ]
+"25
+} 0
+"129 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr0.c
+[v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
+{
+"143
+} 0
+"145
+[v _TMR0_CallBack TMR0_CallBack `(v  1 e 1 0 ]
+{
+"153
+} 0
+"159
+[v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
+{
+"162
+} 0
+"119 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _timer0_ISR timer0_ISR `(v  1 e 1 0 ]
+{
+"177
+} 0
+"122 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/tmr0.c
+[v _TMR0_Reload TMR0_Reload `(v  1 e 1 0 ]
+{
+"126
+} 0
+"308 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\mcc_generated_files/ecan.c
+[v _CAN_receive CAN_receive `(uc  1 e 1 0 ]
+{
+"310
+[v CAN_receive@returnValue returnValue `uc  1 a 1 23 ]
+[s S929 . 14 `uc 1 idType 1 0 `ul 1 id 4 1 `uc 1 dlc 1 5 `uc 1 data0 1 6 `uc 1 data1 1 7 `uc 1 data2 1 8 `uc 1 data3 1 9 `uc 1 data4 1 10 `uc 1 data5 1 11 `uc 1 data6 1 12 `uc 1 data7 1 13 ]
+"308
+[u S941 . 14 `S929 1 frame 14 0 `[14]uc 1 array 14 0 ]
+[v CAN_receive@tempCanMsg tempCanMsg `*.39S941  1 p 2 19 ]
+[v CAN_receive@tempCanMsg1 tempCanMsg1 `*.39S941  1 p 2 21 ]
+"366
+} 0
+"511
+[v _convertReg2StandardCANid convertReg2StandardCANid `(ul  1 s 4 convertReg2StandardCANid ]
+{
+[v convertReg2StandardCANid@tempRXBn_SIDH tempRXBn_SIDH `uc  1 a 1 wreg ]
+"513
+[v convertReg2StandardCANid@ConvertedID ConvertedID `ul  1 a 4 11 ]
+"512
+[v convertReg2StandardCANid@returnValue returnValue `ul  1 a 4 7 ]
+"511
+[v convertReg2StandardCANid@tempRXBn_SIDH tempRXBn_SIDH `uc  1 a 1 wreg ]
+[v convertReg2StandardCANid@tempRXBn_SIDL tempRXBn_SIDL `uc  1 p 1 0 ]
+[v convertReg2StandardCANid@tempRXBn_SIDH tempRXBn_SIDH `uc  1 a 1 6 ]
+"521
+} 0
+"491
+[v _convertReg2ExtendedCANid convertReg2ExtendedCANid `(ul  1 s 4 convertReg2ExtendedCANid ]
+{
+[v convertReg2ExtendedCANid@tempRXBn_EIDH tempRXBn_EIDH `uc  1 a 1 wreg ]
+"493
+[v convertReg2ExtendedCANid@ConvertedID ConvertedID `ul  1 a 4 15 ]
+"492
+[v convertReg2ExtendedCANid@returnValue returnValue `ul  1 a 4 9 ]
+"495
+[v convertReg2ExtendedCANid@CAN_standardLo_ID_hi3bits CAN_standardLo_ID_hi3bits `uc  1 a 1 14 ]
+"494
+[v convertReg2ExtendedCANid@CAN_standardLo_ID_lo2bits CAN_standardLo_ID_lo2bits `uc  1 a 1 13 ]
+"491
+[v convertReg2ExtendedCANid@tempRXBn_EIDH tempRXBn_EIDH `uc  1 a 1 wreg ]
+[v convertReg2ExtendedCANid@tempRXBn_EIDL tempRXBn_EIDL `uc  1 p 1 0 ]
+[v convertReg2ExtendedCANid@tempRXBn_SIDH tempRXBn_SIDH `uc  1 p 1 1 ]
+[v convertReg2ExtendedCANid@tempRXBn_SIDL tempRXBn_SIDL `uc  1 p 1 2 ]
+"493
+[v convertReg2ExtendedCANid@tempRXBn_EIDH tempRXBn_EIDH `uc  1 a 1 8 ]
+"509
+} 0
+"485 D:\B-BMU Design\BMB Design\Code\final rev1\BMB.X\main.c
+[v _CANParser CANParser `(v  1 e 1 0 ]
+{
+"509
+} 0
