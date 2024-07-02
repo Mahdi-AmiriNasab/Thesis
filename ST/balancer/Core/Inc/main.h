@@ -59,10 +59,10 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define CurrentSensor_pack_Pin GPIO_PIN_0
+#define CurrentSensor_pack_GPIO_Port GPIOC
 #define CurrentSensor_AX_Pin GPIO_PIN_1
-#define CurrentSensor_AX_GPIO_Port GPIOA
-#define CurrentSensor_pack_Pin GPIO_PIN_2
-#define CurrentSensor_pack_GPIO_Port GPIOA
+#define CurrentSensor_AX_GPIO_Port GPIOC
 #define trig_neg_2_Pin GPIO_PIN_3
 #define trig_neg_2_GPIO_Port GPIOA
 #define DAC_Voltage_Pin GPIO_PIN_4

@@ -52,11 +52,20 @@ double w_inc = 0.4;
 double w_ovp = 0.2;
 double soc_init[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
 double soc[9];
-uint16_t adc_current [1];
+uint16_t adc_current [100];
+uint16_t adc_current_window [25];
+uint8_t pso_run = 1;
+uint8_t step_cnt_max = 0;
+
+
 
 GPIO_PinState dcdc_rst1 = 0, dcdc_rst2 = 0;
 GPIO_PinState main_relay = 0;
 uint8_t flag_equalizer_step = 0;
+
+uint16_t cnt = 0;
+uint32_t adc_mean = 0; 
+uint32_t adc_sum = 0; 
 
 typedef enum 
 {
@@ -82,6 +91,7 @@ extern ExtY_equalizer_T equalizer_Y;
 
 uint8_t step_cnt = 0;
 
+void sort_and_extract_window(uint16_t *array, uint16_t array_size, uint16_t window_size, uint16_t start_index, uint16_t *window);
 
 typedef struct {
     uint32_t DMA_LISR;
@@ -338,23 +348,6 @@ int main(void)
         // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_p (6)
         // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_p (7)
         // HAL_TIM_PWM_Start(&htim3, TIM_CHANNEL_4); // pwm_ax2pack_DCDC_o_p (8)
-
-        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
-		pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
-        HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
-        
-        // initialize soc
-        memcpy(soc, soc_init, sizeof(soc));
-
-        // step size determination
-        volatile uint8_t step_cnt_max = 0;
-        for(uint8_t i= 0; i < eq_step.size[1]; i++)
-        {
-            if(eq_step.data[i].source_queue_cells.data[0] > 0)
-                step_cnt_max++;
-            else
-                break;
-        }
   
 	while(1)
 	{
@@ -399,9 +392,32 @@ int main(void)
         
         Set_DAC_Voltage(vol, DAC_CHANNEL_1);
         Set_DAC_Voltage(cur, DAC_CHANNEL_2);
-		
 
-        
+        // if(__HAL_ADC_GET_FLAG(&hadc1, ADC_FLAG_EOC))
+        // {
+
+        // }
+
+        if(pso_run)
+        {
+            pso_run = 0;
+            HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
+            pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
+            HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
+            
+            // initialize soc
+            memcpy(soc, soc_init, sizeof(soc));
+
+            // step size determination
+            for(uint8_t i= 0; i < eq_step.size[1]; i++)
+            {
+                if(eq_step.data[i].source_queue_cells.data[0] > 0)
+                    step_cnt_max++;
+                else
+                    break;
+            }
+        }
+		
         if(step_cnt < step_cnt_max) // if have any step to go
         {
             if(flag_equalizer_step)
@@ -420,18 +436,18 @@ int main(void)
                 
                 equalizer_step();
                 
-								if(equalizer_Y.dir == -1)
-								{
-										static uint32_t dir_float_cnt = 0;
-										dir_float_cnt++;
-								}
+                if(equalizer_Y.dir == -1)
+                {
+                        static uint32_t dir_float_cnt = 0;
+                        dir_float_cnt++;
+                }
 
-								if(equalizer_Y.stop_transfer)
-								{
-										static uint32_t stop_transfer_cnt = 0;
-										stop_transfer_cnt++;
-										step_cnt++;
-								}   
+                if(equalizer_Y.stop_transfer)
+                {
+                        static uint32_t stop_transfer_cnt = 0;
+                        stop_transfer_cnt++;
+                        step_cnt++;
+                }   
             }     
         }
 	}
@@ -557,9 +573,9 @@ static void MX_ADC1_Init(void)
   }
   /** Configure Regular Channel
   */
-  sConfig.Channel = ADC_CHANNEL_14;
+  sConfig.Channel = ADC_CHANNEL_10;
   sConfig.Rank = ADC_REGULAR_RANK_1;
-  sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+  sConfig.SamplingTime = ADC_SAMPLETIME_64CYCLES_5;
   sConfig.SingleDiff = ADC_SINGLE_ENDED;
   sConfig.OffsetNumber = ADC_OFFSET_NONE;
   sConfig.Offset = 0;
@@ -861,9 +877,9 @@ static void MX_TIM6_Init(void)
 
   /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 12-1;
+  htim6.Init.Prescaler = 12000-1;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim6.Init.Period = 500-1;
+  htim6.Init.Period = 10-1;
   htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
   {
@@ -1384,19 +1400,71 @@ void set_reset_trig_DCDC(DCDCState state)
     }
 }
 
+
+
 void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
 {
+    uint16_t adc_current_size = sizeof(adc_current)/sizeof(uint16_t);
+    uint16_t adc_current_window_size = sizeof(adc_current_window)/sizeof(uint16_t);
     flag_equalizer_step = 1;
-    static uint16_t cnt = 0;
-    if(cnt > sizeof(adc_current)/sizeof(uint16_t))
-        cnt = 0;
+
     
     adc_current[cnt] = HAL_ADC_GetValue(&hadc1);
     cnt++;
+
+    if(cnt > adc_current_size)
+    {
+        cnt = 0;
+        adc_sum = 0; 
+        sort_and_extract_window(adc_current, adc_current_size, adc_current_window_size, adc_current_size/4, adc_current_window);
+        
+        for(uint16_t i = 0; i < adc_current_window_size; i++)
+        {
+            adc_sum += adc_current_window[i];
+        }
+        adc_mean =  adc_sum / adc_current_window_size;
+
+
+    }
+
+
+    
+
+    
     HAL_GPIO_TogglePin(LED3_GPIO_Port, LED3_Pin);
+    // HAL_ADC_Start_IT(&hadc1);
 
 
 }
+
+// Function to compare two elements for qsort
+int compare(const void *a, const void *b)
+{
+    return (*(uint16_t*)a - *(uint16_t*)b);
+}
+
+// Function to sort the array and extract a window
+void sort_and_extract_window(uint16_t *array, uint16_t array_size, uint16_t window_size, uint16_t start_index, uint16_t *window)
+{
+    // Step 1: Sort the array
+    qsort(array, array_size, sizeof(uint16_t), compare);
+
+    // Step 2: Extract the window
+    for (int i = 0; i < window_size; i++)
+    {
+        if (start_index + i < array_size)
+        {
+            window[i] = array[start_index + i];
+        }
+        else
+        {
+            // Handle case where window exceeds array bounds
+            window[i] = -1;  // or some other sentinel value or error handling
+        }
+    }
+}
+
+
 /* USER CODE END 4 */
 
 /**
