@@ -127,6 +127,7 @@ end
 font_name = 'Helvetica';
 font_size = 22;
 line_width = 2.5;
+tick_font_size = 18; % Add this line to set tick font size
 
 figure('Name', 'cost');
 plot(best_costs,'LineWidth', line_width);
@@ -134,6 +135,7 @@ plot(best_costs,'LineWidth', line_width);
 ylabel('best cost', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set the color to black
 xlabel('iteration', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set x-axis color to black
 
+set(gca, 'FontSize', tick_font_size); % Set the tick font size
 
 end
 

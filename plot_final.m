@@ -42,6 +42,7 @@ function [eq_step] = plot_final(soc_in, mp, best_ep)
     font_name = 'Helvetica';
     font_size = 22;
     line_width = 2.5;
+    tick_font_size = 18; % Add this line to set tick font size
 
     % plot the clustering result
     nexttile;
@@ -49,6 +50,7 @@ function [eq_step] = plot_final(soc_in, mp, best_ep)
     yyaxis left;
     ylabel('% SOC', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k');
     xlabel('Cells', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k');
+    set(gca, 'FontSize', tick_font_size); % Set the tick font size
     yyaxis right;
     set(gca, 'YColor', 'none');
     h = ylabel(right_y_labels{tile_counter + 1}, 'FontName', font_name, 'FontSize', font_size, 'Color', 'k');
@@ -83,6 +85,7 @@ function [eq_step] = plot_final(soc_in, mp, best_ep)
         yyaxis left;
         ylabel('% SOC', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k');
         xlabel('Cells', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k');
+        set(gca, 'FontSize', tick_font_size); % Set the tick font size
         yyaxis right;
         set(gca, 'YColor', 'none');
         h = ylabel(right_y_labels{tile_counter + 1}, 'FontName', font_name, 'FontSize', font_size, 'Color', 'k');
