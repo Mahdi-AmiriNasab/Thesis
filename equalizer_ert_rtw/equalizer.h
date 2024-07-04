@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 4.42
+ * Model version                  : 4.51
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Fri Jun 28 19:12:26 2024
+ * C/C++ source code generated on : Thu Jul  4 12:09:58 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -61,134 +61,175 @@
 #endif
 
 /* Block signals (default storage) */
-typedef struct {
-  real_T Memory3[9];                   /* '<S1>/Memory3' */
-  real_T Memory[2];                    /* '<S1>/Memory' */
-  real_T Memory1[2];                   /* '<S1>/Memory1' */
-  real_T Memory2;                      /* '<S1>/Memory2' */
-  real_T Abs;                          /* '<S4>/Abs' */
-  real_T Abs1;                         /* '<S4>/Abs1' */
-  real_T Saturation;                   /* '<S4>/Saturation' */
-  real_T Product;                      /* '<S4>/Product' */
-  real_T Gain;                         /* '<S4>/Gain' */
-  real_T Integrator;                   /* '<S4>/Integrator' */
-  real_T destinations_batts[2];        /* '<S1>/equalizer' */
-  real_T source_batts[2];              /* '<S1>/equalizer' */
-  real_T step_cnt_out;                 /* '<S1>/equalizer' */
-  real_T I_tranfer;                    /* '<S1>/equalizer' */
-  real_T enable_I_trs;                 /* '<S1>/equalizer' */
-  real_T AH_out;                       /* '<S2>/MATLAB Function' */
-  boolean_T Memory4;                   /* '<S1>/Memory4' */
-  boolean_T comparator;                /* '<S4>/comparator' */
-} B_equalizer_T;
+typedef struct
+{
+    real_T Memory3[9];                 /* '<S1>/Memory3' */
+    real_T Memory[2];                  /* '<S1>/Memory' */
+    real_T Memory1[2];                 /* '<S1>/Memory1' */
+    real_T Memory2;                    /* '<S1>/Memory2' */
+    real_T Abs;                        /* '<S4>/Abs' */
+    real_T Abs1;                       /* '<S4>/Abs1' */
+    real_T Saturation;                 /* '<S4>/Saturation' */
+    real_T Product;                    /* '<S4>/Product' */
+    real_T Gain;                       /* '<S4>/Gain' */
+    real_T Integrator;                 /* '<S4>/Integrator' */
+    real_T destinations_batts[2];      /* '<S1>/equalizer' */
+    real_T source_batts[2];            /* '<S1>/equalizer' */
+    real_T step_cnt_out;               /* '<S1>/equalizer' */
+    real_T I_tranfer;                  /* '<S1>/equalizer' */
+    real_T enable_I_trs;               /* '<S1>/equalizer' */
+    real_T AH_out;                     /* '<S2>/MATLAB Function' */
+    real32_T DataTypeConversion;       /* '<S1>/Data Type Conversion' */
+    boolean_T Memory4;                 /* '<S1>/Memory4' */
+    boolean_T comparator;              /* '<S4>/comparator' */
+}
+B_equalizer_T;
 
 /* Block states (default storage) for system '<Root>' */
-typedef struct {
-  real_T Memory3_PreviousInput[9];     /* '<S1>/Memory3' */
-  real_T Memory_PreviousInput[2];      /* '<S1>/Memory' */
-  real_T Memory1_PreviousInput[2];     /* '<S1>/Memory1' */
-  real_T Memory2_PreviousInput;        /* '<S1>/Memory2' */
-  real_T enable;                       /* '<S1>/equalizer' */
-  int8_T dir;                          /* '<S1>/equalizer' */
-  boolean_T Memory4_PreviousInput;     /* '<S1>/Memory4' */
-} DW_equalizer_T;
+typedef struct
+{
+    real_T Memory3_PreviousInput[9];   /* '<S1>/Memory3' */
+    real_T Memory_PreviousInput[2];    /* '<S1>/Memory' */
+    real_T Memory1_PreviousInput[2];   /* '<S1>/Memory1' */
+    real_T Memory2_PreviousInput;      /* '<S1>/Memory2' */
+    real_T enable;                     /* '<S1>/equalizer' */
+    int8_T dir;                        /* '<S1>/equalizer' */
+    boolean_T Memory4_PreviousInput;   /* '<S1>/Memory4' */
+}
+DW_equalizer_T;
 
 /* Continuous states (default storage) */
-typedef struct {
-  real_T Integrator_CSTATE;            /* '<S4>/Integrator' */
-} X_equalizer_T;
+typedef struct
+{
+    real_T Integrator_CSTATE;          /* '<S4>/Integrator' */
+}
+X_equalizer_T;
 
 /* State derivatives (default storage) */
-typedef struct {
-  real_T Integrator_CSTATE;            /* '<S4>/Integrator' */
-} XDot_equalizer_T;
+typedef struct
+{
+    real_T Integrator_CSTATE;          /* '<S4>/Integrator' */
+}
+XDot_equalizer_T;
 
 /* State disabled  */
-typedef struct {
-  boolean_T Integrator_CSTATE;         /* '<S4>/Integrator' */
-} XDis_equalizer_T;
+typedef struct
+{
+    boolean_T Integrator_CSTATE;       /* '<S4>/Integrator' */
+}
+XDis_equalizer_T;
 
 /* Zero-crossing (trigger) state */
-typedef struct {
-  ZCSigState Integrator_Reset_ZCE;     /* '<S4>/Integrator' */
-} PrevZCX_equalizer_T;
+typedef struct
+{
+    ZCSigState Integrator_Reset_ZCE;   /* '<S4>/Integrator' */
+}
+PrevZCX_equalizer_T;
 
 #ifndef ODE3_INTG
 #define ODE3_INTG
 
 /* ODE3 Integration Data */
-typedef struct {
-  real_T *y;                           /* output */
-  real_T *f[3];                        /* derivatives */
-} ODE3_IntgData;
+typedef struct
+{
+    real_T *y;                         /* output */
+    real_T *f[3];                      /* derivatives */
+}
+ODE3_IntgData;
 
 #endif
 
+/* Constant parameters (default storage) */
+typedef struct
+{
+    /* Computed Parameter: uDLookupTable_tableData
+     * Referenced by: '<S1>/1-D Lookup Table'
+     */
+    real32_T uDLookupTable_tableData[3];
+
+    /* Computed Parameter: uDLookupTable_bp01Data
+     * Referenced by: '<S1>/1-D Lookup Table'
+     */
+    real32_T uDLookupTable_bp01Data[3];
+}
+ConstP_equalizer_T;
+
 /* External inputs (root inport signals with default storage) */
-typedef struct {
-  real_T src_q_cls[2];                 /* '<Root>/src_q_cls' */
-  real_T dst_q_cls[2];                 /* '<Root>/dst_q_cls' */
-  real_T src_trg_soc_av;               /* '<Root>/src_trg_soc_av' */
-  real_T dst_trg_soc_av;               /* '<Root>/dst_trg_soc_av' */
-  real_T SOC[9];                       /* '<Root>/SOC' */
-  real_T SOC_init[9];                  /* '<Root>/SOC_init' */
-  real_T I_meas[9];                    /* '<Root>/I_meas' */
-  real_T CAP_mAh;                      /* '<Root>/CAP_mAh' */
-} ExtU_equalizer_T;
+typedef struct
+{
+    real_T src_q_cls[2];               /* '<Root>/src_q_cls' */
+    real_T dst_q_cls[2];               /* '<Root>/dst_q_cls' */
+    real_T src_trg_soc_av;             /* '<Root>/src_trg_soc_av' */
+    real_T dst_trg_soc_av;             /* '<Root>/dst_trg_soc_av' */
+    real_T SOC[9];                     /* '<Root>/SOC' */
+    real_T SOC_init[9];                /* '<Root>/SOC_init' */
+    real_T I_meas[9];                  /* '<Root>/I_meas' */
+    real_T CAP_mAh;                    /* '<Root>/CAP_mAh' */
+    uint16_T current_sensor_pb_ADC;    /* '<Root>/current_sensor_pb_ADC' */
+}
+ExtU_equalizer_T;
 
 /* External outputs (root outports fed by signals with default storage) */
-typedef struct {
-  int8_T dir;                          /* '<Root>/dir' */
-  real_T eq_current;                   /* '<Root>/eq_current' */
-  real_T soc_est[9];                   /* '<Root>/soc_est' */
-  real_T stop_transfer;                /* '<Root>/stop_transfer' */
-  uint8_T sw_pos;                      /* '<Root>/sw_pos' */
-  uint8_T sw_neg;                      /* '<Root>/sw_neg' */
-} ExtY_equalizer_T;
+typedef struct
+{
+    int8_T dir;                        /* '<Root>/dir' */
+    real_T eq_current;                 /* '<Root>/eq_current' */
+    real_T soc_est[9];                 /* '<Root>/soc_est' */
+    real_T stop_transfer;              /* '<Root>/stop_transfer' */
+    uint8_T sw_pos;                    /* '<Root>/sw_pos' */
+    uint8_T sw_neg;                    /* '<Root>/sw_neg' */
+    real32_T current_sensor_pb_Iout;   /* '<Root>/current_sensor_pb_Iout' */
+}
+ExtY_equalizer_T;
 
 /* Real-time Model Data Structure */
-struct tag_RTM_equalizer_T {
-  const char_T *errorStatus;
-  RTWSolverInfo solverInfo;
-  X_equalizer_T *contStates;
-  int_T *periodicContStateIndices;
-  real_T *periodicContStateRanges;
-  real_T *derivs;
-  XDis_equalizer_T *contStateDisabled;
-  boolean_T zCCacheNeedsReset;
-  boolean_T derivCacheNeedsReset;
-  boolean_T CTOutputIncnstWithState;
-  real_T odeY[1];
-  real_T odeF[3][1];
-  ODE3_IntgData intgData;
+struct tag_RTM_equalizer_T
+{
+    const char_T *errorStatus;
+    RTWSolverInfo solverInfo;
+    X_equalizer_T *contStates;
+    int_T *periodicContStateIndices;
+    real_T *periodicContStateRanges;
+    real_T *derivs;
+    XDis_equalizer_T *contStateDisabled;
+    boolean_T zCCacheNeedsReset;
+    boolean_T derivCacheNeedsReset;
+    boolean_T CTOutputIncnstWithState;
+    real_T odeY[1];
+    real_T odeF[3][1];
+    ODE3_IntgData intgData;
 
-  /*
-   * Sizes:
-   * The following substructure contains sizes information
-   * for many of the model attributes such as inputs, outputs,
-   * dwork, sample times, etc.
-   */
-  struct {
-    int_T numContStates;
-    int_T numPeriodicContStates;
-    int_T numSampTimes;
-  } Sizes;
+    /*
+     * Sizes:
+     * The following substructure contains sizes information
+     * for many of the model attributes such as inputs, outputs,
+     * dwork, sample times, etc.
+     */
+    struct
+    {
+        int_T numContStates;
+        int_T numPeriodicContStates;
+        int_T numSampTimes;
+    }
+    Sizes;
 
-  /*
-   * Timing:
-   * The following substructure contains information regarding
-   * the timing information for the model.
-   */
-  struct {
-    uint32_T clockTick0;
-    time_T stepSize0;
-    uint32_T clockTick1;
-    time_T tStart;
-    SimTimeStep simTimeStep;
-    boolean_T stopRequestedFlag;
-    time_T *t;
-    time_T tArray[2];
-  } Timing;
+    /*
+     * Timing:
+     * The following substructure contains information regarding
+     * the timing information for the model.
+     */
+    struct
+    {
+        uint32_T clockTick0;
+        time_T stepSize0;
+        uint32_T clockTick1;
+        time_T tStart;
+        SimTimeStep simTimeStep;
+        boolean_T stopRequestedFlag;
+        time_T *t;
+        time_T tArray[2];
+    }
+    Timing;
 };
 
 /* Block signals (default storage) */
@@ -211,6 +252,9 @@ extern ExtU_equalizer_T equalizer_U;
 
 /* External outputs (root outports fed by signals with default storage) */
 extern ExtY_equalizer_T equalizer_Y;
+
+/* Constant parameters (default storage) */
+extern const ConstP_equalizer_T equalizer_ConstP;
 
 /* Model entry point functions */
 extern void equalizer_initialize(void);

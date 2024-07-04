@@ -15,7 +15,7 @@
  * Arguments    : double u
  * Return Type  : double
  */
-double rt_roundd_snf(double u)
+double rt_roundd_snf_pso(double u)
 {
   double y;
   if (fabs(u) < 4.503599627370496E+15) {

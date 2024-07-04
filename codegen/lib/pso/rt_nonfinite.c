@@ -11,7 +11,7 @@
  *      (Inf, NaN and -Inf).
  */
 /* Include Files */
-#include "rt_nonfinite.h"
+#include "rt_nonfinite_pso.h"
 #include "rtGetInf.h"
 #include "rtGetNaN.h"
 

@@ -1,5 +1,5 @@
 /*
- * File: equalizer_types.h
+ * File: equalizer_data.c
  *
  * Code generated for Simulink model 'equalizer'.
  *
@@ -13,13 +13,25 @@
  * Validation result: Not run
  */
 
-#ifndef RTW_HEADER_equalizer_types_h_
-#define RTW_HEADER_equalizer_types_h_
+#include "equalizer.h"
 
-/* Forward declaration for rtModel */
-typedef struct tag_RTM_equalizer_T RT_MODEL_equalizer_T;
+/* Constant parameters (default storage) */
+const ConstP_equalizer_T equalizer_ConstP =
+{
+    /* Computed Parameter: uDLookupTable_tableData
+     * Referenced by: '<S1>/1-D Lookup Table'
+     */
+    {
+        0.0F, 1042.0F, 1486.0F
+    },
 
-#endif                                 /* RTW_HEADER_equalizer_types_h_ */
+    /* Computed Parameter: uDLookupTable_bp01Data
+     * Referenced by: '<S1>/1-D Lookup Table'
+     */
+    {
+        52465.0F, 56650.0F, 58230.0F
+    }
+};
 
 /*
  * File trailer for generated code.

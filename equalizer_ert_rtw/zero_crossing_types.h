@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 4.42
+ * Model version                  : 4.51
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Fri Jun 28 19:12:26 2024
+ * C/C++ source code generated on : Thu Jul  4 12:09:58 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -18,11 +18,14 @@
 #include "rtwtypes.h"
 
 /* Trigger directions: falling, either, and rising */
-typedef enum {
-  FALLING_ZERO_CROSSING = -1,
-  ANY_ZERO_CROSSING = 0,
-  RISING_ZERO_CROSSING = 1
-} ZCDirection;
+typedef enum
+{
+    FALLING_ZERO_CROSSING = -1,
+    ANY_ZERO_CROSSING = 0,
+    RISING_ZERO_CROSSING = 1
+}
+
+ZCDirection;
 
 /* Previous state of a trigger signal */
 typedef uint8_T ZCSigState;
@@ -34,8 +37,12 @@ typedef uint8_T ZCSigState;
 #define ZERO_ZCSIG                     0x00U
 
 /* Current state of a trigger signal */
-typedef enum { FALLING_ZCEVENT = -1, NO_ZCEVENT = 0, RISING_ZCEVENT = 1 }
-  ZCEventType;
+typedef enum
+{
+    FALLING_ZCEVENT = -1, NO_ZCEVENT = 0, RISING_ZCEVENT = 1
+}
+
+ZCEventType;
 
 #endif                                 /* ZERO_CROSSING_TYPES_H */
 

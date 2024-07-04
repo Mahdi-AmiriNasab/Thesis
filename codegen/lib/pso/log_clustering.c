@@ -578,10 +578,10 @@ double log_clustering(const double soc_in[9], double mp,
       /* 'balance_soc:275' else */
       /* 'balance_soc:276' soc_transfered_s = round(soc_transfered_s * 100) /
        * 100; */
-      soc_transfered_s = rt_roundd_snf(soc_transfered_s * 100.0) / 100.0;
+      soc_transfered_s = rt_roundd_snf_pso(soc_transfered_s * 100.0) / 100.0;
       /* 'balance_soc:277' soc_transfered_d = round(soc_transfered_d * 100) /
        * 100; */
-      soc_transfered_d = rt_roundd_snf(soc_transfered_d * 100.0) / 100.0;
+      soc_transfered_d = rt_roundd_snf_pso(soc_transfered_d * 100.0) / 100.0;
       /* 'balance_soc:281' if(soc_transfered_s ~= soc_transfered_d) */
       if (!(soc_transfered_s != soc_transfered_d)) {
         /* 'balance_soc:283' else */

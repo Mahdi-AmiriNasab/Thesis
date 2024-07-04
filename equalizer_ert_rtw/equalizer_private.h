@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 4.42
+ * Model version                  : 4.51
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Fri Jun 28 19:12:26 2024
+ * C/C++ source code generated on : Thu Jul  4 12:09:58 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -18,6 +18,7 @@
 #include "rtwtypes.h"
 #include "zero_crossing_types.h"
 #include "equalizer_types.h"
+#include "equalizer.h"
 #include "rtw_continuous.h"
 #include "rtw_solver.h"
 
@@ -34,7 +35,9 @@
 #define rtmSetTPtr(rtm, val)           ((rtm)->Timing.t = (val))
 #endif
 
-// extern real_T rt_roundd_snf(real_T u);
+extern real_T rt_roundd_snf(real_T u);
+extern real32_T look1_iflf_binlxpw(real32_T u0, const real32_T bp0[], const
+    real32_T table[], uint32_T maxIndex);
 
 /* private model entry point functions */
 extern void equalizer_derivatives(void);

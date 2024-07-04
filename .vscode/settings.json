@@ -1,0 +1,11 @@
+{
+    "files.exclude": {
+        "BMS/**": true,
+        "Bootloader/**": true,
+        "documents/**": true,
+        "eclips_log_clustering/**": true,
+        "PCB/**": true,
+        "pspice/**": true,
+        "run*/**": true
+    }
+}

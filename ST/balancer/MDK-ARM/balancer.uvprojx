@@ -827,6 +827,11 @@
               <FileType>1</FileType>
               <FilePath>..\..\..\equalizer_ert_rtw\rt_zcfcn.c</FilePath>
             </File>
+            <File>
+              <FileName>equalizer_data.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\..\..\equalizer_ert_rtw\equalizer_data.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

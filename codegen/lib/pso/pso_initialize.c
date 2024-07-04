@@ -10,7 +10,7 @@
 #include "balance_costF.h"
 #include "eml_rand_mt19937ar_stateful.h"
 #include "pso_data.h"
-#include "rt_nonfinite.h"
+#include "rt_nonfinite_pso.h"
 
 /* Function Definitions */
 /*

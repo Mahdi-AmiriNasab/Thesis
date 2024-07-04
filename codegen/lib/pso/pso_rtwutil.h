@@ -18,7 +18,7 @@ extern "C" {
 #endif
 
 /* Function Declarations */
-double rt_roundd_snf(double u);
+double rt_roundd_snf_pso(double u);
 
 #ifdef __cplusplus
 }

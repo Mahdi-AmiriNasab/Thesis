@@ -3,9 +3,9 @@
  *
  * Code generated for Simulink model 'equalizer'.
  *
- * Model version                  : 4.42
+ * Model version                  : 4.51
  * Simulink Coder version         : 23.2 (R2023b) 01-Aug-2023
- * C/C++ source code generated on : Fri Jun 28 19:12:26 2024
+ * C/C++ source code generated on : Thu Jul  4 12:09:58 2024
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: STMicroelectronics->ST10/Super10
@@ -31,33 +31,34 @@
 void rt_OneStep(void);
 void rt_OneStep(void)
 {
-  static boolean_T OverrunFlag = false;
+    static boolean_T OverrunFlag = false;
 
-  /* Disable interrupts here */
+    /* Disable interrupts here */
 
-  /* Check for overrun */
-  if (OverrunFlag) {
-    rtmSetErrorStatus(equalizer_M, "Overrun");
-    return;
-  }
+    /* Check for overrun */
+    if (OverrunFlag)
+    {
+        rtmSetErrorStatus(equalizer_M, "Overrun");
+        return;
+    }
 
-  OverrunFlag = true;
+    OverrunFlag = true;
 
-  /* Save FPU context here (if necessary) */
-  /* Re-enable timer or interrupt here */
-  /* Set model inputs here */
+    /* Save FPU context here (if necessary) */
+    /* Re-enable timer or interrupt here */
+    /* Set model inputs here */
 
-  /* Step the model */
-  equalizer_step();
+    /* Step the model */
+    equalizer_step();
 
-  /* Get model outputs here */
+    /* Get model outputs here */
 
-  /* Indicate task complete */
-  OverrunFlag = false;
+    /* Indicate task complete */
+    OverrunFlag = false;
 
-  /* Disable interrupts here */
-  /* Restore FPU context here (if necessary) */
-  /* Enable interrupts here */
+    /* Disable interrupts here */
+    /* Restore FPU context here (if necessary) */
+    /* Enable interrupts here */
 }
 
 /*
@@ -68,24 +69,25 @@ void rt_OneStep(void)
  */
 int_T main(int_T argc, const char *argv[])
 {
-  /* Unused arguments */
-  (void)(argc);
-  (void)(argv);
+    /* Unused arguments */
+    (void)(argc);
+    (void)(argv);
 
-  /* Initialize model */
-  equalizer_initialize();
+    /* Initialize model */
+    equalizer_initialize();
 
-  /* Simulating the model step behavior (in non real-time) to
-   *  simulate model behavior at stop time.
-   */
-  while ((rtmGetErrorStatus(equalizer_M) == (NULL)) && !rtmGetStopRequested
-         (equalizer_M)) {
-    rt_OneStep();
-  }
+    /* Simulating the model step behavior (in non real-time) to
+     *  simulate model behavior at stop time.
+     */
+    while ((rtmGetErrorStatus(equalizer_M) == (NULL)) && !rtmGetStopRequested
+            (equalizer_M))
+    {
+        rt_OneStep();
+    }
 
-  /* Terminate model */
-  equalizer_terminate();
-  return 0;
+    /* Terminate model */
+    equalizer_terminate();
+    return 0;
 }
 
 /*

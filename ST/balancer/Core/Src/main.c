@@ -52,8 +52,8 @@ double w_inc = 0.4;
 double w_ovp = 0.2;
 double soc_init[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
 double soc[9];
-uint16_t adc_current [100];
-uint16_t adc_current_window [25];
+uint16_t adc_current [300];
+uint16_t adc_current_window [50];
 uint8_t pso_run = 1;
 uint8_t step_cnt_max = 0;
 
@@ -306,6 +306,7 @@ int main(void)
 
     HAL_TIM_Base_Start(&htim6);
     HAL_ADC_Start_IT(&hadc1);
+    HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED);
 
 
     memcpy(soc, soc_init, sizeof(soc));
@@ -433,6 +434,7 @@ int main(void)
                 memcpy(equalizer_U.SOC_init, soc_init, sizeof(equalizer_U.SOC_init));
                 memcpy(equalizer_U.SOC, soc, sizeof(equalizer_U.SOC));
                 memcpy(equalizer_U.I_meas, I_cells, sizeof(equalizer_U.I_meas));
+                equalizer_U.current_sensor_pb_ADC = adc_mean;
                 
                 equalizer_step();
                 
@@ -1416,7 +1418,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
     {
         cnt = 0;
         adc_sum = 0; 
-        sort_and_extract_window(adc_current, adc_current_size, adc_current_window_size, adc_current_size/4, adc_current_window);
+        sort_and_extract_window(adc_current, adc_current_size, adc_current_window_size, adc_current_size/2 - adc_current_window_size/2, adc_current_window);
         
         for(uint16_t i = 0; i < adc_current_window_size; i++)
         {

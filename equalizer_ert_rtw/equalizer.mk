@@ -2,7 +2,7 @@
 ## Makefile generated for component 'equalizer'. 
 ## 
 ## Makefile     : equalizer.mk
-## Generated on : Fri Jun 28 16:43:03 2024
+## Generated on : Thu Jul 04 12:10:16 2024
 ## Final product: $(RELATIVE_PATH_TO_ANCHOR)/equalizer.exe
 ## Product type : executable
 ## 
@@ -158,7 +158,7 @@ DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STAN
 ## SOURCE FILES
 ###########################################################################
 
-SRCS = $(START_DIR)/equalizer_ert_rtw/equalizer.c $(START_DIR)/equalizer_ert_rtw/rt_zcfcn.c
+SRCS = $(START_DIR)/equalizer_ert_rtw/equalizer.c $(START_DIR)/equalizer_ert_rtw/equalizer_data.c $(START_DIR)/equalizer_ert_rtw/rt_zcfcn.c
 
 MAIN_SRC = $(START_DIR)/equalizer_ert_rtw/ert_main.c
 
@@ -168,7 +168,7 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = equalizer.obj rt_zcfcn.obj
+OBJS = equalizer.obj equalizer_data.obj rt_zcfcn.obj
 
 MAIN_OBJ = ert_main.obj
 
@@ -289,6 +289,10 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 
 
 equalizer.obj : $(START_DIR)/equalizer_ert_rtw/equalizer.c
+	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
+
+
+equalizer_data.obj : $(START_DIR)/equalizer_ert_rtw/equalizer_data.c
 	$(CC) $(CFLAGS) -Fo"$@" $(subst /,\,"$<")
 
 
