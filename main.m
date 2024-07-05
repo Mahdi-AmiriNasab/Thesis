@@ -32,7 +32,7 @@ global no_ovp_plot_flag;
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
 
-run_number = 1; % select the run number you want to execute
+run_number = 2; % select the run number you want to execute
 [global_best, eq_step, stio] = run_selected_pso(soc, run_number);
 
 src_q_cls = zeros(50, 2);
