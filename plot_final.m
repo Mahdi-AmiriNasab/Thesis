@@ -22,6 +22,8 @@ function [eq_step] = plot_final(soc_in, mp, best_ep)
                                                 %           .                   step n  
 
 
+    soc_profile = [] ;
+
     soc = soc_in;
     itteration = 0;
     ep = best_ep;
@@ -58,15 +60,16 @@ function [eq_step] = plot_final(soc_in, mp, best_ep)
 
     tile_counter = tile_counter + 1;
     balancing_fig_counter = 1; % Initialize figure counter for balancing results
-    
+
+    soc_profile(1, :) = soc;
+
     while cluster.clt_max_count > 1
     
-
         % balancing
         [~, soc, ~, eq_step(itteration + 1)] = balance_soc(cluster, soc, mp, ep, 2200, 2000);
 
         % store charge profile
-        % soc_profile(itteration + 2, :) = soc;
+        soc_profile(itteration + 2, :) = soc;
         
         % clustering
         [cluster] = pso_DBSCAN(soc, mp, ep);
@@ -116,6 +119,31 @@ function [eq_step] = plot_final(soc_in, mp, best_ep)
         tile_counter = tile_counter + 1;
     end
 
+    % Define a cell array of markers for each line
+    markers = {'o', '+', '*', '.', 'x', 's', 'd', '^', 'v'};
+
+    figure('Name', 'SOC profile');
+    font_name = 'Helvetica';
+    font_size = 22;
+    line_width = 2.5;
+    tick_font_size = 18; % Add this line to set tick font size
+    
+    hold on;
+    for i = 1:size(soc_profile, 2)
+        plot(soc_profile(:, i), 'LineWidth', line_width, 'Marker', markers{i});
+    end
+    hold off;
+    
+    ylabel('%SOC', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set the color to black
+    xlabel('steps', 'FontName', font_name, 'FontSize', font_size, 'Color', 'k'); % Set x-axis color to black
+    
+    set(gca, 'FontSize', tick_font_size); % Set the tick font size
+    
+    % Set x-axis to integer values only without decimation
+    xticks(0:length(soc_profile)-1);
+    xtickformat('%.0f'); % Ensure no decimal points
+    
+    legend('Cell 1', 'Cell 2', 'Cell 3', 'Cell 4', 'Cell 5', 'Cell 6', 'Cell 7', 'Cell 8', 'Cell 9');
     % Ensure tile_counter is cleared at the very end
     clear soc_transfered V blc_time tile_counter
 end

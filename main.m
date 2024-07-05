@@ -32,7 +32,7 @@ global no_ovp_plot_flag;
 [lg_time, lg_inconsistency, lg_eq_overlap, ~] = log_clustering(soc, mp, ep_domain);
 no_ovp_plot_flag = 0;
 
-run_number = 2; % select the run number you want to execute
+run_number = 5; % select the run number you want to execute
 [global_best, eq_step, stio] = run_selected_pso(soc, run_number);
 
 src_q_cls = zeros(50, 2);
@@ -60,6 +60,7 @@ for i = 1:length(figHandles)
     saveas(fig, fullfile(folder_name, [fig_name, '.png'])); % Save as PNG for easier viewing
 end
 
+
 %% preparing output steps for for matlab simulink file
 for n = 1:length(eq_step)
     src_q_cls(n, :) = eq_step(n).source_queue_cells;
@@ -67,3 +68,7 @@ for n = 1:length(eq_step)
     src_trg_soc_av(n, 1) = eq_step(n).source_target_soc_av;
     dst_trg_soc_av(n, 1) = eq_step(n).destination_target_soc_av;
 end
+
+clear figHandles fig
+% Save the current workspace
+save(fullfile(folder_name, 'workspace.mat'));

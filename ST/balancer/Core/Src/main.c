@@ -1217,6 +1217,14 @@ void Set_DAC_Voltage(float voltage, uint32_t dac_channel)
     uint32_t value = (uint32_t)((voltage / 3.0f) * 4095);
     HAL_DAC_SetValue(&hdac1, dac_channel, DAC_ALIGN_12B_R, value);
 }
+
+void BSW_connection (uint8_t *bsw)
+{
+    if((*(bsw + 1) - *bsw) < 0) // check for the polarity
+        return 0;
+
+}
+
 void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
 {
     switch(trig_num)
