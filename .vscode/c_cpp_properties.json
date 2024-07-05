@@ -7,12 +7,14 @@
                 "${workspaceFolder}/codegen/lib/",
                 "${workspaceFolder}/ST/balancer/Core/Inc",
                 "${workspaceFolder}/ST/balancer/Drivers/STM32h7xx_HAL_Driver/Inc",
+                "${workspaceFolder}/Estimations_ert_rtw",
                 "${workspaceFolder}/ST/balancer/Drivers/STM32H7xx_HAL_Driver/Inc/Legacy",
                 "${workspaceFolder}/ST/balancer/Drivers/CMSIS/Device/ST/STM32H7xx/Include",
                 "${workspaceFolder}/ST/balancer/MDK-ARM/../Drivers/CMSIS/Include",
                 "${workspaceFolder}/ST/balancer/MDK-ARM/../../../codegen/lib/pso",
                 "C:\\Keil_v5\\ARM\\ARMCLANG\\include",
-                "${workspaceFolder}/codegen/includes"
+                "${workspaceFolder}/codegen/includes",
+                "${workspaceFolder}/ST/balancer/Core/Inc"
             ],
             "defines": [
                 "_DEBUG",

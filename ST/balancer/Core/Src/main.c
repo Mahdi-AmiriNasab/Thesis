@@ -30,6 +30,7 @@
 #include "pso_types.h"
 #include "rt_nonfinite.h"
 #include "equalizer.h"
+#include <Estimations.h>
 
 /* USER CODE END Includes */
 
@@ -43,10 +44,22 @@ typedef struct {
 } emxArray_struct1_T_1x100;
 #endif /* typedef_emxArray_struct1_T_1x100 */
 
+// DC DC variables
 float vol = 0.7, cur = 0.7;
 uint8_t current_percent = 20;
 float vout = 2.0;
 
+typedef enum 
+{
+	DCDC_Off,
+	DCDC_P2B,
+	DCDC_B2P
+}DCDCState;
+
+uint8_t num_neg = 1, num_pos = 1;
+DCDCState e_DCDC_status = DCDC_Off;
+
+// pso variables
 double w_time = 0.4;
 double w_inc = 0.4;
 double w_ovp = 0.2;
@@ -57,30 +70,29 @@ uint16_t adc_current_window [50];
 uint8_t pso_run = 1;
 uint8_t step_cnt_max = 0;
 
+emxArray_struct1_T_1x100 eq_step;
+struct2_T stio;
+
+uint8_t step_cnt = 0;
 
 
 GPIO_PinState dcdc_rst1 = 0, dcdc_rst2 = 0;
 GPIO_PinState main_relay = 0;
 uint8_t flag_equalizer_step = 0;
 
+// measurement
 uint16_t cnt = 0;
 uint32_t adc_mean = 0; 
 uint32_t adc_sum = 0; 
 
-typedef enum 
-{
-	DCDC_Off,
-	DCDC_P2B,
-	DCDC_B2P
-}DCDCState;
+void sort_and_extract_window(uint16_t *array, uint16_t array_size, uint16_t window_size, uint16_t start_index, uint16_t *window);
 
-  emxArray_struct1_T_1x100 eq_step;
-  struct2_T stio;
 
 GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
 GPIO_PinState pinstate_neg = GPIO_PIN_RESET;
-uint8_t num_neg = 1, num_pos = 1;
-DCDCState e_DCDC_status = DCDC_Off;
+
+// equalizer
+
 real_T I_cells [9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 /* External inputs (root inport signals with default storage) */
@@ -89,9 +101,70 @@ extern ExtU_equalizer_T equalizer_U;
 /* External outputs (root outports fed by signals with default storage) */
 extern ExtY_equalizer_T equalizer_Y;
 
-uint8_t step_cnt = 0;
+// estimations
 
-void sort_and_extract_window(uint16_t *array, uint16_t array_size, uint16_t window_size, uint16_t start_index, uint16_t *window);
+uint8_t flag_estimations_step = 0;
+float V_cells[9] = {3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3};
+
+double ntcTable[138] =
+{
+    183,    173,    163,    153,    144,    135,    120,    128,    113,
+    107,    101,    90,     85,     80.6,   76.02,  72.01,  68.14,
+    64.47,  61.03,  57.8,   54.77,  51.82,  49.28,  46,89,  44.62,
+    42.48,  40.45,  38.53,  36.70,  34.97,  33.33,  31.77,  30.25,
+    28.82,   27.45, 26.16,  24.94, 23.77,   22.67,  21.62,  20.63,  19.68,  18.78,  17.93,  17.12,   16.35, 15.62,
+    14.93,  14.26,  13.63,  13.04,  12.47,  11.92,  11.41, 10.91,
+    10.45,  10.00,  9.575,  9.170,  8.784,  8.416,  8.064, 7.730,
+    7.410,  7.106,  6.815,  6.538,  6.273,  6.020,  5.778, 5.548,
+    5.327,  5.117,  4.915,  4.723,  4.539,  4.363,  4.195, 4.034,
+    3.880,  3.733,  3.592,  3.457,  3.328,  3.204,  3.086, 2.972,
+    2.863,  2.759,  2.659,  2.564,  2.472,  2.384,  2.292, 2.218,
+    2.141,  2.066,  1.994,  1.926,  1.860,  1.796,  1.735, 1.677,
+    1.621,  1.567,  1.515,  1.465,  1.417,  1.371,  1.326, 1.284,
+    1.243,  1.203,  1.165,  1.128,  1.093,  1.059,  1.027, 0.9955,
+    0.9654, 0.9363, 0.9083, 0.8812, 0.8550, 0.8297, 0.8052, 0.7816,
+    0.7587, 0.7366, 0.7152, 0.6945, 0.6744, 0.6558, 0.6376, 0.6199,
+    0.6026, 0.5858
+};
+
+double OCV_Curve[101]=
+{   
+    4.1629, 4.1223, 4.1043, 4.0910, 4.0804, 4.0724, 4.0659, 4.0597, 4.0539, 4.0482, 4.0432,
+    4.0389, 4.0333, 4.0268, 4.0200, 4.0128, 4.0035, 3.9930, 3.9812, 3.9694, 3.9580, 3.9471,
+    3.9353, 3.9220, 3.9090, 3.8972, 3.8864, 3.8771, 3.8678, 3.8585, 3.8501, 3.8423, 3.8349,
+    3.8268, 3.8188, 3.8110, 3.8033, 3.7955, 3.7875, 3.7788, 3.7698, 3.7611, 3.7524, 3.7431,
+    3.7338, 3.7248, 3.7165, 3.7075, 3.6979, 3.6879, 3.6780, 3.6687, 3.6588, 3.6489, 3.6393,
+    3.6303, 3.6213, 3.6120, 3.6027, 3.5943, 3.5850, 3.5757, 3.5661, 3.5565, 3.5469, 3.5363,
+    3.5252, 3.5131, 3.5016, 3.4911, 3.4824, 3.4743, 3.4666, 3.4588, 3.4505, 3.4412, 3.4306,
+    3.4185, 3.4046, 3.3885, 3.3717, 3.3544, 3.3364, 3.3175, 3.2961, 3.2722, 3.2468, 3.2201,
+    3.1913, 3.1600, 3.1274, 3.0952, 3.0633, 3.0298, 2.9907, 2.9454, 2.8931, 2.8357, 2.7610,
+    2.6534, 2.5000
+};
+
+double OCV_Curve_new[21]={
+4.164, 4.098, 4.077, 4.050, 4.002, 3.951, 3.910, 3.854, 3.808, 3.766, 3.729, 3.686, 3.634, 3.578, 3.524, 3.489, 3.429, 3.341, 3.235, 3.125, 2.877};
+
+
+double OCV(double v){
+    uint16_t i;
+    for(i=0;i<101;i++){
+        if( v > OCV_Curve[i] ){
+            return 100 - (double)i;
+        }
+    }
+}
+
+double new_OCV(double v){
+    uint16_t i;
+    for(i=0;i<21;i++){
+        if( v > OCV_Curve_new[i] ){
+            if(i==0)
+                return 100;
+            return 100 - 5*(double)i + 5.00* (v - OCV_Curve_new[i]) / (OCV_Curve_new[i-1]-OCV_Curve_new[i]);
+        }
+    }
+}
+
 
 typedef struct {
     uint32_t DMA_LISR;
@@ -417,6 +490,19 @@ int main(void)
                 else
                     break;
             }
+        }
+
+        if(flag_estimations_step)
+        {
+            flag_estimations_step = 0;
+
+            Estimations_DW.x[0] = new_OCV(V_cells[0]) * 0.01;
+
+            Estimations_U.voltage = V_cells[0];
+            Estimations_U.current = I_cells[0];
+            Estimations_U.temp = 25;
+            Estimations_U.Cq = 2200;
+            Estimations_step();
         }
 		
         if(step_cnt < step_cnt_max) // if have any step to go
@@ -1409,7 +1495,7 @@ void HAL_ADC_ConvCpltCallback(ADC_HandleTypeDef *hadc)
     uint16_t adc_current_size = sizeof(adc_current)/sizeof(uint16_t);
     uint16_t adc_current_window_size = sizeof(adc_current_window)/sizeof(uint16_t);
     flag_equalizer_step = 1;
-
+    flag_estimations_step = 1;
     
     adc_current[cnt] = HAL_ADC_GetValue(&hadc1);
     cnt++;

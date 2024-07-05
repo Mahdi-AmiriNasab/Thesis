@@ -536,7 +536,7 @@ void Estimations_initialize(void)
   /* Registration code */
 
   /* initialize non-finites */
-  rt_InitInfAndNaN(sizeof(real_T));
+  rt_InitInfAndNaN(/*sizeof(real_T)*/);
 
   {
     int16_T i;
