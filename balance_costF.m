@@ -135,6 +135,8 @@ max_lg_eq_overlap = 50;
 if(lg_eq_overlap > max_lg_eq_overlap)
     lg_eq_overlap = max_lg_eq_overlap;
 end
+% return eq_value
+eq_overlap = lg_eq_overlap;
 
 % calculating maximum time just once
 if isempty(max_t_res)
@@ -146,7 +148,6 @@ lg_time = lg_time / max_t_res;
 lg_inconsistency = lg_inconsistency / max_lg_inconsistency;
 lg_eq_overlap = lg_eq_overlap / max_lg_eq_overlap;
 
-eq_overlap = lg_eq_overlap;
 
 %% combined cost
 cost = w_time * lg_time + w_inconsistency * lg_inconsistency + w_eq_overlap * lg_eq_overlap;

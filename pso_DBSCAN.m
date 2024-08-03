@@ -19,7 +19,7 @@ cluster.cell_cnt = length(socs);
 cluster.average = double(fix(mean(socs)));
 error = [(1:cell_cnt); socs - repmat(cluster.average, 1, cell_cnt)];
 
-dbscan_res_clm = db(error(2, :)', eps, minPts);
+dbscan_res_clm = db(socs', eps, minPts);
 %data_cluster = [error(2, :); dbscan_res_clm'];
 
 % finding adjacent clusters
@@ -52,7 +52,7 @@ for n = 1:cell_cnt
     % calculating average of each cluster
     mn_tmp = mean(nonzeros(cluster.clt_res_soc(s_index, :)));
     if(~isnan(mn_tmp))
-        cluster.clt_res_soc_av(s_index, 1) = fix(mn_tmp);
+        cluster.clt_res_soc_av(s_index, 1) = mn_tmp;
         cluster.clt_res_soc_av(s_index, 2) = s_index;
     end
 
@@ -112,33 +112,69 @@ if all(cluster.clt_noise_soc == 0)
 % if just one noise found
 elseif nnz(cluster.clt_noise_soc(2, :)) == 1
 
-	cluster.noise_status = e_noise_stat.noise_single_found;
+    cluster.noise_status = e_noise_stat.noise_single_found;
 
-	single_noise = cluster.clt_noise_soc(:, 1);
-	search_indices = 1 : cell_cnt;
-	if single_noise(2, 1) > cluster.average
+    % Identify the row with exactly one non-zero entry which indicates the noise
+    noise_row = find(arrayfun(@(x) nnz(cluster.clt_res_cell(x, :)) == 1, 1:size(cluster.clt_res_cell, 1)));
 
-		% maximum single noise
-		cluster.noise_max = single_noise;
+    min_distance = 255;
+    nearest_cluster_index = -1;
 
-		% minimum cluster as noise
-		non_zero_indices = cluster.clt_res_soc_av(:, 2) ~= 0;
-		cluster.noise_min(2, 1) = min(cluster.clt_res_soc_av(non_zero_indices, 1));
-		tmp = find(cluster.clt_res_soc_av(:, 1) == cluster.noise_min(2, 1));
-		cluster.noise_min(1, 1) = cluster.clt_res_soc_av(tmp(1, 1), 2);
-		
-	else
+    % Define adjacent clusters by examining rows directly before and after the noise row
+    adjacent_clusters = [];
 
-		% maximum cluster as noise
-		non_zero_indices = cluster.clt_res_soc_av(:, 2) ~= 0;
-		cluster.noise_max(2, 1) = max(cluster.clt_res_soc_av(non_zero_indices, 1));
-		tmp = find(cluster.clt_res_soc_av(:, 1) == cluster.noise_max(2, 1));
-		cluster.noise_max(1, 1) = cluster.clt_res_soc_av(tmp(1, 1), 2);
+    % Check for clusters immediately before the noise row
+    if noise_row > 1 && nnz(cluster.clt_res_cell(noise_row - 1, :)) > 1
+        adjacent_clusters = [adjacent_clusters; noise_row - 1];  % Use the row number directly as cluster index
+    end
 
-		% minimum single noise
-		cluster.noise_min = single_noise;
-		
-	end
+    % Check for clusters immediately after the noise row
+    if noise_row < size(cluster.clt_res_cell, 1) && nnz(cluster.clt_res_cell(noise_row + 1, :)) > 1
+        adjacent_clusters = [adjacent_clusters; noise_row + 1];  % Use the row number directly as cluster index
+    end
+
+    % Iterate through adjacent clusters to find the nearest one
+    for c = adjacent_clusters'
+        cluster_index = c;  % The adjacent cluster index is the row number
+        if cluster_index <= size(cluster.clt_res_soc_av, 1) && cluster.clt_res_soc_av(cluster_index, 2) ~= 0
+            cluster_average = cluster.clt_res_soc_av(cluster_index, 1);
+            % Calculate the distance from the noise to the cluster average
+            current_distance = abs(cluster.clt_noise_soc(2) - cluster_average);
+
+            if current_distance < min_distance
+                min_distance = current_distance;
+                nearest_cluster_index = cluster_index;
+            end
+        end
+    end
+
+    % Continuing from the previous code where we find the nearest cluster
+    if nearest_cluster_index > 0
+        nearest_cluster = nearest_cluster_index;
+
+        % Retrieve SOC values for noise and the nearest cluster
+        noise_SOC = cluster.clt_noise_soc(2);
+        nearest_cluster_SOC = cluster.clt_res_soc_av(find(cluster.clt_res_soc_av(:, 2) == nearest_cluster, 1), 1);
+
+        % Compare and assign to noise_max or noise_min
+        if noise_SOC > nearest_cluster_SOC
+            % Noise is greater, so it becomes noise_max
+            cluster.noise_max(1) = noise_row;  % Row number of the noise
+            cluster.noise_max(2) = noise_SOC;  % SOC value of the noise
+            cluster.noise_min(1) = nearest_cluster;  % Row number of the nearest cluster
+            cluster.noise_min(2) = nearest_cluster_SOC;  % SOC value of the nearest cluster
+        else
+            % Nearest cluster is greater or equal, so it becomes noise_max
+            cluster.noise_max(1) = nearest_cluster;  % Row number of the nearest cluster
+            cluster.noise_max(2) = nearest_cluster_SOC;  % SOC value of the nearest cluster
+            cluster.noise_min(1) = noise_row;  % Row number of the noise
+            cluster.noise_min(2) = noise_SOC;  % SOC value of the noise
+        end
+    else
+        % If no adjacent clusters are available or valid, handle accordingly
+        % This could involve setting a default behavior or notifying of an error
+        % Consider what should happen if no valid comparison can be made
+    end
 
 % if several noises available
 else

@@ -86,6 +86,7 @@ uint32_t adc_mean = 0;
 uint32_t adc_sum = 0; 
 
 void sort_and_extract_window(uint16_t *array, uint16_t array_size, uint16_t window_size, uint16_t start_index, uint16_t *window);
+HAL_StatusTypeDef BSW_connection (uint8_t *bsw);
 
 
 GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
@@ -268,10 +269,11 @@ DebugInfo debugInfo;
 
 
 // FDCAN filters
+const uint8_t myid = 8; 
 
 FDCAN_FilterTypeDef filter_3 =
 {
-	.FilterID1 = 0x003,
+	.FilterID1 = myid * 3,
 	.IdType = FDCAN_STANDARD_ID,
 	.FilterIndex = 0,
 	.FilterConfig = FDCAN_FILTER_TO_RXBUFFER,
@@ -281,7 +283,7 @@ FDCAN_FilterTypeDef filter_3 =
 
 FDCAN_FilterTypeDef filter_4 =
 {
-	.FilterID1 = 0x004,
+	.FilterID1 = myid * 3 + 1,
 	.IdType = FDCAN_STANDARD_ID,
 	.FilterIndex = 1,
 	.FilterConfig = FDCAN_FILTER_TO_RXBUFFER,
@@ -291,7 +293,7 @@ FDCAN_FilterTypeDef filter_4 =
 
 FDCAN_FilterTypeDef filter_5 =
 {
-	.FilterID1 = 0x005,
+	.FilterID1 = myid * 3 + 2,
 	.IdType = FDCAN_STANDARD_ID,
 	.FilterIndex = 2,
 	.FilterConfig = FDCAN_FILTER_TO_RXBUFFER,
@@ -458,14 +460,10 @@ int main(void)
 			fdcan_hal_status = HAL_FDCAN_DeInit(&hfdcan1);
 			fdcan_hal_status = HAL_FDCAN_Init(&hfdcan1);
 			fdcan_hal_status = HAL_FDCAN_Start(&hfdcan1);
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &HIBfilterConfig);	// HIB reception filter configuration
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &HeaterXNfilterConfig);	// HIB reception filter configuration
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &CompressorfilterConfig);	// compressor reception filter configuration
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &HeaterKUSfilterConfig);	// compressor reception filter configuration
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &VCU_Info1filterConfig);// VCU reception filter configuration
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &VCU_Info2filterConfig);	// compressor reception filter configuration
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &BMSfilterConfig);	// BMS reception filter configuration
-			fdcan_hal_status = HAL_FDCAN_ConfigFilter(&hfdcan1, &VCU_Info3filterConfig);	// VCU reception filter configuration
+            // reception filters
+            HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_3);	        
+            HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_4);	
+            HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_5);
 			
 			hfdcan1.Instance->ILE = FDCAN_INTERRUPT_LINE0;
 			
@@ -481,25 +479,22 @@ int main(void)
 			can_restart_flag = 0; // clear the flag
 		}
 
-		if(hib_header.Identifier == 0x003)
+		if(filter_3_header.Identifier == myid * 3)
 		{
-			// hvacdata->blower				= 	(hib_payload[FAN_SPEED_Index]				&	(FAN_SPEED_COR_BITS << FAN_SPEED_POS)) >> FAN_SPEED_POS;
-			
-			// hvacdata->ventilator			=	(hib_payload[VENT_SELECT_Index]				&	(VENT_SELECT_COR_BITS << VENT_SELECT_POS)) >> VENT_SELECT_POS;
-			
-			// hvacdata->Air_circulation		=	(hib_payload[AIR_DISTRIBUTION_Index]		&	(1 << AIR_DISTRIBUTION_POS)) >> AIR_DISTRIBUTION_POS;
-			
-			// hvacdata->temp 					=	(hib_payload[TEMP_LEVEL_Index]				&	(TEMP_LEVEL_COR_BITS <<	TEMP_LEVEL_POS)) >> TEMP_LEVEL_POS;
 
-			// hvacdata->Air_Conditioning		=	(hib_payload[AC_STAT_Index]					&	(1 << AC_STAT_POS)) >> AC_STAT_POS;
-			// hvacdata->Air_Conditioning_Fast	=	(hib_payload[AC_MAX_STAT_Index]				&	(1 << AC_MAX_STAT_POS)) >>AC_MAX_STAT_POS;
+            filter_3_header.Identifier = 0;
+		}
 
-			// if(hvacdata->Air_Conditioning_Fast == State_ON)
-			// 	hvacdata->Air_Conditioning = State_OFF;
+        if(filter_3_header.Identifier == myid * 3 + 1)
+		{
 
-			// hib_header.Identifier = 0; // clear the identifire 
+            filter_3_header.Identifier = 0;
+		}
 
-			// hvacdata->timeout = 0;
+        if(filter_3_header.Identifier == myid * 3 + 1)
+		{
+
+            filter_3_header.Identifier = 0;
 		}
 
 
@@ -1218,11 +1213,38 @@ void Set_DAC_Voltage(float voltage, uint32_t dac_channel)
     HAL_DAC_SetValue(&hdac1, dac_channel, DAC_ALIGN_12B_R, value);
 }
 
-void BSW_connection (uint8_t *bsw)
+HAL_StatusTypeDef BSW_connection (uint8_t *bsw)
 {
-    if((*(bsw + 1) - *bsw) < 0) // check for the polarity
-        return 0;
+    static uint8_t last_possw_state = 0; GPIO_PinState last_possw_action = GPIO_PIN_RESET;
+    static uint8_t last_negsw_state = 0; GPIO_PinState last_negsw_action = GPIO_PIN_RESET;
+    uint8_t possw = *bsw;
+    uint8_t negsw = *(bsw+1);
 
+
+    if((negsw - possw) < 0) // check for the polarity
+        return HAL_ERROR;
+
+    if(last_possw_state != possw)
+    {
+        // reset the last switches
+        set_reset_trig_pos(last_possw_state, GPIO_PIN_RESET);
+        set_reset_trig_neg(last_negsw_state, GPIO_PIN_RESET);
+        
+        // make sure the switches are off
+        HAL_Delay(50);
+
+        // set the  switches
+        set_reset_trig_pos(possw, GPIO_PIN_SET);
+        set_reset_trig_neg(negsw, GPIO_PIN_SET);
+
+        // save the record
+        last_possw_state = possw;
+        last_negsw_state = negsw;
+        
+    }
+
+    return HAL_OK;
+ 
 }
 
 void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
@@ -1338,6 +1360,16 @@ void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action)
         break;
         
         default:
+            HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_2_GPIO_Port, trig_neg_2_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_3_GPIO_Port, trig_neg_3_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_4_GPIO_Port, trig_neg_4_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_5_GPIO_Port, trig_neg_5_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_6_GPIO_Port, trig_neg_6_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_7_GPIO_Port, trig_neg_7_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_8_GPIO_Port, trig_neg_8_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_9_GPIO_Port, trig_neg_9_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_neg_10_GPIO_Port, trig_neg_10_Pin, GPIO_PIN_RESET);
             // Error_Handler();
         break;
     }
@@ -1456,6 +1488,15 @@ void set_reset_trig_pos(uint8_t trig_num, GPIO_PinState action)
         break;
         
         default:
+            HAL_GPIO_WritePin(trig_pos_1_GPIO_Port, trig_pos_1_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_2_GPIO_Port, trig_pos_2_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_3_GPIO_Port, trig_pos_3_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_4_GPIO_Port, trig_pos_4_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_5_GPIO_Port, trig_pos_5_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_6_GPIO_Port, trig_pos_6_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_7_GPIO_Port, trig_pos_7_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_8_GPIO_Port, trig_pos_8_Pin, GPIO_PIN_RESET);
+            HAL_GPIO_WritePin(trig_pos_9_GPIO_Port, trig_pos_9_Pin, GPIO_PIN_RESET);
             // Error_Handler();
         break;
     }

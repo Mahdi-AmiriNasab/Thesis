@@ -2,8 +2,11 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 
 	%% init
 	blc_time = 0;
-	blc_range = ep;
-	soc_out = soc_in;
+    blc_range = ep;
+    blc_range_div = 2; % default value
+    flag_range_div_reached = 0; % used increase the blc_range_div to keep balancing more steps (higher resolution) to ensure the clustering merge 
+    range_div_reached_step_cnt = 0; % to count steps after reaching the range division 
+    soc_out = soc_in;
     soc_transfered_s = 0; soc_transfered_d = 0;
 	soc_transfered = 0;
 	cell_count = length(soc_in);
@@ -149,19 +152,7 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 	eq_step.source_queue_cells = [source_neighbor_lower_cell + 1, source_neighbor_upper_cell - 1];
 	eq_step.destination_queue_cells = [destination_neighbor_lower_cell + 1, destination_neighbor_upper_cell - 1];
 	 
-	%% calculate soc step to balance
-	% assign step = 1 to lower cluster member count
-	if destination_clt_cnt < source_clt_cnt
 
-		step_source = (blc_range/2) / source_clt_cnt * destination_clt_cnt; 
-		step_destination = (blc_range/2);
-
-	else
-
-		step_source = (blc_range/2);
-		step_destination = (blc_range/2) / destination_clt_cnt * source_clt_cnt;
-
-	end
 
 	
 	
@@ -180,17 +171,21 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 
 	%% equalizing
 
-	while soc_mismatch
+    while soc_mismatch
 
-		% % clustering
-		% [cluster] = pso_DBSCAN(soc_out, mp, ep);
+        %% calculate soc step to balance
+        % assign step = 1 to lower cluster member count
+        if destination_clt_cnt < source_clt_cnt
 
-        % % sorting cluster.clt_res_soc_av 
-	    % V = cluster.clt_res_soc_av;
-	    % V(V(:,2)==0,2) = Inf;
-	    % cluster.clt_res_soc_av = sortrows(V, 2,'ascend');
-	    % cluster.clt_res_soc_av(cluster.clt_res_soc_av(:,2)==Inf,2) = 0;
-        % clear V
+            step_source = (blc_range/blc_range_div) / source_clt_cnt * destination_clt_cnt; 
+            step_destination = (blc_range/blc_range_div);
+
+        else
+
+            step_source = (blc_range/blc_range_div);
+            step_destination = (blc_range/blc_range_div) / destination_clt_cnt * source_clt_cnt;
+
+        end
 
 		% soc sweep
 		sweep_source = sweep_source - step_source;
@@ -202,23 +197,39 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 		if source_neighbor_lower_cell - 1 > 0
 
 			% subtract noise value and lower neighbor value
-			value_lower_diff_s = abs(soc_out(1, source_neighbor_lower_cell) - sweep_source); 
+			value_lower_diff_s = abs(sweep_source - soc_out(1, source_neighbor_lower_cell)); 
 			% if the differential is within the valid range
-			if value_lower_diff_s < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
-				eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
-			end
+            if value_lower_diff_s < blc_range 
+                flag_range_div_reached = 1;
+                blc_range_div = 10;
+                range_div_reached_step_cnt = range_div_reached_step_cnt + 1;
+                if value_lower_diff_s < blc_range/2
+                    flag_range_div_reached = 0;
+                    range_div_reached_step_cnt = 0;
+                    blc_range_div = 2; % reset the divider
+                    soc_mismatch = 0; % the neighbors are balanced
+                    eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
+                end
+            end
 				
 		end
 		% watch for the maximum boundaries
 		if source_neighbor_upper_cell + 1 <= cell_count
 
 			% subtract noise value and lower neighbor value
-			value_higher_diff_s = abs(soc_out(1, source_neighbor_upper_cell) - sweep_source); 
+			value_higher_diff_s = abs(sweep_source - soc_out(1, source_neighbor_upper_cell)); 
 			% if the differential is within the valid range
 			if value_higher_diff_s < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
-				eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
+                flag_range_div_reached = 1;
+                blc_range_div = 10;
+                range_div_reached_step_cnt = range_div_reached_step_cnt + 1;
+                if value_higher_diff_s < blc_range/2
+                    flag_range_div_reached = 0;
+                    range_div_reached_step_cnt = 0;
+                    blc_range_div = 2; % reset the divider
+				    soc_mismatch = 0; % the neighbors are balanced
+                    eq_step.source_target_soc_av = sweep_source;	% store the target soc of neighbors
+                end
 			end
 		end
 
@@ -232,8 +243,16 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 			value_lower_diff_d = abs(soc_out(1, destination_neighbor_lower_cell) - sweep_destination); 
 			% if the differential is within the valid range
 			if value_lower_diff_d < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
-				eq_step.destination_target_soc_av = sweep_destination;	% store the target soc of neighbors
+                flag_range_div_reached = 1;
+                blc_range_div = 10;
+                range_div_reached_step_cnt = range_div_reached_step_cnt + 1;
+                if value_lower_diff_d < blc_range/2
+                    flag_range_div_reached = 0;
+                    range_div_reached_step_cnt = 0;
+                    blc_range_div = 2; % reset the divider
+                    soc_mismatch = 0; % the neighbors are balanced
+                    eq_step.destination_target_soc_av = sweep_destination;	% store the target soc of neighbors
+                end
 			end
 				
 		end
@@ -244,8 +263,16 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
 			value_higher_diff_d = abs(soc_out(1, destination_neighbor_upper_cell) - sweep_destination); 
 			% if the differential is within the valid range
 			if value_higher_diff_d < blc_range 
-				soc_mismatch = 0; % the neighbors are balanced
-				eq_step.destination_target_soc_av = sweep_destination; % store the target soc of neighbors	
+                flag_range_div_reached = 1;
+                blc_range_div = 10;
+                range_div_reached_step_cnt = range_div_reached_step_cnt + 1;
+                if value_higher_diff_d < blc_range/2
+                    flag_range_div_reached = 0;
+                    range_div_reached_step_cnt = 0;
+                    blc_range_div = 2; % reset the divider
+                    soc_mismatch = 0; % the neighbors are balanced
+                    eq_step.destination_target_soc_av = sweep_destination; % store the target soc of neighbors
+                end	
 			end
 		end
 
@@ -294,7 +321,7 @@ function [soc_transfered, soc_out, blc_time, eq_step] = balance_soc(cluster, soc
         if coder.target('MATLAB')
             clear dec inc
         end
-	end
+    end
 
 		%% calculate balancing time
 		source_batt_number = source_clt_cnt;
