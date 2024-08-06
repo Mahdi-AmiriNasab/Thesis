@@ -14,10 +14,17 @@ cell_cap_Ah = 2.2;
 %soc = fix(rand (1, cell_count) * 100);
 
 %soc = [62	58	96	8	50	52	9	90	88];
-soc = [16   16  50  27  27  23  22  73  73]; % main article
+%soc = [16   16  50  27  27  23  22  73  73]; % main article
 
 % Research on two-stage equalization strategy based on fuzzy logic control for lithium-ion battery packs
 %soc = [76   73  71  68  64  62  60  58  57]; 
+
+% A fast active balancing strategy based on model predictive control for lithium-ion battery packs
+
+%soc = [ 95 72  63  46  46  82  39  54  31];
+
+%A Novel Active Equalization Method for Series-Connected Battery Packs Based on Clustering Analysis With Genetic Algorithm
+soc = [51, 52, 70, 42, 53, 59, 63, 52, 49];%, 60, 49, 56];;
 
 if any(soc == 0)
     error("soc equal to 0 is not supported")
@@ -44,7 +51,7 @@ no_ovp_plot_flag = 0;
 % select the run number you want to execute
 
 
-run_number = 9; [global_best, eq_step, stio] = run_selected_pso(soc, run_number);
+run_number = 10; [global_best, eq_step, stio] = run_selected_pso(soc, run_number);
 %[global_best, eq_step, stio] = pso(soc, 2, 0.2,0.7,0.1);
 %[cost, eq_step, soc, time, inconsistency, eq_overlap] = balance_costF(soc_init, 2, 0.400, 0, 0, 0);global_best.position = 0.400;
 
