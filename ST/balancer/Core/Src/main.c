@@ -56,14 +56,16 @@ typedef enum
 	DCDC_B2P
 }DCDCState;
 
-uint8_t num_neg = 1, num_pos = 1;
+uint8_t connect_switches [] = {0, 0};
+
 DCDCState e_DCDC_status = DCDC_Off;
 
 // pso variables
 double w_time = 0.4;
 double w_inc = 0.4;
 double w_ovp = 0.2;
-double soc_init[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
+// double soc_init[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
+double soc_init[9] = {  70,     70,     70,     70,     70,     70,     70,     20,     20};
 double soc[9];
 uint16_t adc_current [300];
 uint16_t adc_current_window [50];
@@ -86,8 +88,9 @@ uint32_t adc_mean = 0;
 uint32_t adc_sum = 0; 
 
 void sort_and_extract_window(uint16_t *array, uint16_t array_size, uint16_t window_size, uint16_t start_index, uint16_t *window);
-HAL_StatusTypeDef BSW_connection (uint8_t *bsw);
-
+HAL_StatusTypeDef BSW_connection (uint8_t *bsw, DCDCState e_DCDC_st);
+HAL_StatusTypeDef BSW_status = HAL_ERROR;
+uint8_t en_controller = 1;
 
 GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
 GPIO_PinState pinstate_neg = GPIO_PIN_RESET;
@@ -447,6 +450,11 @@ int main(void)
     HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_WARNING, 0);
 	HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_LOGGING_OVERFLOW, 0);
 
+   uint32_t error_flags = 0x00000000;
+
+    Set_DAC_Voltage(vol, DAC_CHANNEL_1);
+    Set_DAC_Voltage(cur, DAC_CHANNEL_2);
+    
 
   
 	while(1)
@@ -499,9 +507,10 @@ int main(void)
 
 
         set_reset_trig_DCDC(e_DCDC_status);
-        set_reset_trig_neg(num_neg, pinstate_neg);
-        set_reset_trig_pos(num_pos, pinstate_pos);
+        // set_reset_trig_neg(num_neg, pinstate_neg);
+        // set_reset_trig_pos(num_pos, pinstate_pos);
         // GetDebugInfo(&debugInfo);
+
 
         
 		if(e_DCDC_status == DCDC_Off)
@@ -520,29 +529,7 @@ int main(void)
 			dcdc_rst1 = 0;
 		}
 
-        if(current_percent > 100)
-            current_percent = 100;	
-		cur = current_percent * 0.012;
-
-        if(vout > 37)
-            vout = 37;
-        if(vout < 0)
-            vout = 0;
-        vol = 0.94 - vout * 0.0256;
-
-        if(vol > 1)
-            vol = 1;
-        if(vol < 0)
-            vol = 0;
         
-        Set_DAC_Voltage(vol, DAC_CHANNEL_1);
-        Set_DAC_Voltage(cur, DAC_CHANNEL_2);
-
-        // if(__HAL_ADC_GET_FLAG(&hadc1, ADC_FLAG_EOC))
-        // {
-
-        // }
-
         if(pso_run)
         {
             pso_run = 0;
@@ -576,7 +563,7 @@ int main(void)
             Estimations_step();
         }
 		
-        if(step_cnt < step_cnt_max) // if have any step to go
+        if(step_cnt < step_cnt_max && en_controller) // if have any step to go
         {
             if(flag_equalizer_step)
             {
@@ -590,6 +577,10 @@ int main(void)
                 equalizer_U.dst_trg_soc_av = eq_step.data[step_cnt].destination_target_soc_av.data[0] ? eq_step.data[step_cnt].destination_target_soc_av.data[0] : 255;
                 memcpy(equalizer_U.SOC_init, soc_init, sizeof(equalizer_U.SOC_init));
                 memcpy(equalizer_U.SOC, soc, sizeof(equalizer_U.SOC));
+                if(BSW_status == HAL_OK)
+                    I_cells[connect_switches[0] - 1] = equalizer_Y.current_sensor_pb_Iout / 1000;
+                else
+                    memset(I_cells, 0, sizeof(I_cells));
                 memcpy(equalizer_U.I_meas, I_cells, sizeof(equalizer_U.I_meas));
                 equalizer_U.current_sensor_pb_ADC = adc_mean;
                 
@@ -609,6 +600,83 @@ int main(void)
                 }   
             }     
         }
+
+
+
+        // if(__HAL_ADC_GET_FLAG(&hadc1, ADC_FLAG_EOC))
+        // {
+
+        // }
+
+        if(abs(equalizer_Y.current_sensor_pb_Iout) > 1200)
+        {
+            error_flags |= 1 << 0;
+        }
+        else
+        {
+            error_flags &= ~(0x00000001 << 0);
+        }
+
+        if(error_flags)
+        {
+
+            set_reset_trig_DCDC(DCDC_Off);
+            connect_switches[0] = 0; connect_switches[1] = 0; 
+            en_controller = 0;
+            HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_SET);
+        }
+        else
+        {
+            HAL_GPIO_WritePin(LED3_GPIO_Port, LED3_Pin, GPIO_PIN_RESET);
+        }
+        if(en_controller)
+        {
+            connect_switches[0] = equalizer_Y.sw_pos;
+            connect_switches[1] = equalizer_Y.sw_neg;
+        }
+        
+        BSW_status = BSW_connection(connect_switches, e_DCDC_status);
+        if(en_controller)
+        {
+            if(BSW_status == HAL_OK)
+            {
+                if(equalizer_Y.dir == 0)
+                {
+                    e_DCDC_status = DCDC_P2B;
+                    vout = 13;
+                }
+                else if(equalizer_Y.dir == 1)
+                {
+                    e_DCDC_status = DCDC_B2P;
+                    vout =  (connect_switches[1] - connect_switches[0] + 1) * 4;            
+                }
+                else
+                    e_DCDC_status = DCDC_Off;
+            }
+            else
+                e_DCDC_status = DCDC_Off;
+        }
+
+        if(current_percent > 100)
+            current_percent = 100;	
+		cur = current_percent * 0.012;
+
+        if(vout > 37)
+            vout = 37;
+        if(vout < 0)
+            vout = 0;
+        vol = 0.94 - vout * 0.0256;
+
+        if(vol > 1)
+            vol = 1;
+        if(vol < 0)
+            vol = 0;
+        
+        Set_DAC_Voltage(vol, DAC_CHANNEL_1);
+        Set_DAC_Voltage(cur, DAC_CHANNEL_2);
+
+        
+
 	}
 
 
@@ -1213,19 +1281,26 @@ void Set_DAC_Voltage(float voltage, uint32_t dac_channel)
     HAL_DAC_SetValue(&hdac1, dac_channel, DAC_ALIGN_12B_R, value);
 }
 
-HAL_StatusTypeDef BSW_connection (uint8_t *bsw)
+HAL_StatusTypeDef BSW_connection (uint8_t *bsw, DCDCState e_DCDC_st)
 {
-    static uint8_t last_possw_state = 0; GPIO_PinState last_possw_action = GPIO_PIN_RESET;
-    static uint8_t last_negsw_state = 0; GPIO_PinState last_negsw_action = GPIO_PIN_RESET;
+    static uint8_t last_possw_state = 0xFF; GPIO_PinState last_possw_action = GPIO_PIN_RESET;
+    static uint8_t last_negsw_state = 0xFF; GPIO_PinState last_negsw_action = GPIO_PIN_RESET;
     uint8_t possw = *bsw;
     uint8_t negsw = *(bsw+1);
 
 
-    if((negsw - possw) < 0) // check for the polarity
-        return HAL_ERROR;
+    if  (((negsw - possw) < 0)      || // check for the polarity]
+        (negsw < 1 || negsw > 9 )   ||  // check the range for negative
+        (possw < 1 || possw > 9 ))      // check the range for positive
+        
+            return HAL_ERROR;
+    
+    
 
     if(last_possw_state != possw)
     {
+        if(e_DCDC_st != DCDC_Off)
+            return HAL_BUSY;
         // reset the last switches
         set_reset_trig_pos(last_possw_state, GPIO_PIN_RESET);
         set_reset_trig_neg(last_negsw_state, GPIO_PIN_RESET);
