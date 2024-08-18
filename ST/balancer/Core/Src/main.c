@@ -454,9 +454,10 @@ int main(void)
 
     Set_DAC_Voltage(vol, DAC_CHANNEL_1);
     Set_DAC_Voltage(cur, DAC_CHANNEL_2);
-    
 
-  
+    Estimations_initialize();
+
+
 	while(1)
 	{
 
@@ -555,11 +556,60 @@ int main(void)
             flag_estimations_step = 0;
 
             Estimations_DW.x[0] = new_OCV(V_cells[0]) * 0.01;
+            Estimations_DW.x_a[0] = new_OCV(V_cells[1]) * 0.01;
+            Estimations_DW.x_av[0] = new_OCV(V_cells[2]) * 0.01;
+            Estimations_DW.x_n[0] = new_OCV(V_cells[3]) * 0.01;
+            Estimations_DW.x_d[0] = new_OCV(V_cells[4]) * 0.01;
+            Estimations_DW.x_m[0] = new_OCV(V_cells[5]) * 0.01;
+            Estimations_DW.x_j[0] = new_OCV(V_cells[6]) * 0.01;
+            Estimations_DW.x_e[0] = new_OCV(V_cells[7]) * 0.01;
+            Estimations_DW.x_l[0] = new_OCV(V_cells[8]) * 0.01;
 
-            Estimations_U.voltage = V_cells[0];
-            Estimations_U.current = I_cells[0];
-            Estimations_U.temp = 25;
-            Estimations_U.Cq = 2200;
+            Estimations_U.voltage1 = V_cells[0];
+            Estimations_U.current1 = I_cells[0];
+            Estimations_U.temp1 = 25;
+            Estimations_U.Cq1 = 2200;
+
+            Estimations_U.voltage2 = V_cells[1];
+            Estimations_U.current2 = I_cells[1];
+            Estimations_U.temp2 = 25;
+            Estimations_U.Cq2 = 2200;
+
+            Estimations_U.voltage3 = V_cells[2];
+            Estimations_U.current3 = I_cells[2];
+            Estimations_U.temp3 = 25;
+            Estimations_U.Cq3 = 2200;
+
+            Estimations_U.voltage4 = V_cells[3];
+            Estimations_U.current4 = I_cells[3];
+            Estimations_U.temp4 = 25;
+            Estimations_U.Cq4 = 2200;
+
+            Estimations_U.voltage5 = V_cells[4];
+            Estimations_U.current5 = I_cells[4];
+            Estimations_U.temp5 = 25;
+            Estimations_U.Cq5 = 2200;
+
+            Estimations_U.voltage6 = V_cells[5];
+            Estimations_U.current6 = I_cells[5];
+            Estimations_U.temp6 = 25;
+            Estimations_U.Cq6 = 2200;
+
+            Estimations_U.voltage7 = V_cells[6];
+            Estimations_U.current7 = I_cells[6];
+            Estimations_U.temp7 = 25;
+            Estimations_U.Cq7 = 2200;
+
+            Estimations_U.voltage8 = V_cells[7];
+            Estimations_U.current8 = I_cells[7];
+            Estimations_U.temp8 = 25;
+            Estimations_U.Cq8 = 2200;
+
+            Estimations_U.voltage9 = V_cells[8];
+            Estimations_U.current9 = I_cells[8];
+            Estimations_U.temp9 = 25;
+            Estimations_U.Cq9 = 2200;
+
             Estimations_step();
         }
 		
@@ -608,7 +658,7 @@ int main(void)
 
         // }
 
-        if(abs(equalizer_Y.current_sensor_pb_Iout) > 1200)
+        if(abs(equalizer_Y.current_sensor_pb_Iout) > 1500)
         {
             error_flags |= 1 << 0;
         }
@@ -643,12 +693,12 @@ int main(void)
                 if(equalizer_Y.dir == 0)
                 {
                     e_DCDC_status = DCDC_P2B;
-                    vout = 13;
+                    vout = 14;
                 }
                 else if(equalizer_Y.dir == 1)
                 {
                     e_DCDC_status = DCDC_B2P;
-                    vout =  (connect_switches[1] - connect_switches[0] + 1) * 4;            
+                    vout =  (connect_switches[1] - connect_switches[0] + 1) * 5;            
                 }
                 else
                     e_DCDC_status = DCDC_Off;

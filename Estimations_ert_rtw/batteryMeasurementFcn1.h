@@ -3,15 +3,13 @@
  *
  * Code generated for Simulink model 'Estimations'.
  *
- * Model version                  : 1.373
- * Simulink Coder version         : 9.4 (R2020b) 29-Jul-2020
- * C/C++ source code generated on : Wed May 11 15:23:20 2022
+ * Model version                  : 7.6
+ * Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
+ * C/C++ source code generated on : Sun Aug 18 17:23:11 2024
  */
 
 #ifndef RTW_HEADER_batteryMeasurementFcn1_h_
 #define RTW_HEADER_batteryMeasurementFcn1_h_
-
-/* Shared type includes */
 #include "rtwtypes.h"
 
 extern real_T batteryMeasurementFcn1(const real_T rtu_x1[3]);

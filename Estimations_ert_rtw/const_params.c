@@ -3,23 +3,26 @@
  *
  * Code generation for model "Estimations".
  *
- * Model version              : 1.373
- * Simulink Coder version : 9.4 (R2020b) 29-Jul-2020
- * C source code generated on : Wed May 11 14:53:07 2022
+ * Model version              : 7.0
+ * Simulink Coder version : 9.9 (R2023a) 19-Nov-2022
+ * C source code generated on : Sun Aug 18 17:04:06 2024
  */
 #include "rtwtypes.h"
 
-extern const real_T rtCP_pooled_1rKFvHuziWqE[9];
-const real_T rtCP_pooled_1rKFvHuziWqE[9] = { 0.1, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
-  0.0, 1.0 } ;
+extern const uint32_T rtCP_pooled_5V6edGmokdkO[2];
+const uint32_T rtCP_pooled_5V6edGmokdkO[2] = { 20U, 4U } ;
 
-extern const real_T rtCP_pooled_2jnfhQ065QNq[21];
-const real_T rtCP_pooled_2jnfhQ065QNq[21] = { 0.0, 0.05, 0.1, 0.15, 0.2, 0.25,
+extern const real_T rtCP_pooled_BbJYiBpMf0uY[21];
+const real_T rtCP_pooled_BbJYiBpMf0uY[21] = { 0.0, 0.05, 0.1, 0.15, 0.2, 0.25,
   0.3, 0.35, 0.4, 0.45, 0.5, 0.55, 0.6, 0.65, 0.7, 0.75, 0.8, 0.85, 0.9, 0.95,
   1.0 } ;
 
-extern const real_T rtCP_pooled_9QtqlsFRacs6[105];
-const real_T rtCP_pooled_9QtqlsFRacs6[105] = { 0.153117539, 0.114898532,
+extern const real_T rtCP_pooled_Em3WrKCz53sD[9];
+const real_T rtCP_pooled_Em3WrKCz53sD[9] = { 0.1, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+  0.0, 1.0 } ;
+
+extern const real_T rtCP_pooled_OVHpLMSFPeq1[105];
+const real_T rtCP_pooled_OVHpLMSFPeq1[105] = { 0.153117539, 0.114898532,
   0.101253199, 0.093222981, 0.089962592, 0.089117306, 0.088090887, 0.087366356,
   0.086883336, 0.086038049, 0.08477012, 0.085313519, 0.085373896, 0.085434274,
   0.085977672, 0.086641825, 0.087124846, 0.087004091, 0.087305979, 0.089600327,
@@ -39,8 +42,12 @@ const real_T rtCP_pooled_9QtqlsFRacs6[105] = { 0.153117539, 0.114898532,
   0.016271988, 0.01645346, 0.01645346, 0.015788063, 0.014396777, 0.013973343,
   0.015727572 } ;
 
-extern const real_T rtCP_pooled_SCy36WAhMI4U[105];
-const real_T rtCP_pooled_SCy36WAhMI4U[105] = { 3.147, 3.292, 3.392, 3.477, 3.518,
+extern const real_T rtCP_pooled_OnbPSZK1pBei[9];
+const real_T rtCP_pooled_OnbPSZK1pBei[9] = { 0.00014142135623730951, 0.0, 0.0,
+  0.0, 0.00054772255750516611, 0.0, 0.0, 0.0, 0.00014142135623730951 } ;
+
+extern const real_T rtCP_pooled_l42MQWC3qubd[105];
+const real_T rtCP_pooled_l42MQWC3qubd[105] = { 3.147, 3.292, 3.392, 3.477, 3.518,
   3.561, 3.602, 3.638, 3.677, 3.719, 3.763, 3.799, 3.838, 3.875, 3.916, 3.965,
   4.017, 4.056, 4.075, 4.096, 4.163, 3.128, 3.238, 3.34, 3.419, 3.487, 3.526,
   3.582, 3.627, 3.666, 3.706, 3.746, 3.786, 3.826, 3.868, 3.914, 3.964, 4.015,
@@ -52,15 +59,8 @@ const real_T rtCP_pooled_SCy36WAhMI4U[105] = { 3.147, 3.292, 3.392, 3.477, 3.518
   3.668, 3.724, 3.7645, 3.8065, 3.848, 3.905, 3.947, 3.999, 4.045, 4.07, 4.0975,
   4.159 } ;
 
-extern const real_T rtCP_pooled_ScD7BH7eelHp[9];
-const real_T rtCP_pooled_ScD7BH7eelHp[9] = { 0.00014142135623730951, 0.0, 0.0,
-  0.0, 0.00054772255750516611, 0.0, 0.0, 0.0, 0.00014142135623730951 } ;
-
-extern const uint32_T rtCP_pooled_VeNY2dNehdHS[2];
-const uint32_T rtCP_pooled_VeNY2dNehdHS[2] = { 20U, 4U } ;
-
-extern const real_T rtCP_pooled_jdvt4y9yu4xK[105];
-const real_T rtCP_pooled_jdvt4y9yu4xK[105] = { 540.0, 560.0, 568.0, 572.0, 576.0,
+extern const real_T rtCP_pooled_mogppaAQYv8i[105];
+const real_T rtCP_pooled_mogppaAQYv8i[105] = { 540.0, 560.0, 568.0, 572.0, 576.0,
   580.0, 600.0, 620.0, 640.0, 660.0, 680.0, 700.0, 720.0, 720.0, 700.0, 640.0,
   600.0, 520.0, 400.0, 320.0, 240.0, 1080.0, 1120.0, 1136.0, 1144.0, 1152.0,
   1160.0, 1200.0, 1240.0, 1280.0, 1320.0, 1360.0, 1400.0, 1440.0, 1440.0, 1400.0,
@@ -72,6 +72,6 @@ const real_T rtCP_pooled_jdvt4y9yu4xK[105] = { 540.0, 560.0, 568.0, 572.0, 576.0
   2769.0, 2788.5, 2808.0, 2827.5, 2925.0, 3022.5, 3120.0, 3217.5, 3315.0, 3412.5,
   3510.0, 3510.0, 3412.5, 3120.0, 2925.0, 2535.0, 1950.0, 1560.0, 1170.0 } ;
 
-extern const real_T rtCP_pooled_rPeWEl0uhlTa[5];
-const real_T rtCP_pooled_rPeWEl0uhlTa[5] = { 263.15, 273.15, 298.15, 318.15,
+extern const real_T rtCP_pooled_qDiJiT4WjAIl[5];
+const real_T rtCP_pooled_qDiJiT4WjAIl[5] = { 263.15, 273.15, 298.15, 318.15,
   333.15 } ;

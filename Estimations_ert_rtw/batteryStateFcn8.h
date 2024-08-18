@@ -1,0 +1,23 @@
+/*
+ * File: batteryStateFcn8.h
+ *
+ * Code generated for Simulink model 'Estimations'.
+ *
+ * Model version                  : 7.6
+ * Simulink Coder version         : 9.9 (R2023a) 19-Nov-2022
+ * C/C++ source code generated on : Sun Aug 18 17:23:11 2024
+ */
+
+#ifndef RTW_HEADER_batteryStateFcn8_h_
+#define RTW_HEADER_batteryStateFcn8_h_
+#include "rtwtypes.h"
+
+extern void batteryStateFcn8(const real_T rtu_x1[3], real_T rty_x1Next[3]);
+
+#endif                                 /* RTW_HEADER_batteryStateFcn8_h_ */
+
+/*
+ * File trailer for generated code.
+ *
+ * [EOF]
+ */
