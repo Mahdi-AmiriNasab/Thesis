@@ -272,7 +272,7 @@ DebugInfo debugInfo;
 
 
 // FDCAN filters
-const uint8_t myid = 8; 
+const uint8_t myid = 1; 
 
 FDCAN_FilterTypeDef filter_3 =
 {
@@ -307,6 +307,8 @@ FDCAN_FilterTypeDef filter_5 =
 	FDCAN_RxHeaderTypeDef filter_3_header, filter_4_header, filter_5_header;
 	uint8_t filter_3_payload[10], filter_4_payload[10], filter_5_payload[10];
 
+    HAL_StatusTypeDef can_tx_status;
+
 
 
 
@@ -327,6 +329,7 @@ ADC_HandleTypeDef hadc1;
 DAC_HandleTypeDef hdac1;
 
 FDCAN_HandleTypeDef hfdcan1;
+FDCAN_HandleTypeDef hfdcan2;
 
 RNG_HandleTypeDef hrng;
 
@@ -353,6 +356,7 @@ static void MX_TIM3_Init(void);
 static void MX_TIM4_Init(void);
 static void MX_TIM6_Init(void);
 static void MX_RNG_Init(void);
+static void MX_FDCAN2_Init(void);
 /* USER CODE BEGIN PFP */
 void Set_DAC_Voltage(float voltage, uint32_t dac_channel);
 void set_reset_trig_neg(uint8_t trig_num, GPIO_PinState action);
@@ -408,6 +412,7 @@ int main(void)
   MX_TIM4_Init();
   MX_TIM6_Init();
   MX_RNG_Init();
+//   MX_FDCAN2_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
@@ -417,6 +422,20 @@ int main(void)
  
   
   	/* Call the entry-point 'pso'. */
+
+    /* Configure the CAN transmission message */
+    FDCAN_TxHeaderTypeDef TxHeader;
+    uint8_t TxData[8] = {0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08}; // Example data
+
+    TxHeader.Identifier = 0x123;         // CAN ID
+    TxHeader.IdType = FDCAN_STANDARD_ID; // Standard CAN ID (11-bit)
+    TxHeader.TxFrameType = FDCAN_DATA_FRAME;
+    TxHeader.DataLength = FDCAN_DLC_BYTES_8; // Data length
+    TxHeader.ErrorStateIndicator = FDCAN_ESI_PASSIVE;
+    TxHeader.BitRateSwitch = FDCAN_BRS_OFF;   // No bitrate switching
+    TxHeader.FDFormat = FDCAN_CLASSIC_CAN;    // Classic CAN frame
+    TxHeader.TxEventFifoControl = FDCAN_NO_TX_EVENTS;
+    TxHeader.MessageMarker = 0;
  
     
     HAL_DAC_Start(&hdac1, DAC_CHANNEL_1);
@@ -431,8 +450,6 @@ int main(void)
     equalizer_initialize();
 
 
-	// CAN start
-	HAL_FDCAN_Start(&hfdcan1);
     
     // reception filters
 	HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_3);	        
@@ -440,9 +457,9 @@ int main(void)
     HAL_FDCAN_ConfigFilter(&hfdcan1, &filter_5);
 	
 	hfdcan1.Instance->ILE = FDCAN_INTERRUPT_LINE0;
-	
+
 	// interrrupt enable on receive
-    // HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_BUFFER_NEW_MESSAGE, 0);
+    HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_BUFFER_NEW_MESSAGE, 0);
     
 	// interrrupt in error cases 
 	HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_BUS_OFF, 0);
@@ -450,12 +467,20 @@ int main(void)
     HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_WARNING, 0);
 	HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_ERROR_LOGGING_OVERFLOW, 0);
 
+    	
+	// CAN start
+	static HAL_StatusTypeDef start_status; 
+    start_status =  HAL_FDCAN_Start(&hfdcan1);
+    
+
    uint32_t error_flags = 0x00000000;
 
     Set_DAC_Voltage(vol, DAC_CHANNEL_1);
     Set_DAC_Voltage(cur, DAC_CHANNEL_2);
 
     Estimations_initialize();
+
+
 
 
 	while(1)
@@ -477,7 +502,7 @@ int main(void)
 			hfdcan1.Instance->ILE = FDCAN_INTERRUPT_LINE0;
 			
 			// interrrupt enable on receive
-			// fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_BUFFER_NEW_MESSAGE, 0);
+			fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_RX_BUFFER_NEW_MESSAGE, 0);
 			
 			// interrrupt in error cases 
 			fdcan_hal_status = HAL_FDCAN_ActivateNotification(&hfdcan1, FDCAN_IT_BUS_OFF, 0);
@@ -490,19 +515,20 @@ int main(void)
 
 		if(filter_3_header.Identifier == myid * 3)
 		{
-
+            HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
+         
             filter_3_header.Identifier = 0;
 		}
 
         if(filter_3_header.Identifier == myid * 3 + 1)
 		{
-
+            HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
             filter_3_header.Identifier = 0;
 		}
 
         if(filter_3_header.Identifier == myid * 3 + 1)
 		{
-
+            HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
             filter_3_header.Identifier = 0;
 		}
 
@@ -553,6 +579,11 @@ int main(void)
 
         if(flag_estimations_step)
         {
+        /* Transmit the CAN message directly using the buffer */
+            can_tx_status = HAL_FDCAN_AddMessageToTxBuffer(&hfdcan1, &TxHeader, TxData, FDCAN_TX_BUFFER0);
+
+            HAL_FDCAN_EnableTxBufferRequest(&hfdcan1, FDCAN_TX_BUFFER0);
+
             flag_estimations_step = 0;
 
             Estimations_DW.x[0] = new_OCV(V_cells[0]) * 0.01;
@@ -935,25 +966,25 @@ static void MX_FDCAN1_Init(void)
   hfdcan1.Init.AutoRetransmission = DISABLE;
   hfdcan1.Init.TransmitPause = DISABLE;
   hfdcan1.Init.ProtocolException = DISABLE;
-  hfdcan1.Init.NominalPrescaler = 16;
+  hfdcan1.Init.NominalPrescaler = 1;
   hfdcan1.Init.NominalSyncJumpWidth = 1;
-  hfdcan1.Init.NominalTimeSeg1 = 13;
-  hfdcan1.Init.NominalTimeSeg2 = 2;
-  hfdcan1.Init.DataPrescaler = 16;
+  hfdcan1.Init.NominalTimeSeg1 = 9;
+  hfdcan1.Init.NominalTimeSeg2 = 6;
+  hfdcan1.Init.DataPrescaler = 1;
   hfdcan1.Init.DataSyncJumpWidth = 1;
-  hfdcan1.Init.DataTimeSeg1 = 13;
-  hfdcan1.Init.DataTimeSeg2 = 2;
+  hfdcan1.Init.DataTimeSeg1 = 9;
+  hfdcan1.Init.DataTimeSeg2 = 6;
   hfdcan1.Init.MessageRAMOffset = 0;
-  hfdcan1.Init.StdFiltersNbr = 3;
+  hfdcan1.Init.StdFiltersNbr = 5;
   hfdcan1.Init.ExtFiltersNbr = 0;
   hfdcan1.Init.RxFifo0ElmtsNbr = 0;
   hfdcan1.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8;
   hfdcan1.Init.RxFifo1ElmtsNbr = 0;
   hfdcan1.Init.RxFifo1ElmtSize = FDCAN_DATA_BYTES_8;
-  hfdcan1.Init.RxBuffersNbr = 0;
+  hfdcan1.Init.RxBuffersNbr = 5;
   hfdcan1.Init.RxBufferSize = FDCAN_DATA_BYTES_8;
   hfdcan1.Init.TxEventsNbr = 0;
-  hfdcan1.Init.TxBuffersNbr = 0;
+  hfdcan1.Init.TxBuffersNbr = 5;
   hfdcan1.Init.TxFifoQueueElmtsNbr = 0;
   hfdcan1.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION;
   hfdcan1.Init.TxElmtSize = FDCAN_DATA_BYTES_8;
@@ -964,6 +995,58 @@ static void MX_FDCAN1_Init(void)
   /* USER CODE BEGIN FDCAN1_Init 2 */
 
   /* USER CODE END FDCAN1_Init 2 */
+}
+
+/**
+  * @brief FDCAN2 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_FDCAN2_Init(void)
+{
+
+  /* USER CODE BEGIN FDCAN2_Init 0 */
+
+  /* USER CODE END FDCAN2_Init 0 */
+
+  /* USER CODE BEGIN FDCAN2_Init 1 */
+
+  /* USER CODE END FDCAN2_Init 1 */
+  hfdcan2.Instance = FDCAN2;
+  hfdcan2.Init.FrameFormat = FDCAN_FRAME_CLASSIC;
+  hfdcan2.Init.Mode = FDCAN_MODE_NORMAL;
+  hfdcan2.Init.AutoRetransmission = DISABLE;
+  hfdcan2.Init.TransmitPause = DISABLE;
+  hfdcan2.Init.ProtocolException = DISABLE;
+  hfdcan2.Init.NominalPrescaler = 2;
+  hfdcan2.Init.NominalSyncJumpWidth = 1;
+  hfdcan2.Init.NominalTimeSeg1 = 13;
+  hfdcan2.Init.NominalTimeSeg2 = 2;
+  hfdcan2.Init.DataPrescaler = 2;
+  hfdcan2.Init.DataSyncJumpWidth = 1;
+  hfdcan2.Init.DataTimeSeg1 = 13;
+  hfdcan2.Init.DataTimeSeg2 = 2;
+  hfdcan2.Init.MessageRAMOffset = 0;
+  hfdcan2.Init.StdFiltersNbr = 5;
+  hfdcan2.Init.ExtFiltersNbr = 0;
+  hfdcan2.Init.RxFifo0ElmtsNbr = 0;
+  hfdcan2.Init.RxFifo0ElmtSize = FDCAN_DATA_BYTES_8;
+  hfdcan2.Init.RxFifo1ElmtsNbr = 0;
+  hfdcan2.Init.RxFifo1ElmtSize = FDCAN_DATA_BYTES_8;
+  hfdcan2.Init.RxBuffersNbr = 5;
+  hfdcan2.Init.RxBufferSize = FDCAN_DATA_BYTES_8;
+  hfdcan2.Init.TxEventsNbr = 0;
+  hfdcan2.Init.TxBuffersNbr = 5;
+  hfdcan2.Init.TxFifoQueueElmtsNbr = 0;
+  hfdcan2.Init.TxFifoQueueMode = FDCAN_TX_FIFO_OPERATION;
+  hfdcan2.Init.TxElmtSize = FDCAN_DATA_BYTES_8;
+  if (HAL_FDCAN_Init(&hfdcan2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN FDCAN2_Init 2 */
+
+  /* USER CODE END FDCAN2_Init 2 */
 
 }
 

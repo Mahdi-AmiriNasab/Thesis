@@ -125,7 +125,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGTARM</Key>
-          <Name>(1010=412,209,862,766,0)(6017=105,137,294,473,0)(1008=-1,-1,-1,-1,0)(6016=-1,-1,-1,-1,0)(1012=-1,-1,-1,-1,0)</Name>
+          <Name>(1010=412,209,862,766,0)(6017=105,137,294,473,0)(1008=-1,-1,-1,-1,0)(6016=120,153,378,806,0)(1012=-1,-1,-1,-1,0)</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -319,6 +319,21 @@
           <count>33</count>
           <WinNumber>1</WinNumber>
           <ItemText>Estimations_Y</ItemText>
+        </Ww>
+        <Ww>
+          <count>34</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>can_tx_status</ItemText>
+        </Ww>
+        <Ww>
+          <count>35</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>start_status</ItemText>
+        </Ww>
+        <Ww>
+          <count>36</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>hfdcan1</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>
