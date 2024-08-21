@@ -341,7 +341,7 @@
               <MiscControls></MiscControls>
               <Define>USE_HAL_DRIVER,STM32H750xx</Define>
               <Undefine></Undefine>
-              <IncludePath>../Core/Inc;  ../Drivers/STM32H7xx_HAL_Driver/Inc;  ../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;  ../Drivers/CMSIS/Device/ST/STM32H7xx/Include;  ../Drivers/CMSIS/Include;  ..\..\..\codegen\lib\pso;  ..\..\..\codegen\includes;  ..\..\..\equalizer_ert_rtw;  ..\..\..\Estimations_ert_rtw</IncludePath>
+              <IncludePath>../Core/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc;../Drivers/STM32H7xx_HAL_Driver/Inc/Legacy;../Drivers/CMSIS/Device/ST/STM32H7xx/Include;../Drivers/CMSIS/Include;..\..\..\codegen\lib\pso;..\..\..\codegen\includes;..\..\..\equalizer_ert_rtw;..\..\..\Estimations_ert_rtw;..\CANBMB_ert_rtw</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -1206,6 +1206,16 @@
               <FileName>trisolve_9qKJiUg8.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\..\..\Estimations_ert_rtw\trisolve_9qKJiUg8.c</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
+          <GroupName>CAN_Unpack</GroupName>
+          <Files>
+            <File>
+              <FileName>CANBMB.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\CANBMB_ert_rtw\CANBMB.c</FilePath>
             </File>
           </Files>
         </Group>

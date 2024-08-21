@@ -31,6 +31,8 @@
 #include "rt_nonfinite.h"
 #include "equalizer.h"
 #include <Estimations.h>
+#include <CANBMB.h>
+
 
 /* USER CODE END Includes */
 
@@ -65,7 +67,7 @@ double w_time = 0.4;
 double w_inc = 0.4;
 double w_ovp = 0.2;
 // double soc_init[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
-double soc_init[9] = {  70,     70,     70,     70,     70,     70,     70,     20,     20};
+double soc_init[9] = {  1,     70,     70,     70,     70,     70,     70,     70,     70};
 double soc[9];
 uint16_t adc_current [300];
 uint16_t adc_current_window [50];
@@ -167,6 +169,53 @@ double new_OCV(double v){
             return 100 - 5*(double)i + 5.00* (v - OCV_Curve_new[i]) / (OCV_Curve_new[i-1]-OCV_Curve_new[i]);
         }
     }
+}
+
+/// Function to extract signal data from a CAN frame with little-endian bit order
+uint32_t extractSignal(uint8_t* frame, int startBit, int length)
+{
+    uint32_t signal = 0;
+    int byteIndex, bitIndex, i;
+
+    // Process the bits as packed in little-endian order
+    for (i = 0; i < length; i++)
+    {
+        byteIndex = (startBit + i) / 8;
+        bitIndex = (startBit + i) % 8;
+        signal |= ((frame[byteIndex] >> bitIndex) & 0x01) << i;
+    }
+
+    return signal;
+}
+
+// Function to handle CAN message 1 (ID: 1)
+void handleCanMessage1(uint8_t* frame, uint32_t* v1, uint32_t* v2, uint32_t* v3, uint32_t* v4, uint32_t* t1)
+{
+    *v1 = extractSignal(frame, 0, 13);   // v1: start bit 0, length 13
+    *v2 = extractSignal(frame, 13, 13);  // v2: start bit 13, length 13
+    *v3 = extractSignal(frame, 26, 13);  // v3: start bit 26, length 13
+    *v4 = extractSignal(frame, 39, 13);  // v4: start bit 39, length 13
+    *t1 = extractSignal(frame, 52, 12);  // t1: start bit 52, length 12
+}
+
+// Function to handle CAN message 2 (ID: 2)
+void handleCanMessage2(uint8_t* frame, uint32_t* v5, uint32_t* v6, uint32_t* v7, uint32_t* v8, uint32_t* t2)
+{
+    *v5 = extractSignal(frame, 0, 13);   // v5: start bit 0, length 13
+    *v6 = extractSignal(frame, 13, 13);  // v6: start bit 13, length 13
+    *v7 = extractSignal(frame, 26, 13);  // v7: start bit 26, length 13
+    *v8 = extractSignal(frame, 39, 13);  // v8: start bit 39, length 13
+    *t2 = extractSignal(frame, 52, 12);  // t2: start bit 52, length 12
+}
+
+// Function to handle CAN message 3 (ID: 0)
+void handleCanMessage3(uint8_t* frame, uint32_t* v9, uint32_t* v10, uint32_t* v11, uint32_t* v12, uint32_t* counter)
+{
+    *v9 = extractSignal(frame, 0, 13);   // v9: start bit 0, length 13
+    *v10 = extractSignal(frame, 13, 13); // v10: start bit 13, length 13
+    *v11 = extractSignal(frame, 26, 13); // v11: start bit 26, length 13
+    *v12 = extractSignal(frame, 39, 13); // v12: start bit 39, length 13
+    *counter = extractSignal(frame, 52, 12); // counter: start bit 52, length 12
 }
 
 
@@ -516,21 +565,82 @@ int main(void)
 		if(filter_3_header.Identifier == myid * 3)
 		{
             HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
-         
+            uint32_t t1;
+
+            // handleCanMessage1(filter_3_payload, &V_cells[0], &V_cells[1], &V_cells[2], &V_cells[3], &t1);
             filter_3_header.Identifier = 0;
 		}
 
         if(filter_3_header.Identifier == myid * 3 + 1)
 		{
             HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
+            uint32_t t2;
+           
+            // handleCanMessage2(filter_4_payload, &V_cells[4], &V_cells[5], &V_cells[6], &V_cells[7], &t2);
             filter_3_header.Identifier = 0;
 		}
 
-        if(filter_3_header.Identifier == myid * 3 + 1)
+        if(filter_3_header.Identifier == myid * 3 + 2)
 		{
             HAL_GPIO_TogglePin(LED4_GPIO_Port, LED4_Pin);
+            uint32_t v9, v10, v11, v12, counter;
+
+            // handleCanMessage3(filter_5_payload, &V_cells[8], &v9, &v10, &v11, &counter);
             filter_3_header.Identifier = 0;
 		}
+
+            CANBMB_U.m1_1.Data[0] = filter_3_payload[0];
+            CANBMB_U.m1_1.Data[1] = filter_3_payload[1];
+            CANBMB_U.m1_1.Data[2] = filter_3_payload[4];
+            CANBMB_U.m1_1.Data[3] = filter_3_payload[3];
+            CANBMB_U.m1_1.Data[4] = filter_3_payload[2];
+            CANBMB_U.m1_1.Data[5] = filter_3_payload[5];
+            CANBMB_U.m1_1.Data[6] = filter_3_payload[6];
+            CANBMB_U.m1_1.Data[7] = filter_3_payload[7];
+            CANBMB_U.m1_1.ID = 3;
+            CANBMB_U.m1_1.Length = 8;
+            CANBMB_U.m1_1.Extended = 0;
+
+            CANBMB_U.m1_2.Data[0] = filter_4_payload[0];
+            CANBMB_U.m1_2.Data[1] = filter_4_payload[1];
+            CANBMB_U.m1_2.Data[2] = filter_4_payload[2];
+            CANBMB_U.m1_2.Data[3] = filter_4_payload[3];
+            CANBMB_U.m1_2.Data[4] = filter_4_payload[4];
+            CANBMB_U.m1_2.Data[5] = filter_4_payload[5];
+            CANBMB_U.m1_2.Data[6] = filter_4_payload[6];
+            CANBMB_U.m1_2.Data[7] = filter_4_payload[7];
+            CANBMB_U.m1_2.ID = 4;
+            CANBMB_U.m1_2.Length = 8;
+            CANBMB_U.m1_2.Extended = 0;
+
+            CANBMB_U.m1_3.Data[0] = filter_5_payload[0];
+            CANBMB_U.m1_3.Data[1] = filter_5_payload[1];
+            CANBMB_U.m1_3.Data[2] = filter_5_payload[2];
+            CANBMB_U.m1_3.Data[3] = filter_5_payload[3];
+            CANBMB_U.m1_3.Data[4] = filter_5_payload[4];
+            CANBMB_U.m1_3.Data[5] = filter_5_payload[5];
+            CANBMB_U.m1_3.Data[6] = filter_5_payload[6];
+            CANBMB_U.m1_3.Data[7] = filter_5_payload[7];
+            CANBMB_U.m1_3.ID = 5;
+            CANBMB_U.m1_3.Length = 8;
+            CANBMB_U.m1_3.Extended = 0;
+
+
+            
+            CANBMB_step();
+
+            V_cells[0] = (float)CANBMB_Y.v1_1 * 0.001;
+            V_cells[1] = (float)CANBMB_Y.v1_2 * 0.001;
+            V_cells[2] = (float)CANBMB_Y.v1_3 * 0.001;
+            V_cells[3] = (float)CANBMB_Y.v1_4 * 0.001;
+            V_cells[4] = (float)CANBMB_Y.v1_5 * 0.001;
+            V_cells[5] = (float)CANBMB_Y.v1_6 * 0.001;
+            V_cells[6] = (float)CANBMB_Y.v1_7 * 0.001;
+            V_cells[7] = (float)CANBMB_Y.v1_8 * 0.001;
+            V_cells[8] = (float)CANBMB_Y.v1_9 * 0.001;
+
+            
+            // V_cells[1] = (float)CANBMB_Y.v1_2 * 0.001;
 
 
         set_reset_trig_DCDC(e_DCDC_status);
