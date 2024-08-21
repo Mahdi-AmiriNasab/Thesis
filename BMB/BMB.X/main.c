@@ -75,7 +75,7 @@
 // 0.6026, 0.5858};
 
 ///////////////////////////
-#define MyID 8
+#define MyID 1
 ///////////////////////////
 #define match(x,y) 2*(x+8*y)
 
@@ -543,29 +543,43 @@ void CANTransmit(){
             CAN_Tx.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
             CAN_Tx.frame.id = MyID*3;
             CAN_Tx.frame.dlc = 8;
-            CAN_Tx.frame.data0 = CAN_Y.Voltage1.Data[0];CAN_Tx.frame.data1 = CAN_Y.Voltage1.Data[1];
-            CAN_Tx.frame.data2 = CAN_Y.Voltage1.Data[2];CAN_Tx.frame.data3 = CAN_Y.Voltage1.Data[3];
-            CAN_Tx.frame.data4 = CAN_Y.Voltage1.Data[4];CAN_Tx.frame.data5 = CAN_Y.Voltage1.Data[5];
-            CAN_Tx.frame.data6 = CAN_Y.Voltage1.Data[6];CAN_Tx.frame.data7 = CAN_Y.Voltage1.Data[7];
-            CAN_Tx_flag = CAN_transmit(&CAN_Tx); //every packet last for 200us
+            CAN_Tx.frame.data0 = (uint8_t)	CAN_U.v1;
+            CAN_Tx.frame.data1 = (uint8_t)	(CAN_U.v1 >> 8);
+			CAN_Tx.frame.data2 = (uint8_t)	CAN_U.v2;
+            CAN_Tx.frame.data3 = (uint8_t)	(CAN_U.v2 >> 8);
+			CAN_Tx.frame.data4 = (uint8_t)	CAN_U.v3;
+            CAN_Tx.frame.data5 = (uint8_t)	(CAN_U.v3 >> 8);
+			CAN_Tx.frame.data6 = (uint8_t)	CAN_U.v4;
+            CAN_Tx.frame.data7 = (uint8_t)	(CAN_U.v4 >> 8);
+
+
+			CAN_Tx_flag = CAN_transmit(&CAN_Tx); //every packet last for 200us
             __delay_us(200);
             //time between packet without delay is 20us
             CAN_Tx.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
             CAN_Tx.frame.id = MyID*3+1;
             CAN_Tx.frame.dlc = 8;
-            CAN_Tx.frame.data0 = CAN_Y.Voltage2.Data[0];CAN_Tx.frame.data1 = CAN_Y.Voltage2.Data[1];
-            CAN_Tx.frame.data2 = CAN_Y.Voltage2.Data[2];CAN_Tx.frame.data3 = CAN_Y.Voltage2.Data[3];
-            CAN_Tx.frame.data4 = CAN_Y.Voltage2.Data[4];CAN_Tx.frame.data5 = CAN_Y.Voltage2.Data[5];
-            CAN_Tx.frame.data6 = CAN_Y.Voltage2.Data[6];CAN_Tx.frame.data7 = CAN_Y.Voltage2.Data[7];
+            CAN_Tx.frame.data0 = (uint8_t)	CAN_U.v5;
+            CAN_Tx.frame.data1 = (uint8_t)	(CAN_U.v5 >> 8);
+			CAN_Tx.frame.data2 = (uint8_t)	CAN_U.v6;
+            CAN_Tx.frame.data3 = (uint8_t)	(CAN_U.v6 >> 8);
+			CAN_Tx.frame.data4 = (uint8_t)	CAN_U.v7;
+            CAN_Tx.frame.data5 = (uint8_t)	(CAN_U.v7 >> 8);
+			CAN_Tx.frame.data6 = (uint8_t)	CAN_U.v8;
+            CAN_Tx.frame.data7 = (uint8_t)	(CAN_U.v8 >> 8);
             CAN_Tx_flag = CAN_transmit(&CAN_Tx);
             __delay_us(200);
             CAN_Tx.frame.idType = dSTANDARD_CAN_MSG_ID_2_0B;
             CAN_Tx.frame.id = MyID*3+2;
             CAN_Tx.frame.dlc = 8;
-            CAN_Tx.frame.data0 = CAN_Y.Voltage3.Data[0];CAN_Tx.frame.data1 = CAN_Y.Voltage3.Data[1];
-            CAN_Tx.frame.data2 = CAN_Y.Voltage3.Data[2];CAN_Tx.frame.data3 = CAN_Y.Voltage3.Data[3];
-            CAN_Tx.frame.data4 = CAN_Y.Voltage3.Data[4];CAN_Tx.frame.data5 = CAN_Y.Voltage3.Data[5];
-            CAN_Tx.frame.data6 = CAN_Y.Voltage3.Data[6];CAN_Tx.frame.data7 = CAN_Y.Voltage3.Data[7];
+            CAN_Tx.frame.data0 = (uint8_t)	CAN_U.v9;
+            CAN_Tx.frame.data1 = (uint8_t)	(CAN_U.v9 >> 8);
+			CAN_Tx.frame.data2 = (uint8_t)	0x00;
+            CAN_Tx.frame.data3 = (uint8_t)	0x00;
+			CAN_Tx.frame.data4 = (uint8_t)	0x00;
+            CAN_Tx.frame.data5 = (uint8_t)	0x00;
+			CAN_Tx.frame.data6 = (uint8_t)	0x00;
+            CAN_Tx.frame.data7 = (uint8_t)	0x00;
             CAN_Tx_flag = CAN_transmit(&CAN_Tx);
             
     
