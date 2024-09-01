@@ -509,7 +509,7 @@ static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
   /*  maximum possible values */
   /* 'balance_costF:59' max_lg_time = 1.5; */
   /* 'balance_costF:60' max_lg_inconsistency = 100; */
-  /* 'balance_costF:61' max_lg_eq_overlap = 300; */
+  /* 'balance_costF:61' max_lg_eq_overlap = 50; */
   /*  w_time = 0.8;           % weight for time */
   /*  w_inconsistency = 0.2;  % weight for inconsitency */
   /*  w_eq_overlap = 0;     % weight for overlap equalization */
@@ -654,7 +654,7 @@ static double pso_anonFcn1(const double soc_in[9], double mp, double w_time,
    * max_lg_inconsistency; */
   lg_inconsistency /= 100.0;
   /* 'balance_costF:138' lg_eq_overlap = lg_eq_overlap / max_lg_eq_overlap; */
-  lg_eq_overlap /= 300.0;
+  lg_eq_overlap /= 50.0;
   /*  combined cost */
   /* 'balance_costF:141' cost = w_time * lg_time + w_inconsistency *
    * lg_inconsistency + w_eq_overlap * lg_eq_overlap; */

@@ -63,15 +63,17 @@ uint8_t connect_switches [] = {0, 0};
 DCDCState e_DCDC_status = DCDC_Off;
 
 // pso variables
-double w_time = 0.4;
-double w_inc = 0.4;
-double w_ovp = 0.2;
+double w_time = 0.1;
+double w_inc = 0.8;
+double w_ovp = 0.1;
 // double soc_init[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
-double soc_init[9] = {  1,     70,     70,     70,     70,     70,     70,     70,     70};
+// double soc_init[9] = {  1,     70,     70,     70,     70,     70,     70,     70,     70};
+double soc_init[9] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF};
+double soc_test[9] = {39,   39,    20,    72,    81,    92,    51,    11,    60};
 double soc[9];
 uint16_t adc_current [300];
 uint16_t adc_current_window [50];
-uint8_t pso_run = 1;
+uint8_t pso_run = 0;
 uint8_t step_cnt_max = 0;
 
 emxArray_struct1_T_1x100 eq_step;
@@ -92,7 +94,7 @@ uint32_t adc_sum = 0;
 void sort_and_extract_window(uint16_t *array, uint16_t array_size, uint16_t window_size, uint16_t start_index, uint16_t *window);
 HAL_StatusTypeDef BSW_connection (uint8_t *bsw, DCDCState e_DCDC_st);
 HAL_StatusTypeDef BSW_status = HAL_ERROR;
-uint8_t en_controller = 1;
+uint8_t en_controller = 0;
 
 GPIO_PinState pinstate_pos = GPIO_PIN_RESET;
 GPIO_PinState pinstate_neg = GPIO_PIN_RESET;
@@ -111,6 +113,7 @@ extern ExtY_equalizer_T equalizer_Y;
 
 uint8_t flag_estimations_step = 0;
 float V_cells[9] = {3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3, 3.3};
+uint16_t ADC_cells[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 
 double ntcTable[138] =
 {
@@ -495,7 +498,6 @@ int main(void)
     HAL_ADCEx_Calibration_Start(&hadc1, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED);
 
 
-    memcpy(soc, soc_init, sizeof(soc));
     equalizer_initialize();
 
 
@@ -627,17 +629,55 @@ int main(void)
 
 
             
-            CANBMB_step();
+            // CANBMB_step();
 
-            V_cells[0] = (float)CANBMB_Y.v1_1 * 0.001;
-            V_cells[1] = (float)CANBMB_Y.v1_2 * 0.001;
-            V_cells[2] = (float)CANBMB_Y.v1_3 * 0.001;
-            V_cells[3] = (float)CANBMB_Y.v1_4 * 0.001;
-            V_cells[4] = (float)CANBMB_Y.v1_5 * 0.001;
-            V_cells[5] = (float)CANBMB_Y.v1_6 * 0.001;
-            V_cells[6] = (float)CANBMB_Y.v1_7 * 0.001;
-            V_cells[7] = (float)CANBMB_Y.v1_8 * 0.001;
-            V_cells[8] = (float)CANBMB_Y.v1_9 * 0.001;
+            ADC_cells   [0]  =    filter_3_payload      [0];
+            ADC_cells   [0]  |=   filter_3_payload      [1]  << 8;
+            V_cells     [0] =  0.0000998982 * ADC_cells   [0];
+
+            
+            ADC_cells   [1]  =    filter_3_payload      [2];
+            ADC_cells   [1]  |=   filter_3_payload      [3]  << 8;
+            V_cells     [1] =  0.0000998982 * ADC_cells   [1];
+
+            
+
+            ADC_cells   [2]  =    filter_3_payload      [4];
+            ADC_cells   [2]  |=   filter_3_payload      [5]  << 8;
+            V_cells     [2] =  0.0000998982 * ADC_cells   [2];
+
+            
+
+            ADC_cells   [3]  =    filter_3_payload      [6];
+            ADC_cells   [3]  |=   filter_3_payload      [7]  << 8;
+            V_cells     [3] =  0.0000998982 * ADC_cells   [3];
+
+            
+
+            ADC_cells   [4]  =    filter_4_payload      [0];
+            ADC_cells   [4]  |=   filter_4_payload      [1]  << 8;
+            V_cells     [4] =  0.0000998982 * ADC_cells   [4];
+
+
+            ADC_cells   [5]  =    filter_4_payload      [2];
+            ADC_cells   [5]  |=   filter_4_payload      [3]  << 8;
+            V_cells     [5] =  0.0000998982 * ADC_cells   [5];
+
+
+            ADC_cells   [6]  =    filter_4_payload      [4];
+            ADC_cells   [6]  |=   filter_4_payload      [5]  << 8;
+            V_cells     [6] =  0.0000998982 * ADC_cells   [6];
+
+
+            ADC_cells   [7]  =    filter_4_payload      [6];
+            ADC_cells   [7]  |=   filter_4_payload      [7]  << 8;
+            V_cells     [7] =  0.0000998982 * ADC_cells   [7];
+
+
+            ADC_cells   [8]  =    filter_5_payload      [0];
+            ADC_cells   [8]  |=   filter_5_payload      [1]  << 8;
+            V_cells     [8] =  0.0000998982 * ADC_cells   [8];
+
 
             
             // V_cells[1] = (float)CANBMB_Y.v1_2 * 0.001;
@@ -669,13 +709,26 @@ int main(void)
         
         if(pso_run)
         {
+            step_cnt_max = 0;
             pso_run = 0;
             HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_SET);
-            pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
+            soc [0] = (uint8_t) soc[0];
+            soc [1] = (uint8_t) soc[1];
+            soc [2] = (uint8_t) soc[2];
+            soc [3] = (uint8_t) soc[3];
+            soc [4] = (uint8_t) soc[4];
+            soc [5] = (uint8_t) soc[5];
+            soc [6] = (uint8_t) soc[6];
+            soc [7] = (uint8_t) soc[7];
+            if(en_controller)
+                pso(soc, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
+            else
+                pso(soc_test, 2, w_time, w_inc, w_ovp, &global_best, eq_step.data, eq_step.size, &stio);
+            
             HAL_GPIO_WritePin(LED4_GPIO_Port, LED4_Pin, GPIO_PIN_RESET);
             
             // initialize soc
-            memcpy(soc, soc_init, sizeof(soc));
+            memcpy(soc_init, soc, sizeof(soc));
 
             // step size determination
             for(uint8_t i= 0; i < eq_step.size[1]; i++)
@@ -708,50 +761,60 @@ int main(void)
 
             Estimations_U.voltage1 = V_cells[0];
             Estimations_U.current1 = I_cells[0];
-            Estimations_U.temp1 = 25;
+            Estimations_U.temp1 = 25 +273;
             Estimations_U.Cq1 = 2200;
 
             Estimations_U.voltage2 = V_cells[1];
             Estimations_U.current2 = I_cells[1];
-            Estimations_U.temp2 = 25;
+            Estimations_U.temp2 = 25 +273;
             Estimations_U.Cq2 = 2200;
 
             Estimations_U.voltage3 = V_cells[2];
             Estimations_U.current3 = I_cells[2];
-            Estimations_U.temp3 = 25;
+            Estimations_U.temp3 = 25 +273;
             Estimations_U.Cq3 = 2200;
 
             Estimations_U.voltage4 = V_cells[3];
             Estimations_U.current4 = I_cells[3];
-            Estimations_U.temp4 = 25;
+            Estimations_U.temp4 = 25 +273;
             Estimations_U.Cq4 = 2200;
 
             Estimations_U.voltage5 = V_cells[4];
             Estimations_U.current5 = I_cells[4];
-            Estimations_U.temp5 = 25;
+            Estimations_U.temp5 = 25 +273;
             Estimations_U.Cq5 = 2200;
 
             Estimations_U.voltage6 = V_cells[5];
             Estimations_U.current6 = I_cells[5];
-            Estimations_U.temp6 = 25;
+            Estimations_U.temp6 = 25 +273;
             Estimations_U.Cq6 = 2200;
 
             Estimations_U.voltage7 = V_cells[6];
             Estimations_U.current7 = I_cells[6];
-            Estimations_U.temp7 = 25;
+            Estimations_U.temp7 = 25 +273;
             Estimations_U.Cq7 = 2200;
 
             Estimations_U.voltage8 = V_cells[7];
             Estimations_U.current8 = I_cells[7];
-            Estimations_U.temp8 = 25;
+            Estimations_U.temp8 = 25 +273;
             Estimations_U.Cq8 = 2200;
 
             Estimations_U.voltage9 = V_cells[8];
             Estimations_U.current9 = I_cells[8];
-            Estimations_U.temp9 = 25;
+            Estimations_U.temp9 = 25 +273;
             Estimations_U.Cq9 = 2200;
 
             Estimations_step();
+
+            soc[0] = Estimations_Y.SOC1 * 100;            
+            soc[1] = Estimations_Y.SOC2 * 100;            
+            soc[2] = Estimations_Y.SOC3 * 100;            
+            soc[3] = Estimations_Y.SOC4 * 100;            
+            soc[4] = Estimations_Y.SOC5 * 100;            
+            soc[5] = Estimations_Y.SOC6 * 100;            
+            soc[6] = Estimations_Y.SOC7 * 100;            
+            soc[7] = Estimations_Y.SOC8 * 100;            
+            soc[8] = Estimations_Y.SOC9 * 100;            
         }
 		
         if(step_cnt < step_cnt_max && en_controller) // if have any step to go
@@ -769,7 +832,17 @@ int main(void)
                 memcpy(equalizer_U.SOC_init, soc_init, sizeof(equalizer_U.SOC_init));
                 memcpy(equalizer_U.SOC, soc, sizeof(equalizer_U.SOC));
                 if(BSW_status == HAL_OK)
-                    I_cells[connect_switches[0] - 1] = equalizer_Y.current_sensor_pb_Iout / 1000;
+                {
+                    for(uint8_t i = 0; i < 9; i++)
+                    {
+                        if  (   i >= (connect_switches[0] - 1)   &&
+                                i <= (connect_switches[1] - 1)   
+                            )
+                            {
+                                I_cells[i] = equalizer_Y.current_sensor_pb_Iout / 1000;
+                            }
+                    }
+                }   
                 else
                     memset(I_cells, 0, sizeof(I_cells));
                 memcpy(equalizer_U.I_meas, I_cells, sizeof(equalizer_U.I_meas));
@@ -790,6 +863,12 @@ int main(void)
                         step_cnt++;
                 }   
             }     
+        }
+        else
+        {
+            memcpy(equalizer_U.I_meas, I_cells, sizeof(equalizer_U.I_meas));
+            equalizer_U.current_sensor_pb_ADC = adc_mean;
+            equalizer_step();
         }
 
 
@@ -1884,7 +1963,7 @@ void set_reset_trig_DCDC(DCDCState state)
             HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_1); // pwm_ax2pack_AXBATT_i_p (5)
             HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_4); // pwm_ax2pack_DCDC_o_p (8)
 
-            HAL_Delay(1);
+            HAL_Delay(100);
             HAL_GPIO_WritePin(DCDC_RST1_GPIO_Port, DCDC_RST1_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_SET);
             HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_RESET);
@@ -1918,7 +1997,7 @@ void set_reset_trig_DCDC(DCDCState state)
             HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_2); // pwm_pack2ax_DCDC_i_p (7)
             HAL_TIM_PWM_Stop(&htim3, TIM_CHANNEL_3); // pwm_pack2ax_AXBATT_o_p (6)
 
-            HAL_Delay(1);
+            HAL_Delay(100);
             HAL_GPIO_WritePin(DCDC_RST1_GPIO_Port, DCDC_RST1_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(LED2_GPIO_Port, LED2_Pin, GPIO_PIN_RESET);
             HAL_GPIO_WritePin(LED1_GPIO_Port, LED1_Pin, GPIO_PIN_SET);
